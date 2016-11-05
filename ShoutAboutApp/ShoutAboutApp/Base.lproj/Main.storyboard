@@ -1,13 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ShoutAboutAppV" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +18,92 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7wX-9d-n97">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="257"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shoutaboutapp_logo" translatesAutoresizingMaskIntoConstraints="NO" id="rJo-MU-575">
+                                        <rect key="frame" x="236" y="77" width="128" height="103"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shoutaboutapp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwy-8X-yf3">
+                                        <rect key="frame" x="214" y="208" width="172" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="172" id="dRx-X5-Iav"/>
+                                            <constraint firstAttribute="height" constant="30" id="lln-vC-rJS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="lln-vC-rJS"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.066666666666666666" green="0.47450980392156861" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="rJo-MU-575" firstAttribute="centerY" secondItem="7wX-9d-n97" secondAttribute="centerY" id="2uJ-dZ-NV1"/>
+                                    <constraint firstItem="Nwy-8X-yf3" firstAttribute="centerY" secondItem="7wX-9d-n97" secondAttribute="centerY" constant="94.5" id="NrH-aD-Pug"/>
+                                    <constraint firstItem="Nwy-8X-yf3" firstAttribute="centerX" secondItem="rJo-MU-575" secondAttribute="centerX" id="V6Y-Im-RCO"/>
+                                    <constraint firstItem="Nwy-8X-yf3" firstAttribute="top" secondItem="rJo-MU-575" secondAttribute="top" constant="131" id="VfN-fQ-ZSP"/>
+                                    <constraint firstItem="rJo-MU-575" firstAttribute="top" secondItem="7wX-9d-n97" secondAttribute="top" constant="77" id="nYc-bq-GGG"/>
+                                    <constraint firstItem="rJo-MU-575" firstAttribute="centerX" secondItem="7wX-9d-n97" secondAttribute="centerX" id="qTq-sP-9ZB"/>
+                                    <constraint firstItem="rJo-MU-575" firstAttribute="width" secondItem="7wX-9d-n97" secondAttribute="height" multiplier="128:257" id="ySO-DH-VxX"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter Mobile Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zHG-iV-Q0d">
+                                <rect key="frame" x="20" y="287" width="560" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="lNc-0k-qkp"/>
+                                </constraints>
+                                <color key="textColor" red="0.066666666669999999" green="0.47450980390000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="4YH-2R-4nv"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mo2-K7-gja">
+                                <rect key="frame" x="20" y="338" width="560" height="44"/>
+                                <color key="backgroundColor" red="0.066666666669999999" green="0.47450980390000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Iuo-Xx-4Cl"/>
+                                </constraints>
+                                <state key="normal" title="SUBMIT">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kag-QH-SQI"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7wX-9d-n97" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2mf-pl-FSc"/>
+                            <constraint firstAttribute="trailing" secondItem="7wX-9d-n97" secondAttribute="trailing" id="4tb-HV-BMX"/>
+                            <constraint firstItem="zHG-iV-Q0d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="52x-kl-Hcf"/>
+                            <constraint firstItem="zHG-iV-Q0d" firstAttribute="top" secondItem="7wX-9d-n97" secondAttribute="bottom" constant="30" id="Cfj-XJ-2bc"/>
+                            <constraint firstItem="Mo2-K7-gja" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="KiD-zT-8mW"/>
+                            <constraint firstItem="7wX-9d-n97" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="NqI-1y-2ly"/>
+                            <constraint firstAttribute="trailing" secondItem="Mo2-K7-gja" secondAttribute="trailing" constant="20" id="dHm-cc-6A6"/>
+                            <constraint firstAttribute="trailing" secondItem="zHG-iV-Q0d" secondAttribute="trailing" constant="20" id="jM3-jo-ds4"/>
+                            <constraint firstItem="7wX-9d-n97" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="kTE-Nk-hCT"/>
+                            <constraint firstItem="Mo2-K7-gja" firstAttribute="top" secondItem="zHG-iV-Q0d" secondAttribute="bottom" constant="21" id="okX-Lq-TiP"/>
+                            <constraint firstItem="7wX-9d-n97" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="30:70" id="r8J-nf-kb1"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mobileNumberTextField" destination="zHG-iV-Q0d" id="bdz-jz-QoC"/>
+                        <outlet property="submitButton" destination="Mo2-K7-gja" id="SZE-3f-7yZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="388" y="248"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="shoutaboutapp_logo" width="382" height="382"/>
+    </resources>
 </document>

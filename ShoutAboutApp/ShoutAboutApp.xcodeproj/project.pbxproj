@@ -12,6 +12,7 @@
 		F12C27561DCE45A800AEE0A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F12C27541DCE45A800AEE0A3 /* Main.storyboard */; };
 		F12C27581DCE45A800AEE0A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F12C27571DCE45A800AEE0A3 /* Assets.xcassets */; };
 		F12C275B1DCE45A800AEE0A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F12C27591DCE45A800AEE0A3 /* LaunchScreen.storyboard */; };
+		F12C27651DCE643D00AEE0A3 /* NetworkConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27641DCE643D00AEE0A3 /* NetworkConnectivity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		F12C27571DCE45A800AEE0A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F12C275A1DCE45A800AEE0A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F12C275C1DCE45A800AEE0A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F12C27641DCE643D00AEE0A3 /* NetworkConnectivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConnectivity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 		F12C274F1DCE45A800AEE0A3 /* ShoutAboutApp */ = {
 			isa = PBXGroup;
 			children = (
+				F12C27641DCE643D00AEE0A3 /* NetworkConnectivity.swift */,
 				F12C27501DCE45A800AEE0A3 /* AppDelegate.swift */,
 				F12C27521DCE45A800AEE0A3 /* ViewController.swift */,
 				F12C27541DCE45A800AEE0A3 /* Main.storyboard */,
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F12C27531DCE45A800AEE0A3 /* ViewController.swift in Sources */,
+				F12C27651DCE643D00AEE0A3 /* NetworkConnectivity.swift in Sources */,
 				F12C27511DCE45A800AEE0A3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,6 +290,7 @@
 				F12C27611DCE45A800AEE0A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
