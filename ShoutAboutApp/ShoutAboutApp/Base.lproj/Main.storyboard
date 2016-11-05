@@ -10,7 +10,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ShoutAboutAppV" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ShoutAboutApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -99,6 +99,101 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="388" y="248"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="3Bp-N0-9Ey">
+            <objects>
+                <viewController storyboardIdentifier="OTPViewController" id="iqR-jz-o1j" customClass="OTPViewController" customModule="ShoutAboutApp" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6ie-lP-Ce1"/>
+                        <viewControllerLayoutGuide type="bottom" id="3tZ-w9-tjG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Bo6-h8-eHN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6y3-U4-EQI">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="257"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shoutaboutapp_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Kes-X9-D96">
+                                        <rect key="frame" x="236" y="77" width="128" height="103"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shoutaboutapp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKH-Wz-tQC">
+                                        <rect key="frame" x="214" y="208" width="172" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="FZX-67-qRG"/>
+                                            <constraint firstAttribute="width" constant="172" id="uUp-0b-bfH"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="FZX-67-qRG"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.066666666669999999" green="0.47450980390000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Kes-X9-D96" firstAttribute="width" secondItem="6y3-U4-EQI" secondAttribute="height" multiplier="128:257" id="5Up-pR-KvL"/>
+                                    <constraint firstItem="Kes-X9-D96" firstAttribute="centerY" secondItem="6y3-U4-EQI" secondAttribute="centerY" id="710-5J-yyD"/>
+                                    <constraint firstItem="dKH-Wz-tQC" firstAttribute="top" secondItem="Kes-X9-D96" secondAttribute="top" constant="131" id="Beq-WK-BJ7"/>
+                                    <constraint firstItem="dKH-Wz-tQC" firstAttribute="centerY" secondItem="6y3-U4-EQI" secondAttribute="centerY" constant="94.5" id="PR8-qa-9fW"/>
+                                    <constraint firstItem="Kes-X9-D96" firstAttribute="centerX" secondItem="6y3-U4-EQI" secondAttribute="centerX" id="V37-Jd-lTA"/>
+                                    <constraint firstItem="Kes-X9-D96" firstAttribute="top" secondItem="6y3-U4-EQI" secondAttribute="top" constant="77" id="e1j-lh-xw9"/>
+                                    <constraint firstItem="dKH-Wz-tQC" firstAttribute="centerX" secondItem="Kes-X9-D96" secondAttribute="centerX" id="zzn-KF-EJA"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter OTP" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="adk-6c-Wxs">
+                                <rect key="frame" x="20" y="287" width="560" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="zmS-P8-UFN"/>
+                                </constraints>
+                                <color key="textColor" red="0.066666666669999999" green="0.47450980390000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <outlet property="delegate" destination="iqR-jz-o1j" id="ykU-61-tj2"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1k-NW-CLV">
+                                <rect key="frame" x="20" y="338" width="560" height="44"/>
+                                <color key="backgroundColor" red="0.066666666669999999" green="0.47450980390000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="ugS-Z0-Jbr"/>
+                                </constraints>
+                                <state key="normal" title="VERIFY">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="otpButtonClicked:" destination="iqR-jz-o1j" eventType="touchUpInside" id="QTE-35-0Sd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6y3-U4-EQI" firstAttribute="top" secondItem="Bo6-h8-eHN" secondAttribute="top" id="2Ie-BZ-F4g"/>
+                            <constraint firstItem="6y3-U4-EQI" firstAttribute="leading" secondItem="Bo6-h8-eHN" secondAttribute="leading" id="4Lg-PY-4rZ"/>
+                            <constraint firstItem="adk-6c-Wxs" firstAttribute="top" secondItem="6y3-U4-EQI" secondAttribute="bottom" constant="30" id="6oG-HE-Era"/>
+                            <constraint firstItem="6y3-U4-EQI" firstAttribute="height" secondItem="Bo6-h8-eHN" secondAttribute="height" multiplier="30:70" id="Gue-yP-YIf"/>
+                            <constraint firstItem="6y3-U4-EQI" firstAttribute="width" secondItem="Bo6-h8-eHN" secondAttribute="width" id="IcO-pF-LpF"/>
+                            <constraint firstItem="t1k-NW-CLV" firstAttribute="top" secondItem="adk-6c-Wxs" secondAttribute="bottom" constant="21" id="c1t-KB-nau"/>
+                            <constraint firstAttribute="trailing" secondItem="t1k-NW-CLV" secondAttribute="trailing" constant="20" id="hM6-41-ThZ"/>
+                            <constraint firstItem="t1k-NW-CLV" firstAttribute="leading" secondItem="Bo6-h8-eHN" secondAttribute="leading" constant="20" id="jmP-v2-PpE"/>
+                            <constraint firstAttribute="trailing" secondItem="6y3-U4-EQI" secondAttribute="trailing" id="jw1-pX-bLu"/>
+                            <constraint firstAttribute="trailing" secondItem="adk-6c-Wxs" secondAttribute="trailing" constant="20" id="yLa-KP-USq"/>
+                            <constraint firstItem="adk-6c-Wxs" firstAttribute="leading" secondItem="Bo6-h8-eHN" secondAttribute="leading" constant="20" id="ye9-Kt-e7C"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="otpTextField" destination="adk-6c-Wxs" id="0m1-zM-HOF"/>
+                        <outlet property="verifyButton" destination="t1k-NW-CLV" id="rQI-TZ-OZn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gLA-vV-rTe" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="388" y="248"/>
         </scene>

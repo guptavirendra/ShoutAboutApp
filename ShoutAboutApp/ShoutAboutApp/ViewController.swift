@@ -40,6 +40,34 @@ class ViewController: UIViewController
         }else
         {
             //hit webservice
+            
+            DataSessionManger.sharedInstance.getOTPForMobileNumber(mobileNumberString, onFinish: { (response, deserializedResponse) in
+                
+                print(" response :\(response) , deserializedResponse \(deserializedResponse) ")
+                if deserializedResponse is NSDictionary
+                {
+                    if deserializedResponse.objectForKey(message) != nil
+                    {
+                        let messageString = deserializedResponse.objectForKey(message) as? String
+                        if messageString == otpMessage
+                        {
+                            dispatch_async(dispatch_get_main_queue(), {
+                                let otpViewController = self.storyboard?.instantiateViewControllerWithIdentifier("OTPViewController") as? OTPViewController
+                                self.presentViewController(otpViewController!, animated: true, completion: nil)
+                                
+                            });
+                            // print go ahead
+                        }else
+                        {
+                            // stay here
+                        }
+                    }
+                }
+                
+                }, onError: { (error) in
+                    print(" error:\(error)")
+                    
+            })
         }
         
     }
