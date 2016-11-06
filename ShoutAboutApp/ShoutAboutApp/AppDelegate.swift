@@ -15,6 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let tabBarVC = storyboard.instantiateViewControllerWithIdentifier("tabBarVC") as? UITabBarController
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.window?.backgroundColor = UIColor(red: 236.0, green: 238.0, blue: 241.0, alpha: 1.0)
+        appDelegate.window?.rootViewController = tabBarVC
+        appDelegate.window?.makeKeyAndVisible()
+
         // Override point for customization after application launch.
         return true
     }

@@ -17,6 +17,11 @@
 		F12C27691DCE66D900AEE0A3 /* URLPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27681DCE66D900AEE0A3 /* URLPath.swift */; };
 		F12C276B1DCE6DDF00AEE0A3 /* DataSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C276A1DCE6DDF00AEE0A3 /* DataSession.swift */; };
 		F12C276F1DCE77A900AEE0A3 /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C276E1DCE77A900AEE0A3 /* OTPViewController.swift */; };
+		F12C27711DCEFDE100AEE0A3 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27701DCEFDE100AEE0A3 /* JoinViewController.swift */; };
+		F12C27731DCF079E00AEE0A3 /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27721DCF079E00AEE0A3 /* InputTableViewCell.swift */; };
+		F12C27751DCF07BB00AEE0A3 /* ClickTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27741DCF07BB00AEE0A3 /* ClickTableViewCell.swift */; };
+		F12C27771DCF3DFA00AEE0A3 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27761DCF3DFA00AEE0A3 /* ContactViewController.swift */; };
+		F12C27791DCF497F00AEE0A3 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27781DCF497F00AEE0A3 /* ContactTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,11 @@
 		F12C27681DCE66D900AEE0A3 /* URLPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLPath.swift; sourceTree = "<group>"; };
 		F12C276A1DCE6DDF00AEE0A3 /* DataSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSession.swift; sourceTree = "<group>"; };
 		F12C276E1DCE77A900AEE0A3 /* OTPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
+		F12C27701DCEFDE100AEE0A3 /* JoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
+		F12C27721DCF079E00AEE0A3 /* InputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTableViewCell.swift; sourceTree = "<group>"; };
+		F12C27741DCF07BB00AEE0A3 /* ClickTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickTableViewCell.swift; sourceTree = "<group>"; };
+		F12C27761DCF3DFA00AEE0A3 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		F12C27781DCF497F00AEE0A3 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,8 +80,13 @@
 				F12C27641DCE643D00AEE0A3 /* NetworkConnectivity.swift */,
 				F12C27501DCE45A800AEE0A3 /* AppDelegate.swift */,
 				F12C27521DCE45A800AEE0A3 /* ViewController.swift */,
-				F12C27541DCE45A800AEE0A3 /* Main.storyboard */,
 				F12C276E1DCE77A900AEE0A3 /* OTPViewController.swift */,
+				F12C27701DCEFDE100AEE0A3 /* JoinViewController.swift */,
+				F12C27761DCF3DFA00AEE0A3 /* ContactViewController.swift */,
+				F12C27721DCF079E00AEE0A3 /* InputTableViewCell.swift */,
+				F12C27741DCF07BB00AEE0A3 /* ClickTableViewCell.swift */,
+				F12C27781DCF497F00AEE0A3 /* ContactTableViewCell.swift */,
+				F12C27541DCE45A800AEE0A3 /* Main.storyboard */,
 				F12C27571DCE45A800AEE0A3 /* Assets.xcassets */,
 				F12C27591DCE45A800AEE0A3 /* LaunchScreen.storyboard */,
 				F12C275C1DCE45A800AEE0A3 /* Info.plist */,
@@ -150,12 +165,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F12C27791DCF497F00AEE0A3 /* ContactTableViewCell.swift in Sources */,
+				F12C27751DCF07BB00AEE0A3 /* ClickTableViewCell.swift in Sources */,
 				F12C276B1DCE6DDF00AEE0A3 /* DataSession.swift in Sources */,
 				F12C27671DCE662800AEE0A3 /* BaseNSURLSession.swift in Sources */,
+				F12C27711DCEFDE100AEE0A3 /* JoinViewController.swift in Sources */,
 				F12C27531DCE45A800AEE0A3 /* ViewController.swift in Sources */,
 				F12C27651DCE643D00AEE0A3 /* NetworkConnectivity.swift in Sources */,
+				F12C27771DCF3DFA00AEE0A3 /* ContactViewController.swift in Sources */,
 				F12C27691DCE66D900AEE0A3 /* URLPath.swift in Sources */,
 				F12C276F1DCE77A900AEE0A3 /* OTPViewController.swift in Sources */,
+				F12C27731DCF079E00AEE0A3 /* InputTableViewCell.swift in Sources */,
 				F12C27511DCE45A800AEE0A3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

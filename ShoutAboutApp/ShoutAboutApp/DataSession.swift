@@ -24,6 +24,29 @@ class DataSession: BaseNSURLSession
         
     }
     
+    
+    
+    func getOTPValidateForMobileNumber(mobileNumber:String, otp:String,  onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dict = ["mobile_number":mobileNumber, "otp":otp]
+        super.getWithOnFinish(mCHWebServiceMethod.match_otp, parameters: dict, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+            }) { (error) in
+                onError(error: error)
+        }
+        
+    }
+    
+    func updateProfile(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        
+        super.postDataWithOnFinish(mCHWebServiceMethod.update_profile, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+            }) { (error) in
+                onError(error: error)
+        }
+    }
+    
 }
 
 class DataSessionManger: NSObject
@@ -40,4 +63,26 @@ class DataSessionManger: NSObject
         
     }
     
+    func getOTPValidateForMobileNumber(mobileNumber:String, otp:String,  onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.getOTPValidateForMobileNumber(mobileNumber, otp: otp, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+            }) { (error) in
+                onError(error: error)
+        }
+        
+    }
+    
+    
+    func updateProfile(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.updateProfile(dict, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+            }) { (error) in
+                onError(error: error)
+        }
+        
+    }
 }

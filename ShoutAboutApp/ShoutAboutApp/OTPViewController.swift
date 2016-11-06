@@ -12,8 +12,13 @@ class OTPViewController: UIViewController {
 
     @IBOutlet weak var verifyButton: UIButton!
     @IBOutlet weak var otpTextField: UITextField!
+    var otpString:String = ""
+    var mobileNumberString:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        otpTextField.addTarget(self, action:#selector(ViewController.edited), forControlEvents:UIControlEvents.EditingChanged)
+        verifyButton.userInteractionEnabled = false
 
         // Do any additional setup after loading the view.
     }
@@ -36,6 +41,158 @@ class OTPViewController: UIViewController {
 
     @IBAction func otpButtonClicked(sender: UIButton)
     {
+        otpTextField.resignFirstResponder()
         
+        /*
+        dispatch_async(dispatch_get_main_queue(), {
+            let joinViewController = self.storyboard?.instantiateViewControllerWithIdentifier("JoinViewController") as? JoinViewController
+            //otpViewController?.mobileNumberString = self.mobileNumberString
+            self.presentViewController(joinViewController!, animated: true, completion: nil)
+            
+        });
+        
+        */
+        
+        if NetworkConnectivity.isConnectedToNetwork() != true
+        {
+            displayAlertMessage("No Internet Connection")
+            
+        }else
+        {
+            
+            self.view.showSpinner()
+            DataSessionManger.sharedInstance.getOTPValidateForMobileNumber(mobileNumberString, otp: otpString, onFinish: { (response, deserializedResponse) in
+                print("deserializedResponse \(deserializedResponse)")
+                
+                if deserializedResponse is NSDictionary
+                {
+                     if deserializedResponse.objectForKey(message) != nil
+                     {
+                        let messageString = deserializedResponse.objectForKey(message) as? String
+                        if messageString == otpExpireMessage
+                        {
+                            dispatch_async(dispatch_get_main_queue(), {
+                                self.view.removeSpinner()
+                                self.displayAlertMessage(otpExpireMessage)
+                            })
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    if deserializedResponse.objectForKey(kapp_user_id) != nil
+                    {
+                         let appUserId = deserializedResponse.objectForKey(kapp_user_id) as? Int
+                         NSUserDefaults.standardUserDefaults().setInteger(appUserId!, forKey: kapp_user_id)
+                         NSUserDefaults.standardUserDefaults().synchronize()
+                        
+                    }
+                    
+                    if deserializedResponse.objectForKey(kapp_user_token) != nil
+                    {
+                        let appUserToken = deserializedResponse.objectForKey(kapp_user_token) as? String
+                         NSUserDefaults.standardUserDefaults().setObject(appUserToken, forKey: kapp_user_token)
+                         NSUserDefaults.standardUserDefaults().synchronize()
+                        
+                    }
+                    
+                    
+                    let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id)
+                    let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token)
+                    
+                    if appUserId != nil && appUserToken != nil
+                    {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.view.removeSpinner()
+                            let joinViewController = self.storyboard?.instantiateViewControllerWithIdentifier("JoinViewController") as? JoinViewController
+                            //otpViewController?.mobileNumberString = self.mobileNumberString
+                            self.presentViewController(joinViewController!, animated: true, completion: nil)
+                            
+                        });
+                        
+                    }
+                    
+                }
+                
+                }, onError: { (error) in
+                    
+                    print("error \(error)")
+                    dispatch_async(dispatch_get_main_queue(),
+                        {
+                            self.view.removeSpinner()
+                    })
+
+            })
+            
+        }
+        
+        
+    }
+    
+    @IBAction func resendButtonClicked(sender: UIButton)
+    {
+        
+        if NetworkConnectivity.isConnectedToNetwork() != true
+        {
+            displayAlertMessage("No Internet Connection")
+            
+        }else
+        {
+            //hit webservice
+            
+            DataSessionManger.sharedInstance.getOTPForMobileNumber(mobileNumberString, onFinish: { (response, deserializedResponse) in
+                
+                print(" response :\(response) , deserializedResponse \(deserializedResponse) ")
+                if deserializedResponse is NSDictionary
+                {
+                    if deserializedResponse.objectForKey(message) != nil
+                    {
+                        let messageString = deserializedResponse.objectForKey(message) as? String
+                        if messageString == otpMessage
+                        {
+                            
+                            // print go ahead
+                        }else
+                        {
+                            // stay here
+                        }
+                    }
+                }
+                
+                }, onError: { (error) in
+                    print(" error:\(error)")
+                    
+            })
+        }
+    }
+}
+
+extension OTPViewController
+{
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool
+    {
+        var text:NSString =  textField.text ?? ""
+        text =  text.stringByReplacingCharactersInRange(range, withString: string)
+        
+        
+        if text.length == 6
+        {
+            verifyButton.userInteractionEnabled = true
+        }else
+        {
+            verifyButton.userInteractionEnabled = false
+        }
+        
+        if text.length > 6
+        {
+            return false
+        }
+        return true
+    }
+    func edited()
+    {
+        print("Edited \(otpTextField.text)")
+        otpString = otpTextField.text!
     }
 }
