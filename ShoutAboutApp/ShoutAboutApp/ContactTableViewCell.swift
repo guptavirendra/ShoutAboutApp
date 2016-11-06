@@ -14,6 +14,7 @@ protocol ContactTableViewCellProtocol {
 
 class ContactTableViewCell: UITableViewCell
 {
+     @IBOutlet weak var baseView: UIView!
      @IBOutlet weak var profileImageView: UIImageView!
      @IBOutlet weak var nameLabel: UILabel!
      @IBOutlet weak var mobileLabel: UILabel!
@@ -25,6 +26,8 @@ class ContactTableViewCell: UITableViewCell
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.contentView.backgroundColor = bgColor
+        baseView.backgroundColor = bgColor
         // Initialization code
     }
 

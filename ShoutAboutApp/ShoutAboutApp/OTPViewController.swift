@@ -59,6 +59,7 @@ class OTPViewController: UIViewController {
             
         }else
         {
+            self.otpTextField.text = nil
             
             self.view.showSpinner()
             DataSessionManger.sharedInstance.getOTPValidateForMobileNumber(mobileNumberString, otp: otpString, onFinish: { (response, deserializedResponse) in
@@ -74,6 +75,15 @@ class OTPViewController: UIViewController {
                             dispatch_async(dispatch_get_main_queue(), {
                                 self.view.removeSpinner()
                                 self.displayAlertMessage(otpExpireMessage)
+                            })
+                            
+                        }
+                        
+                        if messageString == inavalidOTP
+                        {
+                            dispatch_async(dispatch_get_main_queue(), {
+                                self.view.removeSpinner()
+                                self.displayAlertMessage(inavalidOTP)
                             })
                             
                         }

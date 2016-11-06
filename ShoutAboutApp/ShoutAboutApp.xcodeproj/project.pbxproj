@@ -22,6 +22,11 @@
 		F12C27751DCF07BB00AEE0A3 /* ClickTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27741DCF07BB00AEE0A3 /* ClickTableViewCell.swift */; };
 		F12C27771DCF3DFA00AEE0A3 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27761DCF3DFA00AEE0A3 /* ContactViewController.swift */; };
 		F12C27791DCF497F00AEE0A3 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27781DCF497F00AEE0A3 /* ContactTableViewCell.swift */; };
+		F12C277B1DCF75F800AEE0A3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C277A1DCF75F800AEE0A3 /* SearchViewController.swift */; };
+		F12C277D1DCF761D00AEE0A3 /* FeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C277C1DCF761D00AEE0A3 /* FeedsViewController.swift */; };
+		F12C277F1DCF763F00AEE0A3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C277E1DCF763F00AEE0A3 /* ProfileViewController.swift */; };
+		F12C27811DCF765300AEE0A3 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27801DCF765300AEE0A3 /* ChatViewController.swift */; };
+		F12C27831DCF85CB00AEE0A3 /* RateANdReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27821DCF85CB00AEE0A3 /* RateANdReviewViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +47,11 @@
 		F12C27741DCF07BB00AEE0A3 /* ClickTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClickTableViewCell.swift; sourceTree = "<group>"; };
 		F12C27761DCF3DFA00AEE0A3 /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		F12C27781DCF497F00AEE0A3 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
+		F12C277A1DCF75F800AEE0A3 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		F12C277C1DCF761D00AEE0A3 /* FeedsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedsViewController.swift; sourceTree = "<group>"; };
+		F12C277E1DCF763F00AEE0A3 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		F12C27801DCF765300AEE0A3 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		F12C27821DCF85CB00AEE0A3 /* RateANdReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateANdReviewViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +87,7 @@
 				F12C27681DCE66D900AEE0A3 /* URLPath.swift */,
 				F12C27661DCE662800AEE0A3 /* BaseNSURLSession.swift */,
 				F12C276A1DCE6DDF00AEE0A3 /* DataSession.swift */,
+				F12C27821DCF85CB00AEE0A3 /* RateANdReviewViewController.swift */,
 				F12C27641DCE643D00AEE0A3 /* NetworkConnectivity.swift */,
 				F12C27501DCE45A800AEE0A3 /* AppDelegate.swift */,
 				F12C27521DCE45A800AEE0A3 /* ViewController.swift */,
@@ -87,6 +98,10 @@
 				F12C27741DCF07BB00AEE0A3 /* ClickTableViewCell.swift */,
 				F12C27781DCF497F00AEE0A3 /* ContactTableViewCell.swift */,
 				F12C27541DCE45A800AEE0A3 /* Main.storyboard */,
+				F12C277A1DCF75F800AEE0A3 /* SearchViewController.swift */,
+				F12C277C1DCF761D00AEE0A3 /* FeedsViewController.swift */,
+				F12C277E1DCF763F00AEE0A3 /* ProfileViewController.swift */,
+				F12C27801DCF765300AEE0A3 /* ChatViewController.swift */,
 				F12C27571DCE45A800AEE0A3 /* Assets.xcassets */,
 				F12C27591DCE45A800AEE0A3 /* LaunchScreen.storyboard */,
 				F12C275C1DCE45A800AEE0A3 /* Info.plist */,
@@ -166,15 +181,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				F12C27791DCF497F00AEE0A3 /* ContactTableViewCell.swift in Sources */,
+				F12C27831DCF85CB00AEE0A3 /* RateANdReviewViewController.swift in Sources */,
 				F12C27751DCF07BB00AEE0A3 /* ClickTableViewCell.swift in Sources */,
+				F12C27811DCF765300AEE0A3 /* ChatViewController.swift in Sources */,
+				F12C277D1DCF761D00AEE0A3 /* FeedsViewController.swift in Sources */,
 				F12C276B1DCE6DDF00AEE0A3 /* DataSession.swift in Sources */,
 				F12C27671DCE662800AEE0A3 /* BaseNSURLSession.swift in Sources */,
 				F12C27711DCEFDE100AEE0A3 /* JoinViewController.swift in Sources */,
 				F12C27531DCE45A800AEE0A3 /* ViewController.swift in Sources */,
 				F12C27651DCE643D00AEE0A3 /* NetworkConnectivity.swift in Sources */,
 				F12C27771DCF3DFA00AEE0A3 /* ContactViewController.swift in Sources */,
+				F12C277B1DCF75F800AEE0A3 /* SearchViewController.swift in Sources */,
 				F12C27691DCE66D900AEE0A3 /* URLPath.swift in Sources */,
 				F12C276F1DCE77A900AEE0A3 /* OTPViewController.swift in Sources */,
+				F12C277F1DCF763F00AEE0A3 /* ProfileViewController.swift in Sources */,
 				F12C27731DCF079E00AEE0A3 /* InputTableViewCell.swift in Sources */,
 				F12C27511DCE45A800AEE0A3 /* AppDelegate.swift in Sources */,
 			);

@@ -48,7 +48,7 @@ class ViewController: UIViewController
         }else
         {
             //hit webservice
-            
+            self
             self.view.showSpinner()
             DataSessionManger.sharedInstance.getOTPForMobileNumber(mobileNumberString, onFinish: { (response, deserializedResponse) in
                 
@@ -145,6 +145,8 @@ extension UIViewController
         self.presentViewController(alert, animated: true, completion: nil)
         
     }
+    
+
     
     
 }
@@ -296,7 +298,7 @@ class GradientArcWithClearColorView : UIView
         var prop: Property = Property()
         
         // Change circle outer color
-            prop.endArcColor = ColorUtil.toUIColor(r: 83.0, g: 147.0, b: 145.0, a: 1.0)
+            prop.endArcColor = ColorUtil.toUIColor(r: 17.0, g: 121.0, b: 190.0, a: 1.0)
         
         
         var startArcColorProp = prop

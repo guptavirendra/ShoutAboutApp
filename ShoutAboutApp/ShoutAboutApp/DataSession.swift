@@ -10,7 +10,7 @@ import UIKit
 
 class DataSession: BaseNSURLSession
 {
-  
+   //MARK: GET OTP
     func getOTPForMobileNumber(mobileNumber:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
         let dict = ["mobile_number":mobileNumber]
@@ -25,7 +25,7 @@ class DataSession: BaseNSURLSession
     }
     
     
-    
+    //MARK: GET OTP VALIDATION
     func getOTPValidateForMobileNumber(mobileNumber:String, otp:String,  onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
         let dict = ["mobile_number":mobileNumber, "otp":otp]
@@ -37,6 +37,7 @@ class DataSession: BaseNSURLSession
         
     }
     
+    //MARK: UPDATE PROFILE
     func updateProfile(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
         
@@ -44,6 +45,16 @@ class DataSession: BaseNSURLSession
             onFinish(response: response, deserializedResponse: deserializedResponse)
             }) { (error) in
                 onError(error: error)
+        }
+    }
+    
+    //MARK: SYNC CONTACT
+    func syncContactToTheServer(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        super.postDataWithOnFinish(mCHWebServiceMethod.add_contact_list, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
         }
     }
     
@@ -84,5 +95,16 @@ class DataSessionManger: NSObject
                 onError(error: error)
         }
         
+    }
+    
+    func syncContactToTheServer(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.syncContactToTheServer(dict, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+            }) { (error) in
+                onError(error: error)
+        }
+
     }
 }
