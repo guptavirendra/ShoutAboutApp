@@ -14,14 +14,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    {
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let tabBarVC = storyboard.instantiateViewControllerWithIdentifier("tabBarVC") as? UITabBarController
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.window?.backgroundColor = UIColor(red: 236.0, green: 238.0, blue: 241.0, alpha: 1.0)
-       // appDelegate.window?.rootViewController = tabBarVC
-        appDelegate.window?.makeKeyAndVisible()
+        let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id)
+        let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token)
+        
+        if appUserId != nil && appUserToken != nil
+        {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let tabBarVC = storyboard.instantiateViewControllerWithIdentifier("tabBarVC") as? UITabBarController
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.window?.backgroundColor = UIColor(red: 236.0, green: 238.0, blue: 241.0, alpha: 1.0)
+            appDelegate.window?.rootViewController = tabBarVC
+            appDelegate.window?.makeKeyAndVisible()
+        }
 
         // Override point for customization after application launch.
         return true

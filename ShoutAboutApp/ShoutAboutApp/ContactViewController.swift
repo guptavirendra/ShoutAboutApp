@@ -37,6 +37,12 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.hidden = true
+    }
 
     /*
     // MARK: - Navigation
@@ -86,11 +92,31 @@ extension ContactViewController
         
     }
     
-    func buttonClicked(cell: ContactTableViewCell)
+    //MARK: CALL
+    func buttonClicked(cell: ContactTableViewCell, button: UIButton)
     {
-        let   phone = "tel://"+"9953166697"
         
-       UIApplication.sharedApplication().openURL(NSURL(string: phone)!)
+        if self.tableView.indexPathForCell(cell) != nil
+        {
+
+            if button.titleLabel?.text == "Call"
+            {
+                let   phone = "tel://"+"9953166697"
+                UIApplication.sharedApplication().openURL(NSURL(string: phone)!)
+            }
+            if button.titleLabel?.text == "Chat"
+            {
+                
+            }
+            if button.titleLabel?.text == "reviews"
+            {
+              
+                let rateANdReviewViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RateANdReviewViewController") as? RateANdReviewViewController
+                 self.navigationController!.pushViewController(rateANdReviewViewController!, animated: true)
+                
+                
+            }
+        }
     }
 }
 
@@ -100,11 +126,7 @@ extension ContactViewController
     {
         let store = CNContactStore()
         
-        if CNContactStore.authorizationStatusForEntityType(.Contacts) == .Denied
-        {
-            self.displayCantAddContactAlert()
-
-        }else if CNContactStore.authorizationStatusForEntityType(.Contacts) == .NotDetermined
+         if CNContactStore.authorizationStatusForEntityType(.Contacts) == .NotDetermined
         {
             store.requestAccessForEntityType(.Contacts, completionHandler: { (authorized: Bool, error: NSError?) -> Void in
                 if authorized
@@ -115,7 +137,13 @@ extension ContactViewController
                     self.displayCantAddContactAlert()
                 }
             })
-        } else if CNContactStore.authorizationStatusForEntityType(.Contacts) == .Authorized
+        }else if CNContactStore.authorizationStatusForEntityType(.Contacts) == .Denied
+        {
+            self.displayCantAddContactAlert()
+            
+        }
+        
+        else if CNContactStore.authorizationStatusForEntityType(.Contacts) == .Authorized
         {
             self.retrieveContactsWithStore(store)
         }
@@ -146,7 +174,7 @@ extension ContactViewController
     }
     
     
-    
+    /*
     override func displayAlert(userMessage: String, handler: ((UIAlertAction) -> Void)?)
     {
         let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
@@ -159,7 +187,7 @@ extension ContactViewController
         alert.addAction(cancelAction)
         self.presentViewController(alert, animated: true, completion: nil)
         
-    }
+    }*/
     
     func showAlertWithMessage(message : String, okAction:UIAlertAction, cancelAction:UIAlertAction )
     {
@@ -221,15 +249,40 @@ extension ContactViewController
         postContactToServer(dict)
     }
     
+    
+    override func displayAlert(userMessage: String, handler: ((UIAlertAction) -> Void)?)
+    {
+        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            self.tableView.reloadData()
+            self.view.removeSpinner()
+            
+        }
+        alert.addAction(okAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
     func postContactToServer(dict:[String:String])
     {
         self.view.showSpinner()
         DataSessionManger.sharedInstance.syncContactToTheServer(dict, onFinish: { (response, deserializedResponse) in
             
+            
+            
+            if deserializedResponse.objectForKey("success") != nil
+            {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.view.removeSpinner()
+                    self.displayAlert("Sync to server successfully ", handler: nil)
+                    
+                });
+            }
+            /*
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.tableView.reloadData()
                 self.view.removeSpinner()
-            })
+            })*/
             }) { (error) in
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.tableView.reloadData()

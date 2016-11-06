@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ContactTableViewCellProtocol {
-    func buttonClicked(cell:ContactTableViewCell)
+    func buttonClicked(cell:ContactTableViewCell, button:UIButton)
 }
 
 class ContactTableViewCell: UITableViewCell
@@ -40,7 +40,7 @@ class ContactTableViewCell: UITableViewCell
     
     @IBAction func buttonClicked(button:UIButton)
     {
-        self.delegate?.buttonClicked(self)
+        self.delegate?.buttonClicked(self, button:button )
     }
 
 }
