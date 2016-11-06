@@ -269,7 +269,10 @@ extension ContactViewController
         DataSessionManger.sharedInstance.syncContactToTheServer(dict, onFinish: { (response, deserializedResponse) in
             
             
-            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                self.view.removeSpinner()
+            })
             if deserializedResponse.objectForKey("success") != nil
             {
                 dispatch_async(dispatch_get_main_queue(), {
@@ -278,11 +281,8 @@ extension ContactViewController
                     
                 });
             }
-            /*
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.tableView.reloadData()
-                self.view.removeSpinner()
-            })*/
+            
+            
             }) { (error) in
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.tableView.reloadData()

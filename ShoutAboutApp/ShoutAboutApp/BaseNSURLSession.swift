@@ -522,13 +522,15 @@ public class BaseNSURLSession: NSObject
         {
             configurePostMutableRequest(path , parameters: parameters, postBody: nil)
         }
-        startSessionTaskDataTaskWithRequest(
+        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0), { () -> Void in
+        self.startSessionTaskDataTaskWithRequest(
             {
                 (response, deserializedResponse) -> () in
                 onFinish(response: response, deserializedResponse: deserializedResponse)
             },
             onError: { (error) -> () in
                 onError(error: error)
+        })
         })
         
     }
@@ -655,40 +657,14 @@ public class BaseNSURLSession: NSObject
                             responseMessage = HttpResponseStatusClass.getResponseStatusMessage(statusCode)
                             print("Status code message" + responseMessage )
                             
-                            if(self.mNSHTTPURLResponse?.statusCode  == 401  && ( self.mNSHTTPURLResponse?.URL?.lastPathComponent == "login" || self.mNSHTTPURLResponse?.URL?.lastPathComponent == "changepassword" || self.mNSHTTPURLResponse?.URL?.lastPathComponent == "forgotpassword"))
-                            {
-                                let errors = "Username or Password not correct"
-                                onError(error:errors)
-                                
-                            }
+                            
                             
                                 
-                            else  if(self.mNSHTTPURLResponse?.statusCode  == 401  && (self.mNSHTTPURLResponse?.URL?.lastPathComponent != "login" || self.mNSHTTPURLResponse?.URL?.lastPathComponent != "changepassword" || self.mNSHTTPURLResponse?.URL?.lastPathComponent != "forgotpassword"))
-                            {
-                                //                                print(self.mNSMutableRequest?.URL)
-                                //                                 print(self.mNSMutableRequest?.HTTPMethod)
-                                
-                                if  ((self.mNSMutableRequest?.URL != nil && self.mNSMutableRequest?.HTTPMethod != nil)  )
-                                {
-                                    if let urlString = self.mNSMutableRequest?.URL?.lastPathComponent
-                                    {
-                                        self.key = urlString + (self.mNSMutableRequest?.HTTPMethod)!
-                                    }
-                                }
-                                
-                                
-                                
-                                let dicRequest : NSMutableDictionary = NSMutableDictionary()
-                                dicRequest.setValue(self.mNSMutableRequest, forKey: self.key)
-                                
-                                
-                                
-                                
-                                
-                            }
+                            
+                            
                                 
                                 // Response code 200 means success
-                            else if(self.mNSHTTPURLResponse?.statusCode  == 200 )
+                             if(self.mNSHTTPURLResponse?.statusCode  == 200 )
                             {
                                 
                                 
@@ -746,6 +722,7 @@ public class BaseNSURLSession: NSObject
                                     }
                                     catch   {
                                         print("Error \(error)")
+                                        onError(error:"\(error)")
                                     }
                                     
                                     

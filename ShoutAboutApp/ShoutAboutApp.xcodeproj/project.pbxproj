@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F12713B01DCF9E9F005928AD /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12713AF1DCF9E9F005928AD /* RatingTableViewCell.swift */; };
+		F12713B21DCFC105005928AD /* WriteReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12713B11DCFC105005928AD /* WriteReviewTableViewCell.swift */; };
 		F12C27511DCE45A800AEE0A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27501DCE45A800AEE0A3 /* AppDelegate.swift */; };
 		F12C27531DCE45A800AEE0A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27521DCE45A800AEE0A3 /* ViewController.swift */; };
 		F12C27561DCE45A800AEE0A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F12C27541DCE45A800AEE0A3 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		F12713AF1DCF9E9F005928AD /* RatingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
+		F12713B11DCFC105005928AD /* WriteReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteReviewTableViewCell.swift; sourceTree = "<group>"; };
 		F12C274D1DCE45A800AEE0A3 /* ShoutAboutApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShoutAboutApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F12C27501DCE45A800AEE0A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F12C27521DCE45A800AEE0A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				F12C27741DCF07BB00AEE0A3 /* ClickTableViewCell.swift */,
 				F12C27781DCF497F00AEE0A3 /* ContactTableViewCell.swift */,
 				F12C27541DCE45A800AEE0A3 /* Main.storyboard */,
+				F12713B11DCFC105005928AD /* WriteReviewTableViewCell.swift */,
 				F12C277A1DCF75F800AEE0A3 /* SearchViewController.swift */,
 				F12C277C1DCF761D00AEE0A3 /* FeedsViewController.swift */,
 				F12C277E1DCF763F00AEE0A3 /* ProfileViewController.swift */,
@@ -183,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F12713B21DCFC105005928AD /* WriteReviewTableViewCell.swift in Sources */,
 				F12C27791DCF497F00AEE0A3 /* ContactTableViewCell.swift in Sources */,
 				F12C27831DCF85CB00AEE0A3 /* RateANdReviewViewController.swift in Sources */,
 				F12713B01DCF9E9F005928AD /* RatingTableViewCell.swift in Sources */,

@@ -670,11 +670,11 @@
                                                             <rect key="frame" x="10" y="60" width="580" height="128"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QIq-Pg-odt" customClass="RatingControl" customModule="ShoutAboutApp" customModuleProvider="target">
-                                                                    <rect key="frame" x="180" y="83" width="240" height="40"/>
-                                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <rect key="frame" x="190" y="83" width="220" height="40"/>
+                                                                    <color key="backgroundColor" red="0.066666666669999999" green="0.47450980390000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="40" id="8LG-LR-nf1"/>
-                                                                        <constraint firstAttribute="width" constant="240" id="g69-y0-yvS"/>
+                                                                        <constraint firstAttribute="width" constant="220" id="g69-y0-yvS"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Update Your Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGw-n2-4kS">
@@ -738,6 +738,81 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="baseView" destination="bhP-d9-JDC" id="1lG-gN-RGb"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WriteReviewTableViewCell" rowHeight="100" id="Qof-l9-hV1" customClass="WriteReviewTableViewCell" customModule="ShoutAboutApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="228" width="600" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qof-l9-hV1" id="ff7-8k-cbq">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AUu-nN-4dx">
+                                                    <rect key="frame" x="10" y="0.0" width="580" height="100"/>
+                                                    <subviews>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2sR-hW-pg7">
+                                                            <rect key="frame" x="10" y="40" width="560" height="50"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        </textView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write a Review" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IQ-ob-dH0">
+                                                            <rect key="frame" x="249" y="8" width="102" height="21"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="21" id="dB8-ry-ctf"/>
+                                                                <constraint firstAttribute="width" constant="102" id="rK4-2g-xOH"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.066666666669999999" green="0.47450980390000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="9IQ-ob-dH0" firstAttribute="centerX" secondItem="AUu-nN-4dx" secondAttribute="centerX" constant="10" id="7A3-Eh-wlG"/>
+                                                        <constraint firstItem="2sR-hW-pg7" firstAttribute="top" secondItem="9IQ-ob-dH0" secondAttribute="bottom" constant="11" id="7iq-Au-za9"/>
+                                                        <constraint firstItem="9IQ-ob-dH0" firstAttribute="top" secondItem="AUu-nN-4dx" secondAttribute="top" constant="8" id="BmF-IF-ZvY"/>
+                                                        <constraint firstItem="2sR-hW-pg7" firstAttribute="leading" secondItem="AUu-nN-4dx" secondAttribute="leading" constant="10" id="Gox-QB-vzd"/>
+                                                        <constraint firstAttribute="bottom" secondItem="2sR-hW-pg7" secondAttribute="bottom" constant="10" id="XNs-KP-gCQ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="2sR-hW-pg7" secondAttribute="trailing" constant="10" id="lze-Gq-nHY"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="AUu-nN-4dx" firstAttribute="leading" secondItem="ff7-8k-cbq" secondAttribute="leading" constant="10" id="Hz6-v1-C8r"/>
+                                                <constraint firstItem="AUu-nN-4dx" firstAttribute="top" secondItem="ff7-8k-cbq" secondAttribute="top" id="k3j-iE-7Y2"/>
+                                                <constraint firstAttribute="trailing" secondItem="AUu-nN-4dx" secondAttribute="trailing" constant="10" id="lhH-da-iTj"/>
+                                                <constraint firstAttribute="bottom" secondItem="AUu-nN-4dx" secondAttribute="bottom" id="ll8-7T-zEf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="button" rowHeight="54" id="Dp9-Y0-9et" customClass="ClickTableViewCell" customModule="ShoutAboutApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="328" width="600" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dp9-Y0-9et" id="4ia-cO-3de">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="54"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94A-Pl-MZe">
+                                                    <rect key="frame" x="10" y="11" width="580" height="43"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <state key="normal" title="SUBMIT">
+                                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="buttonClicked:" destination="Dp9-Y0-9et" eventType="touchUpInside" id="PxZ-f0-8Vv"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="94A-Pl-MZe" firstAttribute="leading" secondItem="4ia-cO-3de" secondAttribute="leading" constant="10" id="5jK-cN-Dx6"/>
+                                                <constraint firstAttribute="trailing" secondItem="94A-Pl-MZe" secondAttribute="trailing" constant="10" id="IS6-TX-WKo"/>
+                                                <constraint firstItem="94A-Pl-MZe" firstAttribute="top" secondItem="4ia-cO-3de" secondAttribute="top" constant="11" id="vZ5-ya-oTK"/>
+                                                <constraint firstAttribute="bottom" secondItem="94A-Pl-MZe" secondAttribute="bottom" id="zcz-Q9-ttc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="button" destination="94A-Pl-MZe" id="Xvu-Q6-hD8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
