@@ -202,28 +202,50 @@ extension ContactViewController
         let url = NSURL(string: UIApplicationOpenSettingsURLString)
         UIApplication.sharedApplication().openURL(url!)
     }
-    func retrieveContactsWithStore(store: CNContactStore) {
-        do {
-            let groups = try store.groupsMatchingPredicate(nil)
-            let predicate = CNContact.predicateForContactsInGroupWithIdentifier(groups[0].identifier)
-            //let predicate = CNContact.predicateForContactsMatchingName("John")
-            let keysToFetch = [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName), CNContactPhoneNumbersKey]
+    func retrieveContactsWithStore(contactStore: CNContactStore)
+    {
+        let keysToFetch = [
+            CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName),
             
-            let contacts = try store.unifiedContactsMatchingPredicate(predicate, keysToFetch: keysToFetch)
-            self.objects = contacts
+            CNContactPhoneNumbersKey,
+           ]
+        
+        // Get all the containers
+        var allContainers: [CNContainer] = []
+        do {
+            allContainers = try contactStore.containersMatchingPredicate(nil)
+        } catch {
+            print("Error fetching containers")
+        }
+        
+        var results: [CNContact] = []
+        
+        // Iterate all containers and append their contacts to our results array
+        for container in allContainers {
+            let fetchPredicate = CNContact.predicateForContactsInContainerWithIdentifier(container.identifier)
+            
+            do {
+                let containerResults = try contactStore.unifiedContactsMatchingPredicate(fetchPredicate, keysToFetch: keysToFetch)
+                results.appendContentsOf(containerResults)
+            } catch {
+                print("Error fetching results for container")
+            }
+        }
+
+            self.objects = results
             allValidContacts.removeAll()
             for contact in self.objects
             {
                 let formatter = CNContactFormatter()
                 
                 let name = formatter.stringFromContact(contact)
-                let mobile = contact.phoneNumbers.first?.value as? String
+                let mobile = (contact.phoneNumbers.first?.value as! CNPhoneNumber).valueForKey("digits") as? String
                 
-                if name?.characters.count > 0 //&& mobile?.characters.count > 0
+                if name?.characters.count > 0 && mobile != nil
                 {
                     let personContact = PersonContact()
                     personContact.name = name!
-                    personContact.mobileNumber = "8888888888"
+                    personContact.mobileNumber =  mobile!
                     allValidContacts.append(personContact)
                     
                 }
@@ -231,10 +253,9 @@ extension ContactViewController
             
             postData()
             
-            } catch {
-            print(error)
         }
-    }
+    
+    
     
     
     func postData()
