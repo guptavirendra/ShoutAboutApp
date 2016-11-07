@@ -68,11 +68,6 @@ extension ContactViewController
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("contact", forIndexPath: indexPath) as! ContactTableViewCell
         cell.delegate = self
-        let contact = self.objects[indexPath.row]
-        let formatter = CNContactFormatter()
-        
-       // cell.nameLabel?.text = formatter.stringFromContact(contact)
-       // cell.mobileLabel?.text = contact.phoneNumbers.first?.value as? String
         
         let personContact = allValidContacts[indexPath.row]
         cell.nameLabel?.text = personContact.name
@@ -98,10 +93,11 @@ extension ContactViewController
         
         if self.tableView.indexPathForCell(cell) != nil
         {
-
+            let indexPath = self.tableView.indexPathForCell(cell)
             if button.titleLabel?.text == "Call"
             {
-                let   phone = "tel://"+"9953166697"
+                let personContact = allValidContacts[indexPath!.row]
+                let   phone = "tel://"+personContact.mobileNumber
                 UIApplication.sharedApplication().openURL(NSURL(string: phone)!)
             }
             if button.titleLabel?.text == "Chat"
