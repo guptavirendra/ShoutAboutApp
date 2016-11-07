@@ -656,13 +656,7 @@ public class BaseNSURLSession: NSObject
                             // Get a corresponding Status code message
                             responseMessage = HttpResponseStatusClass.getResponseStatusMessage(statusCode)
                             print("Status code message" + responseMessage )
-                            
-                            
-                            
-                                
-                            
-                            
-                                
+                
                                 // Response code 200 means success
                              if(self.mNSHTTPURLResponse?.statusCode  == 200 )
                             {
@@ -720,9 +714,18 @@ public class BaseNSURLSession: NSObject
                                             }
                                         }
                                     }
-                                    catch   {
-                                        print("Error \(error)")
-                                        onError(error:"\(error)")
+                                    catch
+                                    {
+                                        
+                                        do  {
+                                            let json = try NSJSONSerialization.JSONObjectWithData(dataInAnyObject, options: .MutableLeaves) as? String
+                                            onFinish(response: data!,deserializedResponse: json!)
+                                        }
+                                        catch
+                                        {
+                                            print("Error \(error)")
+                                            onError(error:"\(error)")
+                                        }
                                     }
                                     
                                     

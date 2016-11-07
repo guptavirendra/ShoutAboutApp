@@ -19,6 +19,7 @@ class ViewController: UIViewController
         super.viewDidLoad()
         mobileNumberTextField.addTarget(self, action:#selector(ViewController.edited), forControlEvents:UIControlEvents.EditingChanged)
         submitButton.userInteractionEnabled = false
+        submitButton.alpha = 0.5
         
     }
 
@@ -103,9 +104,11 @@ extension ViewController:UITextFieldDelegate
         if text.length == 10
         {
             submitButton.userInteractionEnabled = true
+            submitButton.alpha = 1.0
         }else
         {
             submitButton.userInteractionEnabled = false
+            submitButton.alpha = 0.5
         }
         
         if text.length > 10
@@ -118,6 +121,16 @@ extension ViewController:UITextFieldDelegate
     {
         print("Edited \(mobileNumberTextField.text)")
         mobileNumberString = mobileNumberTextField.text!
+        if mobileNumberString.characters.count == 10
+        {
+            submitButton.userInteractionEnabled = true
+            submitButton.alpha = 1.0
+        }else
+        {
+            submitButton.userInteractionEnabled = false
+            submitButton.alpha = 0.5
+        }
+
     }
 }
 

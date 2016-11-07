@@ -17,8 +17,10 @@ class OTPViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         otpTextField.addTarget(self, action:#selector(ViewController.edited), forControlEvents:UIControlEvents.EditingChanged)
         verifyButton.userInteractionEnabled = false
+        verifyButton.alpha = 0.5
 
         // Do any additional setup after loading the view.
     }
@@ -74,6 +76,8 @@ class OTPViewController: UIViewController {
                         {
                             dispatch_async(dispatch_get_main_queue(), {
                                 self.view.removeSpinner()
+                                self.verifyButton.userInteractionEnabled = false
+                                self.verifyButton.alpha = 0.5
                                 self.displayAlertMessage(otpExpireMessage)
                             })
                             
@@ -83,6 +87,8 @@ class OTPViewController: UIViewController {
                         {
                             dispatch_async(dispatch_get_main_queue(), {
                                 self.view.removeSpinner()
+                                self.verifyButton.userInteractionEnabled = false
+                                self.verifyButton.alpha = 0.5
                                 self.displayAlertMessage(inavalidOTP)
                             })
                             
@@ -130,6 +136,8 @@ class OTPViewController: UIViewController {
                     print("error \(error)")
                     dispatch_async(dispatch_get_main_queue(),
                         {
+                            self.verifyButton.userInteractionEnabled = false
+                            self.verifyButton.alpha = 0.5
                             self.view.removeSpinner()
                     })
 
@@ -189,9 +197,11 @@ extension OTPViewController
         if text.length == 6
         {
             verifyButton.userInteractionEnabled = true
+            verifyButton.alpha = 1.0
         }else
         {
             verifyButton.userInteractionEnabled = false
+            verifyButton.alpha = 0.5
         }
         
         if text.length > 6
@@ -204,5 +214,14 @@ extension OTPViewController
     {
         print("Edited \(otpTextField.text)")
         otpString = otpTextField.text!
+        if otpString.characters.count == 6
+        {
+            verifyButton.userInteractionEnabled = true
+            verifyButton.alpha = 1.0
+        }else
+        {
+            verifyButton.userInteractionEnabled = false
+            verifyButton.alpha = 0.5
+        }
     }
 }
