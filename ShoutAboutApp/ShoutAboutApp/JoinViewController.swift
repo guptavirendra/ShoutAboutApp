@@ -250,12 +250,12 @@ extension JoinViewController
                 let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbSize.height, right: 0)
                 self.tableView.contentInset = contentInsets
                 self.tableView.scrollIndicatorInsets = contentInsets
-                
-                self.tableView.scrollToRowAtIndexPath(self.tableView.indexPathForCell(cell)!, atScrollPosition: .Top, animated: true)
-                
+            self.tableView.scrollToRowAtIndexPath(self.tableView.indexPathForCell(cell)!, atScrollPosition: .Top, animated: true)
             }
         }
     }
+    
+    
     func hideKeyBoard(notification: NSNotification)
     {
         
@@ -266,7 +266,4 @@ extension JoinViewController
             self.tableView.scrollIndicatorInsets = contentInsets
         }
     }
-
-    
-    
 }

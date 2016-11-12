@@ -88,10 +88,7 @@
 		F12C274F1DCE45A800AEE0A3 /* ShoutAboutApp */ = {
 			isa = PBXGroup;
 			children = (
-				F12C27681DCE66D900AEE0A3 /* URLPath.swift */,
-				F12C27661DCE662800AEE0A3 /* BaseNSURLSession.swift */,
-				F12C276A1DCE6DDF00AEE0A3 /* DataSession.swift */,
-				F12C27641DCE643D00AEE0A3 /* NetworkConnectivity.swift */,
+				F16FC7271DD64BCC009CC979 /* Network */,
 				F12C27501DCE45A800AEE0A3 /* AppDelegate.swift */,
 				F12C27521DCE45A800AEE0A3 /* ViewController.swift */,
 				F12C276E1DCE77A900AEE0A3 /* OTPViewController.swift */,
@@ -113,6 +110,17 @@
 				F12C275C1DCE45A800AEE0A3 /* Info.plist */,
 			);
 			path = ShoutAboutApp;
+			sourceTree = "<group>";
+		};
+		F16FC7271DD64BCC009CC979 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F12C27681DCE66D900AEE0A3 /* URLPath.swift */,
+				F12C27661DCE662800AEE0A3 /* BaseNSURLSession.swift */,
+				F12C276A1DCE6DDF00AEE0A3 /* DataSession.swift */,
+				F12C27641DCE643D00AEE0A3 /* NetworkConnectivity.swift */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,10 +325,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kshitij Raina (Z4EB893U62)";
 				INFOPLIST_FILE = ShoutAboutApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lalitdev.ShoutAboutApp;
+				PRODUCT_BUNDLE_IDENTIFIER = co.in.varyavega.ShoutAboutApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "11bba660-4cec-4bd7-b455-bcfcc17298b1";
 			};
 			name = Debug;
 		};
@@ -328,10 +338,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kshitij Raina (Z4EB893U62)";
 				INFOPLIST_FILE = ShoutAboutApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lalitdev.ShoutAboutApp;
+				PRODUCT_BUNDLE_IDENTIFIER = co.in.varyavega.ShoutAboutApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "11bba660-4cec-4bd7-b455-bcfcc17298b1";
 			};
 			name = Release;
 		};

@@ -11,6 +11,8 @@ import UIKit
 class RateANdReviewViewController: UIViewController,UITableViewDataSource, UITableViewDelegate
 {
     @IBOutlet weak var tableView: UITableView!
+     
+    var activeTextField:UITextField?
 
     override func viewDidLoad()
     {
@@ -18,12 +20,19 @@ class RateANdReviewViewController: UIViewController,UITableViewDataSource, UITab
         self.tableView.backgroundColor = bgColor
 
          self.navigationController?.navigationBar.hidden = false
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.showKeyBoard(_:)), name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.hideKeyBoard(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
         
+    }
+    deinit
+    {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
 }
 
@@ -70,10 +79,36 @@ extension RateANdReviewViewController
         }
         return 200
     }
-    
-    
+}
 
+extension RateANdReviewViewController
+{
+    func showKeyBoard(notification: NSNotification)
+    {
+        if ((activeTextField?.superview?.superview?.isKindOfClass(InputTableViewCell)) != nil)
+        {
+            if let cell = activeTextField?.superview?.superview as? InputTableViewCell
+            {
+                let dictInfo: NSDictionary = notification.userInfo!
+                let kbSize :CGSize = (dictInfo.objectForKey(UIKeyboardFrameBeginUserInfoKey)?.CGRectValue().size)!
+                let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbSize.height, right: 0)
+                self.tableView.contentInset = contentInsets
+                self.tableView.scrollIndicatorInsets = contentInsets
+                self.tableView.scrollToRowAtIndexPath(self.tableView.indexPathForCell(cell)!, atScrollPosition: .Top, animated: true)
+            }
+        }
+    }
     
     
-    
+    func hideKeyBoard(notification: NSNotification)
+    {
+        
+        if  activeTextField != nil
+        {
+            let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            self.tableView.contentInset = contentInsets
+            self.tableView.scrollIndicatorInsets = contentInsets
+        }
+    }
+
 }

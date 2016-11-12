@@ -28,9 +28,12 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         
         self.tableView.backgroundColor = bgColor
         self.getContacts()
+        
 
         // Do any additional setup after loading the view.
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -42,6 +45,7 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.hidden = true
+        
     }
 
     /*
@@ -244,9 +248,13 @@ extension ContactViewController
                     personContact.mobileNumber =  mobile!
                     allValidContacts.append(personContact)
                     
+                    
                 }
             }
-            
+        
+        allValidContacts.sortInPlace { (person1, person2) -> Bool in
+            return person1.name < person2.name
+        }
             postData()
             
         }

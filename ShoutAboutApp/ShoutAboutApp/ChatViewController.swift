@@ -8,9 +8,11 @@
 
 import UIKit
 
-class ChatViewController: UIViewController {
+class ChatViewController: UIViewController
+{
 
-    override func viewDidLoad() {
+     var allValidContacts = [ChatPerson]()
+     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.

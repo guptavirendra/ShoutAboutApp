@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoutAboutApp/BaseNSURLSession.swift"
-            timestampString = "500155822.225204"
+            timestampString = "500157786.106474"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1010"
-            endingLineNumber = "1010"
+            startingLineNumber = "1013"
+            endingLineNumber = "1013"
             landmarkName = "configureMediaRequest(_:path:headerParam:mediaPaths:bodyDict:name:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoutAboutApp/OTPViewController.swift"
-            timestampString = "500140372.398216"
+            timestampString = "500241625.065461"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "resendButtonClicked(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoutAboutApp/OTPViewController.swift"
-            timestampString = "500140372.398216"
+            timestampString = "500241625.065461"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "resendButtonClicked(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoutAboutApp/OTPViewController.swift"
-            timestampString = "500140372.398216"
+            timestampString = "500241625.065461"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "resendButtonClicked(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoutAboutApp/OTPViewController.swift"
-            timestampString = "500140372.398216"
+            timestampString = "500241625.065461"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "resendButtonClicked(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,7 +122,7 @@
                   moduleName = "ShoutAboutApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/JoinViewController.swift"
-                  timestampString = "500156275.431384"
+                  timestampString = "500669146.5631"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "171"
@@ -137,7 +137,7 @@
                   moduleName = "ShoutAboutApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/JoinViewController.swift"
-                  timestampString = "500156275.431617"
+                  timestampString = "500669146.563341"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "172"
@@ -202,7 +202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoutAboutApp/ContactViewController.swift"
-            timestampString = "500152604.716085"
+            timestampString = "500585535.0634"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "154"
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoutAboutApp/ViewController.swift"
-            timestampString = "500149976.615745"
+            timestampString = "500238165.89829"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "686"
-            endingLineNumber = "686"
+            startingLineNumber = "699"
+            endingLineNumber = "699"
             landmarkName = "updateButtonSelectionStates()"
             landmarkType = "5">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoutAboutApp/ContactViewController.swift"
-            timestampString = "500154982.400635"
+            timestampString = "500585535.0634"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
             landmarkName = "postContactToServer(_:)"
             landmarkType = "5">
             <Locations>
@@ -250,11 +250,11 @@
                   moduleName = "ShoutAboutApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/ContactViewController.swift"
-                  timestampString = "500156275.437376"
+                  timestampString = "500669146.586757"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "269"
-                  endingLineNumber = "269"
+                  startingLineNumber = "294"
+                  endingLineNumber = "294"
                   offsetFromSymbolStart = "194">
                </Location>
                <Location
@@ -265,7 +265,7 @@
                   moduleName = "ShoutAboutApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.3.sdk/usr/include/dispatch/queue.h"
-                  timestampString = "500156275.437579"
+                  timestampString = "500669146.586948"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "325"
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoutAboutApp/ContactViewController.swift"
-            timestampString = "500155007.191566"
+            timestampString = "500585535.0634"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
             landmarkName = "postContactToServer(_:)"
             landmarkType = "5">
             <Locations>
@@ -298,11 +298,11 @@
                   moduleName = "ShoutAboutApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/ContactViewController.swift"
-                  timestampString = "500156275.4388"
+                  timestampString = "500669146.588338"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "272"
-                  endingLineNumber = "272"
+                  startingLineNumber = "297"
+                  endingLineNumber = "297"
                   offsetFromSymbolStart = "73">
                </Location>
                <Location
@@ -313,11 +313,11 @@
                   moduleName = "ShoutAboutApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/ContactViewController.swift"
-                  timestampString = "500156275.43897"
+                  timestampString = "500669146.588524"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "274"
-                  endingLineNumber = "274"
+                  startingLineNumber = "299"
+                  endingLineNumber = "299"
                   offsetFromSymbolStart = "12">
                </Location>
             </Locations>
@@ -342,7 +342,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ShoutAboutApp/BaseNSURLSession.swift"
@@ -353,6 +353,310 @@
             endingLineNumber = "635"
             landmarkName = "startSessionTaskDataTaskWithRequest(_:onError:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoutAboutApp/JoinViewController.swift"
+            timestampString = "500157097.06874"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "buttonClicked(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoutAboutApp/ContactViewController.swift"
+            timestampString = "500585535.0634"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "retrieveContactsWithStore(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoutAboutApp/SearchViewController.swift"
+            timestampString = "500644257.400178"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "searchBar(_:selectedScopeButtonIndexDidChange:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoutAboutApp/SearchViewController.swift"
+            timestampString = "500644257.400178"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "getSearchForText(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoutAboutApp/DataSession.swift"
+            timestampString = "500668925.038575"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "searchContact(_:onFinish:onError:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ShoutAboutApp.DataSessionManger.searchContact (Swift.Dictionary&lt;Swift.String, Swift.String&gt;, onFinish : (response : Swift.AnyObject, deserializedResponse : Swift.Array&lt;ShoutAboutApp.SearchPerson&gt;, errorMessage : Swift.Optional&lt;Swift.String&gt;) -&gt; (), onError : (error : Swift.AnyObject) -&gt; ()) -&gt; ()"
+                  moduleName = "ShoutAboutApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/DataSession.swift"
+                  timestampString = "500669146.593792"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "180"
+                  endingLineNumber = "180"
+                  offsetFromSymbolStart = "75">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ShoutAboutApp.DataSessionManger.(searchContact (Swift.Dictionary&lt;Swift.String, Swift.String&gt;, onFinish : (response : Swift.AnyObject, deserializedResponse : Swift.Array&lt;ShoutAboutApp.SearchPerson&gt;, errorMessage : Swift.Optional&lt;Swift.String&gt;) -&gt; (), onError : (error : Swift.AnyObject) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "ShoutAboutApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/DataSession.swift"
+                  timestampString = "500669146.593949"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "182"
+                  endingLineNumber = "182"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoutAboutApp/DataSession.swift"
+            timestampString = "500668925.038575"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
+            landmarkName = "searchContact(_:onFinish:onError:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoutAboutApp/DataSession.swift"
+            timestampString = "500668925.038575"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "searchContact(_:onFinish:onError:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ShoutAboutApp.DataSessionManger.(searchContact (Swift.Dictionary&lt;Swift.String, Swift.String&gt;, onFinish : (response : Swift.AnyObject, deserializedResponse : Swift.Array&lt;ShoutAboutApp.SearchPerson&gt;, errorMessage : Swift.Optional&lt;Swift.String&gt;) -&gt; (), onError : (error : Swift.AnyObject) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "ShoutAboutApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/DataSession.swift"
+                  timestampString = "500669146.595655"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "202"
+                  endingLineNumber = "202"
+                  offsetFromSymbolStart = "3332">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ShoutAboutApp.DataSessionManger.(searchContact (Swift.Dictionary&lt;Swift.String, Swift.String&gt;, onFinish : (response : Swift.AnyObject, deserializedResponse : Swift.Array&lt;ShoutAboutApp.SearchPerson&gt;, errorMessage : Swift.Optional&lt;Swift.String&gt;) -&gt; (), onError : (error : Swift.AnyObject) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "ShoutAboutApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/DataSession.swift"
+                  timestampString = "500669146.595808"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "202"
+                  endingLineNumber = "202"
+                  offsetFromSymbolStart = "4360">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoutAboutApp/DataSession.swift"
+            timestampString = "500668925.038575"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "searchContact(_:onFinish:onError:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoutAboutApp/DataSession.swift"
+            timestampString = "500668925.038575"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "searchContact(_:onFinish:onError:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoutAboutApp/AppDelegate.swift"
+            timestampString = "500644936.527297"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoutAboutApp/AppDelegate.swift"
+            timestampString = "500644937.444928"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoutAboutApp/DataSession.swift"
+            timestampString = "500668925.038575"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
+            landmarkName = "getChatList(_:onError:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ShoutAboutApp/DataSession.swift"
+            timestampString = "500668925.038575"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "getContactReviewList(_:onFinish:onError:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ShoutAboutApp.DataSessionManger.(getContactReviewList (Swift.Dictionary&lt;Swift.String, Swift.String&gt;, onFinish : (response : Swift.AnyObject, reviewUser : ShoutAboutApp.ReviewUser) -&gt; (), onError : (error : Swift.AnyObject) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "ShoutAboutApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/DataSession.swift"
+                  timestampString = "500669146.599891"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "282"
+                  endingLineNumber = "282"
+                  offsetFromSymbolStart = "610">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ShoutAboutApp.DataSessionManger.(getContactReviewList (Swift.Dictionary&lt;Swift.String, Swift.String&gt;, onFinish : (response : Swift.AnyObject, reviewUser : ShoutAboutApp.ReviewUser) -&gt; (), onError : (error : Swift.AnyObject) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "ShoutAboutApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/DataSession.swift"
+                  timestampString = "500669146.60008"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "282"
+                  endingLineNumber = "282"
+                  offsetFromSymbolStart = "12864">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
