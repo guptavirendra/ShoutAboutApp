@@ -8,16 +8,17 @@
 
 import UIKit
 
-class RateANdReviewViewController: UIViewController,UITableViewDataSource, UITableViewDelegate
+class RateANdReviewViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, UITextViewDelegate
 {
     @IBOutlet weak var tableView: UITableView!
      
-    var activeTextField:UITextField?
+    var activeTextView:UITextView?
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.tableView.backgroundColor = bgColor
+        self.automaticallyAdjustsScrollViewInsets = false
 
          self.navigationController?.navigationBar.hidden = false
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.showKeyBoard(_:)), name: UIKeyboardDidShowNotification, object: nil)
@@ -125,17 +126,86 @@ extension RateANdReviewViewController
 
 extension RateANdReviewViewController
 {
+    func textViewDidBeginEditing(textView: UITextView)
+    {
+        activeTextView = textView
+        textView.becomeFirstResponder()
+    }
+    
+    
+    /*
+    - (void)textViewDidBeginEditing:(UITextView *)textView
+    {
+    // save the text view that is being edited
+    
+    if ([textView.text isEqualToString:NSLocalizedString(@"Add question", nil)] ||[textView.text isEqualToString:NSLocalizedString(@"Add answer", nil)] )
+    {
+    textView.text = @"";
+    textView.textColor = [UIColor colorWithRed:39./255. green:39./255. blue:39./255. alpha:1.]; //optional
+    }
+    mActiveView = textView;
+    [textView becomeFirstResponder];
+    
+    
+    }*/
+    
+    
+    func textViewDidEndEditing(textView: UITextView)
+    {
+        textView.resignFirstResponder()
+    }
+    /*
+    - (void)textViewDidEndEditing:(UITextView *)textView
+    {
+    
+    if ([textView.text isEqualToString:@"Add question"] ||[textView.text isEqualToString:@"Add answer"] )
+    {
+    textView.text = @"";
+    textView.textColor = [UIColor lightGrayColor]; //optional
+    
+    [textView resignFirstResponder];
+    }
+    else
+    {
+    if (textView.tag == 1)
+    {
+    mQuestion = textView.text;
+    }
+    else if (textView.tag == 2)
+    {
+    mAnswer = textView.text;
+    }
+    
+    }
+    // release the selected text view as we don't need it anymore
+    mActiveView = nil;
+    }
+    
+    */
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool
+    {
+        if text == "\n"
+        {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+   
+
+
     func showKeyBoard(notification: NSNotification)
     {
-        if ((activeTextField?.superview?.superview?.isKindOfClass(InputTableViewCell)) != nil)
+        if ((activeTextView?.superview?.superview?.superview?.isKindOfClass(WriteReviewTableViewCell)) != nil)
         {
-            if let cell = activeTextField?.superview?.superview as? InputTableViewCell
+            if let cell = activeTextView?.superview?.superview?.superview as? WriteReviewTableViewCell
             {
                 let dictInfo: NSDictionary = notification.userInfo!
                 let kbSize :CGSize = (dictInfo.objectForKey(UIKeyboardFrameBeginUserInfoKey)?.CGRectValue().size)!
-                let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbSize.height, right: 0)
-                self.tableView.contentInset = contentInsets
-                self.tableView.scrollIndicatorInsets = contentInsets
+                //let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbSize.height, right: 0)
+               // self.tableView.contentInset = contentInsets
+               // self.tableView.scrollIndicatorInsets = contentInsets
                 self.tableView.scrollToRowAtIndexPath(self.tableView.indexPathForCell(cell)!, atScrollPosition: .Top, animated: true)
             }
         }
@@ -145,11 +215,12 @@ extension RateANdReviewViewController
     func hideKeyBoard(notification: NSNotification)
     {
         
-        if  activeTextField != nil
+        if  activeTextView != nil
         {
             let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             self.tableView.contentInset = contentInsets
             self.tableView.scrollIndicatorInsets = contentInsets
+            self.tableView.scrollToNearestSelectedRowAtScrollPosition(.Bottom, animated: true)
         }
     }
 

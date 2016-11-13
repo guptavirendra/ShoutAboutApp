@@ -11,6 +11,8 @@ import UIKit
 class WriteReviewTableViewCell: UITableViewCell
 {
    @IBOutlet weak var baseView: UIView!
+    @IBOutlet weak var textView: UITextView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.backgroundColor = bgColor

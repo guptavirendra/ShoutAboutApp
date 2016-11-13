@@ -10,11 +10,13 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate,UISearchControllerDelegate, ContactTableViewCellProtocol, UITableViewDataSource, UITableViewDelegate
 {
+    //@IBOutlet weak var searchView:UIView?
+   // @IBOutlet weak var searchBar:UISearchBar?
     @IBOutlet weak var tableView: UITableView!
     var allValidContacts = [SearchPerson]()
     var errorMessage:String?
 
-  let searchController = UISearchController(searchResultsController: nil)
+   let searchController = UISearchController(searchResultsController: nil)
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -26,8 +28,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
         
         // Setup the Scope Bar
         //searchController.searchBar.scopeButtonTitles = ["All", "Chocolate", "Hard", "Other"]
+        //searchBar = searchController.searchBar
+        
+        //searchView = searchController.searchBar
+        
         tableView.tableHeaderView = searchController.searchBar
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "message")
+        searchController.hidesNavigationBarDuringPresentation = false
         //self.automaticallyAdjustsScrollViewInsets = false
 
     }
@@ -40,7 +47,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        //self.navigationController?.navigationBar.hidden = true
+        self.navigationController?.navigationBar.hidden = true
         
     }
 }
