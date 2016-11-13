@@ -106,6 +106,8 @@ extension ContactViewController
             }
             if button.titleLabel?.text == "Chat"
             {
+                let chattingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChattingViewController") as? ChattingViewController
+                self.navigationController!.pushViewController(chattingViewController!, animated: true)
                 
             }
             if button.titleLabel?.text == "reviews"
