@@ -8,8 +8,11 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
-
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+{
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var cameraButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,4 +35,29 @@ class ProfileViewController: UIViewController {
     }
     */
 
+}
+
+
+extension ProfileViewController
+{
+    @IBAction func cameraButtonClicked(sender:UIButton)
+    {
+        
+    
+    }
+}
+
+extension ProfileViewController
+{
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return 4
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCellWithIdentifier("EditProfileTableViewCell", forIndexPath: indexPath) as! EditProfileTableViewCell
+        return cell
+    }
 }

@@ -31,6 +31,7 @@
 		F12C27831DCF85CB00AEE0A3 /* RateANdReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27821DCF85CB00AEE0A3 /* RateANdReviewViewController.swift */; };
 		F18839231DD83BE400362B1B /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18839221DD83BE400362B1B /* ReviewTableViewCell.swift */; };
 		F18839251DD8573B00362B1B /* UesrReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18839241DD8573B00362B1B /* UesrReviewTableViewCell.swift */; };
+		F18839271DD86A6F00362B1B /* EditProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18839261DD86A6F00362B1B /* EditProfileTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		F12C27821DCF85CB00AEE0A3 /* RateANdReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateANdReviewViewController.swift; sourceTree = "<group>"; };
 		F18839221DD83BE400362B1B /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		F18839241DD8573B00362B1B /* UesrReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UesrReviewTableViewCell.swift; sourceTree = "<group>"; };
+		F18839261DD86A6F00362B1B /* EditProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				F12C27741DCF07BB00AEE0A3 /* ClickTableViewCell.swift */,
 				F12C27781DCF497F00AEE0A3 /* ContactTableViewCell.swift */,
 				F12C27541DCE45A800AEE0A3 /* Main.storyboard */,
+				F18839261DD86A6F00362B1B /* EditProfileTableViewCell.swift */,
 				F18839241DD8573B00362B1B /* UesrReviewTableViewCell.swift */,
 				F12713B11DCFC105005928AD /* WriteReviewTableViewCell.swift */,
 				F12C277A1DCF75F800AEE0A3 /* SearchViewController.swift */,
@@ -211,6 +214,7 @@
 				F12C27671DCE662800AEE0A3 /* BaseNSURLSession.swift in Sources */,
 				F18839251DD8573B00362B1B /* UesrReviewTableViewCell.swift in Sources */,
 				F12C27711DCEFDE100AEE0A3 /* JoinViewController.swift in Sources */,
+				F18839271DD86A6F00362B1B /* EditProfileTableViewCell.swift in Sources */,
 				F12C27531DCE45A800AEE0A3 /* ViewController.swift in Sources */,
 				F12C27651DCE643D00AEE0A3 /* NetworkConnectivity.swift in Sources */,
 				F12C27771DCF3DFA00AEE0A3 /* ContactViewController.swift in Sources */,
