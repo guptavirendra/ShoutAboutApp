@@ -124,7 +124,7 @@ extension JoinViewController
         if cell.button.titleLabel?.text == "Skip"
         {
            print("Skip")
-            let tabBarVC = self.storyboard?.instantiateViewControllerWithIdentifier("tabBarVC") as? UITabBarController
+            let tabBarVC = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController") as? SWRevealViewController
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.window?.backgroundColor = UIColor(red: 236.0, green: 238.0, blue: 241.0, alpha: 1.0)
             appDelegate.window?.rootViewController = tabBarVC

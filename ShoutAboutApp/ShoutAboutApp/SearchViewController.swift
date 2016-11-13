@@ -10,6 +10,7 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate,UISearchControllerDelegate, ContactTableViewCellProtocol, UITableViewDataSource, UITableViewDelegate
 {
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     //@IBOutlet weak var searchView:UIView?
    // @IBOutlet weak var searchBar:UISearchBar?
     @IBOutlet weak var tableView: UITableView!
@@ -28,14 +29,19 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
         
         // Setup the Scope Bar
         //searchController.searchBar.scopeButtonTitles = ["All", "Chocolate", "Hard", "Other"]
-        //searchBar = searchController.searchBar
-        
-        //searchView = searchController.searchBar
+         
         
         tableView.tableHeaderView = searchController.searchBar
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "message")
         searchController.hidesNavigationBarDuringPresentation = false
         //self.automaticallyAdjustsScrollViewInsets = false
+        
+        if self.revealViewController() != nil
+        {
+            menuButton.target = self.revealViewController()
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
 
     }
 
@@ -47,7 +53,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.hidden = true
+        //self.navigationController?.navigationBar.hidden = true
         
     }
 }
