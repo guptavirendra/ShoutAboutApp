@@ -41,7 +41,7 @@ extension RateANdReviewViewController
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 3 //allValidContacts.count //objects.count
+        return 5 //allValidContacts.count //objects.count
     }
     
     
@@ -49,21 +49,39 @@ extension RateANdReviewViewController
     {
         if indexPath.row == 0
         {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RatingTableViewCell", forIndexPath: indexPath) as! RatingTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("RatingTableViewCell", forIndexPath: indexPath) as! RatingTableViewCell
         
         
-        return cell
+            return cell
         }
         if indexPath.row == 1
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("WriteReviewTableViewCell", forIndexPath: indexPath) as! WriteReviewTableViewCell
             return cell
         }
-         let cell = tableView.dequeueReusableCellWithIdentifier("button", forIndexPath: indexPath) as! ClickTableViewCell
-        cell.contentView.backgroundColor = bgColor
-        cell.button.layer.borderWidth = 1.0
-        cell.button.layer.borderColor = UIColor.blackColor().CGColor
+        
+        if indexPath.row == 2
+        {
+             let cell = tableView.dequeueReusableCellWithIdentifier("button", forIndexPath: indexPath) as! ClickTableViewCell
+            cell.contentView.backgroundColor = bgColor
+            cell.button.layer.borderWidth = 1.0
+            cell.button.layer.borderColor = UIColor.blackColor().CGColor
+            return cell
+        }
+        
+        if indexPath.row == 3
+        {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ReviewTableViewCell", forIndexPath: indexPath) as! ReviewTableViewCell
         return cell
+        }
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("UesrReviewTableViewCell", forIndexPath: indexPath) as! UesrReviewTableViewCell
+        
+        cell.commentLabel.text = "sdsddfffffggggfgfgfgfgfggfgfgfgfgfgfsdsjhkkdsfkdfskkdfkfdsjkkdfkkfdskfdskkdfkkkfdkkfdkdfkfdk"
+        
+        return cell
+        
+        
         
     }
     
@@ -77,7 +95,31 @@ extension RateANdReviewViewController
         {
             return 54
         }
-        return 200
+        if indexPath.row == 0
+        {
+            return 250
+        }
+        
+        return UITableViewAutomaticDimension
+        
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        if indexPath.row == 1
+        {
+            return 100
+        }
+        if indexPath.row == 2
+        {
+            return 54
+        }
+        if indexPath.row == 0
+        {
+            return 250
+        }
+        
+        return 100
     }
 }
 
