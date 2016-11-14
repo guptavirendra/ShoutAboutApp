@@ -128,12 +128,75 @@ class DataSession: BaseNSURLSession
     }
     
     
+    //MARK: GET USER PROFILE DATA
+    func getProfileData(onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dict = NSObject.getAppUserIdAndToken()
+        super.getWithOnFinish(mCHWebServiceMethod.app_user_profile, parameters: dict, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }
+
+    
+    }
+    
     
 }
 
 class DataSessionManger: NSObject
 {
     static let sharedInstance = DataSessionManger()
+    func getProfileData(onFinish:(response:AnyObject,personalProfile:PersonalProfile)->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.getProfileData({ (response, deserializedResponse) in
+            let personalProfileData = PersonalProfile()
+            if deserializedResponse is NSDictionary
+            {
+                if let arrayDict = deserializedResponse.objectForKey(user_profile) as? [NSDictionary]
+                {
+                    
+                    
+                    let dataDict = arrayDict.first
+                    personalProfileData.idInt = (dataDict?.objectForKey("id") as? Int)!
+                    personalProfileData.name = dataDict?.objectForKey(name) as! String
+                    personalProfileData.email = (dataDict?.objectForKey(email))! as! String
+                    personalProfileData.mobile_number = dataDict?.objectForKey(mobile_number) as! String
+                   
+                    personalProfileData.created_at = (dataDict?.objectForKey(created_at))! as! String
+                    personalProfileData.updated_at = dataDict?.objectForKey(updated_at) as! String
+                    personalProfileData.address = dataDict?.objectForKey(address) as! String
+                    personalProfileData.website = dataDict?.objectForKey(website) as! String
+                    if let _ = dataDict?.objectForKey(photo) as? String
+                    {
+                        personalProfileData.photo = dataDict?.objectForKey(photo) as! String
+                    }
+                    
+                    personalProfileData.gcm_token = (dataDict?.objectForKey(gcm_token) as? String)!
+                    personalProfileData.last_online_time = dataDict?.objectForKey(last_online_time) as! String
+                    if let _ = (dataDict?.objectForKey("rating_average") as? [AnyObject])
+                    {
+                        personalProfileData.rating_average = (dataDict?.objectForKey("rating_average") as? [AnyObject])!
+                    }
+                    
+                    if let _ = dataDict?.objectForKey("review_count") as? [AnyObject]
+                    {
+                        personalProfileData.review_count = dataDict?.objectForKey("review_count") as! [AnyObject]
+                    }
+                    
+                }
+                
+            }
+            
+            onFinish(response: response, personalProfile: personalProfileData)
+            
+            
+            }) { (error) in
+                onError(error: error)
+        }
+        
+    }
     
     
     

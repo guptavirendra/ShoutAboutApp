@@ -23,6 +23,22 @@ let kAddress = "Address"
 let kWebsite = "Website"
 let bgColor = UIColor(patternImage: UIImage(named: "background")!)
 
+
+
+let name  = "name"
+let email: String = "email"
+let mobile_number: String = "mobile_number"
+let created_at: String = "created_at"
+let updated_at: String = "updated_at"
+let dob : String = "dob"
+let address: String = "address"
+let website: String = "website"
+let photo: String = "photo"
+let gcm_token: String = "gcm_token"
+let last_online_time: String = "last_online_time"
+let user_profile = "user_profile"
+
+
 struct WebServicePath
 {
     let add_app_user         = "add_app_user"
@@ -41,6 +57,7 @@ struct WebServicePath
     let dislike_review       = "dislike_review"
     let unlike_review        = "unlike_review"
     let undislike_review     = "undislike_review"
+     
 }
 
 class ChatPerson:NSObject

@@ -908,13 +908,13 @@
                                                                 <constraint firstAttribute="width" constant="100" id="110-vJ-RNd"/>
                                                                 <constraint firstAttribute="height" constant="21" id="TVx-lM-IQM"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJK-3i-xBv">
                                                             <rect key="frame" x="5" y="26" width="545" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -925,6 +925,9 @@
                                                                 <constraint firstAttribute="height" constant="50" id="S50-xA-NXo"/>
                                                             </constraints>
                                                             <state key="normal" image="Edit"/>
+                                                            <connections>
+                                                                <action selector="editButtonClicked:" destination="3f9-vP-ICU" eventType="touchUpInside" id="LQq-6X-7gt"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -948,6 +951,11 @@
                                                 <constraint firstItem="FpT-iD-kaT" firstAttribute="leading" secondItem="XlF-tx-fvu" secondAttribute="leading" id="bG5-BU-nTW"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dataLabel" destination="dJK-3i-xBv" id="JeQ-cB-nMU"/>
+                                            <outlet property="editButton" destination="Oui-CC-xMS" id="bBC-d8-bOJ"/>
+                                            <outlet property="titleLabel" destination="V1H-ZR-swf" id="Ue6-FD-YTo"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

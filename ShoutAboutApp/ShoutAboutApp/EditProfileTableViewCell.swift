@@ -8,19 +8,33 @@
 
 import UIKit
 
+protocol EditProfileTableViewCellProtocol
+{
+    func editButtonClickedForCell(cell:EditProfileTableViewCell)
+}
+
 class EditProfileTableViewCell: UITableViewCell
 {
-
-    override func awakeFromNib() {
+    @IBOutlet weak var  titleLabel:UILabel!
+    @IBOutlet weak var  dataLabel :UILabel!
+    @IBOutlet weak var editButton:UIButton!
+    var delegate:EditProfileTableViewCellProtocol?
+ 
+    override func awakeFromNib()
+    {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool)
     {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+    }
+    
+    @IBAction func editButtonClicked(button:UIButton)
+    {
+        self.delegate?.editButtonClickedForCell(self)
     }
 
 }

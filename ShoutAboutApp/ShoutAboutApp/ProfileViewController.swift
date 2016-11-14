@@ -6,19 +6,44 @@
 //  Copyright © 2016 VIRENDRA GUPTA. All rights reserved.
 //
 
+
+
+class PersonalProfile:NSObject
+{
+    var  idInt : Int = 0
+    var  name : String = ""
+    var email: String = ""
+    var mobile_number: String = ""
+    var created_at: String = ""
+    var updated_at: String = ""
+    var dob : String = ""
+    var address: String = ""
+    var website: String = ""
+    var photo: String = ""
+    var gcm_token: String = ""
+    var last_online_time: String = ""
+    var  rating_average  = [AnyObject]()
+    var  review_count = [AnyObject]()
+}
+
+
 import UIKit
 import MobileCoreServices
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     var selectedImages:UIImage?
+    var personalProfile:PersonalProfile = PersonalProfile()
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var imageView:UIImageView!
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         imageView.makeImageRounded()
+        getProfileData()
 
         // Do any additional setup after loading the view.
     }
@@ -36,8 +61,31 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 extension ProfileViewController
 {
     
-    
-
+    func  getProfileData()
+    {
+        self.view.showSpinner()
+        
+        DataSessionManger.sharedInstance.getProfileData({ (response, personalProfile) in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.view.removeSpinner()
+                
+                self.personalProfile = personalProfile
+                self.tableView.reloadData()
+                
+                
+            });
+            
+        }) { (error) in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.view.removeSpinner()
+                
+                
+            });
+            
+        }
+    }
 }
 
 extension ProfileViewController
@@ -51,6 +99,31 @@ extension ProfileViewController
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("EditProfileTableViewCell", forIndexPath: indexPath) as! EditProfileTableViewCell
+        
+        if indexPath.row == 0
+        {
+            cell.titleLabel.text = "Address"
+            cell.dataLabel.text  = personalProfile.address
+            
+        }
+        
+        if indexPath.row == 1
+        {
+            cell.titleLabel.text = "Email"
+            cell.dataLabel.text  = personalProfile.email
+        }
+        
+        if indexPath.row == 2
+        {
+            cell.titleLabel.text = "Mobile"
+            cell.dataLabel.text  = personalProfile.mobile_number
+        }
+        if indexPath.row == 3
+        {
+            cell.titleLabel.text = "Website"
+            cell.dataLabel.text  = personalProfile.website
+        }
+        
         return cell
     }
 }

@@ -53,9 +53,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        allValidContacts.removeAll()
+        self.tableView.reloadData()
+        self.searchController.searchBar.text = nil
         //self.navigationController?.navigationBar.hidden = true
         
     }
+    
+    
 }
 
 extension SearchViewController
@@ -151,7 +156,7 @@ extension SearchViewController
     
     internal func searchBarCancelButtonClicked(searchBar: UISearchBar)
     {
-        
+        allValidContacts.removeAll()
         
     }
     
