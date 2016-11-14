@@ -34,6 +34,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 {
     var selectedImages:UIImage?
     var personalProfile:PersonalProfile = PersonalProfile()
+    @IBOutlet weak var reviewButton:UIButton!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cameraButton: UIButton!
@@ -44,19 +45,36 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         imageView.makeImageRounded()
         getProfileData()
+        
 
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.hidden = true
     }
     
 
     
 }
 
+extension ProfileViewController
+{
+    @IBAction func goToReviewScreen()
+    {
+        let rateANdReviewViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RateANdReviewViewController") as? RateANdReviewViewController
+        self.navigationController!.pushViewController(rateANdReviewViewController!, animated: true)
+    }
+    
+}
 
 extension ProfileViewController
 {

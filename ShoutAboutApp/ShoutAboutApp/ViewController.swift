@@ -696,9 +696,7 @@ class RatingControl: UIView {
     
     func updateButtonSelectionStates()
     {
-        
-        
-            for (index, button) in ratingButtons.enumerate()
+        for (index, button) in ratingButtons.enumerate()
             {
                 // If the index of a button is less than the rating, that button should be selected.
                 
@@ -725,10 +723,6 @@ class RatingControl: UIView {
                     button.selected = index < rating
                     
                 }
-            }
-            
-        
+        }
     }
 }
-
-
