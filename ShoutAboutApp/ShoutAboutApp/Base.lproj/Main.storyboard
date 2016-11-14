@@ -809,13 +809,13 @@
                                             <constraint firstAttribute="height" constant="120" id="vEK-Ut-uYT"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOH-xd-xMN">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOH-xd-xMN">
                                         <rect key="frame" x="225" y="141" width="150" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="eoT-uZ-8M2"/>
                                             <constraint firstAttribute="width" constant="150" id="iTl-2X-s3U"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -982,13 +982,13 @@
                                                 <rect key="frame" x="20" y="16" width="240" height="10"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lB3-rS-bN5" customClass="RatingControl" customModule="ShoutAboutApp" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="180" height="10"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="210" height="10"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 / 5" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3S-uQ-75a">
-                                                        <rect key="frame" x="180" y="0.0" width="60" height="10"/>
+                                                        <rect key="frame" x="210" y="0.0" width="30" height="10"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="60" id="7nu-3h-z85"/>
+                                                            <constraint firstAttribute="width" constant="30" id="7nu-3h-z85"/>
                                                             <constraint firstAttribute="height" constant="10" id="lwt-Co-f0j"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
@@ -1106,6 +1106,7 @@
                     <connections>
                         <outlet property="cameraButton" destination="ooY-Vu-uCK" id="Deb-vF-eyn"/>
                         <outlet property="imageView" destination="CZn-l8-8s1" id="wCN-SE-pVc"/>
+                        <outlet property="nameLabel" destination="mOH-xd-xMN" id="eMf-Bb-2d4"/>
                         <outlet property="reviewButton" destination="HOe-sK-PGo" id="Me8-8f-1N2"/>
                         <outlet property="tableView" destination="Rj0-yY-dht" id="14F-M6-yTv"/>
                     </connections>

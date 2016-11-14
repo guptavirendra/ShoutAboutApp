@@ -40,6 +40,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var imageView:UIImageView!
     
+    @IBOutlet weak var nameLabel:UILabel!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -79,6 +81,11 @@ extension ProfileViewController
 extension ProfileViewController
 {
     
+    func setProfileImgeForURL(urlString:String)
+    {
+        self.imageView.setImageWithURL(NSURL(string:urlString ))
+    }
+    
     func  getProfileData()
     {
         self.view.showSpinner()
@@ -89,7 +96,9 @@ extension ProfileViewController
                 self.view.removeSpinner()
                 
                 self.personalProfile = personalProfile
+                self.nameLabel.text  = personalProfile.name
                 self.tableView.reloadData()
+                self.setProfileImgeForURL(personalProfile.photo)
                 
                 
             });

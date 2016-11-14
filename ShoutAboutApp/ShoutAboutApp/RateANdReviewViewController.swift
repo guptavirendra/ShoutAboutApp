@@ -201,8 +201,8 @@ extension RateANdReviewViewController
         {
             if let cell = activeTextView?.superview?.superview?.superview as? WriteReviewTableViewCell
             {
-                let dictInfo: NSDictionary = notification.userInfo!
-                let kbSize :CGSize = (dictInfo.objectForKey(UIKeyboardFrameBeginUserInfoKey)?.CGRectValue().size)!
+               // let dictInfo: NSDictionary = notification.userInfo!
+                //let kbSize :CGSize = (dictInfo.objectForKey(UIKeyboardFrameBeginUserInfoKey)?.CGRectValue().size)!
                 //let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbSize.height, right: 0)
                // self.tableView.contentInset = contentInsets
                // self.tableView.scrollIndicatorInsets = contentInsets
