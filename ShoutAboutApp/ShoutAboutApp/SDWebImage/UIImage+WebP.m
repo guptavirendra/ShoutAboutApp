@@ -54,6 +54,10 @@ static void FreeImageData(void *info, const void *data, size_t size)
     CGImageRelease(imageRef);
 
     return image;
+    
+    
+    
+    
 }
 
 @end

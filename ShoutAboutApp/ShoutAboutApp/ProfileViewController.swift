@@ -70,7 +70,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.hidden = true
+        self.navigationController?.navigationBar.hidden = false
     }
     
 

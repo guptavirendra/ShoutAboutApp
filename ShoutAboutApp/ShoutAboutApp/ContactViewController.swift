@@ -104,19 +104,23 @@ extension ContactViewController
                 let   phone = "tel://"+personContact.mobileNumber
                 UIApplication.sharedApplication().openURL(NSURL(string: phone)!)
             }
-            if button.titleLabel?.text == "Chat"
+            else if button.titleLabel?.text == "Chat"
             {
                 let chattingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChattingViewController") as? ChattingViewController
                 self.navigationController!.pushViewController(chattingViewController!, animated: true)
                 
             }
-            if button.titleLabel?.text == "reviews"
+            else if button.titleLabel?.text == "reviews"
             {
               
                 let rateANdReviewViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RateANdReviewViewController") as? RateANdReviewViewController
                  self.navigationController!.pushViewController(rateANdReviewViewController!, animated: true)
                 
                 
+            }else
+            {
+                let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as? ProfileViewController
+                self.navigationController!.pushViewController(profileViewController!, animated: true)
             }
         }
     }

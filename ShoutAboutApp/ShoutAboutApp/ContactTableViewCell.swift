@@ -15,7 +15,7 @@ protocol ContactTableViewCellProtocol {
 class ContactTableViewCell: UITableViewCell
 {
      @IBOutlet weak var baseView: UIView!
-     @IBOutlet weak var profileImageView: UIImageView!
+     @IBOutlet weak var profileButton: UIButton!
      @IBOutlet weak var nameLabel: UILabel!
      @IBOutlet weak var mobileLabel: UILabel!
      @IBOutlet weak var ratingLabel: UILabel!
