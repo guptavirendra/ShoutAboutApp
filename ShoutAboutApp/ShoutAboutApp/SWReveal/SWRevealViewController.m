@@ -1934,3 +1934,41 @@ NSString * const SWSegueRightIdentifier = @"sw_right";
 //@end
 
 
+
+@implementation NSString (media)
+
++(NSString *)generateBoundaryString
+{
+    return [NSString stringWithFormat:@"Boundary-%@", [[NSUUID UUID] UUIDString]];
+    
+}
+
+
+
+@end
+
+@implementation NSData (compress)
+
++(NSData*)compressData:(NSData*)data andImage:(UIImage*)image
+{
+    if ((data.length/1024) >= 1024) {
+        
+        while ((data.length/1024) >= 1024) {
+            
+            
+            // While the imageData is too large scale down the image
+            
+            // Get the current image size
+            CGSize currentSize = CGSizeMake(image.size.width, image.size.height);
+        
+            
+            // Pass the NSData out again
+            data = UIImageJPEGRepresentation(image, 1.0);
+            
+        }
+    }
+    
+    return data;
+}
+
+@end

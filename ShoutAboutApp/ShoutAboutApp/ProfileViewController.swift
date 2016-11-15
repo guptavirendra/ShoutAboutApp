@@ -26,6 +26,14 @@ class PersonalProfile:NSObject
     var  review_count = [AnyObject]()
 }
 
+//MARK: PROFILE MANAGER
+class ProfileManager:NSObject
+{
+    static let sharedInstance = ProfileManager()
+    var personalProfile:PersonalProfile = PersonalProfile()
+    var localStoredImage:UIImage?
+}
+
 
 import UIKit
 import MobileCoreServices
@@ -33,7 +41,8 @@ import MobileCoreServices
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     var selectedImages:UIImage?
-    var personalProfile:PersonalProfile = PersonalProfile()
+    var personalProfile:PersonalProfile = PersonalProfile()// since profile is vary from user to user
+    
     @IBOutlet weak var reviewButton:UIButton!
     
     @IBOutlet weak var tableView: UITableView!
@@ -46,10 +55,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     {
         super.viewDidLoad()
         imageView.makeImageRounded()
-        getProfileData()
+        personalProfile = ProfileManager.sharedInstance.personalProfile
+        self.nameLabel.text = ProfileManager.sharedInstance.personalProfile.name
+        setProfileImgeForURL(ProfileManager.sharedInstance.personalProfile.photo)
         
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning()
@@ -83,36 +92,10 @@ extension ProfileViewController
     
     func setProfileImgeForURL(urlString:String)
     {
-        self.imageView.setImageWithURL(NSURL(string:urlString ))
+        self.imageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile_pic"))
     }
     
-    func  getProfileData()
-    {
-        self.view.showSpinner()
-        
-        DataSessionManger.sharedInstance.getProfileData({ (response, personalProfile) in
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                self.view.removeSpinner()
-                
-                self.personalProfile = personalProfile
-                self.nameLabel.text  = personalProfile.name
-                self.tableView.reloadData()
-                self.setProfileImgeForURL(personalProfile.photo)
-                
-                
-            });
-            
-        }) { (error) in
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                self.view.removeSpinner()
-                
-                
-            });
-            
-        }
-    }
+    
 }
 
 extension ProfileViewController
@@ -181,9 +164,56 @@ extension ProfileViewController
             picker.dismissViewControllerAnimated(true, completion: nil)
             // self.delegate?.imageFileSelected(selectedImage)
             imageView.image = selectedImages
+            self.imageFileSelected(selectedImages!)
         }
         
     }
+    
+    
+    func imageFileSelected(selectedImage: UIImage)
+    {
+        ProfileManager.sharedInstance.localStoredImage = selectedImage
+        let currentTime = NSDate().timeIntervalSince1970 as NSTimeInterval
+        let extensionPathStr = "profile\(currentTime).jpg"
+        let documentsDirectory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+        let fullPathToFile = "\(documentsDirectory)/\(extensionPathStr)"
+        
+        print(fullPathToFile)
+        
+        var imageData: NSData = UIImageJPEGRepresentation(selectedImage, 0.5)!
+        
+        
+        
+        imageData.writeToFile(fullPathToFile, atomically: true)
+        
+        let imagePath =  [ "photo"]
+        
+        let mediaPathArray = [fullPathToFile]
+        
+        if NetworkConnectivity.isConnectedToNetwork() != true
+        {
+            
+        }else
+        {
+           self.view.showSpinner()
+            DataSessionManger.sharedInstance.postProfileImage(mediaPathArray, name: imagePath, onFinish: { (response, deserializedResponse) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.view.removeSpinner()
+                    //self.displayAlert("Success", handler: self.handler)
+                    
+                });
+                
+                }) { (error) in
+                    dispatch_async(dispatch_get_main_queue(),
+                                   {
+                        self.view.removeSpinner()
+                        
+                        
+                    });
+            }
+        }
+    }
+
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController)
     {
@@ -207,3 +237,32 @@ public extension UIView
         self.layer.borderColor = UIColor.whiteColor().CGColor
     }
 }
+
+extension SWRevealViewController
+{
+    // MARK: GET DATA
+    func  getProfileData()
+    {
+        self.view.showSpinner()
+        DataSessionManger.sharedInstance.getProfileData({ (response, personalProfile) in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.view.removeSpinner()
+                
+                ProfileManager.sharedInstance.personalProfile = personalProfile
+                
+        });
+            
+        }) { (error) in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.view.removeSpinner()
+                
+                
+            });
+            
+        }
+    }
+}
+
+

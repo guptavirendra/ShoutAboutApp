@@ -420,3 +420,12 @@ extern NSString* const SWSegueRightIdentifier; // this is @"sw_right"
 //@interface SWRevealViewControllerSegue : UIStoryboardSegue     // DEPRECATED: USE SWRevealViewControllerSegueSetController instead
 //@property (nonatomic, strong) void(^performBlock)( SWRevealViewControllerSegue* segue, UIViewController* svc, UIViewController* dvc );
 //@end
+
+@interface NSString (media)
+
++(NSString *)generateBoundaryString;
+@end
+@interface NSData (compress)
+
++(NSData*)compressData:(NSData*)data andImage:(UIImage*)image;
+@end

@@ -231,7 +231,7 @@ public class BaseNSURLSession: NSObject
         {
             print("All urls goes Here \(stringURL)")
             mNSMutableRequest = NSMutableURLRequest(URL:lURL )// Apend Path to Hit
-            mNSMutableRequest?.timeoutInterval = 60
+            mNSMutableRequest?.timeoutInterval = 130
             addDefaultJSONHeader()// Added Json Header Only
             if let tempData = mConnectionHeaders as? Dictionary<String, String>
             {
@@ -1006,7 +1006,7 @@ extension BaseNSURLSession
 {
     func configureMediaRequest(methodType:String, path:String, headerParam:Dictionary<String, String>?, mediaPaths:[String]?, bodyDict:Dictionary<String, String>?, name:String )
     {
-        let boundary = String.generateBoundaryString()
+        let boundary = NSString.generateBoundaryString()
         configureGetMutableRequest(path, parameters:headerParam)
         mNSMutableRequest!.HTTPMethod = methodType
         mNSMutableRequest!.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
@@ -1183,9 +1183,9 @@ extension NSMutableData
 extension String
 {
     
-    static func generateBoundaryString()->String
-    {
-        return ""
-    }
+//    static func generateBoundaryString()->String
+//    {
+//        return ""
+//    }
 }
 

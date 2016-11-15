@@ -152,6 +152,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F100A7CE1DDB9B5D00DD320C /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				F12C277E1DCF763F00AEE0A3 /* ProfileViewController.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		F100A7D11DDB9D9C00DD320C /* LeftView */ = {
+			isa = PBXGroup;
+			children = (
+				F18839321DD8D26400362B1B /* LeftViewController.swift */,
+			);
+			name = LeftView;
+			sourceTree = "<group>";
+		};
 		F11DB53E1DD9ADC70084F9F4 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,7 +234,7 @@
 				F12C27741DCF07BB00AEE0A3 /* ClickTableViewCell.swift */,
 				F12C27781DCF497F00AEE0A3 /* ContactTableViewCell.swift */,
 				F12C27541DCE45A800AEE0A3 /* Main.storyboard */,
-				F18839321DD8D26400362B1B /* LeftViewController.swift */,
+				F100A7D11DDB9D9C00DD320C /* LeftView */,
 				F188392A1DD8A76B00362B1B /* ChattingTableViewCell.swift */,
 				F18839281DD877C000362B1B /* ChattingViewController.swift */,
 				F18839261DD86A6F00362B1B /* EditProfileTableViewCell.swift */,
@@ -226,7 +242,7 @@
 				F12713B11DCFC105005928AD /* WriteReviewTableViewCell.swift */,
 				F12C277A1DCF75F800AEE0A3 /* SearchViewController.swift */,
 				F12C277C1DCF761D00AEE0A3 /* FeedsViewController.swift */,
-				F12C277E1DCF763F00AEE0A3 /* ProfileViewController.swift */,
+				F100A7CE1DDB9B5D00DD320C /* Profile */,
 				F12C27801DCF765300AEE0A3 /* ChatViewController.swift */,
 				F12C27761DCF3DFA00AEE0A3 /* ContactViewController.swift */,
 				F12C27821DCF85CB00AEE0A3 /* RateANdReviewViewController.swift */,
@@ -302,6 +318,12 @@
 				TargetAttributes = {
 					F12C274C1DCE45A800AEE0A3 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = DAU95HF65T;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -514,12 +536,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kshitij Raina (Z4EB893U62)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ShoutAboutApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.in.varyavega.ShoutAboutApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "11bba660-4cec-4bd7-b455-bcfcc17298b1";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShoutAboutApp/ShoutAboutApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -530,12 +553,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kshitij Raina (Z4EB893U62)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ShoutAboutApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.in.varyavega.ShoutAboutApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "11bba660-4cec-4bd7-b455-bcfcc17298b1";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShoutAboutApp/ShoutAboutApp-Bridging-Header.h";
 			};
 			name = Release;

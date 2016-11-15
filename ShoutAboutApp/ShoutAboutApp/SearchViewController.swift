@@ -28,7 +28,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
         searchController.dimsBackgroundDuringPresentation = false
         
         // Setup the Scope Bar
-        //searchController.searchBar.scopeButtonTitles = ["All", "Chocolate", "Hard", "Other"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Chocolate", "Hard", "Other"]
          
         
         tableView.tableHeaderView = searchController.searchBar
@@ -38,9 +38,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
         
         if self.revealViewController() != nil
         {
+            self.revealViewController().getProfileData()
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            
         }
 
     }

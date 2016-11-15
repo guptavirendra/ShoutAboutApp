@@ -142,11 +142,41 @@ class DataSession: BaseNSURLSession
     }
     
     
+    func postProfileImage(mediaPath:[String]?, name:[String]?,onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dict = NSObject.getAppUserIdAndToken()
+        /*
+        super.postSBMediaWithOnFinish(mCHWebServiceMethod.image_upload, headerParam: dict, mediaPaths: mediaPath, bodyDict: nil, name: name, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }*/
+        
+        super.postMediaWithOnFinish(mCHWebServiceMethod.image_upload, headerParam: dict, mediaPaths: mediaPath, bodyDict: nil, name: "photo", onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+            }) { (error) in
+                onError(error: error)
+        }
+    }
+    
+    
 }
 
 class DataSessionManger: NSObject
 {
     static let sharedInstance = DataSessionManger()
+    
+    
+    func postProfileImage(mediaPath:[String]?, name:[String]?,onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.postProfileImage(mediaPath, name: name, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+            }) { (error) in
+                onError(error: error)
+        }
+        
+    }
     func getProfileData(onFinish:(response:AnyObject,personalProfile:PersonalProfile)->(), onError:(error:AnyObject)->())
     {
         let dataSession = DataSession()
@@ -539,3 +569,5 @@ class ReviewUser:NSObject
     var reviewCountArray   = [ReviewCount]()
     var rateGraphArray     = [RateGraph]()
 }
+
+
