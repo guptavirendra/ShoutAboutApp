@@ -8,12 +8,23 @@
 
 import UIKit
 
-class MainSearchViewController: UIViewController {
-
-    override func viewDidLoad() {
+class MainSearchViewController: UIViewController
+{
+    @IBOutlet weak var menuButton: UIBarButtonItem!
+    @IBOutlet weak var searchButton:UIButton!
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
+        if self.revealViewController() != nil
+        {
+            self.revealViewController().getProfileData()
+            menuButton.target = self.revealViewController()
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            
+        }
 
-        // Do any additional setup after loading the view.
+         
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,4 +43,14 @@ class MainSearchViewController: UIViewController {
     }
     */
 
+}
+
+extension MainSearchViewController
+{
+    @IBAction func searchButtonClicked(button:UIButton)
+    {
+        let searchViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SearchViewController") as? SearchViewController
+        self.navigationController!.pushViewController(searchViewController!, animated: true)
+        
+    }
 }

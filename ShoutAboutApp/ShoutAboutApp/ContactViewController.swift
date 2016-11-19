@@ -13,6 +13,14 @@ class PersonContact: NSObject
     var mobileNumber:String = ""
 }
 
+
+class ContactManger:NSObject
+{
+    static let sharedInstance = ContactManger()
+    var  deviceContactArray    = [PersonContact]()
+    
+}
+
 import UIKit
 
 import Contacts
@@ -22,6 +30,10 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
     var objects = [CNContact]()
     var allValidContacts = [PersonContact]()
+    var syncContactArray = [SearchPerson]()
+    var nextPage         = 1
+    var totalContact     = 0
+    var lastPage         = 0
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -44,7 +56,7 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.hidden = true
+        //self.navigationController?.navigationBar.hidden = true
         
     }
 
@@ -64,7 +76,7 @@ extension ContactViewController
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return  allValidContacts.count //objects.count
+        return  syncContactArray.count //allValidContacts.count //objects.count
     }
     
     
@@ -73,10 +85,13 @@ extension ContactViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("contact", forIndexPath: indexPath) as! ContactTableViewCell
         cell.delegate = self
         
-        let personContact = allValidContacts[indexPath.row]
+        let personContact = syncContactArray[indexPath.row]
         cell.nameLabel?.text = personContact.name
         cell.mobileLabel?.text = personContact.mobileNumber
-        
+        if let urlString = personContact.photo
+        {
+        cell.profileButton.imageView?.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile_pic"))
+        }
         return cell
     }
     
@@ -89,6 +104,20 @@ extension ContactViewController
     {
         return 100.0
         
+    }
+    
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let currentCount = indexPath.row + 1
+        if (currentCount < self.totalContact)
+        {
+            if nextPage < lastPage && (syncContactArray.count == currentCount) 
+            {
+                nextPage += 1
+                self.getContact()
+            }
+        }
     }
     
     //MARK: CALL
@@ -258,11 +287,18 @@ extension ContactViewController
                 }
             }
         
-        allValidContacts.sortInPlace { (person1, person2) -> Bool in
+        /*allValidContacts.sortInPlace { (person1, person2) -> Bool in
             return person1.name < person2.name
-        }
-            postData()
+        }*/
+        if NetworkConnectivity.isConnectedToNetwork() != true
+        {
+            displayAlertMessage("No Internet Connection")
             
+        }else
+        {
+            postData()
+        }
+        
         }
     
     
@@ -285,12 +321,26 @@ extension ContactViewController
     {
         let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
         let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            self.tableView.reloadData()
+            self.getContact()
+            //self.tableView.reloadData() hit web service
             self.view.removeSpinner()
             
         }
         alert.addAction(okAction)
         self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
+    func getContact()
+    {
+        if NetworkConnectivity.isConnectedToNetwork() != true
+        {
+            self.displayAlertMessage("No Internet Connection")
+            
+        }else
+        {
+            self.getContactForPage(String(self.nextPage))
+        }
         
     }
     
@@ -316,13 +366,38 @@ extension ContactViewController
             
             }) { (error) in
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.tableView.reloadData()
+                    
                     self.view.removeSpinner()
                 })
                 
         }
         
         
+    }
+    
+    
+    func getContactForPage(page:String)
+    {
+        self.view.showSpinner()
+        DataSessionManger.sharedInstance.getContactListForPage(page, onFinish: { (response, contactPerson) in
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                self.totalContact = contactPerson.total
+                self.nextPage = contactPerson.current_page
+                self.lastPage = contactPerson.last_page
+                self.syncContactArray.appendContentsOf(contactPerson.data)
+                self.tableView.reloadData()
+                self.view.removeSpinner()
+            })
+            
+            }) { (error) in
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.tableView.reloadData()
+                    self.view.removeSpinner()
+                })
+                
+        }
     }
     
     func getJsonFromArray(array: [PersonContact]) -> String

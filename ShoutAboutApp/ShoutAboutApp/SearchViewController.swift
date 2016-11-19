@@ -10,7 +10,7 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate,UISearchControllerDelegate, ContactTableViewCellProtocol, UITableViewDataSource, UITableViewDelegate
 {
-    @IBOutlet weak var menuButton: UIBarButtonItem!
+    
     //@IBOutlet weak var searchView:UIView?
    // @IBOutlet weak var searchBar:UISearchBar?
     @IBOutlet weak var tableView: UITableView!
@@ -36,14 +36,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
         searchController.hidesNavigationBarDuringPresentation = false
         //self.automaticallyAdjustsScrollViewInsets = false
         
-        if self.revealViewController() != nil
-        {
-            self.revealViewController().getProfileData()
-            menuButton.target = self.revealViewController()
-            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-            
-        }
+        
 
     }
 

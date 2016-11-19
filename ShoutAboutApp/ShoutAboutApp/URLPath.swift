@@ -21,7 +21,7 @@ let kEmail   = "email"
 let kName    = "Name"
 let kAddress = "Address"
 let kWebsite = "Website"
-let bgColor = UIColor(patternImage: UIImage(named: "background")!)
+let bgColor = UIColor(patternImage: UIImage(named: "bg")!)
 
 
 
@@ -47,6 +47,7 @@ struct WebServicePath
     let add_contact_list     = "add_contact_list"
     let search_mobile_number = "search_mobile_number"
     let chat_contact_list    = "chat_contact_list"
+    let user_contact_list    = "user_contact_list"
     let  app_user_profile    = "app_user_profile"
     let image_upload         = "image_upload"
     let send_message         = "send_message"
@@ -63,26 +64,45 @@ struct WebServicePath
 class ChatPerson:NSObject
 {
     var idString:Int = 0
-    var name:String  = ""
-    var photo:String = ""
-    
+    var name:String?
+    var photo:String?
+    var last_message:String?
+    var last_message_time:String?
+    var unread_message:Int = 0
 }
+
 
 class SearchPerson:PersonContact
 {
     var idString:Int = 0
+    //var name: String
+    var email: String?
+    //var "mobile_number": "1234567890",
+    var app_user_token: String?
+    var created_at : String?
+    var updated_at: String?
+    var dob: String?
+    var address: String?
+    var website: String?
+    var photo: String?
+    var gcm_token: String?
+    var last_online_time: String?
     var ratingAverage:[AnyObject] = [AnyObject]()
     var reviewCount:[AnyObject]   = [AnyObject]()
-    /*
-    {
-    "id": 3798,
-    "name": "Chandani Delhi",
-    "mobile_number": "8447673545",
-    "rating_average": [],
-    "review_count": []
-    }
- */
+}
 
+class ContactPerson:NSObject
+{
+    var total : Int = 0
+    var per_page: Int = 0
+    var current_page: Int = 0
+    var last_page: Int = 0
+    var next_page_url: String?
+    var prev_page_url: String?
+    var from: Int = 0
+    var to: Int = 0
+    var data:[SearchPerson] = [SearchPerson]()
 }
 
 
+ 

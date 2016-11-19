@@ -10,6 +10,8 @@ import UIKit
 
 class DataSession: BaseNSURLSession
 {
+    
+    /*******************  LOGIN SCREEN ********************/
    //MARK: GET OTP
     func getOTPForMobileNumber(mobileNumber:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
@@ -24,7 +26,7 @@ class DataSession: BaseNSURLSession
         
     }
     
-    
+    /*******************  OTP SCREEN ********************/
     //MARK: GET OTP VALIDATION
     func getOTPValidateForMobileNumber(mobileNumber:String, otp:String,  onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
@@ -37,6 +39,7 @@ class DataSession: BaseNSURLSession
         
     }
     
+    /*******************  SIGN UP ********************/
     //MARK: UPDATE PROFILE
     func updateProfile(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
@@ -47,6 +50,54 @@ class DataSession: BaseNSURLSession
                 onError(error: error)
         }
     }
+    /*******************  SEARCH CONTACT ********************/
+    
+    //MARK:SEARCH CONTACT
+    func searchContact(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        super.getWithOnFinish(mCHWebServiceMethod.search_mobile_number, parameters: dict, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }
+        
+    }
+    
+    /******************* PROFILE SCREEN ********************/
+    
+    //MARK: GET USER PROFILE DATA
+    func getProfileData(onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dict = NSObject.getAppUserIdAndToken()
+        super.getWithOnFinish(mCHWebServiceMethod.app_user_profile, parameters: dict, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }
+        
+        
+    }
+    
+    //MARK: POST PROFILE IMAGE
+    
+    func postProfileImage(mediaPath:[String]?, name:[String]?,onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dict = NSObject.getAppUserIdAndToken()
+        /*
+         super.postSBMediaWithOnFinish(mCHWebServiceMethod.image_upload, headerParam: dict, mediaPaths: mediaPath, bodyDict: nil, name: name, onFinish: { (response, deserializedResponse) in
+         onFinish(response: response, deserializedResponse: deserializedResponse)
+         }) { (error) in
+         onError(error: error)
+         }*/
+        
+        super.postMediaWithOnFinish(mCHWebServiceMethod.image_upload, headerParam: dict, mediaPaths: mediaPath, bodyDict: nil, name: "photo", onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }
+    }
+    
+    
     
     //MARK: SYNC CONTACT
     func syncContactToTheServer(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
@@ -59,9 +110,12 @@ class DataSession: BaseNSURLSession
     }
     
     
-    func searchContact(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    func getContactListForPage(page:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
-        super.getWithOnFinish(mCHWebServiceMethod.search_mobile_number, parameters: dict, onFinish: { (response, deserializedResponse) in
+        
+         var dict = NSObject.getAppUserIdAndToken()
+         dict["page"] = page
+         super.getWithOnFinish(mCHWebServiceMethod.user_contact_list, parameters: dict, onFinish: { (response, deserializedResponse) in
             onFinish(response: response, deserializedResponse: deserializedResponse)
         }) { (error) in
             onError(error: error)
@@ -70,9 +124,13 @@ class DataSession: BaseNSURLSession
     }
     
     
+    
+    
+    //MARK: CHAT LIST
     func getChatList(onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
-        super.getWithOnFinish(mCHWebServiceMethod.chat_contact_list, parameters: nil, onFinish: { (response, deserializedResponse) in
+        let dict = NSObject.getAppUserIdAndToken()
+        super.getWithOnFinish(mCHWebServiceMethod.chat_contact_list, parameters: dict, onFinish: { (response, deserializedResponse) in
             onFinish(response: response, deserializedResponse: deserializedResponse)
         }) { (error) in
             onError(error: error)
@@ -81,7 +139,7 @@ class DataSession: BaseNSURLSession
     }
     
     
-    //MARK: CONTACT LIST
+    //MARK: ADD REVIEW LIST
     func addRateReview(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
         super.postDataWithOnFinish(mCHWebServiceMethod.add_rate_review, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
@@ -105,6 +163,9 @@ class DataSession: BaseNSURLSession
     }
     
     
+    
+    //MARK: CHAT CONVERSATION
+    
     func getChatConversionForContactID(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
         super.getWithOnFinish(mCHWebServiceMethod.chat_conversation, parameters: nil, onFinish: { (response, deserializedResponse) in
@@ -116,7 +177,7 @@ class DataSession: BaseNSURLSession
 
     }
     
-    
+    // MARK: TEXT MESSAGE
     func sendTextMessage(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
         
@@ -128,37 +189,20 @@ class DataSession: BaseNSURLSession
     }
     
     
-    //MARK: GET USER PROFILE DATA
-    func getProfileData(onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    func sendVideoORImageMessage(recipentID:String, message_type: String, mediaPath:[String]?, name:[String]?,onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
-        let dict = NSObject.getAppUserIdAndToken()
-        super.getWithOnFinish(mCHWebServiceMethod.app_user_profile, parameters: dict, onFinish: { (response, deserializedResponse) in
-            onFinish(response: response, deserializedResponse: deserializedResponse)
-        }) { (error) in
-            onError(error: error)
-        }
-
-    
-    }
-    
-    
-    func postProfileImage(mediaPath:[String]?, name:[String]?,onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
-    {
-        let dict = NSObject.getAppUserIdAndToken()
-        /*
-        super.postSBMediaWithOnFinish(mCHWebServiceMethod.image_upload, headerParam: dict, mediaPaths: mediaPath, bodyDict: nil, name: name, onFinish: { (response, deserializedResponse) in
-            onFinish(response: response, deserializedResponse: deserializedResponse)
-        }) { (error) in
-            onError(error: error)
-        }*/
         
-        super.postMediaWithOnFinish(mCHWebServiceMethod.image_upload, headerParam: dict, mediaPaths: mediaPath, bodyDict: nil, name: "photo", onFinish: { (response, deserializedResponse) in
-            onFinish(response: response, deserializedResponse: deserializedResponse)
-            }) { (error) in
-                onError(error: error)
-        }
-    }
+        var dict = NSObject.getAppUserIdAndToken()
+        dict["recipient_id"] = recipentID
+        dict["message_type"] = message_type
     
+        super.postMediaWithOnFinish(mCHWebServiceMethod.send_message, headerParam: dict, mediaPaths: mediaPath, bodyDict: nil, name: message_type, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }
+        
+    }
     
 }
 
@@ -338,7 +382,26 @@ class DataSessionManger: NSObject
                     
                     chatPerson.idString = dict.objectForKey("id") as! Int
                     chatPerson.name = (dict.objectForKey("name") as? String)!
-                    chatPerson.photo = (dict.objectForKey("photo") as? String)!
+                    if let photo = dict.objectForKey("photo") as? String
+                    {
+                        chatPerson.photo = photo
+                    }
+                    
+                    if let lastMessage = dict.objectForKey("last_message") as? String
+                    {
+                    
+                        chatPerson.last_message = lastMessage
+                    }
+                    
+                    if let lastMessageTime = dict.objectForKey("last_message_time") as? String
+                    {
+                        chatPerson.last_message_time = lastMessageTime
+                    }
+                    
+                    if let unreadMessage = dict.objectForKey("last_message_time") as? Int
+                    {
+                        chatPerson.unread_message = unreadMessage
+                    }
                     dataArray.append(chatPerson)
                 }
                 
@@ -486,8 +549,80 @@ class DataSessionManger: NSObject
         
         
     }
-
     
+    
+    
+    func getContactListForPage(page:String, onFinish:(response:AnyObject,contactPerson:ContactPerson)->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.getContactListForPage(page, onFinish: { (response, deserializedResponse) in
+            
+            let conatactPerson = ContactPerson()
+            if deserializedResponse is NSDictionary
+            {
+                
+                if let  next_page_url = deserializedResponse.objectForKey("next_page_url") as? String
+                {
+                    conatactPerson.next_page_url = next_page_url
+                    
+                }
+                conatactPerson.current_page = (deserializedResponse.objectForKey("current_page") as? Int)!
+                conatactPerson.total = (deserializedResponse.objectForKey("total") as? Int)!
+                conatactPerson.last_page = (deserializedResponse.objectForKey("last_page") as? Int)!
+                
+                if let   data = deserializedResponse.objectForKey("data") as? NSArray
+                {
+                    
+                    for dict in data
+                    {
+                        
+                        let searchPerson = SearchPerson()
+                        
+                        searchPerson.idString = (dict.objectForKey("id") as? Int)!
+                        if let name = dict.objectForKey("name") as? String
+                        {
+                            searchPerson.name   = name
+                        }
+                        
+                        searchPerson.email = dict.objectForKey("email") as? String
+                        if let mobileNumber = dict.objectForKey("mobile_number") as? String
+                        {
+                            searchPerson.mobileNumber = mobileNumber
+                        }
+                        
+                        searchPerson.app_user_token = dict.objectForKey("app_user_token") as? String
+                         searchPerson.created_at = dict.objectForKey("created_at") as? String
+                         searchPerson.updated_at = dict.objectForKey("updated_at") as? String
+                         searchPerson.dob = dict.objectForKey("dob") as? String
+                         searchPerson.address = dict.objectForKey("address") as? String
+                         searchPerson.website = dict.objectForKey("website") as? String
+                         searchPerson.photo = dict.objectForKey("photo") as? String
+                         searchPerson.gcm_token = dict.objectForKey("gcm_token") as? String
+                         searchPerson.last_online_time = dict.objectForKey("last_online_time") as? String
+                        if let ratingAverage =  dict.objectForKey("rating_average") as? [AnyObject]
+                        {
+                            searchPerson.ratingAverage = ratingAverage
+                        }
+                        
+                        if let reviewcount = dict.objectForKey("review_count") as? [AnyObject]
+                        {
+                            searchPerson.reviewCount = reviewcount
+                        }
+                        conatactPerson.data.append(searchPerson)
+                         
+                    }
+                    
+                }
+                
+            }
+            onFinish(response: response, contactPerson: conatactPerson)
+            
+            }) { (error) in
+                onError(error: error)
+        }
+        
+        
+    }
     
 }
 

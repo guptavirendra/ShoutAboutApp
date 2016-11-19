@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F11B75F01DDF844B0075DDCB /* MainSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B75EF1DDF844B0075DDCB /* MainSearchViewController.swift */; };
 		F11DB4F81DD9AB170084F9F4 /* SDWebImage in Resources */ = {isa = PBXBuildFile; fileRef = F11DB4F61DD9AB170084F9F4 /* SDWebImage */; };
 		F11DB4F91DD9AB170084F9F4 /* SWReveal in Resources */ = {isa = PBXBuildFile; fileRef = F11DB4F71DD9AB170084F9F4 /* SWReveal */; };
 		F11DB4FE1DD9ACF10084F9F4 /* SWRevealViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = F11DB4FC1DD9ACF10084F9F4 /* SWRevealViewController.h */; };
@@ -73,6 +74,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F11B75EF1DDF844B0075DDCB /* MainSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSearchViewController.swift; sourceTree = "<group>"; };
 		F11DB4F61DD9AB170084F9F4 /* SDWebImage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SDWebImage; path = /Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/SDWebImage; sourceTree = "<absolute>"; };
 		F11DB4F71DD9AB170084F9F4 /* SWReveal */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SWReveal; path = /Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/SWReveal; sourceTree = "<absolute>"; };
 		F11DB4FC1DD9ACF10084F9F4 /* SWRevealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = ShoutAboutApp/SWReveal/SWRevealViewController.h; sourceTree = "<group>"; };
@@ -168,6 +170,15 @@
 			name = LeftView;
 			sourceTree = "<group>";
 		};
+		F11B75F11DDF90450075DDCB /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				F11B75EF1DDF844B0075DDCB /* MainSearchViewController.swift */,
+				F12C277A1DCF75F800AEE0A3 /* SearchViewController.swift */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		F11DB53E1DD9ADC70084F9F4 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,13 +245,13 @@
 				F12C27741DCF07BB00AEE0A3 /* ClickTableViewCell.swift */,
 				F12C27781DCF497F00AEE0A3 /* ContactTableViewCell.swift */,
 				F12C27541DCE45A800AEE0A3 /* Main.storyboard */,
+				F11B75F11DDF90450075DDCB /* Search */,
 				F100A7D11DDB9D9C00DD320C /* LeftView */,
 				F188392A1DD8A76B00362B1B /* ChattingTableViewCell.swift */,
 				F18839281DD877C000362B1B /* ChattingViewController.swift */,
 				F18839261DD86A6F00362B1B /* EditProfileTableViewCell.swift */,
 				F18839241DD8573B00362B1B /* UesrReviewTableViewCell.swift */,
 				F12713B11DCFC105005928AD /* WriteReviewTableViewCell.swift */,
-				F12C277A1DCF75F800AEE0A3 /* SearchViewController.swift */,
 				F12C277C1DCF761D00AEE0A3 /* FeedsViewController.swift */,
 				F100A7CE1DDB9B5D00DD320C /* Profile */,
 				F12C27801DCF765300AEE0A3 /* ChatViewController.swift */,
@@ -386,6 +397,7 @@
 				F11DB5311DD9AD060084F9F4 /* SDWebImagePrefetcher.m in Sources */,
 				F11DB5321DD9AD060084F9F4 /* UIButton+WebCache.h in Sources */,
 				F11DB5331DD9AD060084F9F4 /* UIButton+WebCache.m in Sources */,
+				F11B75F01DDF844B0075DDCB /* MainSearchViewController.swift in Sources */,
 				F11DB5341DD9AD060084F9F4 /* UIImage+GIF.h in Sources */,
 				F11DB5351DD9AD060084F9F4 /* UIImage+GIF.m in Sources */,
 				F11DB5361DD9AD060084F9F4 /* UIImage+MultiFormat.h in Sources */,
