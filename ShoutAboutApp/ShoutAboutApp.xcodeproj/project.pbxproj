@@ -10,6 +10,7 @@
 		F11B75F01DDF844B0075DDCB /* MainSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B75EF1DDF844B0075DDCB /* MainSearchViewController.swift */; };
 		F11B75F61DE071FB0075DDCB /* ChatPersionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B75F51DE071FB0075DDCB /* ChatPersionTableViewCell.swift */; };
 		F11B75FA1DE0C70C0075DDCB /* MyTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B75F91DE0C70C0075DDCB /* MyTabViewController.swift */; };
+		F11B75FC1DE17B520075DDCB /* ChatImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B75FB1DE17B520075DDCB /* ChatImageTableViewCell.swift */; };
 		F11DB4F81DD9AB170084F9F4 /* SDWebImage in Resources */ = {isa = PBXBuildFile; fileRef = F11DB4F61DD9AB170084F9F4 /* SDWebImage */; };
 		F11DB4F91DD9AB170084F9F4 /* SWReveal in Resources */ = {isa = PBXBuildFile; fileRef = F11DB4F71DD9AB170084F9F4 /* SWReveal */; };
 		F11DB4FE1DD9ACF10084F9F4 /* SWRevealViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = F11DB4FC1DD9ACF10084F9F4 /* SWRevealViewController.h */; };
@@ -79,6 +80,7 @@
 		F11B75EF1DDF844B0075DDCB /* MainSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSearchViewController.swift; sourceTree = "<group>"; };
 		F11B75F51DE071FB0075DDCB /* ChatPersionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPersionTableViewCell.swift; sourceTree = "<group>"; };
 		F11B75F91DE0C70C0075DDCB /* MyTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTabViewController.swift; sourceTree = "<group>"; };
+		F11B75FB1DE17B520075DDCB /* ChatImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatImageTableViewCell.swift; sourceTree = "<group>"; };
 		F11DB4F61DD9AB170084F9F4 /* SDWebImage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SDWebImage; path = /Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/SDWebImage; sourceTree = "<absolute>"; };
 		F11DB4F71DD9AB170084F9F4 /* SWReveal */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SWReveal; path = /Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/SWReveal; sourceTree = "<absolute>"; };
 		F11DB4FC1DD9ACF10084F9F4 /* SWRevealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = ShoutAboutApp/SWReveal/SWRevealViewController.h; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				F12C27741DCF07BB00AEE0A3 /* ClickTableViewCell.swift */,
 				F12C27781DCF497F00AEE0A3 /* ContactTableViewCell.swift */,
 				F12C27541DCE45A800AEE0A3 /* Main.storyboard */,
+				F11B75FB1DE17B520075DDCB /* ChatImageTableViewCell.swift */,
 				F11B75F11DDF90450075DDCB /* Search */,
 				F100A7D11DDB9D9C00DD320C /* LeftView */,
 				F11B75F41DE062460075DDCB /* Chat */,
@@ -405,6 +408,7 @@
 				F11DB52B1DD9AD060084F9F4 /* SDWebImageDownloaderOperation.h in Sources */,
 				F11DB52C1DD9AD060084F9F4 /* SDWebImageDownloaderOperation.m in Sources */,
 				F11DB52D1DD9AD060084F9F4 /* SDWebImageManager.h in Sources */,
+				F11B75FC1DE17B520075DDCB /* ChatImageTableViewCell.swift in Sources */,
 				F11DB52E1DD9AD060084F9F4 /* SDWebImageManager.m in Sources */,
 				F11DB52F1DD9AD060084F9F4 /* SDWebImageOperation.h in Sources */,
 				F11DB5301DD9AD060084F9F4 /* SDWebImagePrefetcher.h in Sources */,

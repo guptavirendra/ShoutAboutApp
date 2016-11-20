@@ -193,14 +193,22 @@ class DataSession: BaseNSURLSession
     }
     
     // MARK: TEXT MESSAGE
-    func sendTextMessage(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    func sendTextMessage(recipient_id:String, message:String,  onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
+         var  paramdict = NSObject.getAppUserIdAndToken()
+         paramdict["recipient_id"] = recipient_id
+         paramdict["message_type"] = "text"
         
-        super.getWithOnFinish(mCHWebServiceMethod.send_message, parameters: nil, onFinish: { (response, deserializedResponse) in
+         let  postDict = ["text":message]
+        
+        super.postDataWithOnFinish(mCHWebServiceMethod.send_message, parameters: paramdict, postBody: postDict, onFinish: { (response, deserializedResponse) in
             onFinish(response: response, deserializedResponse: deserializedResponse)
-        }) { (error) in
-            onError(error: error)
+
+            }) { (error) in
+                onError(error: error)
         }
+        
+       
     }
     
     
@@ -561,11 +569,14 @@ class DataSessionManger: NSObject
     }
     
     
-    func sendTextMessage(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    func sendTextMessage(recipient_id:String, message:String,  onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
-        
-         
-        
+         let dataSession = DataSession()
+        dataSession.sendTextMessage(recipient_id, message: message, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+            }) { (error) in
+                onError(error: error)
+        }
         
     }
     
@@ -645,7 +656,7 @@ class DataSessionManger: NSObject
     
     
      //MARK: Get conversation
-    func getChatConversationForID(contactID:String, page: String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    func getChatConversationForID(contactID:String, page: String, onFinish:(response:AnyObject,chatConversation:ChatConversation)->(), onError:(error:AnyObject)->())
     {
         let dataSession = DataSession()
         dataSession.getChatConversationForID(contactID, page: page, onFinish: { (response, deserializedResponse) in
@@ -662,11 +673,10 @@ class DataSessionManger: NSObject
                 
                 if let data = deserializedResponse.objectForKey("data") as? NSArray
                 {
-                   
-                    let chattDetail = ChatDetail()
-                    for dict in data
+                   for dict in data
                     {
-                       chattDetail.id = (dict.objectForKey("id") as? Int)!
+                        let chattDetail = ChatDetail()
+                         chattDetail.id = (dict.objectForKey("id") as? Int)!
                         
                         if let  senderId =   dict.objectForKey("sender_id") as? String
                         {
@@ -706,6 +716,7 @@ class DataSessionManger: NSObject
                             dict.objectForKey("received_at") as? String
                         {
                             chattDetail.received_at =  received_at
+                            
                         }
                         
                         if let created_at =
@@ -731,7 +742,7 @@ class DataSessionManger: NSObject
                 }
                 
             }
-            onFinish(response: response, deserializedResponse: chatConversation)
+            onFinish(response: response, chatConversation: chatConversation)
             
             
             

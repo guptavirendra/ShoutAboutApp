@@ -70,6 +70,14 @@ extension SearchViewController
             let personContact = allValidContacts[indexPath.row]
             cell.nameLabel?.text = personContact.name
             cell.mobileLabel?.text = personContact.mobileNumber
+            if let urlString = personContact.photo
+            {
+                cell.profileImageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+                
+            }else
+            {
+                cell.profileImageView.image = UIImage(named: "profile")
+            }
             
             return cell
         }
@@ -97,9 +105,11 @@ extension SearchViewController
     func buttonClicked(cell: ContactTableViewCell, button: UIButton)
     {
         
+        
         if self.tableView.indexPathForCell(cell) != nil
         {
             let indexPath = self.tableView.indexPathForCell(cell)
+            let personContact = allValidContacts[indexPath!.row]
             if button.titleLabel?.text == " Call"
             {
                 let personContact = allValidContacts[indexPath!.row]
@@ -122,6 +132,8 @@ extension SearchViewController
             }else
             {
                 let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as? ProfileViewController
+                profileViewController?.personalProfile = personContact
+                
                 self.navigationController!.pushViewController(profileViewController!, animated: true)
             }
         }

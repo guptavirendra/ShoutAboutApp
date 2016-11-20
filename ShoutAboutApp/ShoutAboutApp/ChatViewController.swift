@@ -76,7 +76,7 @@ extension ChatViewController
         cell.nameLabel.text = chatPerson.name
         if let urlString = chatPerson.photo
         {
-            cell.profileButton.imageView?.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+            cell.profileView?.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
         }
         cell.delegate = self
         
@@ -107,8 +107,15 @@ extension ChatViewController
 {
     func buttonClicked(cell: ChatPersionTableViewCell, button: UIButton)
     {
-        let chattingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChattingViewController") as? ChattingViewController
+        if self.tableView.indexPathForCell(cell) != nil
+        {
+            let indexPath = self.tableView.indexPathForCell(cell)
+            let chatPerson = chatPersons[indexPath!.row]
+           let chattingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChattingViewController") as? ChattingViewController
+            chattingViewController?.chatPerson = chatPerson
+        
         self.navigationController!.pushViewController(chattingViewController!, animated: true)
+        }
     }
     
 }

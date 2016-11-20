@@ -8,6 +8,7 @@
 
 import UIKit
 import Darwin
+import AVFoundation
 
 let fmax = FLT_MAX
 
@@ -43,15 +44,24 @@ class DynamicTextView:UITextView
 
 class ChattingViewController: UIViewController, UITextViewDelegate
 {
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var attachButton: UIButton!
     @IBOutlet weak var  toolBar:UIToolbar!
+    @IBOutlet weak var callButton: UIButton!
     @IBOutlet weak var  chatTextView:DynamicTextView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var constraintTextFieldBottom:NSLayoutConstraint?
     @IBOutlet weak var tableViewBottomConstant:NSLayoutConstraint?
+    @IBOutlet weak var sendButton:UIButton!
+    var chatPerson:ChatPerson = ChatPerson()
     
     var contactID:String = ""
+    var nextPage         = 1
+    var totalMessage     = 0
+    var lastPage         = 0
     
-    var chatArray = [AnyObject]()
+    var chatArray = [ChatDetail]()
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -59,18 +69,29 @@ class ChattingViewController: UIViewController, UITextViewDelegate
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.showKeyBoard(_:)), name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.hideKeyBoard(_:)), name: UIKeyboardWillHideNotification, object: nil)
         self.toolBar.hidden = true
-        self.chatArray.append("")
-        self.chatArray.append("")
-        self.chatArray.append("")
-        self.chatArray.append("")
+        self.view.backgroundColor = bgColor
+        self.tableView.backgroundColor = bgColor
+        profileImageView.makeImageRoundedWithGray()
+        getChat()
+        
 
-         
     }
 
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        if let photo  = chatPerson.photo
+        {
+            setProfileImgeForURL(photo)
+        }
+        self.nameLabel.text = chatPerson.name
     }
     
 
@@ -94,24 +115,77 @@ extension ChattingViewController
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ChattingTableViewCell", forIndexPath: indexPath) as! ChattingTableViewCell
+        let chatDetail = chatArray[indexPath.row]
+        print("message type \(chatDetail.message_type)")
+        if chatDetail.message_type == "video" ||  chatDetail.message_type == "image"
+        {
+        
+            let cell = tableView.dequeueReusableCellWithIdentifier("ChatImageTableViewCell", forIndexPath: indexPath) as! ChatImageTableViewCell
+            if chatDetail.video != nil
+            {
+                let url = NSURL(string: chatDetail.video!)
+                cell.imagesView.image =  self.thumbnail(sourceURL: url!)
+                cell.timeLabel.text        = chatDetail.created_at
+                
+            }
             
-            
+            if chatDetail.image != nil
+            {
+                let url = NSURL(string: chatDetail.image!)
+               cell.imagesView.setImageWithURL(url)
+            }
             return cell
+        }
+        let cell = tableView.dequeueReusableCellWithIdentifier("ChattingTableViewCell", forIndexPath: indexPath) as! ChattingTableViewCell
+        if chatDetail.text?.characters.count > 0
+        {
+            cell.messageLabel.text     = chatDetail.text
+        }else
+        {
+            cell.messageLabel.text     = nil
+        }
+        cell.timeLabel.text        = chatDetail.created_at
+        
+        return cell
+        
     }
     
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        
+        let chatDetail = chatArray[indexPath.row]
+        print("message type \(chatDetail.message_type)")
+        if chatDetail.message_type == "video" ||  chatDetail.message_type == "image"
+        {
+            return 150
+        }
         return UITableViewAutomaticDimension
         
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
+        let chatDetail = chatArray[indexPath.row]
+        print("message type \(chatDetail.message_type)")
+        if chatDetail.message_type == "video" ||  chatDetail.message_type == "image"
+        {
+            return 150
+        }
         
         return 57
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let currentCount = indexPath.row + 1
+        if (currentCount < self.totalMessage)
+        {
+            if nextPage < lastPage && (chatArray.count == currentCount)
+            {
+                nextPage += 1
+                self.getChat()
+            }
+        }
     }
 
     
@@ -127,9 +201,13 @@ extension ChattingViewController
         let  animationDuration = dictInfo.objectForKey(UIKeyboardAnimationDurationUserInfoKey)?.doubleValue
         let  keyboardFrame: CGRect  = (kbFrame?.CGRectValue())!
         var  height:CGFloat =  keyboardFrame.size.height ;
+        if let tabBarVC = self.tabBarController?.tabBar
+        {
+            height   -=  (self.tabBarController?.tabBar.frame.size.height)!
+            
+        }
         
-        
-      height   -=  (self.tabBarController?.tabBar.frame.size.height)!
+      
         // Because the "space" is actually the difference between the bottom lines of the 2 views,
         // we need to set a negative constant value here.
         
@@ -190,13 +268,35 @@ extension ChattingViewController
 
 extension ChattingViewController
 {
-    
     func getChat()
+    {
+        if NetworkConnectivity.isConnectedToNetwork() != true
+        {
+            self.displayAlertMessage("No Internet Connection")
+            
+        }else
+        {
+            self.getChatForPage(String(self.nextPage))
+        }
+        
+    }
+    
+    func getChatForPage(page:String)
     {
         self.view.showSpinner()
         
-       DataSessionManger.sharedInstance.getChatConversationForID(self.contactID, page: "1", onFinish: { (response, deserializedResponse) in
+       DataSessionManger.sharedInstance.getChatConversationForID(String(self.chatPerson.idString), page: page, onFinish: { (response, chatConversation) in
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            
+            self.totalMessage = chatConversation.total
+            self.nextPage     = chatConversation.current_page
+            self.lastPage     = chatConversation.last_page
+            self.chatArray.appendContentsOf(chatConversation.data)
+            self.chatArray.sortInPlace({ (chatdetail1, chatdetail2) -> Bool in
+                chatdetail1.created_at < chatdetail2.created_at
+             })
+            self.tableView.reloadData()
+            self.view.removeSpinner()
             
         })
         
@@ -204,9 +304,97 @@ extension ChattingViewController
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 
+                 self.view.removeSpinner()
+                
             })
             
         }
     }
+    
+}
+
+
+extension ChattingViewController
+{
+    func thumbnail(sourceURL sourceURL:NSURL) -> UIImage
+    {
+        let asset = AVAsset(URL: sourceURL)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        let time = CMTime(seconds: 1, preferredTimescale: 1)
+        
+        do {
+            let imageRef = try imageGenerator.copyCGImageAtTime(time, actualTime: nil)
+            return UIImage(CGImage: imageRef)
+        } catch {
+            print(error)
+            return UIImage(named: "profile")!
+        }
+    }
+}
+extension ChattingViewController
+{
+    
+    @IBAction func sendButtonClicked(sender:UIButton)
+    {
+        chatTextView.resignFirstResponder()
+        
+       
+        
+        if NetworkConnectivity.isConnectedToNetwork() != true
+        {
+            displayAlertMessage("No Internet Connection")
+            
+        }else
+        {
+            let message = self.chatTextView.text
+            
+            self.chatTextView.text = nil
+            
+            sendTextMessage(message)
+        }
+    
+    }
+    
+    func sendTextMessage(message:String)
+    {
+        
+        self.view.showSpinner()
+        
+        DataSessionManger.sharedInstance.sendTextMessage(contactID, message: message, onFinish: { (response, deserializedResponse) in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                self.view.removeSpinner()
+                self.chatArray.removeAll()
+                self.getChat()
+                
+            })
+            }) { (error) in
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    
+                    self.view.removeSpinner()
+                    
+                })
+        }
+    }
+    
+}
+
+extension ChattingViewController
+{
+    func setProfileImgeForURL(urlString:String)
+    {
+        self.profileImageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+    }
+    
+    @IBAction func attachButtonClicked(sender: AnyObject)
+    {
+        
+        
+    }
+    @IBAction func callButtonClicked(sender: AnyObject)
+    {
+        
+    }
+    
     
 }

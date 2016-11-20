@@ -14,6 +14,7 @@ protocol ContactTableViewCellProtocol {
 
 class ContactTableViewCell: UITableViewCell
 {
+     @IBOutlet weak var profileImageView: UIImageView!
      @IBOutlet weak var baseView: UIView!
      @IBOutlet weak var profileButton: UIButton!
      @IBOutlet weak var nameLabel: UILabel!
@@ -29,6 +30,7 @@ class ContactTableViewCell: UITableViewCell
         self.contentView.backgroundColor = bgColor
         baseView.backgroundColor = bgColor
         baseView.setGraphicEffects()
+        profileImageView.makeImageRoundedWithGray()
         // Initialization code
     }
 

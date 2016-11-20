@@ -14,6 +14,7 @@ protocol ChatPersionTableViewCellProtocol {
 
 class ChatPersionTableViewCell: UITableViewCell
 {
+    @IBOutlet weak var profileView:UIImageView!
     @IBOutlet weak var baseView:UIView!
     @IBOutlet weak var profileButton:UIButton!
     @IBOutlet weak var nameLabel:UILabel!
@@ -33,6 +34,7 @@ class ChatPersionTableViewCell: UITableViewCell
         unreadMessageView.makeImageRounded()
         self.contentView.backgroundColor = bgColor
         baseView.setGraphicEffects()
+        profileView.makeImageRoundedWithWidth(3.0, color: UIColor.grayColor())
         
     }
 

@@ -96,10 +96,12 @@ extension ContactViewController
         cell.mobileLabel?.text = personContact.mobileNumber
         if let urlString = personContact.photo
         {
-            if let _ = cell.profileButton.imageView
-            {
-                cell.profileButton.imageView?.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
-            }
+            
+            cell.profileImageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+            
+        }else
+        {
+            cell.profileImageView.image = UIImage(named: "profile")
         }
         return cell
     }

@@ -99,8 +99,17 @@ extension MainSearchViewController
             let personContact = allValidContacts[indexPath.row]
             cell.nameLabel?.text = personContact.name
             cell.mobileLabel?.text = personContact.mobileNumber
+        if let urlString = personContact.photo
+        {
             
-            return cell
+            cell.profileImageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+            
+        }else
+        {
+            cell.profileImageView.image = UIImage(named: "profile")
+        }
+        
+        return cell
          
         
     }

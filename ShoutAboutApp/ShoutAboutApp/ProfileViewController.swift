@@ -74,6 +74,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        if let photo  = personalProfile.photo
+        {
+            setProfileImgeForURL(photo)
+        }
         //self.navigationController?.navigationBar.hidden = false
     }
     
@@ -96,7 +100,7 @@ extension ProfileViewController
     
     func setProfileImgeForURL(urlString:String)
     {
-        self.imageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile_pic"))
+        self.imageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
     }
     
     
@@ -239,6 +243,19 @@ public extension UIView
         self.clipsToBounds = true
         self.layer.borderWidth = 1.0
         self.layer.borderColor = UIColor.whiteColor().CGColor
+    }
+    
+    func makeImageRoundedWithWidth(widthFloat:CGFloat, color:UIColor)
+    {
+        self.layer.cornerRadius = self.frame.size.width / 2
+        self.clipsToBounds = true
+        self.layer.borderWidth = widthFloat
+        self.layer.borderColor = color.CGColor
+    }
+    
+    func makeImageRoundedWithGray()
+    {
+        makeImageRoundedWithWidth(3.0, color: UIColor.grayColor())
     }
 }
 
