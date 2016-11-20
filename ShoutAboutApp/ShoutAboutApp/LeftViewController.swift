@@ -41,7 +41,11 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
         }else
         {
-            setProfileImgeForURL(ProfileManager.sharedInstance.personalProfile.photo)
+            if let photo  = ProfileManager.sharedInstance.personalProfile.photo
+            {
+                setProfileImgeForURL(photo)
+            }
+             
         }
     }
     
@@ -64,8 +68,10 @@ extension LeftViewController
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel?.text = choiceArray[indexPath.row]
+        let text = choiceArray[indexPath.row]
+        cell.textLabel?.text = text
         cell.textLabel?.textColor = UIColor.whiteColor()
+        cell.imageView?.image = UIImage(named: text)
         return cell
         
     }

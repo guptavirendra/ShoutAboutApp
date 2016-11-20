@@ -11,6 +11,12 @@ class PersonContact: NSObject
 {
     var name:String  = ""
     var mobileNumber:String = ""
+    
+    override init()
+    {
+        self.name = ""
+        self.mobileNumber = ""
+    }
 }
 
 
@@ -90,7 +96,10 @@ extension ContactViewController
         cell.mobileLabel?.text = personContact.mobileNumber
         if let urlString = personContact.photo
         {
-        cell.profileButton.imageView?.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile_pic"))
+            if let _ = cell.profileButton.imageView
+            {
+                cell.profileButton.imageView?.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+            }
         }
         return cell
     }
@@ -127,13 +136,13 @@ extension ContactViewController
         if self.tableView.indexPathForCell(cell) != nil
         {
             let indexPath = self.tableView.indexPathForCell(cell)
-            if button.titleLabel?.text == "Call"
+            if button.titleLabel?.text == " Call"
             {
                 let personContact = allValidContacts[indexPath!.row]
                 let   phone = "tel://"+personContact.mobileNumber
                 UIApplication.sharedApplication().openURL(NSURL(string: phone)!)
             }
-            else if button.titleLabel?.text == "Chat"
+            else if button.titleLabel?.text == " Chat"
             {
                 let chattingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChattingViewController") as? ChattingViewController
                 self.navigationController!.pushViewController(chattingViewController!, animated: true)
@@ -298,11 +307,7 @@ extension ContactViewController
         {
             postData()
         }
-        
-        }
-    
-    
-    
+    }
     
     func postData()
     {

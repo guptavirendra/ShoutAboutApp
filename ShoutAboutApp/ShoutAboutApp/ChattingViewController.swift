@@ -49,6 +49,8 @@ class ChattingViewController: UIViewController, UITextViewDelegate
     @IBOutlet weak var constraintTextFieldBottom:NSLayoutConstraint?
     @IBOutlet weak var tableViewBottomConstant:NSLayoutConstraint?
     
+    var contactID:String = ""
+    
     var chatArray = [AnyObject]()
     override func viewDidLoad()
     {
@@ -184,4 +186,27 @@ extension ChattingViewController
         }
         return true
     }
+}
+
+extension ChattingViewController
+{
+    
+    func getChat()
+    {
+        self.view.showSpinner()
+        
+       DataSessionManger.sharedInstance.getChatConversationForID(self.contactID, page: "1", onFinish: { (response, deserializedResponse) in
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            
+        })
+        
+        }) { (error) in
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+            })
+            
+        }
+    }
+    
 }

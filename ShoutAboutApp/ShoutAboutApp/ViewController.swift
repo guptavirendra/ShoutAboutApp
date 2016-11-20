@@ -171,6 +171,22 @@ import UIKit
 
 public extension UIView
 {
+    
+    func setGraphicEffects()
+    {
+        //        self.layer.cornerRadius = 0.0
+        //        self.layer.shadowRadius = 7
+        //        self.layer.shadowOpacity = 0.30
+        //        self.layer.shadowOffset = CGSizeMake(0, 4)
+        
+        // Changed Shadow As discussed dated on 4 Aug
+        self.layer.shadowColor   = UIColor.lightGrayColor().CGColor
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius  = 3.0
+        self.layer.shadowOffset  = CGSizeMake(1.0, 1.0)
+        self.layer.masksToBounds = false
+        
+    }
     public func showSpinner()
     {
         self.showSpinner(true, userInteractionEnabled: false)

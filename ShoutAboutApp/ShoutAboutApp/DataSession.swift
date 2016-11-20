@@ -138,6 +138,21 @@ class DataSession: BaseNSURLSession
         
     }
     
+    //MARK: Get conversation
+    func getChatConversationForID(contactID:String, page: String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        var  dict = NSObject.getAppUserIdAndToken()
+        dict["contact_id"] = contactID
+        dict["page"] = page
+        
+        super.getWithOnFinish(mCHWebServiceMethod.chat_conversation, parameters: dict, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }
+        
+    }
+    
     
     //MARK: ADD REVIEW LIST
     func addRateReview(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
@@ -221,11 +236,11 @@ class DataSessionManger: NSObject
         }
         
     }
-    func getProfileData(onFinish:(response:AnyObject,personalProfile:PersonalProfile)->(), onError:(error:AnyObject)->())
+    func getProfileData(onFinish:(response:AnyObject,personalProfile:SearchPerson)->(), onError:(error:AnyObject)->())
     {
         let dataSession = DataSession()
         dataSession.getProfileData({ (response, deserializedResponse) in
-            let personalProfileData = PersonalProfile()
+            let personalProfileData = SearchPerson()
             if deserializedResponse is NSDictionary
             {
                 if let arrayDict = deserializedResponse.objectForKey(user_profile) as? [NSDictionary]
@@ -233,10 +248,10 @@ class DataSessionManger: NSObject
                     
                     
                     let dataDict = arrayDict.first
-                    personalProfileData.idInt = (dataDict?.objectForKey("id") as? Int)!
+                    personalProfileData.idString = (dataDict?.objectForKey("id") as? Int)!
                     personalProfileData.name = dataDict?.objectForKey(name) as! String
                     personalProfileData.email = (dataDict?.objectForKey(email))! as! String
-                    personalProfileData.mobile_number = dataDict?.objectForKey(mobile_number) as! String
+                    personalProfileData.mobileNumber = dataDict?.objectForKey(mobile_number) as! String
                    
                     personalProfileData.created_at = (dataDict?.objectForKey(created_at))! as! String
                     personalProfileData.updated_at = dataDict?.objectForKey(updated_at) as! String
@@ -251,12 +266,12 @@ class DataSessionManger: NSObject
                     personalProfileData.last_online_time = dataDict?.objectForKey(last_online_time) as! String
                     if let _ = (dataDict?.objectForKey("rating_average") as? [AnyObject])
                     {
-                        personalProfileData.rating_average = (dataDict?.objectForKey("rating_average") as? [AnyObject])!
+                        personalProfileData.ratingAverage = (dataDict?.objectForKey("rating_average") as? [AnyObject])!
                     }
                     
                     if let _ = dataDict?.objectForKey("review_count") as? [AnyObject]
                     {
-                        personalProfileData.review_count = dataDict?.objectForKey("review_count") as! [AnyObject]
+                        personalProfileData.reviewCount = dataDict?.objectForKey("review_count") as! [AnyObject]
                     }
                     
                 }
@@ -381,7 +396,11 @@ class DataSessionManger: NSObject
                     let chatPerson = ChatPerson()
                     
                     chatPerson.idString = dict.objectForKey("id") as! Int
-                    chatPerson.name = (dict.objectForKey("name") as? String)!
+                    
+                    if let name = dict.objectForKey("name") as? String
+                    {
+                        chatPerson.name = name
+                    }
                     if let photo = dict.objectForKey("photo") as? String
                     {
                         chatPerson.photo = photo
@@ -622,6 +641,105 @@ class DataSessionManger: NSObject
         }
         
         
+    }
+    
+    
+     //MARK: Get conversation
+    func getChatConversationForID(contactID:String, page: String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.getChatConversationForID(contactID, page: page, onFinish: { (response, deserializedResponse) in
+            
+            let chatConversation = ChatConversation()
+            if deserializedResponse is NSDictionary
+            {
+                
+                chatConversation.total = (deserializedResponse.objectForKey("total") as? Int)!
+                chatConversation.per_page =  (deserializedResponse.objectForKey("per_page") as? Int)!
+                chatConversation.current_page =    (deserializedResponse.objectForKey("current_page") as? Int)!
+                chatConversation.last_page =  (deserializedResponse.objectForKey("last_page") as? Int)!
+                
+                
+                if let data = deserializedResponse.objectForKey("data") as? NSArray
+                {
+                   
+                    let chattDetail = ChatDetail()
+                    for dict in data
+                    {
+                       chattDetail.id = (dict.objectForKey("id") as? Int)!
+                        
+                        if let  senderId =   dict.objectForKey("sender_id") as? String
+                        {
+                           chattDetail.sender_id = senderId
+                        }
+                        if let recipient_id = dict.objectForKey("recipient_id") as? String
+                        {
+                            chattDetail.recipient_id = recipient_id
+                        }
+                        if let message_type =  dict.objectForKey("message_type") as? String
+                        {
+                            chattDetail.message_type = message_type
+                        }
+                        
+                        if let text =
+                            dict.objectForKey("text") as? String
+                        {
+                            chattDetail.text = text
+                        }
+                        
+                        if let  image = dict.objectForKey("image") as? String
+                        {
+                            chattDetail.image = image
+                        }
+                        
+                        if let  video = dict.objectForKey("video") as? String
+                        {
+                            chattDetail.video = video
+                        }
+                        
+                        if let message_read =
+                            dict.objectForKey("message_read") as? String
+                        {
+                            chattDetail.message_read = message_read
+                        }
+                        if let received_at =
+                            dict.objectForKey("received_at") as? String
+                        {
+                            chattDetail.received_at =  received_at
+                        }
+                        
+                        if let created_at =
+                            dict.objectForKey("created_at") as? String
+                        {
+                           chattDetail.created_at = created_at
+                        }
+                        
+                        if let updated_at =
+                            dict.objectForKey("updated_at") as? String
+                        {
+                            chattDetail.updated_at = updated_at
+                        }
+                        if let conversation_id =
+                            dict.objectForKey("conversation_id") as? String
+                        {
+                            chattDetail.conversation_id = conversation_id
+                        }
+                        
+                        chatConversation.data.append(chattDetail)
+                        
+                    }
+                }
+                
+            }
+            onFinish(response: response, deserializedResponse: chatConversation)
+            
+            
+            
+            }) { (error) in
+                onError(error: error)
+        }
+        
+    
     }
     
 }

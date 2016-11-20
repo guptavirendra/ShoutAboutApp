@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+let searchHistory  = "searchHistory"
 let search_mobile  = "search_mobile"
 let message        = "message"
 let otpMessage     = "Successfully sent the One Time Password to your Mobile Number"
@@ -72,7 +73,7 @@ class ChatPerson:NSObject
 }
 
 
-class SearchPerson:PersonContact
+class SearchPerson:PersonContact, NSCoding
 {
     var idString:Int = 0
     //var name: String
@@ -89,6 +90,83 @@ class SearchPerson:PersonContact
     var last_online_time: String?
     var ratingAverage:[AnyObject] = [AnyObject]()
     var reviewCount:[AnyObject]   = [AnyObject]()
+    
+    
+    required override init()
+    {
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init()
+        if let id = aDecoder.decodeObjectForKey("idString") as? Int
+        {
+            idString = id
+        }
+        if let name = aDecoder.decodeObjectForKey("name") as? String
+        {
+            self.name = name
+        }
+        if let email = aDecoder.decodeObjectForKey("email") as? String
+        {
+            self.email = email
+        }
+        if let mobileNumber = aDecoder.decodeObjectForKey("mobileNumber") as? String
+        {
+            self.mobileNumber = mobileNumber
+        }
+        if let created_at = aDecoder.decodeObjectForKey("created_at") as? String
+        {
+            self.created_at = created_at
+        }
+        if let updated_at = aDecoder.decodeObjectForKey("updated_at") as? String
+        {
+            self.updated_at = updated_at
+        }
+        if let dob = aDecoder.decodeObjectForKey("dob") as? String
+        {
+            self.dob = dob
+        }
+        if let address = aDecoder.decodeObjectForKey("address") as? String
+        {
+            self.address = address
+        }
+        if let website = aDecoder.decodeObjectForKey("website") as? String
+        {
+            self.website = website
+        }
+        if let photo = aDecoder.decodeObjectForKey("photo") as? String
+        {
+            self.photo = photo
+        }
+        
+        
+        
+        
+        
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder)
+    {
+        aCoder.encodeObject(idString, forKey: "idString")
+        aCoder.encodeObject(name, forKey: "name")
+        aCoder.encodeObject(email, forKey: "email")
+        aCoder.encodeObject(mobileNumber, forKey: "mobileNumber")
+        aCoder.encodeObject(created_at, forKey: "created_at")
+        aCoder.encodeObject(updated_at, forKey: "updated_at")
+        aCoder.encodeObject(dob, forKey: "dob")
+        aCoder.encodeObject(address, forKey: "address")
+        aCoder.encodeObject(website, forKey: "website")
+        aCoder.encodeObject(photo, forKey: "photo")
+    }
+    
+    class func archivePeople(people:[SearchPerson]) -> NSData
+    {
+        let archivedObject = NSKeyedArchiver.archivedDataWithRootObject(people as NSArray)
+        return archivedObject
+    }
+    
 }
 
 class ContactPerson:NSObject
@@ -104,5 +182,34 @@ class ContactPerson:NSObject
     var data:[SearchPerson] = [SearchPerson]()
 }
 
+
+class ChatDetail:NSObject
+{
+    var id: Int = 0
+    var sender_id: String?
+    var recipient_id: String?
+    var message_type: String?
+    var text: String?
+    var image: String?
+    var video: String?
+    var message_read: String?
+    var received_at: String?
+    var created_at: String?
+    var updated_at: String?
+    var conversation_id: String?
+}
+
+class ChatConversation:NSObject
+{
+    var total: Int = 0
+    var per_page: Int = 0
+    var current_page: Int = 0
+    var last_page: Int = 0
+    var next_page_url: String?
+    var prev_page_url: String?
+    var from: Int = 0
+    var to: Int = 0
+    var data:[ChatDetail] = [ChatDetail]()
+}
 
  

@@ -22,12 +22,13 @@ class ContactTableViewCell: UITableViewCell
      @IBOutlet weak var callButton: UIButton!
      @IBOutlet weak var chaBbutton: UIButton!
      @IBOutlet weak var revieBbutton: UIButton!
-    var delegate:ContactTableViewCellProtocol?
+     var delegate:ContactTableViewCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.backgroundColor = bgColor
         baseView.backgroundColor = bgColor
+        baseView.setGraphicEffects()
         // Initialization code
     }
 

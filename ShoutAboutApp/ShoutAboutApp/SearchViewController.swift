@@ -10,34 +10,23 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate,UISearchControllerDelegate, ContactTableViewCellProtocol, UITableViewDataSource, UITableViewDelegate
 {
-    
-    //@IBOutlet weak var searchView:UIView?
-   // @IBOutlet weak var searchBar:UISearchBar?
+
     @IBOutlet weak var tableView: UITableView!
     var allValidContacts = [SearchPerson]()
     var errorMessage:String?
 
-   let searchController = UISearchController(searchResultsController: nil)
+    let searchController = UISearchController(searchResultsController: nil)
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Setup the Search Controller
-        //searchController.searchResultsUpdater = self
+        
         searchController.searchBar.delegate = self
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
         
-        // Setup the Scope Bar
-        searchController.searchBar.scopeButtonTitles = ["All", "Chocolate", "Hard", "Other"]
-         
-        
         tableView.tableHeaderView = searchController.searchBar
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "message")
         searchController.hidesNavigationBarDuringPresentation = false
-        //self.automaticallyAdjustsScrollViewInsets = false
-        
-        
-
     }
 
     override func didReceiveMemoryWarning()
@@ -48,8 +37,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        allValidContacts.removeAll()
-        self.tableView.reloadData()
+        //allValidContacts.removeAll()
+        //self.tableView.reloadData()
         self.searchController.searchBar.text = nil
         //self.navigationController?.navigationBar.hidden = true
         
@@ -111,23 +100,29 @@ extension SearchViewController
         if self.tableView.indexPathForCell(cell) != nil
         {
             let indexPath = self.tableView.indexPathForCell(cell)
-            if button.titleLabel?.text == "Call"
+            if button.titleLabel?.text == " Call"
             {
                 let personContact = allValidContacts[indexPath!.row]
                 let   phone = "tel://"+personContact.mobileNumber
                 UIApplication.sharedApplication().openURL(NSURL(string: phone)!)
             }
-            if button.titleLabel?.text == "Chat"
+            else if button.titleLabel?.text == " Chat"
             {
+                let chattingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChattingViewController") as? ChattingViewController
+                self.navigationController!.pushViewController(chattingViewController!, animated: true)
                 
             }
-            if button.titleLabel?.text == "reviews"
+            else if button.titleLabel?.text == "reviews"
             {
                 
                 let rateANdReviewViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RateANdReviewViewController") as? RateANdReviewViewController
                 self.navigationController!.pushViewController(rateANdReviewViewController!, animated: true)
                 
                 
+            }else
+            {
+                let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as? ProfileViewController
+                self.navigationController!.pushViewController(profileViewController!, animated: true)
             }
         }
     }
@@ -186,6 +181,33 @@ extension SearchViewController
             dispatch_async(dispatch_get_main_queue(),
                 {
                     self.allValidContacts = deserializedResponse
+                    
+                    
+                   var searchArray = self.retrievePearson()
+                    
+                    if searchArray == nil
+                    {
+                        searchArray = [SearchPerson]()
+                        
+                    }
+                    if searchArray?.count > 30
+                    {
+                        
+                        if deserializedResponse.count > 0
+                        {
+                            searchArray?.removeFirst()
+                            searchArray?.append(deserializedResponse.first!)
+                        }
+                    }else
+                    {
+                        if deserializedResponse.count > 0
+                        {
+                            //searchArray?.removeFirst()
+                            searchArray?.append(deserializedResponse.last!)
+                        }
+                    }
+                    self.savePerson(searchArray!)
+                    // NSUserDefaults.standardUserDefaults().setObject(searchArray, forKey: searchHistory)
                     self.view.removeSpinner()
                     self.tableView.reloadData()
                     self.errorMessage = errorMessage
@@ -202,5 +224,21 @@ extension SearchViewController
             });//
         }
         
+    }
+    
+    func savePerson(person:[SearchPerson])
+    {
+        let archivedObject = SearchPerson.archivePeople(person)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(archivedObject, forKey: searchHistory)
+        defaults.synchronize()
+    }
+    
+    func retrievePearson() -> [SearchPerson]?
+    {
+        if let unarchivedObject = NSUserDefaults.standardUserDefaults().objectForKey(searchHistory) as? NSData {
+            return NSKeyedUnarchiver.unarchiveObjectWithData(unarchivedObject) as? [SearchPerson]
+        }
+        return nil
     }
 }

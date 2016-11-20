@@ -30,7 +30,7 @@ class PersonalProfile:NSObject
 class ProfileManager:NSObject
 {
     static let sharedInstance = ProfileManager()
-    var personalProfile:PersonalProfile = PersonalProfile()
+    var personalProfile:SearchPerson = SearchPerson()
     var localStoredImage:UIImage?
 }
 
@@ -41,7 +41,7 @@ import MobileCoreServices
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     var selectedImages:UIImage?
-    var personalProfile:PersonalProfile = PersonalProfile()// since profile is vary from user to user
+    var personalProfile:SearchPerson = SearchPerson()// since profile is vary from user to user
     
     @IBOutlet weak var reviewButton:UIButton!
     
@@ -55,9 +55,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     {
         super.viewDidLoad()
         imageView.makeImageRounded()
-        personalProfile = ProfileManager.sharedInstance.personalProfile
-        self.nameLabel.text = ProfileManager.sharedInstance.personalProfile.name
-        setProfileImgeForURL(ProfileManager.sharedInstance.personalProfile.photo)
+        
+        self.nameLabel.text = personalProfile.name
+        if let photo  = personalProfile.photo
+        {
+            setProfileImgeForURL(photo)
+        }
+            
         
     }
 
@@ -126,7 +130,7 @@ extension ProfileViewController
         if indexPath.row == 2
         {
             cell.titleLabel.text = "Mobile"
-            cell.dataLabel.text  = personalProfile.mobile_number
+            cell.dataLabel.text  = personalProfile.mobileNumber
         }
         if indexPath.row == 3
         {
@@ -180,7 +184,7 @@ extension ProfileViewController
         
         print(fullPathToFile)
         
-        var imageData: NSData = UIImageJPEGRepresentation(selectedImage, 0.5)!
+        let imageData: NSData = UIImageJPEGRepresentation(selectedImage, 0.5)!
         
         
         

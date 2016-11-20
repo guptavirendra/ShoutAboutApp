@@ -667,7 +667,7 @@ public class BaseNSURLSession: NSObject
                                 if let dataInAnyObject = data
                                 {
                                     do  {
-                                        let json = try NSJSONSerialization.JSONObjectWithData(dataInAnyObject, options: .MutableLeaves) as? NSDictionary
+                                        let json = try NSJSONSerialization.JSONObjectWithData(dataInAnyObject, options: .MutableLeaves) as? AnyObject
                                         // println("DeserilizedDict:"+"\(json)")
                                         
                                         // Check  if there is any error while converting the data

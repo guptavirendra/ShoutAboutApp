@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		F11B75F01DDF844B0075DDCB /* MainSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B75EF1DDF844B0075DDCB /* MainSearchViewController.swift */; };
+		F11B75F61DE071FB0075DDCB /* ChatPersionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B75F51DE071FB0075DDCB /* ChatPersionTableViewCell.swift */; };
+		F11B75FA1DE0C70C0075DDCB /* MyTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11B75F91DE0C70C0075DDCB /* MyTabViewController.swift */; };
 		F11DB4F81DD9AB170084F9F4 /* SDWebImage in Resources */ = {isa = PBXBuildFile; fileRef = F11DB4F61DD9AB170084F9F4 /* SDWebImage */; };
 		F11DB4F91DD9AB170084F9F4 /* SWReveal in Resources */ = {isa = PBXBuildFile; fileRef = F11DB4F71DD9AB170084F9F4 /* SWReveal */; };
 		F11DB4FE1DD9ACF10084F9F4 /* SWRevealViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = F11DB4FC1DD9ACF10084F9F4 /* SWRevealViewController.h */; };
@@ -75,6 +77,8 @@
 
 /* Begin PBXFileReference section */
 		F11B75EF1DDF844B0075DDCB /* MainSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSearchViewController.swift; sourceTree = "<group>"; };
+		F11B75F51DE071FB0075DDCB /* ChatPersionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPersionTableViewCell.swift; sourceTree = "<group>"; };
+		F11B75F91DE0C70C0075DDCB /* MyTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTabViewController.swift; sourceTree = "<group>"; };
 		F11DB4F61DD9AB170084F9F4 /* SDWebImage */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SDWebImage; path = /Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/SDWebImage; sourceTree = "<absolute>"; };
 		F11DB4F71DD9AB170084F9F4 /* SWReveal */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SWReveal; path = /Users/virendragupta/ShoutAboutApp/ShoutAboutApp/ShoutAboutApp/SWReveal; sourceTree = "<absolute>"; };
 		F11DB4FC1DD9ACF10084F9F4 /* SWRevealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = ShoutAboutApp/SWReveal/SWRevealViewController.h; sourceTree = "<group>"; };
@@ -179,6 +183,17 @@
 			name = Search;
 			sourceTree = "<group>";
 		};
+		F11B75F41DE062460075DDCB /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				F188392A1DD8A76B00362B1B /* ChattingTableViewCell.swift */,
+				F12C27801DCF765300AEE0A3 /* ChatViewController.swift */,
+				F11B75F51DE071FB0075DDCB /* ChatPersionTableViewCell.swift */,
+				F18839281DD877C000362B1B /* ChattingViewController.swift */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
 		F11DB53E1DD9ADC70084F9F4 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +237,7 @@
 		F12C27441DCE45A800AEE0A3 = {
 			isa = PBXGroup;
 			children = (
+				F11B75F91DE0C70C0075DDCB /* MyTabViewController.swift */,
 				F11DB53E1DD9ADC70084F9F4 /* SDWebImage */,
 				F12C274F1DCE45A800AEE0A3 /* ShoutAboutApp */,
 				F12C274E1DCE45A800AEE0A3 /* Products */,
@@ -247,14 +263,12 @@
 				F12C27541DCE45A800AEE0A3 /* Main.storyboard */,
 				F11B75F11DDF90450075DDCB /* Search */,
 				F100A7D11DDB9D9C00DD320C /* LeftView */,
-				F188392A1DD8A76B00362B1B /* ChattingTableViewCell.swift */,
-				F18839281DD877C000362B1B /* ChattingViewController.swift */,
+				F11B75F41DE062460075DDCB /* Chat */,
 				F18839261DD86A6F00362B1B /* EditProfileTableViewCell.swift */,
 				F18839241DD8573B00362B1B /* UesrReviewTableViewCell.swift */,
 				F12713B11DCFC105005928AD /* WriteReviewTableViewCell.swift */,
 				F12C277C1DCF761D00AEE0A3 /* FeedsViewController.swift */,
 				F100A7CE1DDB9B5D00DD320C /* Profile */,
-				F12C27801DCF765300AEE0A3 /* ChatViewController.swift */,
 				F12C27761DCF3DFA00AEE0A3 /* ContactViewController.swift */,
 				F12C27821DCF85CB00AEE0A3 /* RateANdReviewViewController.swift */,
 				F12713AF1DCF9E9F005928AD /* RatingTableViewCell.swift */,
@@ -400,6 +414,7 @@
 				F11B75F01DDF844B0075DDCB /* MainSearchViewController.swift in Sources */,
 				F11DB5341DD9AD060084F9F4 /* UIImage+GIF.h in Sources */,
 				F11DB5351DD9AD060084F9F4 /* UIImage+GIF.m in Sources */,
+				F11B75F61DE071FB0075DDCB /* ChatPersionTableViewCell.swift in Sources */,
 				F11DB5361DD9AD060084F9F4 /* UIImage+MultiFormat.h in Sources */,
 				F11DB5371DD9AD060084F9F4 /* UIImage+MultiFormat.m in Sources */,
 				F11DB5381DD9AD060084F9F4 /* UIImage+WebP.h in Sources */,
@@ -429,6 +444,7 @@
 				F18839331DD8D26400362B1B /* LeftViewController.swift in Sources */,
 				F12C27771DCF3DFA00AEE0A3 /* ContactViewController.swift in Sources */,
 				F12C277B1DCF75F800AEE0A3 /* SearchViewController.swift in Sources */,
+				F11B75FA1DE0C70C0075DDCB /* MyTabViewController.swift in Sources */,
 				F12C27691DCE66D900AEE0A3 /* URLPath.swift in Sources */,
 				F12C276F1DCE77A900AEE0A3 /* OTPViewController.swift in Sources */,
 				F12C277F1DCF763F00AEE0A3 /* ProfileViewController.swift in Sources */,
