@@ -7,13 +7,96 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate
+{
 
     var window: UIWindow?
+    func tokenRefreshNotification(notification: NSNotification)
+    {
+        if let refreshedToken = FIRInstanceID.instanceID().token()
+        {
+            print("InstanceID token: \(refreshedToken)")
+            
+        }
+        // Connect to FCM since connection may have failed when attempted before having a token.
+        
+        connectToFcm()
+        
+    }
+     func connectToFcm()
+        
+    {
 
-
+        FIRMessaging.messaging().connectWithCompletion { (error) in
+        if error != nil
+        {
+                
+                print("Unable to connect with FCM. \(error)")
+        } else{
+                
+                let refreshedToken = FIRInstanceID.instanceID().token()
+                print("InstanceID token: \(refreshedToken)")
+                print("Connected to FCM.")
+                
+            }
+        }
+        
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void)
+    {
+        if userInfo["gcm.message_id"] != nil
+        {
+            print("Message ID: \(userInfo["gcm.message_id"]!)")
+            
+        }
+        // Print full message.
+        
+        print(userInfo)
+        
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject])
+        
+    {
+        
+        // If you are receiving a notification message while your app is in the background,
+        
+        // this callback will not be fired till the user taps on the notification launching the application.
+        
+        // TODO: Handle data of notification
+        // Print message ID.
+        
+        print("Message ID: \(userInfo["gcm.message_id"]!)")
+        // Print full message.
+        
+        print(userInfo)
+        FIRMessaging.messaging().appDidReceiveMessage(userInfo)
+        
+    }
+    
+    
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        
+        let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
+        
+        var tokenString = ""
+        for i in 0..<deviceToken.length
+        {
+            
+            tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
+            
+        }
+        
+        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Sandbox)
+        
+        print("Device Token:", tokenString)
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         
@@ -23,16 +106,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if appUserId != nil && appUserToken != nil
         {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let tabBarVC = storyboard.instantiateViewControllerWithIdentifier("tabBarVC") as? UITabBarController
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
              let joinViewController = storyboard.instantiateViewControllerWithIdentifier("JoinViewController") as? JoinViewController
             appDelegate.window?.rootViewController = joinViewController
             appDelegate.window?.makeKeyAndVisible()
         }
-
-        // Override point for customization after application launch.
+        FIRApp.configure()
+        /*
+         
+         if #available(iOS 10.0, *)
+         
+         {
+         
+         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+         
+         UNUserNotificationCenter.current().requestAuthorization(
+         
+         options: authOptions,
+         
+         completionHandler: {_, _ in })
+         
+         
+         
+         // For iOS 10 display notification (sent via APNS)
+         
+         UNUserNotificationCenter.current().delegate = self
+         
+         // For iOS 10 data message (sent via FCM)
+         
+         FIRMessaging.messaging().remoteMessageDelegate = self
+         
+         
+         
+         } else*/
+    
+        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
+        
+        let pushNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+        
+        application.registerUserNotificationSettings(pushNotificationSettings)
+        application.registerForRemoteNotifications()
+        
         return true
-    }
+}
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -42,6 +158,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        
+        FIRMessaging.messaging().disconnect()
+        print("Disconnected from FCM.")
+
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -55,7 +176,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 

@@ -360,7 +360,7 @@ extension ChattingViewController
         
         self.view.showSpinner()
         
-        DataSessionManger.sharedInstance.sendTextMessage(contactID, message: message, onFinish: { (response, deserializedResponse) in
+        DataSessionManger.sharedInstance.sendTextMessage(String(self.chatPerson.idString), message: message, onFinish: { (response, deserializedResponse) in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 
                 self.view.removeSpinner()

@@ -47,3 +47,6 @@ class MyTabViewController: UITabBarController, UITabBarControllerDelegate
     }
 
 }
+
+/*curl --header "Authorization: key=AIzaSyCiarKO0nxdVMk2VTJsYGNHK2IrUgdoWlE" --header Content-Type:"application/json" https://fcm.googleapis.com/fcm/send -d "{\"registration_ids\":[\"a08b82ff9e92bca7a5fa33f4c72f05a583996c2ff48cbb69d9312231672a23d4\"]}"
+ */

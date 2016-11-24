@@ -227,12 +227,65 @@ class DataSession: BaseNSURLSession
         
     }
     
+    
+    func likeUserID(ratereviews_id:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        var dict = NSObject.getAppUserIdAndToken()
+        dict["ratereviews_id"] = ratereviews_id
+        super.getWithOnFinish(mCHWebServiceMethod.like_review, parameters: dict, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }
+        
+    }
+    
+    func dislikeUserID(ratereviews_id:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        var dict = NSObject.getAppUserIdAndToken()
+        dict["ratereviews_id"] = ratereviews_id
+        super.getWithOnFinish(mCHWebServiceMethod.dislike_review, parameters: dict, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }
+        
+    }
+    
+    
 }
 
 class DataSessionManger: NSObject
 {
     static let sharedInstance = DataSessionManger()
     
+    
+    func dislikeUserID(ratereviews_id:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.dislikeUserID(ratereviews_id, onFinish: { (response, deserializedResponse) in
+             onFinish(response: response, deserializedResponse: deserializedResponse)
+            }) { (error) in
+                 onError(error: error)
+        }
+        
+        
+    }
+    
+    
+    
+    func likeUserID(ratereviews_id:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.likeUserID(ratereviews_id, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+
+            }) { (error) in
+                onError(error: error)
+        }
+        
+        
+    }
     
     func postProfileImage(mediaPath:[String]?, name:[String]?,onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {

@@ -11,6 +11,7 @@ import UIKit
 class RatingTableViewCell: UITableViewCell
 {
 
+    @IBOutlet weak var ratingView: RatingControl!
     @IBOutlet weak var baseView: UIView!
     override func awakeFromNib()
     {

@@ -8,11 +8,16 @@
 
 import UIKit
 
-class RateANdReviewViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, UITextViewDelegate
+class RateANdReviewViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, ClickTableViewCellProtocol
 {
     @IBOutlet weak var tableView: UITableView!
      
     var activeTextView:UITextView?
+    
+    var person:SearchPerson = SearchPerson()
+    
+    var rating:String = "0"
+    var review:String = ""
 
     override func viewDidLoad()
     {
@@ -67,12 +72,15 @@ extension RateANdReviewViewController
             cell.contentView.backgroundColor = bgColor
             cell.button.layer.borderWidth = 1.0
             cell.button.layer.borderColor = UIColor.blackColor().CGColor
+            cell.delegate = self
             return cell
         }
         
         if indexPath.row == 3
         {
         let cell = tableView.dequeueReusableCellWithIdentifier("ReviewTableViewCell", forIndexPath: indexPath) as! ReviewTableViewCell
+            
+        
         return cell
         }
         
@@ -224,4 +232,23 @@ extension RateANdReviewViewController
         }
     }
 
+}
+
+extension RateANdReviewViewController
+{
+    func buttonClicked(cell:ClickTableViewCell)
+    {
+        if self.tableView.indexPathForCell(cell) != nil
+        {
+            let indexPath = self.tableView.indexPathForCell(cell)
+            
+        }
+    }
+    
+    func addLike()
+    {
+        
+    }
+    
+    
 }
