@@ -10,17 +10,21 @@ import UIKit
 
 class OTPViewController: UIViewController {
 
+    @IBOutlet weak var textFieldBaseView:UIView!
     @IBOutlet weak var verifyButton: UIButton!
     @IBOutlet weak var otpTextField: UITextField!
     var otpString:String = ""
     var mobileNumberString:String = ""
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         otpTextField.addTarget(self, action:#selector(ViewController.edited), forControlEvents:UIControlEvents.EditingChanged)
         verifyButton.userInteractionEnabled = false
         verifyButton.alpha = 0.5
+        textFieldBaseView.makeBorder()
+        
 
         // Do any additional setup after loading the view.
     }

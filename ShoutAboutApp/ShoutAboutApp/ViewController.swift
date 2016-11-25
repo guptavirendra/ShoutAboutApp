@@ -13,6 +13,7 @@ class ViewController: UIViewController
 
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var mobileNumberTextField: UITextField!
+    @IBOutlet weak var textFieldBaseView:UIView!
     var mobileNumberString:String = ""
     override func viewDidLoad()
     {
@@ -20,6 +21,8 @@ class ViewController: UIViewController
         mobileNumberTextField.addTarget(self, action:#selector(ViewController.edited), forControlEvents:UIControlEvents.EditingChanged)
         submitButton.userInteractionEnabled = false
         submitButton.alpha = 0.5
+        textFieldBaseView.makeBorder()
+        //self.view.backgroundColor = bgColor
         
     }
 

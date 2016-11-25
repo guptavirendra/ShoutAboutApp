@@ -257,6 +257,16 @@ public extension UIView
     {
         makeImageRoundedWithWidth(3.0, color: UIColor.grayColor())
     }
+    
+    
+    func makeBorder()
+    {
+        self.layer.cornerRadius = 3.0
+        self.clipsToBounds     = true
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.blackColor().CGColor
+        
+    }
 }
 
 extension SWRevealViewController
