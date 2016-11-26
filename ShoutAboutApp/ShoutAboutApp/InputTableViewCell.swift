@@ -15,6 +15,8 @@ import UIKit
 
 class InputTableViewCell: UITableViewCell
 {
+    @IBOutlet weak var inputBaseView:UIView!
+    @IBOutlet weak var inputImage:UIImageView!
     @IBOutlet weak var inputTextField: UITextField!
     var inputText:String = ""
     var delegate:InputTableViewCellProtocol?
@@ -23,6 +25,7 @@ class InputTableViewCell: UITableViewCell
     {
         super.awakeFromNib()
         inputTextField.addTarget(self, action:#selector(InputTableViewCell.edited), forControlEvents:UIControlEvents.EditingChanged)
+        inputBaseView.makeBorder()
         
     }
 

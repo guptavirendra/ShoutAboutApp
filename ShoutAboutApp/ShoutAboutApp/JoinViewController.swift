@@ -8,6 +8,31 @@
 
 import UIKit
 
+extension UITableView
+{
+    func addBackGroundImageView()
+    {
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "bg")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundView = imageView
+        
+        
+        let top = NSLayoutConstraint(item: imageView, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 0.0)
+        let leading = NSLayoutConstraint(item: imageView, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 0.0)
+        let trailing = NSLayoutConstraint(item: imageView, attribute: .Trailing, relatedBy: .Equal, toItem: self, attribute: .Trailing, multiplier: 1.0, constant: 0.0)
+        let bottom = NSLayoutConstraint(item: imageView, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
+        
+        self.addConstraints([top, leading, trailing, bottom])
+        
+    }
+    
+    
+}
+
+
+
 class JoinViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, InputTableViewCellProtocol, ClickTableViewCellProtocol
 {
     @IBOutlet weak var tableView: UITableView!
@@ -32,8 +57,8 @@ class JoinViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.automaticallyAdjustsScrollViewInsets = false
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.showKeyBoard(_:)), name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.hideKeyBoard(_:)), name: UIKeyboardWillHideNotification, object: nil)
-
-        // Do any additional setup after loading the view.
+        
+        tableView.addBackGroundImageView()
     }
 
     override func didReceiveMemoryWarning()
@@ -55,13 +80,14 @@ extension JoinViewController
 {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 7
+        return 8
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        if indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3
+        if indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4
+
         {
         
             let cell = tableView.dequeueReusableCellWithIdentifier("input", forIndexPath: indexPath) as! InputTableViewCell
@@ -69,52 +95,99 @@ extension JoinViewController
             cell.delegate = self
             if indexPath.row == 0
             {
-                cell.inputTextField.placeholder = kEmail
+                cell.inputTextField.placeholder =  kName
+                cell.inputImage.image = UIImage(named: kName)
                 cell.inputTextField.tag = 0
                 
             }
             
             if indexPath.row == 1
             {
-                cell.inputTextField.placeholder = kName
+                cell.inputTextField.placeholder = kEmail
+                cell.inputImage.image = UIImage(named: kEmail)
                 cell.inputTextField.tag = 1
             }
             
             if indexPath.row == 2
             {
                 cell.inputTextField.placeholder = kAddress
+                cell.inputImage.image = UIImage(named: kEmail)
                 cell.inputTextField.tag = 2
             }
             if indexPath.row == 3
             {
-                cell.inputTextField.placeholder = kWebsite
+                cell.inputTextField.placeholder = kBirthDay
+                cell.inputImage.image = UIImage(named: kBirthDay)
                 cell.inputTextField.tag = 3
+            }
+            if indexPath.row == 4
+            {
+                cell.inputTextField.placeholder = kWebsite
+                cell.inputImage.image = UIImage(named: kWebsite)
+                cell.inputTextField.tag = 4
             }
             
             return cell
         }
         
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("button", forIndexPath: indexPath) as! ClickTableViewCell
+        if indexPath.row == 5 || indexPath.row == 7  
+        {
+        let  cell = tableView.dequeueReusableCellWithIdentifier("button", forIndexPath: indexPath) as! ClickTableViewCell
         cell.delegate = self
         
-        if indexPath.row == 4
-        {
-            cell.button.setTitle("Join", forState: .Normal)
-        }
         if indexPath.row == 5
         {
-            cell.button.setTitle("Or", forState: .Normal)
-            cell.button.userInteractionEnabled = false
+            cell.button.setTitle("Join", forState: .Normal)
+            cell.widthConstraints?.constant = cell.contentView.bounds.size.width - 60
         }
+            /*
         if indexPath.row == 6
         {
+            cell.textLabel?.text = "Or"
+            cell.textLabel?.textAlignment = .Center
+            cell.textLabel?.makeImageRoundedWithGray()
+            //cell.button.setTitle("Or", forState: .Normal)
+            //cell.button.makeImageRoundedWithGray()
+            //cell.button.backgroundColor = UIColor.blackColor()
+            cell.button.userInteractionEnabled = false
+            //let width = NSLayoutConstraint(item: cell.button, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .Width, multiplier: 1.0, constant: 30)
+            
+            //cell.button.addConstraint(width)
+        }*/
+        
+        if indexPath.row == 7
+        {
+            cell.widthConstraints?.constant = 80
             cell.button.setTitle("Skip", forState: .Normal)
+            cell.button.backgroundColor = UIColor.blackColor()
+            let centerx = NSLayoutConstraint(item: cell.button, attribute: .CenterX, relatedBy: .Equal, toItem: cell.contentView, attribute: .CenterX, multiplier: 1.0, constant: 0)
+            cell.contentView.addConstraint(centerx)
         }
         
         
         return cell
+        }
+        
+        
+               let cell = tableView.dequeueReusableCellWithIdentifier("FaceBookGoogleTableViewCell", forIndexPath: indexPath) as! FaceBookGoogleTableViewCell
+                //cell.button.setTitle("Skip", forState: .Normal)
+        return cell
+        
+      }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        if indexPath.row == 6
+        {
+            return 80
+        }
+        
+        
+        return 44
+        
     }
+
+    
 
 }
 extension JoinViewController

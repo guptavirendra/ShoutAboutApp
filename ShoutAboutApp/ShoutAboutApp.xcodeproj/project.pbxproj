@@ -153,6 +153,11 @@
 		F188392A1DD8A76B00362B1B /* ChattingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingTableViewCell.swift; sourceTree = "<group>"; };
 		F188392C1DD8CED200362B1B /* ShoutAboutApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShoutAboutApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		F18839321DD8D26400362B1B /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
+		F1DD71F91DE8B81700DE0A12 /* TitilliumWeb-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Bold.ttf"; sourceTree = "<group>"; };
+		F1DD71FA1DE8B81700DE0A12 /* TitilliumWeb-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Italic.ttf"; sourceTree = "<group>"; };
+		F1DD71FB1DE8B81700DE0A12 /* TitilliumWeb-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Light.ttf"; sourceTree = "<group>"; };
+		F1DD71FC1DE8B81700DE0A12 /* TitilliumWeb-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Regular.ttf"; sourceTree = "<group>"; };
+		F1DD71FD1DE8B81700DE0A12 /* TitilliumWeb-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +311,11 @@
 				F12C27591DCE45A800AEE0A3 /* LaunchScreen.storyboard */,
 				F11B75FD1DE373AD0075DDCB /* GoogleService-Info.plist */,
 				F12C275C1DCE45A800AEE0A3 /* Info.plist */,
+				F1DD71F91DE8B81700DE0A12 /* TitilliumWeb-Bold.ttf */,
+				F1DD71FA1DE8B81700DE0A12 /* TitilliumWeb-Italic.ttf */,
+				F1DD71FB1DE8B81700DE0A12 /* TitilliumWeb-Light.ttf */,
+				F1DD71FC1DE8B81700DE0A12 /* TitilliumWeb-Regular.ttf */,
+				F1DD71FD1DE8B81700DE0A12 /* TitilliumWeb-SemiBold.ttf */,
 			);
 			path = ShoutAboutApp;
 			sourceTree = "<group>";

@@ -20,6 +20,11 @@
             <string>TitilliumWeb-Regular</string>
             <string>TitilliumWeb-Regular</string>
             <string>TitilliumWeb-Regular</string>
+            <string>TitilliumWeb-Regular</string>
+            <string>TitilliumWeb-Regular</string>
+            <string>TitilliumWeb-Regular</string>
+            <string>TitilliumWeb-Regular</string>
+            <string>TitilliumWeb-Regular</string>
         </mutableArray>
         <mutableArray key="TitilliumWeb-SemiBold.ttf">
             <string>TitilliumWeb-SemiBold</string>
@@ -326,14 +331,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pgv-Q1-lfc">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="257"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shoutaboutapp_logo" translatesAutoresizingMaskIntoConstraints="NO" id="d9B-1P-Cya">
-                                        <rect key="frame" x="236" y="77" width="128" height="103"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="d9B-1P-Cya">
+                                        <rect key="frame" x="236" y="50" width="128" height="141"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="103" id="UAe-Yy-DaO"/>
+                                            <constraint firstAttribute="height" constant="141" id="UAe-Yy-DaO"/>
                                             <constraint firstAttribute="width" constant="128" id="kJP-Dl-kTc"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shoutaboutapp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2M9-qV-AF9">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2M9-qV-AF9">
                                         <rect key="frame" x="214" y="208" width="172" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="6i9-HN-d8A"/>
@@ -344,16 +349,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.066666666669999999" green="0.47450980390000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.1215686275" green="0.55294117649999996" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="2M9-qV-AF9" firstAttribute="top" secondItem="d9B-1P-Cya" secondAttribute="bottom" constant="28" id="30G-uX-5Xa"/>
+                                    <constraint firstItem="2M9-qV-AF9" firstAttribute="top" secondItem="d9B-1P-Cya" secondAttribute="bottom" constant="17" id="30G-uX-5Xa"/>
                                     <constraint firstItem="d9B-1P-Cya" firstAttribute="centerX" secondItem="pgv-Q1-lfc" secondAttribute="centerX" id="3HK-hA-RBm"/>
-                                    <constraint firstItem="d9B-1P-Cya" firstAttribute="top" secondItem="pgv-Q1-lfc" secondAttribute="top" constant="77" id="BWu-Jy-dVH"/>
+                                    <constraint firstItem="d9B-1P-Cya" firstAttribute="top" secondItem="pgv-Q1-lfc" secondAttribute="top" constant="50" id="BWu-Jy-dVH"/>
                                     <constraint firstItem="2M9-qV-AF9" firstAttribute="centerX" secondItem="pgv-Q1-lfc" secondAttribute="centerX" id="rqU-bz-diC"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qrF-g2-DlK">
-                                <rect key="frame" x="0.0" y="262" width="600" height="338"/>
+                                <rect key="frame" x="0.0" y="257" width="600" height="343"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="input" id="asA-8D-16A" customClass="InputTableViewCell" customModule="ShoutAboutApp" customModuleProvider="target">
@@ -363,47 +368,170 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NWw-Yy-wRL">
-                                                    <rect key="frame" x="20" y="0.0" width="560" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lh2-tC-SSr">
+                                                    <rect key="frame" x="30" y="8" width="540" height="32"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="avy-kJ-yde">
+                                                            <rect key="frame" x="5" y="2" width="522" height="30"/>
+                                                        </imageView>
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NWw-Yy-wRL">
+                                                            <rect key="frame" x="532" y="5" width="8" height="22"/>
+                                                            <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="NWw-Yy-wRL" firstAttribute="top" secondItem="lh2-tC-SSr" secondAttribute="top" constant="5" id="9tW-Ef-flh"/>
+                                                        <constraint firstAttribute="bottom" secondItem="avy-kJ-yde" secondAttribute="bottom" id="Jvt-Uv-pDb"/>
+                                                        <constraint firstItem="avy-kJ-yde" firstAttribute="leading" secondItem="lh2-tC-SSr" secondAttribute="leading" constant="5" id="MOk-RJ-jHV"/>
+                                                        <constraint firstAttribute="bottom" secondItem="NWw-Yy-wRL" secondAttribute="bottom" constant="5" id="Ngo-CQ-hcL"/>
+                                                        <constraint firstItem="NWw-Yy-wRL" firstAttribute="leading" secondItem="avy-kJ-yde" secondAttribute="trailing" constant="5" id="mBP-87-ATw"/>
+                                                        <constraint firstItem="avy-kJ-yde" firstAttribute="top" secondItem="lh2-tC-SSr" secondAttribute="top" constant="2" id="tAp-N3-K9X"/>
+                                                        <constraint firstAttribute="trailing" secondItem="NWw-Yy-wRL" secondAttribute="trailing" id="teL-Hl-Skh"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="NWw-Yy-wRL" firstAttribute="top" secondItem="SXg-qM-QQP" secondAttribute="top" id="3D3-ON-yvc"/>
-                                                <constraint firstItem="NWw-Yy-wRL" firstAttribute="leading" secondItem="SXg-qM-QQP" secondAttribute="leading" constant="20" id="POl-m9-ASJ"/>
-                                                <constraint firstAttribute="bottom" secondItem="NWw-Yy-wRL" secondAttribute="bottom" constant="14" id="VCp-ju-rC6"/>
-                                                <constraint firstAttribute="trailing" secondItem="NWw-Yy-wRL" secondAttribute="trailing" constant="20" id="hBB-zu-55C"/>
+                                                <constraint firstAttribute="trailing" secondItem="lh2-tC-SSr" secondAttribute="trailing" constant="30" id="26F-f6-Sbt"/>
+                                                <constraint firstItem="lh2-tC-SSr" firstAttribute="top" secondItem="SXg-qM-QQP" secondAttribute="top" constant="8" id="JCK-Mg-NnN"/>
+                                                <constraint firstItem="lh2-tC-SSr" firstAttribute="leading" secondItem="SXg-qM-QQP" secondAttribute="leading" constant="30" id="Ww0-vR-wHa"/>
+                                                <constraint firstAttribute="bottom" secondItem="lh2-tC-SSr" secondAttribute="bottom" constant="4" id="fMV-nE-uA6"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="inputBaseView" destination="lh2-tC-SSr" id="GiI-hu-3XF"/>
+                                            <outlet property="inputImage" destination="avy-kJ-yde" id="DSf-bg-gX2"/>
                                             <outlet property="inputTextField" destination="NWw-Yy-wRL" id="UpQ-6W-drP"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FaceBookGoogleTableViewCell" rowHeight="80" id="6Dk-1l-JID" customClass="FaceBookGoogleTableViewCell" customModule="ShoutAboutApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="600" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Dk-1l-JID" id="dia-Yc-vX6">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8nE-Op-LBp">
+                                                    <rect key="frame" x="30" y="0.0" width="540" height="80"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EvW-sP-4dh">
+                                                            <rect key="frame" x="260" y="5" width="30" height="30"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEh-jL-7a3">
+                                                                    <rect key="frame" x="0.0" y="5" width="30" height="21"/>
+                                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="9"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="6DQ-2C-KD3"/>
+                                                                <constraint firstAttribute="trailing" secondItem="OEh-jL-7a3" secondAttribute="trailing" id="6Tp-OL-U8M"/>
+                                                                <constraint firstItem="OEh-jL-7a3" firstAttribute="top" secondItem="EvW-sP-4dh" secondAttribute="top" constant="5" id="HDw-jT-MFQ"/>
+                                                                <constraint firstAttribute="width" constant="30" id="WXb-49-190"/>
+                                                                <constraint firstItem="OEh-jL-7a3" firstAttribute="leading" secondItem="EvW-sP-4dh" secondAttribute="leading" id="dWc-6G-jpl"/>
+                                                                <constraint firstAttribute="bottom" secondItem="OEh-jL-7a3" secondAttribute="bottom" constant="4" id="xUA-u3-BY9"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEe-Cc-eeg">
+                                                            <rect key="frame" x="0.0" y="42" width="260" height="30"/>
+                                                            <color key="backgroundColor" red="0.21176470588235294" green="0.29803921568627451" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="Wxi-Fv-29a"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="14"/>
+                                                            <state key="normal" title=" facebook" image="facebook"/>
+                                                            <connections>
+                                                                <action selector="buttonClicked:" destination="6Dk-1l-JID" eventType="touchUpInside" id="V0v-4E-fmj"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USu-4V-Yda">
+                                                            <rect key="frame" x="280" y="42" width="260" height="30"/>
+                                                            <color key="backgroundColor" red="0.81176470588235294" green="0.21568627450980393" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="bMl-MQ-Lp4"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="14"/>
+                                                            <state key="normal" title="  google" image="googleplus"/>
+                                                            <connections>
+                                                                <action selector="buttonClicked:" destination="6Dk-1l-JID" eventType="touchUpInside" id="9UX-CA-sZm"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="USu-4V-Yda" firstAttribute="top" secondItem="EvW-sP-4dh" secondAttribute="bottom" constant="7" id="16s-39-ODB"/>
+                                                        <constraint firstAttribute="bottom" secondItem="mEe-Cc-eeg" secondAttribute="bottom" constant="7" id="GKb-OJ-Qbo"/>
+                                                        <constraint firstAttribute="height" constant="80" id="PoX-Cu-wMK"/>
+                                                        <constraint firstItem="mEe-Cc-eeg" firstAttribute="top" secondItem="EvW-sP-4dh" secondAttribute="bottom" constant="7" id="cda-Hw-i5l"/>
+                                                        <constraint firstItem="USu-4V-Yda" firstAttribute="leading" secondItem="mEe-Cc-eeg" secondAttribute="trailing" constant="20" id="kAG-tu-NFc"/>
+                                                        <constraint firstItem="EvW-sP-4dh" firstAttribute="top" secondItem="8nE-Op-LBp" secondAttribute="top" constant="5" id="lDQ-wU-XKR"/>
+                                                        <constraint firstItem="USu-4V-Yda" firstAttribute="width" secondItem="mEe-Cc-eeg" secondAttribute="width" id="lry-8Q-tZc"/>
+                                                        <constraint firstItem="EvW-sP-4dh" firstAttribute="centerX" secondItem="8nE-Op-LBp" secondAttribute="centerX" constant="5" id="o5I-vk-47K"/>
+                                                        <constraint firstAttribute="bottom" secondItem="USu-4V-Yda" secondAttribute="bottom" constant="7" id="rPd-Ya-MuS"/>
+                                                        <constraint firstAttribute="trailing" secondItem="USu-4V-Yda" secondAttribute="trailing" id="yg9-ZX-KlS"/>
+                                                        <constraint firstItem="mEe-Cc-eeg" firstAttribute="leading" secondItem="8nE-Op-LBp" secondAttribute="leading" id="zJ6-Sq-jGV"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="GKb-OJ-Qbo"/>
+                                                            <exclude reference="rPd-Ya-MuS"/>
+                                                        </mask>
+                                                    </variation>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="8nE-Op-LBp" secondAttribute="bottom" id="Jml-0y-be2"/>
+                                                <constraint firstItem="8nE-Op-LBp" firstAttribute="leading" secondItem="dia-Yc-vX6" secondAttribute="leading" constant="30" id="Rui-FE-wLc"/>
+                                                <constraint firstAttribute="trailing" secondItem="8nE-Op-LBp" secondAttribute="trailing" constant="30" id="XEw-RX-XIv"/>
+                                                <constraint firstItem="8nE-Op-LBp" firstAttribute="top" secondItem="dia-Yc-vX6" secondAttribute="top" id="ad1-dk-Ldh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="baseTitleView" destination="EvW-sP-4dh" id="mRb-mA-PfD"/>
+                                            <outlet property="button" destination="mEe-Cc-eeg" id="w7Y-eO-UVA"/>
+                                            <outlet property="button2" destination="USu-4V-Yda" id="U9U-Dz-l03"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="button" id="EKc-hD-C0z" customClass="ClickTableViewCell" customModule="ShoutAboutApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="152" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EKc-hD-C0z" id="qxG-Vu-PcF">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Th3-1L-Swz">
-                                                    <rect key="frame" x="20" y="0.0" width="560" height="43"/>
-                                                    <state key="normal" title="Button"/>
+                                                    <rect key="frame" x="30" y="5" width="540" height="35"/>
+                                                    <color key="backgroundColor" red="0.1215686275" green="0.55294117649999996" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="540" id="D86-vY-xUm"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="15"/>
+                                                    <state key="normal">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="buttonClicked:" destination="EKc-hD-C0z" eventType="touchUpInside" id="yQb-S5-Hm4"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Th3-1L-Swz" secondAttribute="bottom" constant="1" id="620-ah-aaE"/>
-                                                <constraint firstAttribute="trailing" secondItem="Th3-1L-Swz" secondAttribute="trailing" constant="20" id="IK2-rt-7Tu"/>
-                                                <constraint firstItem="Th3-1L-Swz" firstAttribute="top" secondItem="qxG-Vu-PcF" secondAttribute="top" id="nTv-uo-REo"/>
-                                                <constraint firstItem="Th3-1L-Swz" firstAttribute="leading" secondItem="qxG-Vu-PcF" secondAttribute="leading" constant="20" id="rH0-4W-rEn"/>
+                                                <constraint firstAttribute="bottom" secondItem="Th3-1L-Swz" secondAttribute="bottom" constant="4" id="620-ah-aaE"/>
+                                                <constraint firstAttribute="trailing" secondItem="Th3-1L-Swz" secondAttribute="trailing" priority="250" constant="30" id="IK2-rt-7Tu"/>
+                                                <constraint firstItem="Th3-1L-Swz" firstAttribute="top" secondItem="qxG-Vu-PcF" secondAttribute="top" constant="5" id="nTv-uo-REo"/>
+                                                <constraint firstItem="Th3-1L-Swz" firstAttribute="leading" secondItem="qxG-Vu-PcF" secondAttribute="leading" priority="250" constant="30" id="rH0-4W-rEn"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="button" destination="Th3-1L-Swz" id="4J2-zg-Z3M"/>
+                                            <outlet property="widthConstraints" destination="D86-vY-xUm" id="oYq-7j-9ua"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -415,7 +543,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="qrF-g2-DlK" firstAttribute="top" secondItem="pgv-Q1-lfc" secondAttribute="bottom" constant="5" id="5QH-Wk-bd5"/>
+                            <constraint firstItem="qrF-g2-DlK" firstAttribute="top" secondItem="pgv-Q1-lfc" secondAttribute="bottom" id="5QH-Wk-bd5"/>
                             <constraint firstItem="pgv-Q1-lfc" firstAttribute="leading" secondItem="3WK-HF-2kT" secondAttribute="leading" id="AO8-e6-eZe"/>
                             <constraint firstAttribute="trailing" secondItem="pgv-Q1-lfc" secondAttribute="trailing" id="FGo-fL-KHJ"/>
                             <constraint firstAttribute="trailing" secondItem="qrF-g2-DlK" secondAttribute="trailing" id="Tug-B7-fT2"/>
@@ -3375,13 +3503,14 @@
         <image name="chat" width="18" height="18"/>
         <image name="close_iPhone.png" width="16" height="19"/>
         <image name="dslike" width="18" height="18"/>
+        <image name="facebook" width="20" height="20"/>
+        <image name="googleplus" width="20" height="20"/>
         <image name="icon_attach_inbox.png" width="16" height="19"/>
         <image name="like" width="18" height="18"/>
         <image name="login" width="22" height="39"/>
         <image name="logo" width="120" height="141"/>
         <image name="profile" width="100" height="100"/>
         <image name="send" width="22" height="22"/>
-        <image name="shoutaboutapp_logo" width="382" height="382"/>
         <image name="tab_chat" width="22" height="22"/>
         <image name="tab_contact" width="22" height="22"/>
         <image name="tab_feed" width="22" height="22"/>

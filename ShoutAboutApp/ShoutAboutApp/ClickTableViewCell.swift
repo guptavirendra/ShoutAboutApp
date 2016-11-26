@@ -16,6 +16,7 @@ protocol ClickTableViewCellProtocol
 class ClickTableViewCell: UITableViewCell
 {
     @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var widthConstraints:NSLayoutConstraint?
     var delegate:ClickTableViewCellProtocol?
     override func awakeFromNib()
     {
@@ -35,4 +36,18 @@ class ClickTableViewCell: UITableViewCell
         self.delegate?.buttonClicked(self)
     }
 
+}
+
+class FaceBookGoogleTableViewCell:ClickTableViewCell
+{
+    @IBOutlet weak var baseTitleView:UIView!
+    @IBOutlet weak var button2: UIButton!
+    override func awakeFromNib()
+    {
+        super.awakeFromNib()
+        baseTitleView.makeImageRounded()
+        
+    }
+    
+    
 }
