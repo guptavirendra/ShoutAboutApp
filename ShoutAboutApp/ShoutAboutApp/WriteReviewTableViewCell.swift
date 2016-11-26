@@ -15,7 +15,7 @@ class WriteReviewTableViewCell: UITableViewCell
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.contentView.backgroundColor = bgColor
+        //self.contentView.backgroundColor = bgColor
         // Initialization code
     }
 

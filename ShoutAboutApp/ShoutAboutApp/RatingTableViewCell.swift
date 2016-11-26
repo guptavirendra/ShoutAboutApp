@@ -17,7 +17,7 @@ class RatingTableViewCell: UITableViewCell
     {
         super.awakeFromNib()
         self.contentView.backgroundColor = bgColor
-        self.baseView.backgroundColor = bgColor
+        //self.baseView.backgroundColor = bgColor
         // Initialization code
     }
 

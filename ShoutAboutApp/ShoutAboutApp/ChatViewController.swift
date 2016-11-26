@@ -18,8 +18,9 @@ class ChatViewController: UIViewController, ChatPersionTableViewCellProtocol
      {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
-        self.tableView.backgroundColor = bgColor
-        self.view.backgroundColor = bgColor
+        self.tableView.addBackGroundImageView()
+       // self.tableView.backgroundColor = bgColor
+        //self.view.backgroundColor = bgColor
 
         // Do any additional setup after loading the view.
     }

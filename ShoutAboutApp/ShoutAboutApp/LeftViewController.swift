@@ -18,7 +18,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        choiceArray = ["Block","Spam","Settings","Favorites","Premium"]
+        choiceArray = ["Block","Spam","Settings","Favorites","Premium","Logout"]
         profileImageView.makeImageRounded()
         
 
@@ -70,6 +70,7 @@ extension LeftViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         let text = choiceArray[indexPath.row]
         cell.textLabel?.text = text
+        cell.textLabel?.font = UIFont(name: "TitilliumWeb-Regular", size: 18)
         cell.textLabel?.textColor = UIColor.whiteColor()
         cell.imageView?.image = UIImage(named: text)
         return cell
@@ -79,6 +80,15 @@ extension LeftViewController
     //MARK: SELECTION
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
+        
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        
+        
+        
+        return 60
         
     }
     

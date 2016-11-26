@@ -74,7 +74,8 @@ extension MainSearchViewController
     @IBAction func searchButtonClicked(button:UIButton)
     {
         let searchViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SearchViewController") as? SearchViewController
-        self.navigationController!.pushViewController(searchViewController!, animated: true)
+        self.presentViewController(searchViewController!, animated: true, completion: nil)
+        //self.navigationController!.pushViewController(searchViewController!, animated: true)
         
     }
 }

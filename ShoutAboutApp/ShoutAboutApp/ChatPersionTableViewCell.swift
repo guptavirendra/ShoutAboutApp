@@ -32,7 +32,7 @@ class ChatPersionTableViewCell: UITableViewCell
         super.awakeFromNib()
         onlineView.makeImageRounded()
         unreadMessageView.makeImageRounded()
-        self.contentView.backgroundColor = bgColor
+       // self.contentView.backgroundColor = bgColor
         baseView.setGraphicEffects()
         profileView.makeImageRoundedWithWidth(3.0, color: UIColor.grayColor())
         

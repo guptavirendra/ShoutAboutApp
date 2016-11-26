@@ -27,6 +27,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
         tableView.tableHeaderView = searchController.searchBar
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "message")
         searchController.hidesNavigationBarDuringPresentation = false
+        
     }
 
     override func didReceiveMemoryWarning()
@@ -42,6 +43,15 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
         self.searchController.searchBar.text = nil
         //self.navigationController?.navigationBar.hidden = true
         
+        
+    }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        searchController.searchBar.becomeFirstResponder()
+        searchController.searchBar.delegate?.searchBarTextDidBeginEditing!(searchController.searchBar)
+        searchController.searchBar.delegate?.searchBarShouldBeginEditing!(searchController.searchBar) 
     }
     
     
@@ -143,7 +153,11 @@ extension SearchViewController
 extension SearchViewController
 {
     
-    internal func searchBarTextDidBeginEditing(searchBar: UISearchBar)
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool
+    {
+        return true
+    }
+     func searchBarTextDidBeginEditing(searchBar: UISearchBar)
     {
         
     }
@@ -159,6 +173,7 @@ extension SearchViewController
     internal func searchBarCancelButtonClicked(searchBar: UISearchBar)
     {
         allValidContacts.removeAll()
+        self.dismissViewControllerAnimated(true, completion: nil)
         
     }
     

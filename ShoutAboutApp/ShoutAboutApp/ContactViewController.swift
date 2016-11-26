@@ -43,8 +43,9 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.tableView.addBackGroundImageView()
         
-        self.tableView.backgroundColor = bgColor
+       // self.tableView.backgroundColor = bgColor
         self.getContacts()
         
 
@@ -82,7 +83,7 @@ extension ContactViewController
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return  syncContactArray.count //allValidContacts.count //objects.count
+        return  1//syncContactArray.count //allValidContacts.count //objects.count
     }
     
     
@@ -91,9 +92,9 @@ extension ContactViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("contact", forIndexPath: indexPath) as! ContactTableViewCell
         cell.delegate = self
         
-        let personContact = syncContactArray[indexPath.row]
-        cell.nameLabel?.text = personContact.name
-        cell.mobileLabel?.text = personContact.mobileNumber
+        let personContact =  SearchPerson()//syncContactArray[indexPath.row]
+       // cell.nameLabel?.text = personContact.name
+       // cell.mobileLabel?.text = personContact.mobileNumber
         if let urlString = personContact.photo
         {
             

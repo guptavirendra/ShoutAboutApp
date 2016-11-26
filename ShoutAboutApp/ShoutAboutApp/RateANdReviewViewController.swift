@@ -22,7 +22,8 @@ class RateANdReviewViewController: UIViewController,UITableViewDataSource, UITab
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.tableView.backgroundColor = bgColor
+        self.tableView.addBackGroundImageView()
+        //self.tableView.backgroundColor = bgColor
         self.automaticallyAdjustsScrollViewInsets = false
 
          self.navigationController?.navigationBar.hidden = false
@@ -69,9 +70,9 @@ extension RateANdReviewViewController
         if indexPath.row == 2
         {
              let cell = tableView.dequeueReusableCellWithIdentifier("button", forIndexPath: indexPath) as! ClickTableViewCell
-            cell.contentView.backgroundColor = bgColor
+            //cell.contentView.backgroundColor = bgColor
             cell.button.layer.borderWidth = 1.0
-            cell.button.layer.borderColor = UIColor.blackColor().CGColor
+            //cell.button.layer.borderColor = UIColor.blackColor().CGColor
             cell.delegate = self
             return cell
         }
@@ -96,20 +97,26 @@ extension RateANdReviewViewController
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-       if indexPath.row == 1
-            {
-                return 100
+        if indexPath.row == 0
+        {
+            return 150
+        }
+        
+        if indexPath.row == 1
+        {
+                return 140
         }
         if indexPath.row == 2
         {
             return 54
         }
-        if indexPath.row == 0
+        
+        if indexPath.row == 3
         {
             return 250
         }
         
-        return UITableViewAutomaticDimension
+       return UITableViewAutomaticDimension
         
     }
     

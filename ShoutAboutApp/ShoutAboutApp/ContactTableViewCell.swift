@@ -27,8 +27,8 @@ class ContactTableViewCell: UITableViewCell
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.contentView.backgroundColor = bgColor
-        baseView.backgroundColor = bgColor
+        //self.contentView.backgroundColor = bgColor
+       // baseView.backgroundColor = bgColor
         baseView.setGraphicEffects()
         profileImageView.makeImageRoundedWithGray()
         // Initialization code
