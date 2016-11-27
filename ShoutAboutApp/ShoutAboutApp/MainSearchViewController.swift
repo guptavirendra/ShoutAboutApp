@@ -13,10 +13,12 @@ class MainSearchViewController: UIViewController, ContactTableViewCellProtocol
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var searchButton:UIButton!
+    @IBOutlet weak var clearButton:UIButton!
     var allValidContacts = [SearchPerson]()
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.tableView.addBackGroundImageView()
         
         if self.revealViewController() != nil
         {
@@ -44,7 +46,9 @@ class MainSearchViewController: UIViewController, ContactTableViewCellProtocol
         {
             allValidContacts = historydata
             self.tableView.reloadData()
+            
         }
+        enableDisableClearButton()
        
         
     }
@@ -163,4 +167,51 @@ extension MainSearchViewController
             }
         }
     }
+}
+
+extension MainSearchViewController
+{
+     func clearSearchHistory()
+    {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey(searchHistory)
+        
+        defaults.synchronize()
+        allValidContacts.removeAll()
+        self.tableView.reloadData()
+        enableDisableClearButton()
+        
+    }
+    
+    func enableDisableClearButton()
+    {
+        if allValidContacts.count > 0
+        {
+            clearButton.userInteractionEnabled = true
+            clearButton.alpha   = 1.0
+        }else
+        {
+            clearButton.userInteractionEnabled = false
+            clearButton.alpha   = 0.5
+        }
+    }
+    
+   @IBAction func displayClearAlert()
+    {
+        
+        
+        let alert = UIAlertController(title: "Clear Recent Searchs", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction = UIAlertAction(title: "Yes", style: .Default) { (action) in
+            self.clearSearchHistory()
+            
+        }
+        let cancelAction =  UIAlertAction(title: "No", style: .Cancel, handler: nil)
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+        
+    }
+    
 }
