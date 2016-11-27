@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 extension UITableView
 {
@@ -196,6 +197,9 @@ extension JoinViewController
     {
         if cell.button.titleLabel?.text == "Skip"
         {
+            
+            getFireBaseAuth()
+            
             print("Skip")
             self.dismissViewControllerAnimated(false, completion: nil)
             let tabBarVC = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController") as? SWRevealViewController
@@ -339,5 +343,25 @@ extension JoinViewController
             self.tableView.contentInset = contentInsets
             self.tableView.scrollIndicatorInsets = contentInsets
         }
+    }
+}
+
+extension JoinViewController
+{
+    
+    func getFireBaseAuth()
+    {
+        FIRAuth.auth()?.signInAnonymouslyWithCompletion({ (user, error) in
+            
+            // 2
+            if let err = error { // 3
+                print(err.localizedDescription)
+                return
+            }
+            
+            //self.performSegueWithIdentifier("LoginToChat", sender: nil) // 4
+        })
+
+        
     }
 }

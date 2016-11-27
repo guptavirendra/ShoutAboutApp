@@ -311,11 +311,11 @@ class DataSessionManger: NSObject
                     let dataDict = arrayDict.first
                     personalProfileData.idString = (dataDict?.objectForKey("id") as? Int)!
                     personalProfileData.name = dataDict?.objectForKey(name) as! String
-                    personalProfileData.email = (dataDict?.objectForKey(email))! as! String
+                    personalProfileData.email = (dataDict?.objectForKey(email))! as? String
                     personalProfileData.mobileNumber = dataDict?.objectForKey(mobile_number) as! String
                    
-                    personalProfileData.created_at = (dataDict?.objectForKey(created_at))! as! String
-                    personalProfileData.updated_at = dataDict?.objectForKey(updated_at) as! String
+                    personalProfileData.created_at = (dataDict?.objectForKey(created_at))! as? String
+                    personalProfileData.updated_at = dataDict?.objectForKey(updated_at) as? String
                     personalProfileData.address = dataDict?.objectForKey(address) as! String
                     personalProfileData.website = dataDict?.objectForKey(website) as! String
                     if let _ = dataDict?.objectForKey(photo) as? String

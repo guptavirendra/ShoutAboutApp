@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
 class ChatViewController: UIViewController, ChatPersionTableViewCellProtocol
 {
+    
+    private lazy var channelRef: FIRDatabaseReference = FIRDatabase.database().reference().child("channels")
+    private var channelRefHandle: FIRDatabaseHandle?
+
 
     @IBOutlet weak var tableView: UITableView!
     var chatPersons = [ChatPerson]()
@@ -23,6 +28,16 @@ class ChatViewController: UIViewController, ChatPersionTableViewCellProtocol
         //self.view.backgroundColor = bgColor
 
         // Do any additional setup after loading the view.
+        observeChannels()
+    }
+    
+    deinit
+    {
+        if let refHandle = channelRefHandle
+        {
+            channelRef.removeObserverWithHandle(refHandle)
+            
+        }
     }
 
     override func didReceiveMemoryWarning()
@@ -114,8 +129,19 @@ extension ChatViewController
             let chatPerson = chatPersons[indexPath!.row]
            let chattingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChattingViewController") as? ChattingViewController
             chattingViewController?.chatPerson = chatPerson
+            
+            
+            let chatVc = self.storyboard?.instantiateViewControllerWithIdentifier("ChatsViewController") as? ChatsViewController
+            
+            chatVc!.senderDisplayName = ProfileManager.sharedInstance.personalProfile.name
+            chatVc?.senderId          = String(ProfileManager.sharedInstance.personalProfile.idString)
+           // chatVc.channel = channel
+            
+            chatVc?.chatPerson = chatPerson
+            chatVc!.channelRef = channelRef.child(String(chatPerson.idString))
+            self.navigationController!.pushViewController(chatVc!, animated: true)
         
-        self.navigationController!.pushViewController(chattingViewController!, animated: true)
+       // self.navigationController!.pushViewController(chattingViewController!, animated: true)
         }
     }
     
@@ -140,4 +166,33 @@ extension ChatViewController
                 })
         }
     }
+}
+
+
+extension ChatViewController
+{
+    // MARK: Firebase related methods
+    private func observeChannels()
+    {
+        // Use the observe method to listen for new
+        // channels being written to the Firebase DB
+        channelRefHandle = channelRef.observeEventType(.ChildAdded, withBlock: { (snapshot) in // 1
+            let channelData = snapshot.value as! Dictionary<String, AnyObject> // 2
+            let id = snapshot.key
+            if let name = channelData["name"] as! String! where name.characters.count > 0
+            {
+                let chatPerson = ChatPerson()
+                chatPerson.name = name
+                chatPerson.idString = Int(id)!
+                self.chatPersons.append(chatPerson)
+                // 3
+               // self.channels.append(Channel(id: id, name: name))
+                self.tableView.reloadData()
+            } else {
+                print("Error! Could not decode channel data")
+            }
+        })
+    }
+
+
 }

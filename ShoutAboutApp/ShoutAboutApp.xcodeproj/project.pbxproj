@@ -76,6 +76,9 @@
 		F18839291DD877C000362B1B /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18839281DD877C000362B1B /* ChattingViewController.swift */; };
 		F188392B1DD8A76B00362B1B /* ChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F188392A1DD8A76B00362B1B /* ChattingTableViewCell.swift */; };
 		F18839331DD8D26400362B1B /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18839321DD8D26400362B1B /* LeftViewController.swift */; };
+		F1DD72031DEAADF800DE0A12 /* ChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD72001DEAADF800DE0A12 /* ChannelListViewController.swift */; };
+		F1DD72041DEAADF800DE0A12 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD72011DEAADF800DE0A12 /* ChatsViewController.swift */; };
+		F1DD72051DEAADF800DE0A12 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD72021DEAADF800DE0A12 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -158,6 +161,9 @@
 		F1DD71FB1DE8B81700DE0A12 /* TitilliumWeb-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Light.ttf"; sourceTree = "<group>"; };
 		F1DD71FC1DE8B81700DE0A12 /* TitilliumWeb-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Regular.ttf"; sourceTree = "<group>"; };
 		F1DD71FD1DE8B81700DE0A12 /* TitilliumWeb-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-SemiBold.ttf"; sourceTree = "<group>"; };
+		F1DD72001DEAADF800DE0A12 /* ChannelListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelListViewController.swift; sourceTree = "<group>"; };
+		F1DD72011DEAADF800DE0A12 /* ChatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
+		F1DD72021DEAADF800DE0A12 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +223,9 @@
 		F11B75F41DE062460075DDCB /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				F1DD72001DEAADF800DE0A12 /* ChannelListViewController.swift */,
+				F1DD72011DEAADF800DE0A12 /* ChatsViewController.swift */,
+				F1DD72021DEAADF800DE0A12 /* LoginViewController.swift */,
 				F188392A1DD8A76B00362B1B /* ChattingTableViewCell.swift */,
 				F12C27801DCF765300AEE0A3 /* ChatViewController.swift */,
 				F11B75F51DE071FB0075DDCB /* ChatPersionTableViewCell.swift */,
@@ -520,6 +529,7 @@
 				F11DB4FF1DD9ACF10084F9F4 /* SWRevealViewController.m in Sources */,
 				F12713B21DCFC105005928AD /* WriteReviewTableViewCell.swift in Sources */,
 				F12C27791DCF497F00AEE0A3 /* ContactTableViewCell.swift in Sources */,
+				F1DD72041DEAADF800DE0A12 /* ChatsViewController.swift in Sources */,
 				F12C27831DCF85CB00AEE0A3 /* RateANdReviewViewController.swift in Sources */,
 				F12713B01DCF9E9F005928AD /* RatingTableViewCell.swift in Sources */,
 				F12C27751DCF07BB00AEE0A3 /* ClickTableViewCell.swift in Sources */,
@@ -533,6 +543,7 @@
 				F12C27711DCEFDE100AEE0A3 /* JoinViewController.swift in Sources */,
 				F18839271DD86A6F00362B1B /* EditProfileTableViewCell.swift in Sources */,
 				F12C27531DCE45A800AEE0A3 /* ViewController.swift in Sources */,
+				F1DD72031DEAADF800DE0A12 /* ChannelListViewController.swift in Sources */,
 				F12C27651DCE643D00AEE0A3 /* NetworkConnectivity.swift in Sources */,
 				F18839331DD8D26400362B1B /* LeftViewController.swift in Sources */,
 				F12C27771DCF3DFA00AEE0A3 /* ContactViewController.swift in Sources */,
@@ -543,6 +554,7 @@
 				F12C277F1DCF763F00AEE0A3 /* ProfileViewController.swift in Sources */,
 				F18839231DD83BE400362B1B /* ReviewTableViewCell.swift in Sources */,
 				F12C27731DCF079E00AEE0A3 /* InputTableViewCell.swift in Sources */,
+				F1DD72051DEAADF800DE0A12 /* LoginViewController.swift in Sources */,
 				F12C27511DCE45A800AEE0A3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
