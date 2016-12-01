@@ -41,7 +41,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
         //allValidContacts.removeAll()
         //self.tableView.reloadData()
         self.searchController.searchBar.text = nil
-        //self.navigationController?.navigationBar.hidden = true
+        self.navigationController?.navigationBar.hidden = true
         
         
     }
@@ -49,9 +49,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(animated)
-        searchController.searchBar.becomeFirstResponder()
-        searchController.searchBar.delegate?.searchBarTextDidBeginEditing!(searchController.searchBar)
-        searchController.searchBar.delegate?.searchBarShouldBeginEditing!(searchController.searchBar) 
+        self.searchController.active = true
+        dispatch_async(dispatch_get_main_queue(), {
+            self.searchController.searchBar.becomeFirstResponder()
+        })
+        //searchController.searchBar.delegate?.searchBarTextDidBeginEditing!(searchController.searchBar)
+        //searchController.searchBar.delegate?.searchBarShouldBeginEditing!(searchController.searchBar)
     }
     
     
@@ -152,11 +155,15 @@ extension SearchViewController
 
 extension SearchViewController
 {
+   
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool
     {
         return true
     }
+    
+    
+    
      func searchBarTextDidBeginEditing(searchBar: UISearchBar)
     {
         

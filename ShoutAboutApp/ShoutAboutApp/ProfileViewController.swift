@@ -32,7 +32,9 @@ class ProfileManager:NSObject
     static let sharedInstance = ProfileManager()
     var personalProfile:SearchPerson = SearchPerson()
     var localStoredImage:UIImage?
+    var syncedContactArray = [SearchPerson]()
 }
+
 
 
 import UIKit
@@ -42,6 +44,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 {
     var selectedImages:UIImage?
     var personalProfile:SearchPerson = SearchPerson()// since profile is vary from user to user
+    
+    @IBOutlet weak var callChatBaseView:UIView!
+    @IBOutlet weak var favoriteBlockSpamConstraints:NSLayoutConstraint!
     
     @IBOutlet weak var reviewButton:UIButton!
     
@@ -54,6 +59,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.hidden = false
+        self.navigationController?.navigationBar.tintColor = appColor
+        
         imageView.makeImageRounded()
         
         self.nameLabel.text = personalProfile.name
@@ -74,6 +82,21 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        
+        if personalProfile.idString == ProfileManager.sharedInstance.personalProfile.idString
+        {
+            self.favoriteBlockSpamConstraints.constant = 0
+            self.callChatBaseView.hidden = true
+            self.cameraButton.hidden    = false
+            self.callChatBaseView.hidden = true
+           
+        }else
+        {
+            self.callChatBaseView.hidden = false
+            self.cameraButton.hidden     = false
+            self.cameraButton.hidden     = true
+            self.favoriteBlockSpamConstraints.constant = 30
+        }
         if let photo  = personalProfile.photo
         {
             setProfileImgeForURL(photo)
@@ -117,6 +140,10 @@ extension ProfileViewController
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("EditProfileTableViewCell", forIndexPath: indexPath) as! EditProfileTableViewCell
+        if personalProfile.idString != ProfileManager.sharedInstance.personalProfile.idString
+        {
+           cell.editButton.hidden = true
+        }
         
         if indexPath.row == 0
         {

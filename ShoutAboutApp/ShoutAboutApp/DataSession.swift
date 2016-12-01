@@ -110,11 +110,11 @@ class DataSession: BaseNSURLSession
     }
     
     
-    func getContactListForPage(page:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    func getContactListForPage(/*page:String,*/ onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
         
-         var dict = NSObject.getAppUserIdAndToken()
-         dict["page"] = page
+         let dict = NSObject.getAppUserIdAndToken()
+         //dict["page"] = page
          super.getWithOnFinish(mCHWebServiceMethod.user_contact_list, parameters: dict, onFinish: { (response, deserializedResponse) in
             onFinish(response: response, deserializedResponse: deserializedResponse)
         }) { (error) in
@@ -635,15 +635,17 @@ class DataSessionManger: NSObject
     
     
     
-    func getContactListForPage(page:String, onFinish:(response:AnyObject,contactPerson:ContactPerson)->(), onError:(error:AnyObject)->())
+    func getContactListForPage(/*page:String,*/ onFinish:(response:AnyObject,contactPerson:ContactPerson)->(), onError:(error:AnyObject)->())
     {
         let dataSession = DataSession()
-        dataSession.getContactListForPage(page, onFinish: { (response, deserializedResponse) in
+        dataSession.getContactListForPage(/*page,*/ { (response, deserializedResponse) in
             
             let conatactPerson = ContactPerson()
+            let  data = deserializedResponse as! NSArray
+            /*
             if deserializedResponse is NSDictionary
-            {
-                
+            {*/
+                /*
                 if let  next_page_url = deserializedResponse.objectForKey("next_page_url") as? String
                 {
                     conatactPerson.next_page_url = next_page_url
@@ -651,9 +653,9 @@ class DataSessionManger: NSObject
                 }
                 conatactPerson.current_page = (deserializedResponse.objectForKey("current_page") as? Int)!
                 conatactPerson.total = (deserializedResponse.objectForKey("total") as? Int)!
-                conatactPerson.last_page = (deserializedResponse.objectForKey("last_page") as? Int)!
+                conatactPerson.last_page = (deserializedResponse.objectForKey("last_page") as? Int)!*/
                 
-                if let   data = deserializedResponse.objectForKey("data") as? NSArray
+                if data is NSArray
                 {
                     
                     for dict in data
@@ -697,7 +699,7 @@ class DataSessionManger: NSObject
                     
                 }
                 
-            }
+            //}*/
             onFinish(response: response, contactPerson: conatactPerson)
             
             }) { (error) in

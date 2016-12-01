@@ -8,6 +8,14 @@
 
 import UIKit
 import Firebase
+import Contacts
+
+ class ContactManager: NSObject
+{
+    static let sharedInstance = ContactManager()
+     
+}
+
 
 extension UITableView
 {
@@ -36,6 +44,8 @@ extension UITableView
 
 class JoinViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, InputTableViewCellProtocol, ClickTableViewCellProtocol
 {
+    var objects = [CNContact]()
+    var allValidContacts = [PersonContact]()
     @IBOutlet weak var tableView: UITableView!
     var activeTextField:UITextField?
     var name:String = ""
@@ -200,6 +210,12 @@ extension JoinViewController
             
             getFireBaseAuth()
             
+            dispatch_async(dispatch_get_global_queue(0, 0),
+                           {
+                            self.getContacts()
+                            
+            })
+            
             print("Skip")
             self.dismissViewControllerAnimated(false, completion: nil)
             let tabBarVC = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController") as? SWRevealViewController
@@ -362,6 +378,283 @@ extension JoinViewController
             //self.performSegueWithIdentifier("LoginToChat", sender: nil) // 4
         })
 
+    }
+}
+
+extension JoinViewController
+{
+    func getContacts()
+    {
+        let store = CNContactStore()
         
+        if CNContactStore.authorizationStatusForEntityType(.Contacts) == .NotDetermined
+        {
+            store.requestAccessForEntityType(.Contacts, completionHandler: { (authorized: Bool, error: NSError?) -> Void in
+                if authorized
+                {
+                    self.retrieveContactsWithStore(store)
+                }else
+                {
+                    self.displayCantAddContactAlert()
+                }
+            })
+        }else if CNContactStore.authorizationStatusForEntityType(.Contacts) == .Denied
+        {
+            self.displayCantAddContactAlert()
+            
+        }
+            
+        else if CNContactStore.authorizationStatusForEntityType(.Contacts) == .Authorized
+        {
+            self.retrieveContactsWithStore(store)
+        }
+    }
+    
+    func displayCantAddContactAlert()
+    {
+        /*let okAction = UIAlertAction(title: "Change Settings",
+         style: .Default,
+         handler: { action in
+         self.openSettings()
+         })*/
+        //let cancelAction =  UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+        // showAlertWithMessage("You must give the app permission to add the contact first.", okAction: okAction, cancelAction: cancelAction)
+        //displayAlert("You must give the app permission to add the contact first.", handler: nil)
+        
+        let alert = UIAlertController(title: "Alert", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction = UIAlertAction(title: "Change Settings", style: .Default) { (action) in
+            self.openSettings()
+            
+        }
+        let cancelAction =  UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+        
+    }
+    
+    
+    /*
+     override func displayAlert(userMessage: String, handler: ((UIAlertAction) -> Void)?)
+     {
+     let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+     let okAction = UIAlertAction(title: "Change Settings", style: .Default) { (action) in
+     self.openSettings()
+     
+     }
+     let cancelAction =  UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+     alert.addAction(okAction)
+     alert.addAction(cancelAction)
+     self.presentViewController(alert, animated: true, completion: nil)
+     
+     }*/
+    
+    func showAlertWithMessage(message : String, okAction:UIAlertAction, cancelAction:UIAlertAction )
+    {
+        let alert = UIAlertController(title: "Message", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    func openSettings()
+    {
+        let url = NSURL(string: UIApplicationOpenSettingsURLString)
+        UIApplication.sharedApplication().openURL(url!)
+    }
+    func retrieveContactsWithStore(contactStore: CNContactStore)
+    {
+        let keysToFetch = [
+            CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName),
+            
+            CNContactPhoneNumbersKey,
+            ]
+        
+        // Get all the containers
+        var allContainers: [CNContainer] = []
+        do {
+            allContainers = try contactStore.containersMatchingPredicate(nil)
+        } catch {
+            print("Error fetching containers")
+        }
+        
+        var results: [CNContact] = []
+        
+        // Iterate all containers and append their contacts to our results array
+        for container in allContainers {
+            let fetchPredicate = CNContact.predicateForContactsInContainerWithIdentifier(container.identifier)
+            
+            do {
+                let containerResults = try contactStore.unifiedContactsMatchingPredicate(fetchPredicate, keysToFetch: keysToFetch)
+                results.appendContentsOf(containerResults)
+            } catch {
+                print("Error fetching results for container")
+            }
+        }
+        
+        self.objects = results
+        allValidContacts.removeAll()
+        for contact in self.objects
+        {
+            let formatter = CNContactFormatter()
+            
+            let name = formatter.stringFromContact(contact)
+            let mobile = (contact.phoneNumbers.first?.value as! CNPhoneNumber).valueForKey("digits") as? String
+            
+            if name?.characters.count > 0 && mobile != nil
+            {
+                let personContact = PersonContact()
+                personContact.name = name!
+                personContact.mobileNumber =  mobile!
+                allValidContacts.append(personContact)
+                
+                
+            }
+        }
+        
+        /*allValidContacts.sortInPlace { (person1, person2) -> Bool in
+         return person1.name < person2.name
+         }*/
+        if NetworkConnectivity.isConnectedToNetwork() != true
+        {
+            displayAlertMessage("No Internet Connection")
+            
+        }else
+        {
+            postData()
+        }
+    }
+    
+    func postData()
+    {
+        let stringtext = getJsonFromArray(allValidContacts)
+        print("json:\(stringtext)")
+        
+        let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
+        let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token) as! String
+        
+        let dict = ["contacts":stringtext, kapp_user_id:String(appUserId), kapp_user_token :appUserToken, ]
+        postContactToServer(dict)
+    }
+    
+    /*
+    override func displayAlert(userMessage: String, handler: ((UIAlertAction) -> Void)?)
+    {
+        let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            self.getContact()
+            //self.tableView.reloadData() hit web service
+            self.view.removeSpinner()
+            
+        }
+        alert.addAction(okAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }*/
+    
+    func getContact()
+    {
+        if NetworkConnectivity.isConnectedToNetwork() != true
+        {
+            self.displayAlertMessage("No Internet Connection")
+            
+        }else
+        {
+            self.getContactForPage()
+        }
+        
+    }
+    
+    func postContactToServer(dict:[String:String])
+    {
+        self.view.showSpinner()
+        DataSessionManger.sharedInstance.syncContactToTheServer(dict, onFinish: { (response, deserializedResponse) in
+            
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.getContact()
+                self.view.removeSpinner()
+            })
+            if deserializedResponse.objectForKey("success") != nil
+            {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.view.removeSpinner()
+                    self.displayAlert("Sync to server successfully ", handler: nil)
+                    
+                });
+            }
+            
+            
+        }) { (error) in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                self.view.removeSpinner()
+            })
+            
+        }
+        
+        
+    }
+    
+    
+    func getContactForPage()
+    {
+        self.view.showSpinner()
+        
+        //ProfileManager.sharedInstance.syncedContactArray.removeAll
+        
+        
+        DataSessionManger.sharedInstance.getContactListForPage( { (response, contactPerson) in
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                
+                
+                 
+                ProfileManager.sharedInstance.syncedContactArray.appendContentsOf(contactPerson.data)
+                self.tableView.reloadData()
+                self.view.removeSpinner()
+            })
+            
+        }) { (error) in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+                self.view.removeSpinner()
+            })
+            
+        }
+    }
+    
+    func getJsonFromArray(array: [PersonContact]) -> String
+    {
+        
+        let jsonCompatibleArray = array.map { model in
+            return [
+                "name":model.name,
+                "mobile_number":model.mobileNumber,
+                
+            ]
+        }
+        var errorinString = ""
+        
+        do
+        {
+            let data = try NSJSONSerialization.dataWithJSONObject(jsonCompatibleArray, options: NSJSONWritingOptions.PrettyPrinted)
+            
+            let json = NSString(data: data, encoding: NSUTF8StringEncoding)
+            if let json = json
+            {
+                errorinString = json as String
+                print(json)
+            }
+            
+        }
+        catch
+        {
+            print(" in catch block")
+            
+        }
+        return errorinString
     }
 }

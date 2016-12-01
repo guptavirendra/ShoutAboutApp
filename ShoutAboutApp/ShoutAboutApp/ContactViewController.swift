@@ -46,7 +46,7 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         self.tableView.addBackGroundImageView()
         
        // self.tableView.backgroundColor = bgColor
-        self.getContacts()
+       // self.getContacts()
         
 
         // Do any additional setup after loading the view.
@@ -63,6 +63,8 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        
+      syncContactArray =  ProfileManager.sharedInstance.syncedContactArray
         //self.navigationController?.navigationBar.hidden = true
         
     }
@@ -83,7 +85,7 @@ extension ContactViewController
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return  1//syncContactArray.count //allValidContacts.count //objects.count
+        return  syncContactArray.count //allValidContacts.count //objects.count
     }
     
     
@@ -92,9 +94,9 @@ extension ContactViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("contact", forIndexPath: indexPath) as! ContactTableViewCell
         cell.delegate = self
         
-        let personContact =  SearchPerson()//syncContactArray[indexPath.row]
-       // cell.nameLabel?.text = personContact.name
-       // cell.mobileLabel?.text = personContact.mobileNumber
+        let personContact =  syncContactArray[indexPath.row]
+        cell.nameLabel?.text = personContact.name
+        cell.mobileLabel?.text = personContact.mobileNumber
         if let urlString = personContact.photo
         {
             
@@ -127,7 +129,7 @@ extension ContactViewController
             if nextPage < lastPage && (syncContactArray.count == currentCount) 
             {
                 nextPage += 1
-                self.getContact()
+               // self.getContact()
             }
         }
     }
@@ -169,6 +171,7 @@ extension ContactViewController
 
 extension ContactViewController
 {
+    /*
     func getContacts()
     {
         let store = CNContactStore()
@@ -441,5 +444,5 @@ extension ContactViewController
     }
 
     
-    
+    */
 }

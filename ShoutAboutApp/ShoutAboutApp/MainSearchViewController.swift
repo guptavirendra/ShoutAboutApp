@@ -77,8 +77,11 @@ extension MainSearchViewController
 {
     @IBAction func searchButtonClicked(button:UIButton)
     {
+        
         let searchViewController = self.storyboard?.instantiateViewControllerWithIdentifier("SearchViewController") as? SearchViewController
-        self.presentViewController(searchViewController!, animated: true, completion: nil)
+        let nav = UINavigationController(rootViewController: searchViewController!)
+         nav.navigationBar.barTintColor = appColor
+        self.presentViewController(nav, animated: true, completion: nil)
         //self.navigationController!.pushViewController(searchViewController!, animated: true)
         
     }

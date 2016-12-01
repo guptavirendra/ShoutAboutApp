@@ -56,7 +56,7 @@ final class ChatsViewController: JSQMessagesViewController
     }*/
     var channelRef: FIRDatabaseReference?
     
-    lazy var storageRef: FIRStorageReference = FIRStorage.storage().referenceForURL("gs://shoutabout-146808.appspot.com")
+    lazy var storageRef: FIRStorageReference = FIRStorage.storage().referenceForURL(" gs://shoutaboutapp-53d1c.appspot.com")
      //self.channelRef
    // lazy var usersTypingQuery: FIRDatabaseQuery = self.ch
     
