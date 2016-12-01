@@ -12,10 +12,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
 {
 
     @IBOutlet weak var tableView: UITableView!
-    var allValidContacts = [SearchPerson]()
+    var allValidContacts  = [SearchPerson]()
+    var localContactArray = [SearchPerson]()
     var errorMessage:String?
 
     let searchController = UISearchController(searchResultsController: nil)
+    
+    var isSeaechingLocal:Bool = true
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -65,35 +68,54 @@ extension SearchViewController
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+        if isSeaechingLocal == true
+        {
+           return localContactArray.count
+        }else
+        {
         if allValidContacts.count > 0
         {
             return  allValidContacts.count //objects.count
         }
-        return 1
+        }
+        return 0
     }
     
     
+    func returnCellForTableView(tableView: UITableView, indexPath: NSIndexPath, dataArray:[SearchPerson])->UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCellWithIdentifier("contact", forIndexPath: indexPath) as! ContactTableViewCell
+        cell.delegate = self
+        
+        let personContact = dataArray[indexPath.row]
+        cell.nameLabel?.text = personContact.name
+        cell.mobileLabel?.text = personContact.mobileNumber
+        if let urlString = personContact.photo
+        {
+            cell.profileImageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+            
+        }else
+        {
+            cell.profileImageView.image = UIImage(named: "profile")
+        }
+        
+        return cell
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        if allValidContacts.count > 0
+        if isSeaechingLocal == true
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("contact", forIndexPath: indexPath) as! ContactTableViewCell
-            cell.delegate = self
-            
-            let personContact = allValidContacts[indexPath.row]
-            cell.nameLabel?.text = personContact.name
-            cell.mobileLabel?.text = personContact.mobileNumber
-            if let urlString = personContact.photo
+            return returnCellForTableView(tableView, indexPath: indexPath, dataArray: localContactArray)
+        }else
+        {
+            if allValidContacts.count > 0
             {
-                cell.profileImageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
                 
-            }else
-            {
-                cell.profileImageView.image = UIImage(named: "profile")
+                return returnCellForTableView(tableView, indexPath: indexPath, dataArray: localContactArray)
             }
-            
-            return cell
         }
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("message", forIndexPath: indexPath)
         cell.textLabel?.text = errorMessage
         
@@ -172,6 +194,7 @@ extension SearchViewController
     
     internal func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
+        isSeaechingLocal = false
         getSearchForText(searchBar.text!)
         
     }
@@ -187,6 +210,10 @@ extension SearchViewController
     
     internal func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
+        if searchText.characters.count > 0
+        {
+            searchString(searchText)
+        }
         
         
     }
@@ -212,6 +239,7 @@ extension SearchViewController
         
         DataSessionManger.sharedInstance.searchContact(dict, onFinish: { (response, deserializedResponse, errorMessage) in
             
+            self.isSeaechingLocal = false
             dispatch_async(dispatch_get_main_queue(),
                 {
                     self.allValidContacts = deserializedResponse
@@ -250,7 +278,7 @@ extension SearchViewController
             });
             
         }) { (error) in
-            
+            self.isSeaechingLocal = false
             dispatch_async(dispatch_get_main_queue(), {
                 self.view.removeSpinner()
                // self.displayAlert("Success", handler: self.handler)
@@ -274,5 +302,30 @@ extension SearchViewController
             return NSKeyedUnarchiver.unarchiveObjectWithData(unarchivedObject) as? [SearchPerson]
         }
         return nil
+    }
+}
+
+
+extension SearchViewController
+{
+    
+    func  searchString(searchString:String)
+    {
+        //let namePredicate  = NSPredicate(format: "(name BEGINSWITH[c] %@)", searchString)
+        let phonePredicate = NSPredicate(format: "(mobileNumber BEGINSWITH[c] %@) OR (name BEGINSWITH[c] %@)", searchString, searchString)
+        
+       // let predicateArray = [namePredicate, phonePredicate]
+       // let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicateArray)
+        
+        
+
+    localContactArray  =  ProfileManager.sharedInstance.syncedContactArray.filter
+            { phonePredicate.evaluateWithObject($0)
+        };
+        
+    tableView.reloadData()
+        
+        
+        
     }
 }
