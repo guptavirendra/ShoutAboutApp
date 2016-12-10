@@ -231,7 +231,7 @@ public class BaseNSURLSession: NSObject
         {
             print("All urls goes Here \(stringURL)")
             mNSMutableRequest = NSMutableURLRequest(URL:lURL )// Apend Path to Hit
-            mNSMutableRequest?.timeoutInterval = 130
+            mNSMutableRequest?.timeoutInterval = 300
             addDefaultJSONHeader()// Added Json Header Only
             if let tempData = mConnectionHeaders as? Dictionary<String, String>
             {

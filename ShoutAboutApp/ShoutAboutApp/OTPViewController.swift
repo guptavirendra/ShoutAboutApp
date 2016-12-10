@@ -12,13 +12,18 @@ class OTPViewController: UIViewController {
 
     @IBOutlet weak var textFieldBaseView:UIView!
     @IBOutlet weak var verifyButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var otpTextField: UITextField!
+    
+    @IBOutlet var countDownLabel: UILabel!
+    var count = 120
     var otpString:String = ""
     var mobileNumberString:String = ""
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        startTimer()
         
         otpTextField.addTarget(self, action:#selector(ViewController.edited), forControlEvents:UIControlEvents.EditingChanged)
         verifyButton.userInteractionEnabled = false
@@ -65,6 +70,7 @@ class OTPViewController: UIViewController {
             
         }else
         {
+            
             self.otpTextField.text = nil
             
             self.view.showSpinner()
@@ -163,6 +169,7 @@ class OTPViewController: UIViewController {
         {
             //hit webservice
             
+            startTimer()
             DataSessionManger.sharedInstance.getOTPForMobileNumber(mobileNumberString, onFinish: { (response, deserializedResponse) in
                 
                 print(" response :\(response) , deserializedResponse \(deserializedResponse) ")
@@ -227,5 +234,38 @@ extension OTPViewController
             verifyButton.userInteractionEnabled = false
             verifyButton.alpha = 0.5
         }
+    }
+}
+
+extension OTPViewController
+{
+    
+    func startTimer()
+    {
+        count = 120
+        countDownLabel.text = nil
+        countDownLabel.hidden = false
+        resetButton.userInteractionEnabled = false
+        resetButton.alpha = 0.5
+        _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(OTPViewController.update), userInfo: nil, repeats: true)
+    }
+    
+    func update() {
+        
+        if(count > 0)
+        {
+            let minutes = String(count / 60)
+            let seconds = String(count % 60)
+            countDownLabel.text = minutes + " Min" + " : " + seconds+" Sec"
+            count -= 1
+        }else
+        {
+            countDownLabel.hidden = true
+            resetButton.userInteractionEnabled = true
+            resetButton.alpha = 1.0
+
+            
+        }
+        
     }
 }

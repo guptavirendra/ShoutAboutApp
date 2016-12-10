@@ -112,7 +112,7 @@ extension SearchViewController
             if allValidContacts.count > 0
             {
                 
-                return returnCellForTableView(tableView, indexPath: indexPath, dataArray: localContactArray)
+                return returnCellForTableView(tableView, indexPath: indexPath, dataArray: allValidContacts)
             }
         }
         

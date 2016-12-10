@@ -530,11 +530,12 @@ extension JoinViewController
     {
         let stringtext = getJsonFromArray(allValidContacts)
         print("json:\(stringtext)")
+        let trimmedString = stringtext.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         
         let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
         let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token) as! String
         
-        let dict = ["contacts":stringtext, kapp_user_id:String(appUserId), kapp_user_token :appUserToken, ]
+        let dict = ["contacts":trimmedString, kapp_user_id:String(appUserId), kapp_user_token :appUserToken]
         postContactToServer(dict)
     }
     

@@ -324,7 +324,14 @@ class DataSessionManger: NSObject
                     }
                     
                     personalProfileData.gcm_token = (dataDict?.objectForKey(gcm_token) as? String)!
-                    personalProfileData.last_online_time = dataDict?.objectForKey(last_online_time) as! String
+                    
+                    
+                    if let lastonlineTime = dataDict?.objectForKey(last_online_time) as? String
+                    {
+                         personalProfileData.last_online_time = lastonlineTime
+                        
+                    }
+                   
                     if let _ = (dataDict?.objectForKey("rating_average") as? [AnyObject])
                     {
                         personalProfileData.ratingAverage = (dataDict?.objectForKey("rating_average") as? [AnyObject])!
