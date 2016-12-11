@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "tab_contact-h@x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "location@2x.png",
+      "filename" : "tab_contact-h@2x.png",
       "scale" : "2x"
     },
     {
