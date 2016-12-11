@@ -308,7 +308,6 @@ extension SearchViewController
 
 extension SearchViewController
 {
-    
     func  searchString(searchString:String)
     {
         //let namePredicate  = NSPredicate(format: "(name BEGINSWITH[c] %@)", searchString)
@@ -317,15 +316,11 @@ extension SearchViewController
        // let predicateArray = [namePredicate, phonePredicate]
        // let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicateArray)
         
-        
-
     localContactArray  =  ProfileManager.sharedInstance.syncedContactArray.filter
             { phonePredicate.evaluateWithObject($0)
         };
         
     tableView.reloadData()
-        
-        
         
     }
 }

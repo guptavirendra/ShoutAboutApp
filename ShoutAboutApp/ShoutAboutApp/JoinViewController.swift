@@ -122,7 +122,7 @@ extension JoinViewController
             if indexPath.row == 2
             {
                 cell.inputTextField.placeholder = kAddress
-                cell.inputImage.image = UIImage(named: kEmail)
+                cell.inputImage.image = UIImage(named: kAddress)
                 cell.inputTextField.tag = 2
             }
             if indexPath.row == 3
@@ -200,16 +200,18 @@ extension JoinViewController
 {
     func buttonClicked(cell: ClickTableViewCell)
     {
+        getFireBaseAuth()
+        
+        dispatch_async(dispatch_get_global_queue(0, 0),
+                       {
+                        self.getContacts()
+                        
+        })
+        
         if cell.button.titleLabel?.text == "Skip"
         {
             
-            getFireBaseAuth()
             
-            dispatch_async(dispatch_get_global_queue(0, 0),
-                           {
-                            self.getContacts()
-                            
-            })
             
             print("Skip")
             self.dismissViewControllerAnimated(false, completion: nil)
@@ -258,8 +260,10 @@ extension JoinViewController
     override func displayAlert(userMessage: String, handler: ((UIAlertAction) -> Void)?)
     {
         let alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-        let tabBarVC = self.storyboard?.instantiateViewControllerWithIdentifier("tabBarVC") as? UITabBarController
+        let okAction = UIAlertAction(title: "OK", style: .Default)
+        { (action) in
+            self.dismissViewControllerAnimated(false, completion: nil)
+            let tabBarVC = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController") as? SWRevealViewController
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.window?.backgroundColor = UIColor(red: 236.0, green: 238.0, blue: 241.0, alpha: 1.0)
             appDelegate.window?.rootViewController = tabBarVC
@@ -588,18 +592,18 @@ extension JoinViewController
     
     func postContactToServer(dict:[String:String], postDict:[String:String])
     {
-        self.view.showSpinner()
+        //self.view.showSpinner()
         DataSessionManger.sharedInstance.syncContactToTheServer(dict, postDict:postDict,  onFinish: { (response, deserializedResponse) in
             
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.getContact()
-                self.view.removeSpinner()
+                //self.view.removeSpinner()
             })
             if deserializedResponse.objectForKey("success") != nil
             {
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.view.removeSpinner()
+                    //self.view.removeSpinner()
                     self.displayAlert("Sync to server successfully ", handler: nil)
                     
                 });
@@ -620,32 +624,38 @@ extension JoinViewController
     
     func getContactForPage()
     {
-        self.view.showSpinner()
+        //self.view.showSpinner()
         
         //ProfileManager.sharedInstance.syncedContactArray.removeAll
-        
-        
         DataSessionManger.sharedInstance.getContactListForPage( { (response, contactPerson) in
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                
-                
-                
-                 
-                ProfileManager.sharedInstance.syncedContactArray.appendContentsOf(contactPerson.data)
-                self.tableView.reloadData()
+            ProfileManager.sharedInstance.syncedContactArray.appendContentsOf(contactPerson.data)
+               // self.tableView.reloadData()
+                self.saveContacts(ProfileManager.sharedInstance.syncedContactArray)
                 self.view.removeSpinner()
             })
             
         }) { (error) in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.tableView.reloadData()
-                self.view.removeSpinner()
+               // self.tableView.reloadData()
+               // self.view.removeSpinner()
             })
             
         }
     }
     
+    func saveContacts(person:[SearchPerson])
+    {
+        let archivedObject = SearchPerson.archivePeople(person)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(archivedObject, forKey: contactStored)
+        defaults.synchronize()
+    }
+    
+    
+    
+    //MARK: CONVERT TO JSON
     func getJsonFromArray(array: [PersonContact]) -> String
     {
         

@@ -147,21 +147,24 @@ extension ProfileViewController
         
         if indexPath.row == 0
         {
-            cell.titleLabel.text = "Address"
-            cell.dataLabel.text  = personalProfile.address
+            cell.titleLabel.text = "Email"
+            cell.dataLabel.text  = personalProfile.email
+           
             
         }
         
         if indexPath.row == 1
         {
-            cell.titleLabel.text = "Email"
-            cell.dataLabel.text  = personalProfile.email
+            cell.titleLabel.text = "Mobile"
+            cell.dataLabel.text  = personalProfile.mobileNumber
+            
         }
         
         if indexPath.row == 2
         {
-            cell.titleLabel.text = "Mobile"
-            cell.dataLabel.text  = personalProfile.mobileNumber
+            cell.titleLabel.text = "Address"
+            cell.dataLabel.text  = personalProfile.address
+            
         }
         if indexPath.row == 3
         {

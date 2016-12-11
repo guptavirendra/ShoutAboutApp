@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+let contactStored  = "contactStored"
 let searchHistory  = "searchHistory"
 let search_mobile  = "search_result"
 let message        = "message"

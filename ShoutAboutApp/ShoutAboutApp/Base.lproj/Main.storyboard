@@ -3038,7 +3038,7 @@
         <scene sceneID="znk-ix-nla">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="trV-yL-XSM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Contacts" image="tab_contact" id="dA0-HG-A3I"/>
+                    <tabBarItem key="tabBarItem" title="Contacts" image="tab_contact-h@x" id="dA0-HG-A3I"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="54b-Kk-DkM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3502,7 +3502,7 @@
         <scene sceneID="yYc-0Q-Crj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JMP-8F-mSG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="tab_profile" id="4br-gi-cYA"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="tab_profile-h@x" id="4br-gi-cYA"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="p5Z-lT-cbt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3852,7 +3852,7 @@
         <scene sceneID="S6T-mh-8Sz">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hee-fm-2yJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" image="tab_search" id="a6e-yL-e4v"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="tab_search-h@x" id="a6e-yL-e4v"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZiS-XP-fcG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3872,7 +3872,7 @@
         <scene sceneID="wxc-XW-nfx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jo4-bj-ifk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Feeds" image="tab_feed" id="AgL-5T-3fW"/>
+                    <tabBarItem key="tabBarItem" title="Feeds" image="tab_feed-h@x" id="AgL-5T-3fW"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pSW-JT-lbS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3892,7 +3892,7 @@
         <scene sceneID="qBQ-aI-aMj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zVO-hi-GLd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Chat" image="tab_chat" id="P1t-fA-Qmz"/>
+                    <tabBarItem key="tabBarItem" title="Chat" image="tab_chat-h@x" id="P1t-fA-Qmz"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FZg-pi-h7y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -4009,11 +4009,12 @@
         <image name="search" width="20" height="20"/>
         <image name="search_logo" width="80" height="107"/>
         <image name="send" width="22" height="22"/>
-        <image name="tab_chat" width="22" height="22"/>
-        <image name="tab_contact" width="22" height="22"/>
-        <image name="tab_feed" width="22" height="22"/>
-        <image name="tab_profile" width="22" height="22"/>
+        <image name="tab_chat-h@x" width="22" height="22"/>
+        <image name="tab_contact-h@x" width="22" height="22"/>
+        <image name="tab_feed-h@x" width="22" height="22"/>
+        <image name="tab_profile-h@x" width="22" height="22"/>
         <image name="tab_search" width="22" height="22"/>
+        <image name="tab_search-h@x" width="22" height="22"/>
         <image name="timer" width="16" height="16"/>
         <image name="timer_blue" width="16" height="16"/>
     </resources>
