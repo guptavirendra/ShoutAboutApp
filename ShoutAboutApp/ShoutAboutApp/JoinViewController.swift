@@ -91,13 +91,13 @@ extension JoinViewController
 {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 8
+        return 7
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        if indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3 || indexPath.row == 4
+        if indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3
 
         {
         
@@ -127,26 +127,21 @@ extension JoinViewController
             }
             if indexPath.row == 3
             {
-                cell.inputTextField.placeholder = kBirthDay
-                cell.inputImage.image = UIImage(named: kBirthDay)
-                cell.inputTextField.tag = 3
-            }
-            if indexPath.row == 4
-            {
                 cell.inputTextField.placeholder = kWebsite
                 cell.inputImage.image = UIImage(named: kWebsite)
-                cell.inputTextField.tag = 4
+                cell.inputTextField.tag = 3
+                
             }
             
             return cell
         }
         
-        if indexPath.row == 5 || indexPath.row == 7  
+        if indexPath.row == 4 || indexPath.row == 6
         {
         let  cell = tableView.dequeueReusableCellWithIdentifier("button", forIndexPath: indexPath) as! ClickTableViewCell
         cell.delegate = self
         
-        if indexPath.row == 5
+        if indexPath.row == 4
         {
             cell.button.setTitle("Join", forState: .Normal)
             cell.widthConstraints?.constant = cell.contentView.bounds.size.width - 60
@@ -166,7 +161,7 @@ extension JoinViewController
             //cell.button.addConstraint(width)
         }*/
         
-        if indexPath.row == 7
+        if indexPath.row == 6
         {
             cell.widthConstraints?.constant = 80
             cell.button.setTitle("Skip", forState: .Normal)
@@ -188,9 +183,9 @@ extension JoinViewController
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        if indexPath.row == 6
+        if indexPath.row == 5
         {
-            return 80
+            return 66
         }
         
         
@@ -232,12 +227,30 @@ extension JoinViewController
             
             print(" email:\(self.email), name:\(self.name),  web:\(self.website ), address:f \(self.address) ")
             
-            let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
-            let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token) as! String
-            
-            let dict = ["name":self.name, "email":self.email, "website":self.website, "address":self.address, kapp_user_id:String(appUserId), kapp_user_token :appUserToken, "notify_token":"text"]
-            postData(dict)
-            
+            if self.name.characters.count == 0
+            {
+                self.displayAlertMessage("Please enter name")
+                
+            }else if self.email.characters.count == 0
+            {
+                self.displayAlertMessage("Please enter email")
+                             }
+            else if self.address.characters.count == 0
+            {
+                self.displayAlertMessage("Please enter address")
+                
+            }else if self.website.characters.count == 0
+            {
+                self.displayAlertMessage("Please enter website")
+                
+            }else
+            {
+                let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
+                let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token) as! String
+                
+                let dict = ["name":self.name, "email":self.email, "website":self.website, "address":self.address, kapp_user_id:String(appUserId), kapp_user_token :appUserToken, "notify_token":"text"]
+                postData(dict)
+            }
         }
     }
     
@@ -294,21 +307,23 @@ extension JoinViewController
     {
         if cell.inputTextField.tag == 0
         {
-            self.email = text
+            self.name = text
+            
         }
         if cell.inputTextField.tag == 1
         {
-            self.name = text
+            self.email = text
+        }
+        if cell.inputTextField.tag == 2
+        {
+            self.address = text
         }
         if cell.inputTextField.tag == 3
         {
             self.website = text
             
         }
-        if cell.inputTextField.tag == 2
-        {
-            self.address = text
-        }
+        
         
     }
     
@@ -335,16 +350,16 @@ extension JoinViewController
     
     func showKeyBoard(notification: NSNotification)
     {
-        if ((activeTextField?.superview?.superview?.isKindOfClass(InputTableViewCell)) != nil)
+        if ((activeTextField?.superview?.superview?.superview!.isKindOfClass(InputTableViewCell)) != nil)
         {
-            if let cell = activeTextField?.superview?.superview as? InputTableViewCell
+            if let cell = activeTextField?.superview?.superview?.superview as? InputTableViewCell
             {
                 let dictInfo: NSDictionary = notification.userInfo!
                 let kbSize :CGSize = (dictInfo.objectForKey(UIKeyboardFrameBeginUserInfoKey)?.CGRectValue().size)!
                 let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbSize.height, right: 0)
                 self.tableView.contentInset = contentInsets
                 self.tableView.scrollIndicatorInsets = contentInsets
-            self.tableView.scrollToRowAtIndexPath(self.tableView.indexPathForCell(cell)!, atScrollPosition: .Top, animated: true)
+              self.tableView.scrollToRowAtIndexPath(self.tableView.indexPathForCell(cell)!, atScrollPosition: .Top, animated: true)
             }
         }
     }
