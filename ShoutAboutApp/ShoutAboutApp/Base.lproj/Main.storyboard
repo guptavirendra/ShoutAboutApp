@@ -488,18 +488,18 @@
                                             <outlet property="inputTextField" destination="NWw-Yy-wRL" id="UpQ-6W-drP"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FaceBookGoogleTableViewCell" rowHeight="80" id="6Dk-1l-JID" customClass="FaceBookGoogleTableViewCell" customModule="ShoutAboutApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="600" height="80"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FaceBookGoogleTableViewCell" rowHeight="66" id="6Dk-1l-JID" customClass="FaceBookGoogleTableViewCell" customModule="ShoutAboutApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="600" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Dk-1l-JID" id="dia-Yc-vX6">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="66"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8nE-Op-LBp">
-                                                    <rect key="frame" x="30" y="0.0" width="540" height="80"/>
+                                                    <rect key="frame" x="30" y="0.0" width="540" height="66"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EvW-sP-4dh">
-                                                            <rect key="frame" x="260" y="2" width="30" height="30"/>
+                                                            <rect key="frame" x="255" y="2" width="30" height="30"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEh-jL-7a3">
                                                                     <rect key="frame" x="0.0" y="5" width="30" height="21"/>
@@ -602,14 +602,14 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="Ae6-fa-ZLg" firstAttribute="width" secondItem="tSh-hW-caf" secondAttribute="width" id="1H8-Fv-Jpc"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Ae6-fa-ZLg" secondAttribute="bottom" constant="15" id="DKQ-fn-pzB"/>
-                                                        <constraint firstAttribute="height" constant="80" id="PoX-Cu-wMK"/>
+                                                        <constraint firstItem="tSh-hW-caf" firstAttribute="top" secondItem="EvW-sP-4dh" secondAttribute="bottom" constant="3" id="CtK-o0-29m"/>
+                                                        <constraint firstItem="Ae6-fa-ZLg" firstAttribute="top" secondItem="EvW-sP-4dh" secondAttribute="bottom" constant="3" id="Ji6-KP-BXf"/>
+                                                        <constraint firstAttribute="height" constant="66" id="PoX-Cu-wMK"/>
                                                         <constraint firstItem="Ae6-fa-ZLg" firstAttribute="leading" secondItem="tSh-hW-caf" secondAttribute="trailing" constant="20" id="S2u-jV-jhl"/>
-                                                        <constraint firstAttribute="bottom" secondItem="tSh-hW-caf" secondAttribute="bottom" constant="15" id="ZOe-11-sGG"/>
                                                         <constraint firstAttribute="trailing" secondItem="Ae6-fa-ZLg" secondAttribute="trailing" id="egT-Af-ufj"/>
                                                         <constraint firstItem="tSh-hW-caf" firstAttribute="leading" secondItem="8nE-Op-LBp" secondAttribute="leading" id="kMY-bX-f3u"/>
                                                         <constraint firstItem="EvW-sP-4dh" firstAttribute="top" secondItem="8nE-Op-LBp" secondAttribute="top" constant="2" id="lDQ-wU-XKR"/>
-                                                        <constraint firstItem="EvW-sP-4dh" firstAttribute="centerX" secondItem="8nE-Op-LBp" secondAttribute="centerX" constant="5" id="o5I-vk-47K"/>
+                                                        <constraint firstItem="EvW-sP-4dh" firstAttribute="centerX" secondItem="8nE-Op-LBp" secondAttribute="centerX" id="o5I-vk-47K"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -628,7 +628,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="button" id="EKc-hD-C0z" customClass="ClickTableViewCell" customModule="ShoutAboutApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="152" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="138" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EKc-hD-C0z" id="qxG-Vu-PcF">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
