@@ -43,7 +43,7 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.tableView.addBackGroundImageView()
+        //self.tableView.addBackGroundImageView()
         
        // self.tableView.backgroundColor = bgColor
        // self.getContacts()

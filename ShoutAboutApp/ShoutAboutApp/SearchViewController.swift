@@ -235,7 +235,7 @@ extension SearchViewController
         let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
         let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token) as! String
         
-         let dict = ["mobile_number":text,  kapp_user_id:String(appUserId), kapp_user_token :appUserToken, ]
+         let dict = ["search":text,  kapp_user_id:String(appUserId), kapp_user_token :appUserToken, ]
         
         DataSessionManger.sharedInstance.searchContact(dict, onFinish: { (response, deserializedResponse, errorMessage) in
             

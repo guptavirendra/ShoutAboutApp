@@ -45,7 +45,7 @@ extension UITableView
 class JoinViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, InputTableViewCellProtocol, ClickTableViewCellProtocol
 {
     var objects = [CNContact]()
-    var allValidContacts = [PersonContact]()
+    var allValidContacts = [SearchPerson]()
     @IBOutlet weak var tableView: UITableView!
     var activeTextField:UITextField?
     var name:String = ""
@@ -69,7 +69,7 @@ class JoinViewController: UIViewController, UITableViewDataSource, UITableViewDe
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.showKeyBoard(_:)), name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.hideKeyBoard(_:)), name: UIKeyboardWillHideNotification, object: nil)
         
-        tableView.addBackGroundImageView()
+        //tableView.addBackGroundImageView()
     }
 
     override func didReceiveMemoryWarning()
@@ -504,7 +504,7 @@ extension JoinViewController
             
             if name?.characters.count > 0 && mobile != nil
             {
-                let personContact = PersonContact()
+                let personContact = SearchPerson()
                 personContact.name = name!
                 personContact.mobileNumber =  mobile!
                 allValidContacts.append(personContact)
@@ -512,6 +512,8 @@ extension JoinViewController
                 
             }
         }
+        
+        //1ProfileManager.sharedInstance.syncedContactArray.appendContentsOf(allValidContacts)
         
         /*allValidContacts.sortInPlace { (person1, person2) -> Bool in
          return person1.name < person2.name
@@ -535,8 +537,10 @@ extension JoinViewController
         let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
         let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token) as! String
         
-        let dict = ["contacts":trimmedString, kapp_user_id:String(appUserId), kapp_user_token :appUserToken]
-        postContactToServer(dict)
+        let dict = [ kapp_user_id:String(appUserId), kapp_user_token :appUserToken]
+        let postDict = ["contacts":trimmedString]
+        
+        postContactToServer(dict, postDict: postDict)
     }
     
     /*
@@ -567,10 +571,10 @@ extension JoinViewController
         
     }
     
-    func postContactToServer(dict:[String:String])
+    func postContactToServer(dict:[String:String], postDict:[String:String])
     {
         self.view.showSpinner()
-        DataSessionManger.sharedInstance.syncContactToTheServer(dict, onFinish: { (response, deserializedResponse) in
+        DataSessionManger.sharedInstance.syncContactToTheServer(dict, postDict:postDict,  onFinish: { (response, deserializedResponse) in
             
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in

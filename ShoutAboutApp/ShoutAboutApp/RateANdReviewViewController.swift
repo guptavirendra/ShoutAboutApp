@@ -22,13 +22,16 @@ class RateANdReviewViewController: UIViewController,UITableViewDataSource, UITab
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.tableView.addBackGroundImageView()
+        //self.tableView.addBackGroundImageView()
         //self.tableView.backgroundColor = bgColor
         self.automaticallyAdjustsScrollViewInsets = false
 
          self.navigationController?.navigationBar.hidden = false
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.showKeyBoard(_:)), name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.hideKeyBoard(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        let tapGesture = UITapGestureRecognizer()
+        self.view.addGestureRecognizer(tapGesture)
+        tapGesture.addTarget(self, action: #selector(self.hideKeyBoard(_:)))
     }
 
     override func didReceiveMemoryWarning()

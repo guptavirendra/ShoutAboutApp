@@ -30,6 +30,11 @@ class OTPViewController: UIViewController {
         verifyButton.alpha = 0.5
         textFieldBaseView.makeBorder()
         
+         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.hideKeyBoard(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        let tapGesture = UITapGestureRecognizer()
+        self.view.addGestureRecognizer(tapGesture)
+        tapGesture.addTarget(self, action: #selector(self.hideKeyBoard(_:)))
+        
 
         // Do any additional setup after loading the view.
     }
@@ -266,6 +271,15 @@ extension OTPViewController
 
             
         }
+        
+    }
+}
+
+extension OTPViewController
+{
+    func hideKeyBoard(notification: NSNotification)
+    {
+        otpTextField.resignFirstResponder()
         
     }
 }

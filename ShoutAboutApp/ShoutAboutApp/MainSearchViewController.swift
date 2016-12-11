@@ -18,7 +18,7 @@ class MainSearchViewController: UIViewController, ContactTableViewCellProtocol
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.tableView.addBackGroundImageView()
+       // self.tableView.addBackGroundImageView()
         
         if self.revealViewController() != nil
         {

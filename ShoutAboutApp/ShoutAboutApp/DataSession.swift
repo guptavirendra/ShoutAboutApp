@@ -55,7 +55,8 @@ class DataSession: BaseNSURLSession
     //MARK:SEARCH CONTACT
     func searchContact(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
-        super.getWithOnFinish(mCHWebServiceMethod.search_mobile_number, parameters: dict, onFinish: { (response, deserializedResponse) in
+        
+        super.postDataWithOnFinish(mCHWebServiceMethod.search_mobile_number, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
             onFinish(response: response, deserializedResponse: deserializedResponse)
         }) { (error) in
             onError(error: error)
@@ -100,9 +101,9 @@ class DataSession: BaseNSURLSession
     
     
     //MARK: SYNC CONTACT
-    func syncContactToTheServer(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    func syncContactToTheServer(dict:[String:String], postDict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
-        super.postDataWithOnFinish(mCHWebServiceMethod.add_contact_list, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
+        super.postDataWithOnFinish(mCHWebServiceMethod.add_contact_list, parameters: dict, postBody: postDict, onFinish: { (response, deserializedResponse) in
             onFinish(response: response, deserializedResponse: deserializedResponse)
         }) { (error) in
             onError(error: error)
@@ -393,10 +394,10 @@ class DataSessionManger: NSObject
     }
     
     // SYNC CONTACT TO SERVER
-    func syncContactToTheServer(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    func syncContactToTheServer(dict:[String:String],postDict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
         let dataSession = DataSession()
-        dataSession.syncContactToTheServer(dict, onFinish: { (response, deserializedResponse) in
+        dataSession.syncContactToTheServer(dict, postDict:postDict, onFinish: { (response, deserializedResponse) in
             onFinish(response: response, deserializedResponse: deserializedResponse)
             }) { (error) in
                 onError(error: error)
@@ -430,8 +431,8 @@ class DataSessionManger: NSObject
                         person.name = (dict.objectForKey("name") as? String)!
                         person.idString = (dict["id"] as? Int)!
                         person.mobileNumber = (dict.objectForKey("mobile_number") as? String)!
-                         person.ratingAverage = (dict.objectForKey("rating_average") as? [AnyObject])!
-                         person.reviewCount = (dict.objectForKey("review_count") as? [AnyObject])!
+                         //person.ratingAverage = (dict.objectForKey("rating_average") as? [AnyObject])!
+                        // person.reviewCount = (dict.objectForKey("review_count") as? [AnyObject])!
                         personArray.append(person)
                         
                     }

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 let searchHistory  = "searchHistory"
-let search_mobile  = "search_mobile"
+let search_mobile  = "search_result"
 let message        = "message"
 let otpMessage     = "Successfully sent the One Time Password to your Mobile Number"
 let otpExpireMessage = "your otp has been expired, please regenerate new otp."
@@ -48,7 +48,7 @@ struct WebServicePath
     let match_otp            = "match_otp"
     let update_profile       = "update_profile"
     let add_contact_list     = "add_contact_list"
-    let search_mobile_number = "search_mobile_number"
+    let search_mobile_number = "advanced_search"
     let chat_contact_list    = "chat_contact_list"
     let user_contact_list    = "user_contact_list"
     let  app_user_profile    = "app_user_profile"
