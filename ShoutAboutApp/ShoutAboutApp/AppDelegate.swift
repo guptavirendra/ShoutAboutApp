@@ -10,10 +10,25 @@ import UIKit
 import Firebase
 
 @UIApplicationMain
+
+
+
 class AppDelegate: UIResponder, UIApplicationDelegate
 {
 
     var window: UIWindow?
+    
+    
+    
+    func retrieveContacts() -> [SearchPerson]?
+    {
+        if let unarchivedObject = NSUserDefaults.standardUserDefaults().objectForKey(contactStored) as? NSData {
+            return NSKeyedUnarchiver.unarchiveObjectWithData(unarchivedObject) as? [SearchPerson]
+        }
+        return nil
+    }
+    
+    
     func tokenRefreshNotification(notification: NSNotification)
     {
         if let refreshedToken = FIRInstanceID.instanceID().token()
@@ -107,9 +122,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-             let joinViewController = storyboard.instantiateViewControllerWithIdentifier("JoinViewController") as? JoinViewController
-            appDelegate.window?.rootViewController = joinViewController
+            let tabBarVC = storyboard.instantiateViewControllerWithIdentifier("SWRevealViewController") as? SWRevealViewController
+            
+            appDelegate.window?.backgroundColor = UIColor(red: 236.0, green: 238.0, blue: 241.0, alpha: 1.0)
+            appDelegate.window?.rootViewController = tabBarVC
             appDelegate.window?.makeKeyAndVisible()
+            
+            if let contactStored = self.retrieveContacts()
+            {
+                ProfileManager.sharedInstance.syncedContactArray.appendContentsOf(contactStored)
+            }
+            
+            
+            
+            
         }
         FIRApp.configure()
         /*
