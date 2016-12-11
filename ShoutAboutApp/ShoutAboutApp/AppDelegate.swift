@@ -114,6 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
         let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id)
         let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token)

@@ -647,8 +647,10 @@ extension JoinViewController
     
     func saveContacts(person:[SearchPerson])
     {
+        
         let archivedObject = SearchPerson.archivePeople(person)
         let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey(contactStored)
         defaults.setObject(archivedObject, forKey: contactStored)
         defaults.synchronize()
     }

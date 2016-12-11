@@ -423,18 +423,31 @@ class DataSessionManger: NSObject
                 
                 if deserializedResponse.objectForKey(search_mobile) != nil
                 {
-                    let dataArray = deserializedResponse.objectForKey(search_mobile) as? [NSDictionary]
-                    for dict in dataArray!
+                    
+                    let responseDictionary = deserializedResponse.objectForKey(search_mobile) as? NSDictionary
+                    if let dataArray = responseDictionary?.objectForKey("data") as? [NSDictionary]
+                    {
+                    for dict in dataArray
                     {
                         
                         let person:SearchPerson = SearchPerson()
-                        person.name = (dict.objectForKey("name") as? String)!
-                        person.idString = (dict["id"] as? Int)!
+                        if let name = dict.objectForKey("name") as? String
+                        {
+                            
+                            person.name = name
+                        }
+                        
+                        if let id = dict["id"] as? Int
+                        {
+                             person.idString = id
+                        }
+                       
                         person.mobileNumber = (dict.objectForKey("mobile_number") as? String)!
                          //person.ratingAverage = (dict.objectForKey("rating_average") as? [AnyObject])!
                         // person.reviewCount = (dict.objectForKey("review_count") as? [AnyObject])!
                         personArray.append(person)
                         
+                    }
                     }
                     
                 }

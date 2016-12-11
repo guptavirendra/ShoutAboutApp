@@ -82,7 +82,11 @@ extension LeftViewController
     {
         if indexPath.row == 5
         {
-           let vc = self.storyboard?.instantiateInitialViewController()
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(kapp_user_id)
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(kapp_user_token)
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(contactStored)
+            
+            let vc = self.storyboard?.instantiateInitialViewController()
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.window?.backgroundColor = UIColor(red: 236.0, green: 238.0, blue: 241.0, alpha: 1.0)
             appDelegate.window?.rootViewController = vc

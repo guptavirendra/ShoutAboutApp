@@ -11,6 +11,7 @@ import UIKit
 
 let contactStored  = "contactStored"
 let searchHistory  = "searchHistory"
+let searchString   = "searchString"
 let search_mobile  = "search_result"
 let message        = "message"
 let otpMessage     = "Successfully sent the One Time Password to your Mobile Number"

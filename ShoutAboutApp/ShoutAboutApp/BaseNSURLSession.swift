@@ -661,8 +661,6 @@ public class BaseNSURLSession: NSObject
                              if(self.mNSHTTPURLResponse?.statusCode  == 200 )
                             {
                                 
-                                
-                                
                                 // here we check if there is any data
                                 if let dataInAnyObject = data
                                 {
@@ -713,6 +711,8 @@ public class BaseNSURLSession: NSObject
                                                 onError(error:errors )
                                             }
                                         }
+                                        
+                                        
                                     }
                                     catch
                                     {

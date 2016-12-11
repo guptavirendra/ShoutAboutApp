@@ -8,28 +8,37 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchBarDelegate,UISearchControllerDelegate, ContactTableViewCellProtocol, UITableViewDataSource, UITableViewDelegate
+class SearchViewController: UIViewController, UISearchBarDelegate,UISearchControllerDelegate, ContactTableViewCellProtocol, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate
 {
 
     @IBOutlet weak var tableView: UITableView!
     var allValidContacts  = [SearchPerson]()
     var localContactArray = [SearchPerson]()
+    var historyArray      = [String]()
     var errorMessage:String?
-
     let searchController = UISearchController(searchResultsController: nil)
     
     var isSeaechingLocal:Bool = true
+    var isSearching:Bool      = false
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+        setHistoryArray()
+        self.view.backgroundColor = appColor
         searchController.searchBar.delegate = self
         definesPresentationContext = true
+
+        searchController.searchBar.barTintColor = appColor
+        searchController.searchBar.tintColor   = UIColor.whiteColor()
+        searchController.searchBar.placeholder = "Number Or Name"
         searchController.dimsBackgroundDuringPresentation = false
         
         tableView.tableHeaderView = searchController.searchBar
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "message")
         searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.translucent = true
         
     }
 
@@ -41,8 +50,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        //allValidContacts.removeAll()
-        //self.tableView.reloadData()
         self.searchController.searchBar.text = nil
         self.navigationController?.navigationBar.hidden = true
         
@@ -53,7 +60,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
     {
         super.viewDidAppear(animated)
         self.searchController.active = true
-        dispatch_async(dispatch_get_main_queue(), {
+        dispatch_async(dispatch_get_main_queue(),{
             self.searchController.searchBar.becomeFirstResponder()
         })
         //searchController.searchBar.delegate?.searchBarTextDidBeginEditing!(searchController.searchBar)
@@ -68,15 +75,28 @@ extension SearchViewController
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if isSeaechingLocal == true
+        if isSearching == false
         {
-           return localContactArray.count
+            if historyArray.count > 0
+            {
+                return historyArray.count + 1
+            }
+            return historyArray.count
+            
         }else
         {
-        if allValidContacts.count > 0
-        {
-            return  allValidContacts.count //objects.count
-        }
+            
+            if isSeaechingLocal == true
+            {
+                return localContactArray.count
+            }
+            else
+            {
+                if allValidContacts.count > 0
+                {
+                    return  allValidContacts.count //objects.count
+                }
+            }
         }
         return 0
     }
@@ -104,24 +124,45 @@ extension SearchViewController
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        if isSeaechingLocal == true
+        if isSearching == false
         {
-            return returnCellForTableView(tableView, indexPath: indexPath, dataArray: localContactArray)
+            if historyArray.count > 0
+            {
+               let cell = tableView.dequeueReusableCellWithIdentifier("message", forIndexPath: indexPath)
+               
+                
+                if historyArray.count == indexPath.row
+                {
+                    cell.textLabel?.text = "Clear recent searches"
+                    cell.textLabel?.textColor = UIColor.redColor()
+                    cell.imageView?.image = UIImage(named: "cross")?.imageWithRenderingMode(.AlwaysTemplate)
+                    cell.imageView?.tintColor = UIColor.redColor()
+                    
+                }else
+                {
+                    cell.textLabel?.text = historyArray[indexPath.row]
+                    cell.textLabel?.textColor = UIColor.blackColor()
+                    cell.imageView?.image = UIImage(named: "tab_search-h@x")!.imageWithRenderingMode(.AlwaysTemplate)
+                    cell.imageView?.tintColor = UIColor.grayColor()
+                }
+              return cell
+            }
+            
         }else
         {
-            if allValidContacts.count > 0
+            if isSeaechingLocal == true
             {
-                
-                return returnCellForTableView(tableView, indexPath: indexPath, dataArray: allValidContacts)
+                return returnCellForTableView(tableView, indexPath: indexPath, dataArray: localContactArray)
+            }else
+            {
+                if allValidContacts.count > 0
+                {
+                    
+                    return returnCellForTableView(tableView, indexPath: indexPath, dataArray: allValidContacts)
+                }
             }
         }
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("message", forIndexPath: indexPath)
-        cell.textLabel?.text = errorMessage
-        
-        return cell
-        
-        
+        return UITableViewCell()
         
     }
     
@@ -136,6 +177,31 @@ extension SearchViewController
         
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        
+        
+        if isSearching == false
+        {
+            
+            if indexPath.row == historyArray.count
+            {
+               clearHistory()
+            }else
+            {
+                isSearching = true
+                tableView.allowsSelection = !isSearching
+                self.tableView.reloadData()
+                let searchText = historyArray[indexPath.row]
+                self.searchController.searchBar.text = searchText
+                self.searchController.searchBar.delegate?.searchBarSearchButtonClicked!(self.searchController.searchBar)
+                
+                
+            }
+        }
+        
+    }
+    
     //MARK: CALL
     func buttonClicked(cell: ContactTableViewCell, button: UIButton)
     {
@@ -143,11 +209,22 @@ extension SearchViewController
         
         if self.tableView.indexPathForCell(cell) != nil
         {
-            let indexPath = self.tableView.indexPathForCell(cell)
-            let personContact = allValidContacts[indexPath!.row]
+            if let indexPath = self.tableView.indexPathForCell(cell)
+            {
+                var personContact = SearchPerson()
+                if isSeaechingLocal == true
+                {
+                   personContact =  localContactArray[indexPath.row]
+                }else
+                {
+                    personContact = allValidContacts[indexPath.row]
+                    
+                }
+            
+             
             if button.titleLabel?.text == " Call"
             {
-                let personContact = allValidContacts[indexPath!.row]
+                let personContact = allValidContacts[indexPath.row]
                 let   phone = "tel://"+personContact.mobileNumber
                 UIApplication.sharedApplication().openURL(NSURL(string: phone)!)
             }
@@ -166,11 +243,31 @@ extension SearchViewController
                 
             }else
             {
+                var searchArray = self.retrievePearson()
+                
+                if searchArray == nil
+                {
+                    searchArray = [SearchPerson]()
+                    
+                }
+                if searchArray?.count > 30
+                {
+                    searchArray?.removeFirst()
+                    searchArray?.append(personContact)
+                    
+                }else
+                {
+                     searchArray?.append(personContact)
+                    
+                }
+
+                self.savePerson(searchArray!)
                 let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as? ProfileViewController
                 profileViewController?.personalProfile = personContact
                 
                 self.navigationController!.pushViewController(profileViewController!, animated: true)
             }
+        }
         }
     }
 }
@@ -195,6 +292,9 @@ extension SearchViewController
     internal func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
         isSeaechingLocal = false
+        isSearching      = true
+        tableView.allowsSelection = !isSearching
+        saveSearchHistory(searchBar.text!)
         getSearchForText(searchBar.text!)
         
     }
@@ -213,6 +313,13 @@ extension SearchViewController
         if searchText.characters.count > 0
         {
             searchString(searchText)
+        }else
+        {
+            isSearching = false
+            tableView.allowsSelection = !isSearching
+            isSeaechingLocal = true
+            allValidContacts.removeAll()
+            self.tableView.reloadData()
         }
         
         
@@ -244,31 +351,6 @@ extension SearchViewController
                 {
                     self.allValidContacts = deserializedResponse
                     
-                    
-                   var searchArray = self.retrievePearson()
-                    
-                    if searchArray == nil
-                    {
-                        searchArray = [SearchPerson]()
-                        
-                    }
-                    if searchArray?.count > 30
-                    {
-                        
-                        if deserializedResponse.count > 0
-                        {
-                            searchArray?.removeFirst()
-                            searchArray?.append(deserializedResponse.first!)
-                        }
-                    }else
-                    {
-                        if deserializedResponse.count > 0
-                        {
-                            //searchArray?.removeFirst()
-                            searchArray?.append(deserializedResponse.last!)
-                        }
-                    }
-                    self.savePerson(searchArray!)
                     // NSUserDefaults.standardUserDefaults().setObject(searchArray, forKey: searchHistory)
                     self.view.removeSpinner()
                     self.tableView.reloadData()
@@ -296,6 +378,46 @@ extension SearchViewController
         defaults.synchronize()
     }
     
+    func saveSearchHistory(searchText:String)
+    {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        var array   = defaults.objectForKey("searchString") as? [String]
+        if array?.count > 30
+        {
+            array?.removeLast()
+            array?.insert(searchText, atIndex: 0)
+        }
+        if array == nil
+        {
+            array = [String]()
+        }
+        array?.insert(searchText, atIndex: 0)
+        defaults.setObject(array, forKey: "searchString")
+        historyArray.removeAll()
+        historyArray.appendContentsOf(array!)
+        
+    }
+    
+    func setHistoryArray()
+    {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let array   = defaults.objectForKey("searchString") as? [String]
+        if array?.count > 0
+        {
+            historyArray.removeAll()
+            historyArray.appendContentsOf(array!)
+        }
+        
+    }
+    func clearHistory()
+    {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey("searchString")
+        historyArray.removeAll()
+        self.tableView.reloadData()
+        
+    }
+    
     func retrievePearson() -> [SearchPerson]?
     {
         if let unarchivedObject = NSUserDefaults.standardUserDefaults().objectForKey(searchHistory) as? NSData {
@@ -310,6 +432,8 @@ extension SearchViewController
 {
     func  searchString(searchString:String)
     {
+        isSearching = true
+        tableView.allowsSelection = !isSearching
         //let namePredicate  = NSPredicate(format: "(name BEGINSWITH[c] %@)", searchString)
         let phonePredicate = NSPredicate(format: "(mobileNumber BEGINSWITH[c] %@) OR (name BEGINSWITH[c] %@)", searchString, searchString)
         
@@ -321,6 +445,29 @@ extension SearchViewController
         };
         
     tableView.reloadData()
+        
+    }
+}
+
+extension SearchViewController
+{
+    func textFieldShouldClear(textField: UITextField) -> Bool
+    {
+        self.clearText()
+        return true
+    }
+    
+    func clearText()
+    {
+        isSearching = false
+        tableView.allowsSelection = !isSearching
+        localContactArray.removeAll()
+        allValidContacts.removeAll()
+    }
+    
+    func scrollViewWillBeginDecelerating(scrollView: UIScrollView)
+    {
+        self.searchController.searchBar.resignFirstResponder()
         
     }
 }

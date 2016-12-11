@@ -14,6 +14,7 @@ class MainSearchViewController: UIViewController, ContactTableViewCellProtocol
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var searchButton:UIButton!
     @IBOutlet weak var clearButton:UIButton!
+    @IBOutlet weak var clearButtonBaseView:UIView!
     var allValidContacts = [SearchPerson]()
     override func viewDidLoad()
     {
@@ -28,8 +29,12 @@ class MainSearchViewController: UIViewController, ContactTableViewCellProtocol
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             
         }
+        
+        self.searchButton.setImage(UIImage(named: "tab_search-h@x")!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        
+        self.searchButton.tintColor = UIColor.grayColor()
 
-         
+        
     }
 
     override func didReceiveMemoryWarning()
@@ -190,10 +195,12 @@ extension MainSearchViewController
     {
         if allValidContacts.count > 0
         {
+            self.clearButtonBaseView.hidden = false
             clearButton.userInteractionEnabled = true
             clearButton.alpha   = 1.0
         }else
         {
+            self.clearButtonBaseView.hidden = true
             clearButton.userInteractionEnabled = false
             clearButton.alpha   = 0.5
         }
