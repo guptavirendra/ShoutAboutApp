@@ -2503,7 +2503,7 @@
                                                                                 <constraint firstAttribute="height" constant="21" id="fvU-SY-ElB"/>
                                                                             </constraints>
                                                                         </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="324555" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCo-wl-XUm">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCo-wl-XUm">
                                                                             <rect key="frame" x="21" y="96" width="70" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="21" id="yOy-hh-RlV"/>
@@ -2529,7 +2529,7 @@
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5/5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6e-it-vWi">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6e-it-vWi">
                                                                             <rect key="frame" x="75" y="82" width="20" height="15"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="15" id="bNa-Wx-TLv"/>
@@ -2964,7 +2964,9 @@
                                             <outlet property="countLabel4" destination="o4m-H5-Xn5" id="rg2-sH-yQZ"/>
                                             <outlet property="countLabel5" destination="bF9-o0-Tc8" id="YvY-aR-4Ee"/>
                                             <outlet property="name" destination="Qq3-tb-F1U" id="2yT-aN-DjB"/>
+                                            <outlet property="nameView" destination="5oO-A7-2Dy" id="yIn-pa-FVe"/>
                                             <outlet property="profileImageView" destination="Wn7-hh-948" id="IYy-5x-dlu"/>
+                                            <outlet property="ratingOutOfFive" destination="L6e-it-vWi" id="mau-cr-11s"/>
                                             <outlet property="ratingView" destination="fUK-tJ-eWQ" id="Zey-bq-LE5"/>
                                             <outlet property="reviewCount" destination="WCo-wl-XUm" id="Zte-VP-gK4"/>
                                             <outlet property="view1" destination="Ims-1A-a2G" id="Fuz-Qx-gWY"/>

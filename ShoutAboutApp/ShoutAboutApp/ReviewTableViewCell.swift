@@ -10,6 +10,8 @@ import UIKit
 
 class ReviewTableViewCell: UITableViewCell
 {
+    @IBOutlet weak var ratingOutOfFive: UILabel!
+    @IBOutlet weak var nameView: UIImageView!
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var reviewCount: UILabel!
@@ -40,6 +42,8 @@ class ReviewTableViewCell: UITableViewCell
          view4.makeImageRounded()
          view5.makeImageRounded()
          profileImageView.makeImageRounded()
+         nameView.tintColor = UIColor.whiteColor()
+         nameView.image = UIImage(named: "Name")?.imageWithRenderingMode(.AlwaysTemplate)
         
     }
 

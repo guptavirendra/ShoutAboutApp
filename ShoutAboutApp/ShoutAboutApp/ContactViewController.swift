@@ -119,7 +119,7 @@ extension ContactViewController
         let personContact =  syncContactArray[indexPath.row]
         cell.nameLabel?.text = personContact.name
         cell.mobileLabel?.text = personContact.mobileNumber
-        cell.rateView.rating =  personContact.reviewCount.count
+        cell.rateView!.rating =  personContact.reviewCount.count
         cell.ratingLabel.text = String(personContact.reviewCount.count) + "/5"
         if let urlString = personContact.photo
         {

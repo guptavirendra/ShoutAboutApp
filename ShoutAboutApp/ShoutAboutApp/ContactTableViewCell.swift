@@ -23,7 +23,7 @@ class ContactTableViewCell: UITableViewCell
      @IBOutlet weak var callButton: UIButton!
      @IBOutlet weak var chaBbutton: UIButton!
      @IBOutlet weak var revieBbutton: UIButton!
-     @IBOutlet weak var rateView: RatingControl!
+     @IBOutlet weak var rateView: RatingControl?
     
      var delegate:ContactTableViewCellProtocol?
     
@@ -34,8 +34,11 @@ class ContactTableViewCell: UITableViewCell
        // baseView.backgroundColor = bgColor
         baseView.setGraphicEffects()
         profileImageView.makeImageRoundedWithGray()
-        rateView.color = UIColor.grayColor()
-        rateView.userInteractionEnabled = false
+        if let _ = rateView
+        {
+        rateView!.color = UIColor.grayColor()
+        rateView!.userInteractionEnabled = false
+        }
         // Initialization code
     }
 

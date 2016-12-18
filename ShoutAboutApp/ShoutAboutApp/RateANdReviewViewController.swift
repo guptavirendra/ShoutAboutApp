@@ -23,10 +23,20 @@ class RateANdReviewViewController: UIViewController,UITableViewDataSource, UITab
     var idString:String?
     var name:String = ""
     var photo:String = ""
+    var subtractCount:Int = 0
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        
+        let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
+        if String(appUserId) == idString
+        {
+            subtractCount = 3
+            
+        }
+        
         //self.tableView.addBackGroundImageView()
         //self.tableView.backgroundColor = bgColor
         self.automaticallyAdjustsScrollViewInsets = false
@@ -39,6 +49,10 @@ class RateANdReviewViewController: UIViewController,UITableViewDataSource, UITab
         tapGesture.addTarget(self, action: #selector(self.hideKeyBoard(_:)))
         
         self.title = "Rate & Review"
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.whiteColor()
+             ]
+        
         
         getReview()
     }
@@ -60,13 +74,13 @@ extension RateANdReviewViewController
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 4 + reviewUser.rateReviewList.count //allValidContacts.count //objects.count
+        return 4 - subtractCount + reviewUser.rateReviewList.count //allValidContacts.count //objects.count
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        if indexPath.row == 0
+        if indexPath.row == (0-subtractCount)
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("RatingTableViewCell", forIndexPath: indexPath) as! RatingTableViewCell
             cell.nameLabel.text = name
@@ -87,7 +101,7 @@ extension RateANdReviewViewController
         
             return cell
         }
-        if indexPath.row == 1
+        if indexPath.row == (1-subtractCount)
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("WriteReviewTableViewCell", forIndexPath: indexPath) as! WriteReviewTableViewCell
             cell.textView.layer.borderColor = UIColor.blackColor().CGColor
@@ -95,7 +109,7 @@ extension RateANdReviewViewController
             return cell
         }
         
-        if indexPath.row == 2
+        if indexPath.row == (2-subtractCount)
         {
              let cell = tableView.dequeueReusableCellWithIdentifier("button", forIndexPath: indexPath) as! ClickTableViewCell
             //cell.contentView.backgroundColor = bgColor
@@ -106,7 +120,7 @@ extension RateANdReviewViewController
             return cell
         }
         
-        if indexPath.row == 3
+        if indexPath.row == (3-subtractCount)
         {
             
         let cell = tableView.dequeueReusableCellWithIdentifier("ReviewTableViewCell", forIndexPath: indexPath) as! ReviewTableViewCell
@@ -126,11 +140,12 @@ extension RateANdReviewViewController
             cell.name.text = name
             if let _ = reviewUser.reviewCountArray.first
             {
-            cell.reviewCount.text = (reviewUser.reviewCountArray.first?.count)! + "total"
+            cell.reviewCount.text = (reviewUser.reviewCountArray.first?.count)! + " total"
             }
             if let ratingAverage = reviewUser.ratingAverageArray.first?.average
             {
                 cell.ratingView.rating = Int(Float(ratingAverage)!)
+                cell.ratingOutOfFive.text   =  String(cell.ratingView.rating) + "/5"
             }
             for rateGraph in reviewUser.rateGraphArray
             {
@@ -161,7 +176,7 @@ extension RateANdReviewViewController
         return cell
         }
         
-        let rateReviewer = reviewUser.rateReviewList[indexPath.row-4]
+        let rateReviewer = reviewUser.rateReviewList[indexPath.row-4-subtractCount]
         
         let cell = tableView.dequeueReusableCellWithIdentifier("UesrReviewTableViewCell", forIndexPath: indexPath) as! UesrReviewTableViewCell
         cell.nameLabel.text    = rateReviewer.appUser.name
@@ -188,21 +203,21 @@ extension RateANdReviewViewController
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        if indexPath.row == 0
+        if indexPath.row == 0-subtractCount
         {
             return 150
         }
         
-        if indexPath.row == 1
+        if indexPath.row == 1-subtractCount
         {
                 return 140
         }
-        if indexPath.row == 2
+        if indexPath.row == 2-subtractCount
         {
             return 54
         }
         
-        if indexPath.row == 3
+        if indexPath.row == 3-subtractCount
         {
             return 250
         }
@@ -213,15 +228,15 @@ extension RateANdReviewViewController
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        if indexPath.row == 1
+        if indexPath.row == 1-subtractCount
         {
             return 100
         }
-        if indexPath.row == 2
+        if indexPath.row == 2-subtractCount
         {
             return 54
         }
-        if indexPath.row == 0
+        if indexPath.row == 0-subtractCount
         {
             return 250
         }
@@ -417,11 +432,11 @@ extension RateANdReviewViewController:RatingControlDelegate
        
             DataSessionManger.sharedInstance.getContactReviewList(dict, onFinish: { (response, reviewUser) in
         
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
             
-        self.reviewUser = reviewUser
-             self.tableView.reloadData()
-            self.view.removeSpinner()
+                    self.reviewUser = reviewUser
+                    self.tableView.reloadData()
+                    self.view.removeSpinner()
         })
         
         }) { (error) in
@@ -430,7 +445,7 @@ extension RateANdReviewViewController:RatingControlDelegate
                 // self.tableView.reloadData()
                 self.view.removeSpinner()
             })
-        }
+            }
         }
         
     }

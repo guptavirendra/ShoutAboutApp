@@ -162,7 +162,14 @@ extension MainSearchViewController
             else if button.titleLabel?.text == "reviews"
             {
                 
+                let personContact = allValidContacts[(indexPath?.row)!]
                 let rateANdReviewViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RateANdReviewViewController") as? RateANdReviewViewController
+                rateANdReviewViewController?.idString = String(personContact.idString)
+                rateANdReviewViewController?.name = personContact.name
+                if let _ = personContact.photo
+                {
+                    rateANdReviewViewController?.photo = personContact.photo!
+                }
                 self.navigationController!.pushViewController(rateANdReviewViewController!, animated: true)
                 
                 
