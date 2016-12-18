@@ -23,14 +23,19 @@ class ContactTableViewCell: UITableViewCell
      @IBOutlet weak var callButton: UIButton!
      @IBOutlet weak var chaBbutton: UIButton!
      @IBOutlet weak var revieBbutton: UIButton!
+     @IBOutlet weak var rateView: RatingControl!
+    
      var delegate:ContactTableViewCellProtocol?
     
-    override func awakeFromNib() {
+    override func awakeFromNib()
+    {
         super.awakeFromNib()
         //self.contentView.backgroundColor = bgColor
        // baseView.backgroundColor = bgColor
         baseView.setGraphicEffects()
         profileImageView.makeImageRoundedWithGray()
+        rateView.color = UIColor.grayColor()
+        rateView.userInteractionEnabled = false
         // Initialization code
     }
 

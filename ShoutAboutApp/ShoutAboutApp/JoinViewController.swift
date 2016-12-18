@@ -633,6 +633,7 @@ extension JoinViewController
             ProfileManager.sharedInstance.syncedContactArray.appendContentsOf(contactPerson.data)
                // self.tableView.reloadData()
                 self.saveContacts(ProfileManager.sharedInstance.syncedContactArray)
+                NSNotificationCenter.defaultCenter().postNotificationName("ContactUpdated", object: nil)
                 self.view.removeSpinner()
             })
             
@@ -647,7 +648,6 @@ extension JoinViewController
     
     func saveContacts(person:[SearchPerson])
     {
-        
         let archivedObject = SearchPerson.archivePeople(person)
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.removeObjectForKey(contactStored)

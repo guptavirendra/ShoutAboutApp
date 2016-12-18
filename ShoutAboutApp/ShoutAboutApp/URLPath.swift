@@ -92,9 +92,8 @@ class SearchPerson:PersonContact, NSCoding
     var photo: String?
     var gcm_token: String?
     var last_online_time: String?
-    var ratingAverage:[AnyObject] = [AnyObject]()
-    var reviewCount:[AnyObject]   = [AnyObject]()
-    
+    var ratingAverage:[AnyObject] = [RatingAverage]()
+    var reviewCount:[AnyObject]   = [ReviewCount]()
     
     required override init()
     {

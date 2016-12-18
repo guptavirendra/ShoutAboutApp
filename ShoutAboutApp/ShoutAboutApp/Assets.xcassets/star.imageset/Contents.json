@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "grey_star_s@x.png",
+      "filename" : "grey_star_s.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "grey_star_s@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "grey_star_s@3x.png",
       "scale" : "3x"
     }
   ],

@@ -16,13 +16,15 @@ class UesrReviewTableViewCell: UITableViewCell
     
     @IBOutlet weak var timeLabel: UILabel!
     
-    @IBOutlet weak var rateView: UIView!
+    @IBOutlet weak var rateView: RatingControl!
     @IBOutlet weak var nameLabel: UILabel!
     
     
     @IBOutlet weak var commentLabel: UILabel!
-    override func awakeFromNib() {
+    override func awakeFromNib()
+    {
         super.awakeFromNib()
+        profileImageView.makeImageRounded()
         // Initialization code
     }
 

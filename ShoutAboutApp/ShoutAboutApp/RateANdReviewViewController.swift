@@ -16,8 +16,13 @@ class RateANdReviewViewController: UIViewController,UITableViewDataSource, UITab
     
     var person:SearchPerson = SearchPerson()
     
+    var reviewUser = ReviewUser()
+    
     var rating:String = "0"
     var review:String = ""
+    var idString:String?
+    var name:String = ""
+    var photo:String = ""
 
     override func viewDidLoad()
     {
@@ -32,6 +37,10 @@ class RateANdReviewViewController: UIViewController,UITableViewDataSource, UITab
         let tapGesture = UITapGestureRecognizer()
         self.view.addGestureRecognizer(tapGesture)
         tapGesture.addTarget(self, action: #selector(self.hideKeyBoard(_:)))
+        
+        self.title = "Rate & Review"
+        
+        getReview()
     }
 
     override func didReceiveMemoryWarning()
@@ -51,7 +60,7 @@ extension RateANdReviewViewController
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 5 //allValidContacts.count //objects.count
+        return 4 + reviewUser.rateReviewList.count //allValidContacts.count //objects.count
     }
     
     
@@ -60,6 +69,20 @@ extension RateANdReviewViewController
         if indexPath.row == 0
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("RatingTableViewCell", forIndexPath: indexPath) as! RatingTableViewCell
+            cell.nameLabel.text = name
+            cell.ratingView.delegate = self
+            let urlString       = photo
+            if urlString.characters.count != 0
+            {
+                
+                cell.profileImageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+                
+            }else
+            {
+                cell.profileImageView.image = UIImage(named: "profile")
+            }
+            
+          rating = String(cell.ratingView.rating)
         
         
             return cell
@@ -67,6 +90,8 @@ extension RateANdReviewViewController
         if indexPath.row == 1
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("WriteReviewTableViewCell", forIndexPath: indexPath) as! WriteReviewTableViewCell
+            cell.textView.layer.borderColor = UIColor.blackColor().CGColor
+            review = cell.textView.text
             return cell
         }
         
@@ -75,22 +100,85 @@ extension RateANdReviewViewController
              let cell = tableView.dequeueReusableCellWithIdentifier("button", forIndexPath: indexPath) as! ClickTableViewCell
             //cell.contentView.backgroundColor = bgColor
             cell.button.layer.borderWidth = 1.0
-            //cell.button.layer.borderColor = UIColor.blackColor().CGColor
+            cell.button.layer.borderColor = appColor.CGColor
+            cell.button.layer.cornerRadius = 2.0
             cell.delegate = self
             return cell
         }
         
         if indexPath.row == 3
         {
+            
         let cell = tableView.dequeueReusableCellWithIdentifier("ReviewTableViewCell", forIndexPath: indexPath) as! ReviewTableViewCell
+            
+            
+            let urlString       = photo
+            if urlString.characters.count != 0
+            {
+                
+                cell.profileImageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+                
+            }else
+            {
+                cell.profileImageView.image = UIImage(named: "profile")
+            }
+             
+            cell.name.text = name
+            if let _ = reviewUser.reviewCountArray.first
+            {
+            cell.reviewCount.text = (reviewUser.reviewCountArray.first?.count)! + "total"
+            }
+            if let ratingAverage = reviewUser.ratingAverageArray.first?.average
+            {
+                cell.ratingView.rating = Int(Float(ratingAverage)!)
+            }
+            for rateGraph in reviewUser.rateGraphArray
+            {
+                switch rateGraph.rate
+                {
+                case "5":
+                    cell.countLabel5.text = rateGraph.count
+                    break
+                case "4":
+                    cell.countLabel4.text = rateGraph.count
+                    break
+                case "3":
+                    cell.countLabel3.text = rateGraph.count
+                    break
+                case "2":
+                    cell.countLabel2.text = rateGraph.count
+                    break
+                case "1":
+                    cell.countLabel1.text = rateGraph.count
+                    break
+                default:
+                    break
+                }
+                
+            }
             
         
         return cell
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("UesrReviewTableViewCell", forIndexPath: indexPath) as! UesrReviewTableViewCell
+        let rateReviewer = reviewUser.rateReviewList[indexPath.row-4]
         
-        cell.commentLabel.text = "sdsddfffffggggfgfgfgfgfggfgfgfgfgfgfsdsjhkkdsfkdfskkdfkfdsjkkdfkkfdskfdskkdfkkkfdkkfdkdfkfdk"
+        let cell = tableView.dequeueReusableCellWithIdentifier("UesrReviewTableViewCell", forIndexPath: indexPath) as! UesrReviewTableViewCell
+        cell.nameLabel.text    = rateReviewer.appUser.name
+        cell.commentLabel.text = rateReviewer.review
+        cell.rateView.rating   = Int(rateReviewer.rate)!
+        cell.timeLabel.text    = rateReviewer.created_at
+        let urlString       = rateReviewer.appUser.photo
+         if urlString.characters.count != 0
+        {
+            
+            cell.profileImageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+            
+        }else
+        {
+            cell.profileImageView.image = UIImage(named: "profile")
+        }
+        
         
         return cell
         
@@ -170,7 +258,9 @@ extension RateANdReviewViewController
     
     func textViewDidEndEditing(textView: UITextView)
     {
-        textView.resignFirstResponder()
+        review = textView.text
+       // textView.text = nil
+        //textView.resignFirstResponder()
     }
     /*
     - (void)textViewDidEndEditing:(UITextView *)textView
@@ -203,6 +293,7 @@ extension RateANdReviewViewController
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool
     {
+        //review.appendContentsOf(text)
         if text == "\n"
         {
             textView.resignFirstResponder()
@@ -224,7 +315,13 @@ extension RateANdReviewViewController
                 //let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbSize.height, right: 0)
                // self.tableView.contentInset = contentInsets
                // self.tableView.scrollIndicatorInsets = contentInsets
-                self.tableView.scrollToRowAtIndexPath(self.tableView.indexPathForCell(cell)!, atScrollPosition: .Top, animated: true)
+               
+                
+                if let indexPath = self.tableView.indexPathForCell(cell)
+                {
+                    self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+                }
+                
             }
         }
     }
@@ -244,13 +341,32 @@ extension RateANdReviewViewController
 
 }
 
-extension RateANdReviewViewController
+extension RateANdReviewViewController:RatingControlDelegate
 {
     func buttonClicked(cell:ClickTableViewCell)
     {
+        if  activeTextView != nil
+        {
+            review.appendContentsOf((activeTextView?.text)!)
+            
+            activeTextView?.resignFirstResponder()
+        }
+        
+        
         if self.tableView.indexPathForCell(cell) != nil
         {
-            let indexPath = self.tableView.indexPathForCell(cell)
+            
+            
+            let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
+            let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token) as! String
+            
+            if idString != nil
+            {
+            
+                let dict = ["by_user_id":String(appUserId),"for_user_id":idString!, "rate":rating, "review":review,kapp_user_id:String(appUserId), kapp_user_token :appUserToken ]
+            
+                postReview(dict)
+            }
             
         }
     }
@@ -259,4 +375,63 @@ extension RateANdReviewViewController
     {
         
     }
+    
+    func ratingSelected(ratingInt: Int)
+    {
+         rating = String(ratingInt)
     }
+    
+    
+    func postReview(dict:[String:String])
+    {
+        self.view.showSpinner()
+        DataSessionManger.sharedInstance.addRateReview(dict, onFinish: { (response, deserializedResponse) in
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                // self.tableView.reloadData()
+                self.view.removeSpinner()
+                self.activeTextView?.text = nil
+            })
+            
+            }) { (error) in
+                
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    // self.tableView.reloadData()
+                     self.view.removeSpinner()
+                })
+                 
+        }
+    }
+    
+    
+    func getReview()
+    {
+        self.view.showSpinner()
+        let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
+        let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token) as! String
+        
+        if idString != nil
+        {
+            
+            let dict = ["for_user_id":idString!,kapp_user_id:String(appUserId), kapp_user_token :appUserToken ]
+       
+            DataSessionManger.sharedInstance.getContactReviewList(dict, onFinish: { (response, reviewUser) in
+        
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            
+        self.reviewUser = reviewUser
+             self.tableView.reloadData()
+            self.view.removeSpinner()
+        })
+        
+        }) { (error) in
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                // self.tableView.reloadData()
+                self.view.removeSpinner()
+            })
+        }
+        }
+        
+    }
+}

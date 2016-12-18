@@ -15,6 +15,9 @@ class WriteReviewTableViewCell: UITableViewCell
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        textView.layer.borderColor = UIColor.blackColor().CGColor
+        textView.layer.borderWidth = 1.0
+        textView.layer.cornerRadius = 2.0
         //self.contentView.backgroundColor = bgColor
         // Initialization code
     }

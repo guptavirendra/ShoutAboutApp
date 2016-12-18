@@ -43,6 +43,11 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(ContactViewController.contactReload) , name: "ContactUpdated", object: nil)
+        
+        
+        
         //self.tableView.addBackGroundImageView()
         
        // self.tableView.backgroundColor = bgColor
@@ -50,6 +55,18 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         
 
         // Do any additional setup after loading the view.
+    }
+    
+    deinit
+    {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "ContactUpdated", object: nil)
+        
+    }
+    func contactReload()
+    {
+        syncContactArray =  ProfileManager.sharedInstance.syncedContactArray
+        tableView.reloadData()
+        
     }
     
     
@@ -64,7 +81,12 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     {
         super.viewWillAppear(animated)
         
-      syncContactArray =  ProfileManager.sharedInstance.syncedContactArray
+        dispatch_async(dispatch_get_global_queue(0, 0))
+        {
+            self.getContact()
+        }
+        
+       syncContactArray =  ProfileManager.sharedInstance.syncedContactArray
         //self.navigationController?.navigationBar.hidden = true
         
     }
@@ -97,6 +119,8 @@ extension ContactViewController
         let personContact =  syncContactArray[indexPath.row]
         cell.nameLabel?.text = personContact.name
         cell.mobileLabel?.text = personContact.mobileNumber
+        cell.rateView.rating =  personContact.reviewCount.count
+        cell.ratingLabel.text = String(personContact.reviewCount.count) + "/5"
         if let urlString = personContact.photo
         {
             
@@ -156,7 +180,14 @@ extension ContactViewController
             else if button.titleLabel?.text == "reviews"
             {
               
+                let personContact = syncContactArray[(indexPath?.row)!]
                 let rateANdReviewViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RateANdReviewViewController") as? RateANdReviewViewController
+                rateANdReviewViewController?.idString = String(personContact.idString)
+                rateANdReviewViewController?.name = personContact.name
+                if let _ = personContact.photo
+                {
+                 rateANdReviewViewController?.photo = personContact.photo!
+                }
                  self.navigationController!.pushViewController(rateANdReviewViewController!, animated: true)
                 
                 
@@ -445,4 +476,58 @@ extension ContactViewController
 
     
     */
+    
+    
+    func saveContacts(person:[SearchPerson])
+    {
+        
+        let archivedObject = SearchPerson.archivePeople(person)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey(contactStored)
+        defaults.setObject(archivedObject, forKey: contactStored)
+        defaults.synchronize()
+    }
+    
+    
+    func getContact()
+    {
+        if NetworkConnectivity.isConnectedToNetwork() != true
+        {
+            self.displayAlertMessage("No Internet Connection")
+            
+        }else
+        {
+            self.getContactForPage()
+        }
+        
+    }
+    
+    
+    func getContactForPage()
+    {
+        //self.view.showSpinner()
+        
+        //ProfileManager.sharedInstance.syncedContactArray.removeAll
+        DataSessionManger.sharedInstance.getContactListForPage( { (response, contactPerson) in
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                self.saveContacts(ProfileManager.sharedInstance.syncedContactArray)
+                ProfileManager.sharedInstance.syncedContactArray.removeAll()
+                ProfileManager.sharedInstance.syncedContactArray.appendContentsOf(contactPerson.data)
+                // self.tableView.reloadData()
+               
+                NSNotificationCenter.defaultCenter().postNotificationName("ContactUpdated", object: nil)
+                self.view.removeSpinner()
+            })
+            
+        }) { (error) in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                // self.tableView.reloadData()
+                // self.view.removeSpinner()
+            })
+            
+        }
+    }
+    
 }

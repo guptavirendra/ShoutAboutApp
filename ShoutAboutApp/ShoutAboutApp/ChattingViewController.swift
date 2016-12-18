@@ -201,7 +201,7 @@ extension ChattingViewController
         let  animationDuration = dictInfo.objectForKey(UIKeyboardAnimationDurationUserInfoKey)?.doubleValue
         let  keyboardFrame: CGRect  = (kbFrame?.CGRectValue())!
         var  height:CGFloat =  keyboardFrame.size.height ;
-        if let tabBarVC = self.tabBarController?.tabBar
+        if (self.tabBarController?.tabBar) != nil
         {
             height   -=  (self.tabBarController?.tabBar.frame.size.height)!
             

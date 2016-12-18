@@ -718,7 +718,7 @@ public class BaseNSURLSession: NSObject
                                     {
                                         
                                         do  {
-                                            let json = try NSJSONSerialization.JSONObjectWithData(dataInAnyObject, options: .MutableLeaves) as? String
+                                            let json = try NSJSONSerialization.JSONObjectWithData(dataInAnyObject, options: .MutableLeaves) as? NSString
                                             onFinish(response: data!,deserializedResponse: json!)
                                         }
                                         catch
@@ -1178,7 +1178,6 @@ extension NSMutableData
         appendData(data!)
     }
 }
-
 
 extension String
 {

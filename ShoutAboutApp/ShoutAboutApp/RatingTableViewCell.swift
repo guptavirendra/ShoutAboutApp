@@ -10,13 +10,17 @@ import UIKit
 
 class RatingTableViewCell: UITableViewCell
 {
+    @IBOutlet weak var profileImageView: UIImageView!
 
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var ratingView: RatingControl!
     @IBOutlet weak var baseView: UIView!
     override func awakeFromNib()
     {
         super.awakeFromNib()
         self.contentView.backgroundColor = bgColor
+        profileImageView.makeImageRounded()
+        
         //self.baseView.backgroundColor = bgColor
         // Initialization code
     }

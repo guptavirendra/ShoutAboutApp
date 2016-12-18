@@ -170,7 +170,7 @@ class DataSession: BaseNSURLSession
     func getContactReviewList(dict:[String:String], onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
         
-        super.getWithOnFinish(mCHWebServiceMethod.contact_review_list, parameters: nil, onFinish: { (response, deserializedResponse) in
+        super.getWithOnFinish(mCHWebServiceMethod.contact_review_list, parameters: dict, onFinish: { (response, deserializedResponse) in
             onFinish(response: response, deserializedResponse: deserializedResponse)
         }) { (error) in
             onError(error: error)
@@ -317,11 +317,11 @@ class DataSessionManger: NSObject
                    
                     personalProfileData.created_at = (dataDict?.objectForKey(created_at))! as? String
                     personalProfileData.updated_at = dataDict?.objectForKey(updated_at) as? String
-                    personalProfileData.address = dataDict?.objectForKey(address) as! String
-                    personalProfileData.website = dataDict?.objectForKey(website) as! String
+                    personalProfileData.address = dataDict?.objectForKey(address) as? String
+                    personalProfileData.website = dataDict?.objectForKey(website) as? String
                     if let _ = dataDict?.objectForKey(photo) as? String
                     {
-                        personalProfileData.photo = dataDict?.objectForKey(photo) as! String
+                        personalProfileData.photo = dataDict?.objectForKey(photo) as? String
                     }
                     
                     personalProfileData.gcm_token = (dataDict?.objectForKey(gcm_token) as? String)!
@@ -537,17 +537,18 @@ class DataSessionManger: NSObject
          // GET
         /// for_user_id
         
-        let appTokenDict = NSObject.getAppUserIdAndToken()
         
-        
-        let dataSession = DataSession()
+    let dataSession = DataSession()
         dataSession.getContactReviewList(dict, onFinish: { (response, deserializedResponse) in
             let reviewUser:ReviewUser = ReviewUser()
             if deserializedResponse is NSDictionary
             {
                 if let  review_user = deserializedResponse.objectForKey("review_user") as? [NSDictionary]
                 {
-                    reviewUser.reviewPerson.name = (review_user.first!.objectForKey("name") as? String)!
+                    if let name = review_user.first!.objectForKey("name") as? String
+                    {
+                        reviewUser.reviewPerson.name = name
+                    }
                     
                 }
                 
@@ -569,16 +570,52 @@ class DataSessionManger: NSObject
                             
                             rateReviewr.appUser.idInt =   (appuserDict.objectForKey("id") as? Int)!
                             rateReviewr.appUser.name =      (appuserDict.objectForKey("name") as? String)!
-                            rateReviewr.appUser.email =  (appuserDict.objectForKey("email") as? String)!
-                            rateReviewr.appUser.mobileNumber =   (appuserDict.objectForKey("mobile_number") as? String)!
-                            rateReviewr.appUser.createdAt =   (appuserDict.objectForKey("created_at") as? String)!
-                            rateReviewr.appUser.updatedAt =   (appuserDict.objectForKey("updated_at") as? String)!
-                            rateReviewr.appUser.dob =   (appuserDict.objectForKey("dob") as? String)!
-                            rateReviewr.appUser.address =  (appuserDict.objectForKey("address") as? String)!
-                            rateReviewr.appUser.website =    (appuserDict.objectForKey("website") as? String)!
-                            rateReviewr.appUser.photo =  (appuserDict.objectForKey("photo") as? String)!
-                            rateReviewr.appUser.gcmToken =  (appuserDict.objectForKey("gcm_token") as? String)!
-                            rateReviewr.appUser.lastOnlineTime =   (appuserDict.objectForKey("last_online_time") as? String)!
+                            if let email = appuserDict.objectForKey("email") as? String
+                            {
+                                rateReviewr.appUser.email = email
+                                
+                            }
+                            
+                            if let mobile = appuserDict.objectForKey("mobile_number") as? String
+                            {
+                                rateReviewr.appUser.mobileNumber = mobile
+                            }
+                            
+                            if let createdAt = appuserDict.objectForKey("created_at") as? String
+                            {
+                                rateReviewr.appUser.createdAt = createdAt
+                            }
+                            
+                            if let updatedAt = appuserDict.objectForKey("updated_at") as? String
+                            {
+                                rateReviewr.appUser.updatedAt = updatedAt
+                            }
+                            if let dob = appuserDict.objectForKey("dob") as? String
+                            {
+                                rateReviewr.appUser.dob = dob
+                            }
+                            
+                            if let address = appuserDict.objectForKey("address") as? String
+                            {
+                                rateReviewr.appUser.address = address
+                            }
+                            if let website = appuserDict.objectForKey("website") as? String
+                            {
+                                rateReviewr.appUser.website = website
+                            }
+                            if let photo = appuserDict.objectForKey("photo") as? String
+                            {
+                                rateReviewr.appUser.photo = photo
+                            }
+                            if let gcmToken = appuserDict.objectForKey("gcm_token") as? String
+                            {
+                                rateReviewr.appUser.gcmToken = gcmToken
+                            }
+                            
+                            if let lastOnlineTime = appuserDict.objectForKey("last_online_time") as? String
+                            {
+                                rateReviewr.appUser.lastOnlineTime = lastOnlineTime
+                            }
                             
                             
                             }
@@ -626,6 +663,7 @@ class DataSessionManger: NSObject
                 }
             }
             
+            onFinish(response: response, reviewUser: reviewUser)
             
             
             }) { (error) in

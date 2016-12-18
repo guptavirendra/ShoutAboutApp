@@ -642,10 +642,15 @@ class GradientArcView : UIView {
 
 
 import UIKit
+protocol RatingControlDelegate
+{
+    func ratingSelected(ratingInt:Int)
+}
 
-class RatingControl: UIView {
+class RatingControl: UIView
+{
     // MARK: Properties
-    
+    var delegate:RatingControlDelegate?
     var rating = 0 {
         didSet {
             setNeedsLayout()
@@ -657,23 +662,35 @@ class RatingControl: UIView {
     var spacing = 5
     var stars = 5
     
+    var color:UIColor = UIColor.whiteColor()
+        {
+            didSet {
+                for button in self.subviews
+                {
+                    button.tintColor = color
+                }
+            }
+    }
+    
     // MARK: Initialization
     
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder)
+    {
         super.init(coder: aDecoder)
         
         //star_red
         //star_green
-        let filledStarImage = UIImage(named: "star_green")
-        let emptyStarImage = UIImage(named: "star")
-        
-        
+        let filledStarImage = UIImage(named: "green_star_s")
+        let emptyStarImage = UIImage(named: "star")?.imageWithRenderingMode(.AlwaysTemplate)
         
         for  _ in 0..<5
         {
             let button = UIButton()
             
             button.setImage(emptyStarImage, forState: .Normal)
+             button.tintColor = UIColor.whiteColor()
+             
+           
             button.setImage(filledStarImage, forState: .Selected)
             button.setImage(filledStarImage, forState: [.Highlighted, .Selected])
             
@@ -707,9 +724,10 @@ class RatingControl: UIView {
     
     // MARK: Button Action
     
-    func ratingButtonTapped(button: UIButton) {
+    func ratingButtonTapped(button: UIButton)
+    {
         rating = ratingButtons.indexOf(button)! + 1
-        
+        self.delegate?.ratingSelected(rating)
         updateButtonSelectionStates()
     }
     
@@ -721,13 +739,13 @@ class RatingControl: UIView {
                 
                 if rating > 3 && rating<=5
                 {
-                    let filledStarImage = UIImage(named: "star_green")
+                    let filledStarImage = UIImage(named: "green_star_s")
                     button.setImage(filledStarImage, forState: .Selected)
                     button.setImage(filledStarImage, forState: [.Highlighted, .Selected])
                     button.selected = index < rating
                 }else if rating > 1 && rating<=3
                 {
-                    let filledStarImage = UIImage(named: "star_yellow")
+                    let filledStarImage = UIImage(named: "orange_star_s")
                     
                     button.setImage(filledStarImage, forState: .Selected)
                     button.setImage(filledStarImage, forState: [.Highlighted, .Selected])
@@ -735,7 +753,7 @@ class RatingControl: UIView {
                     
                 }else
                 {
-                    let filledStarImage = UIImage(named: "star_red")
+                    let filledStarImage = UIImage(named: "red_star_s")
                     
                     button.setImage(filledStarImage, forState: .Selected)
                     button.setImage(filledStarImage, forState: [.Highlighted, .Selected])
