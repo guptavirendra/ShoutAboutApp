@@ -70,6 +70,17 @@
 		F12C277F1DCF763F00AEE0A3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C277E1DCF763F00AEE0A3 /* ProfileViewController.swift */; };
 		F12C27811DCF765300AEE0A3 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27801DCF765300AEE0A3 /* ChatViewController.swift */; };
 		F12C27831DCF85CB00AEE0A3 /* RateANdReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12C27821DCF85CB00AEE0A3 /* RateANdReviewViewController.swift */; };
+		F17E085C1E0FF16500FDBF0B /* AKImageCropperOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17E08511E0FF16500FDBF0B /* AKImageCropperOverlayView.swift */; };
+		F17E085D1E0FF16500FDBF0B /* AKImageCropperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17E08521E0FF16500FDBF0B /* AKImageCropperView.swift */; };
+		F17E085E1E0FF16500FDBF0B /* CropperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17E08531E0FF16500FDBF0B /* CropperViewController.swift */; };
+		F17E085F1E0FF16500FDBF0B /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17E08541E0FF16500FDBF0B /* CGFloat.swift */; };
+		F17E08601E0FF16500FDBF0B /* AKImageCropperScollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17E08551E0FF16500FDBF0B /* AKImageCropperScollView.swift */; };
+		F17E08611E0FF16500FDBF0B /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17E08561E0FF16500FDBF0B /* CGRect.swift */; };
+		F17E08621E0FF16500FDBF0B /* AKImageCropperTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17E08571E0FF16500FDBF0B /* AKImageCropperTouchView.swift */; };
+		F17E08631E0FF16500FDBF0B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17E08581E0FF16500FDBF0B /* UIColor.swift */; };
+		F17E08641E0FF16500FDBF0B /* Crop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F17E08591E0FF16500FDBF0B /* Crop.storyboard */; };
+		F17E08651E0FF16500FDBF0B /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17E085A1E0FF16500FDBF0B /* ImageViewController.swift */; };
+		F17E08661E0FF16500FDBF0B /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17E085B1E0FF16500FDBF0B /* UIImage.swift */; };
 		F18839231DD83BE400362B1B /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18839221DD83BE400362B1B /* ReviewTableViewCell.swift */; };
 		F18839251DD8573B00362B1B /* UesrReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18839241DD8573B00362B1B /* UesrReviewTableViewCell.swift */; };
 		F18839271DD86A6F00362B1B /* EditProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18839261DD86A6F00362B1B /* EditProfileTableViewCell.swift */; };
@@ -176,6 +187,17 @@
 		F12C277E1DCF763F00AEE0A3 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F12C27801DCF765300AEE0A3 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		F12C27821DCF85CB00AEE0A3 /* RateANdReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateANdReviewViewController.swift; sourceTree = "<group>"; };
+		F17E08511E0FF16500FDBF0B /* AKImageCropperOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperOverlayView.swift; sourceTree = "<group>"; };
+		F17E08521E0FF16500FDBF0B /* AKImageCropperView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperView.swift; sourceTree = "<group>"; };
+		F17E08531E0FF16500FDBF0B /* CropperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropperViewController.swift; sourceTree = "<group>"; };
+		F17E08541E0FF16500FDBF0B /* CGFloat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
+		F17E08551E0FF16500FDBF0B /* AKImageCropperScollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperScollView.swift; sourceTree = "<group>"; };
+		F17E08561E0FF16500FDBF0B /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
+		F17E08571E0FF16500FDBF0B /* AKImageCropperTouchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKImageCropperTouchView.swift; sourceTree = "<group>"; };
+		F17E08581E0FF16500FDBF0B /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		F17E08591E0FF16500FDBF0B /* Crop.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Crop.storyboard; sourceTree = "<group>"; };
+		F17E085A1E0FF16500FDBF0B /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		F17E085B1E0FF16500FDBF0B /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		F18839221DD83BE400362B1B /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		F18839241DD8573B00362B1B /* UesrReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UesrReviewTableViewCell.swift; sourceTree = "<group>"; };
 		F18839261DD86A6F00362B1B /* EditProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileTableViewCell.swift; sourceTree = "<group>"; };
@@ -337,6 +359,17 @@
 		F12C274F1DCE45A800AEE0A3 /* ShoutAboutApp */ = {
 			isa = PBXGroup;
 			children = (
+				F17E08511E0FF16500FDBF0B /* AKImageCropperOverlayView.swift */,
+				F17E08521E0FF16500FDBF0B /* AKImageCropperView.swift */,
+				F17E08531E0FF16500FDBF0B /* CropperViewController.swift */,
+				F17E08541E0FF16500FDBF0B /* CGFloat.swift */,
+				F17E08551E0FF16500FDBF0B /* AKImageCropperScollView.swift */,
+				F17E08561E0FF16500FDBF0B /* CGRect.swift */,
+				F17E08571E0FF16500FDBF0B /* AKImageCropperTouchView.swift */,
+				F17E08581E0FF16500FDBF0B /* UIColor.swift */,
+				F17E08591E0FF16500FDBF0B /* Crop.storyboard */,
+				F17E085A1E0FF16500FDBF0B /* ImageViewController.swift */,
+				F17E085B1E0FF16500FDBF0B /* UIImage.swift */,
 				F16FC7271DD64BCC009CC979 /* Network */,
 				F18839311DD8CF0A00362B1B /* LoginAndOTP */,
 				F12C27721DCF079E00AEE0A3 /* InputTableViewCell.swift */,
@@ -470,6 +503,7 @@
 			files = (
 				F12C275B1DCE45A800AEE0A3 /* LaunchScreen.storyboard in Resources */,
 				F12C27581DCE45A800AEE0A3 /* Assets.xcassets in Resources */,
+				F17E08641E0FF16500FDBF0B /* Crop.storyboard in Resources */,
 				F1227AF91E070FE7002D9CE3 /* ContactTableViewCell.xib in Resources */,
 				F11DB4F81DD9AB170084F9F4 /* SDWebImage in Resources */,
 				F12C27561DCE45A800AEE0A3 /* Main.storyboard in Resources */,
@@ -537,9 +571,11 @@
 				F11DB5201DD9AD060084F9F4 /* MKAnnotationView+WebCache.m in Sources */,
 				F11DB5211DD9AD060084F9F4 /* NSData+ImageContentType.h in Sources */,
 				F11DB5221DD9AD060084F9F4 /* NSData+ImageContentType.m in Sources */,
+				F17E085E1E0FF16500FDBF0B /* CropperViewController.swift in Sources */,
 				F11DB5231DD9AD060084F9F4 /* SDImageCache.h in Sources */,
 				F11DB5241DD9AD060084F9F4 /* SDImageCache.m in Sources */,
 				F11DB5251DD9AD060084F9F4 /* SDWebImageCompat.h in Sources */,
+				F17E08651E0FF16500FDBF0B /* ImageViewController.swift in Sources */,
 				F11DB5261DD9AD060084F9F4 /* SDWebImageCompat.m in Sources */,
 				F11DB5271DD9AD060084F9F4 /* SDWebImageDecoder.h in Sources */,
 				F11DB5281DD9AD060084F9F4 /* SDWebImageDecoder.m in Sources */,
@@ -548,6 +584,7 @@
 				F11DB52B1DD9AD060084F9F4 /* SDWebImageDownloaderOperation.h in Sources */,
 				F11DB52C1DD9AD060084F9F4 /* SDWebImageDownloaderOperation.m in Sources */,
 				F11DB52D1DD9AD060084F9F4 /* SDWebImageManager.h in Sources */,
+				F17E08621E0FF16500FDBF0B /* AKImageCropperTouchView.swift in Sources */,
 				F11B75FC1DE17B520075DDCB /* ChatImageTableViewCell.swift in Sources */,
 				F11DB52E1DD9AD060084F9F4 /* SDWebImageManager.m in Sources */,
 				F11DB52F1DD9AD060084F9F4 /* SDWebImageOperation.h in Sources */,
@@ -564,10 +601,15 @@
 				F11DB5381DD9AD060084F9F4 /* UIImage+WebP.h in Sources */,
 				F11DB5391DD9AD060084F9F4 /* UIImage+WebP.m in Sources */,
 				F11DB53A1DD9AD060084F9F4 /* UIImageView+HighlightedWebCache.h in Sources */,
+				F17E08631E0FF16500FDBF0B /* UIColor.swift in Sources */,
 				F11DB53B1DD9AD060084F9F4 /* UIImageView+HighlightedWebCache.m in Sources */,
 				F11DB53C1DD9AD060084F9F4 /* UIImageView+WebCache.h in Sources */,
+				F17E085C1E0FF16500FDBF0B /* AKImageCropperOverlayView.swift in Sources */,
+				F17E08611E0FF16500FDBF0B /* CGRect.swift in Sources */,
 				F11DB53D1DD9AD060084F9F4 /* UIImageView+WebCache.m in Sources */,
+				F17E085F1E0FF16500FDBF0B /* CGFloat.swift in Sources */,
 				F11DB4FE1DD9ACF10084F9F4 /* SWRevealViewController.h in Sources */,
+				F17E08601E0FF16500FDBF0B /* AKImageCropperScollView.swift in Sources */,
 				F11DB4FF1DD9ACF10084F9F4 /* SWRevealViewController.m in Sources */,
 				F12713B21DCFC105005928AD /* WriteReviewTableViewCell.swift in Sources */,
 				F12C27791DCF497F00AEE0A3 /* ContactTableViewCell.swift in Sources */,
@@ -576,6 +618,7 @@
 				F12713B01DCF9E9F005928AD /* RatingTableViewCell.swift in Sources */,
 				F12C27751DCF07BB00AEE0A3 /* ClickTableViewCell.swift in Sources */,
 				F12C27811DCF765300AEE0A3 /* ChatViewController.swift in Sources */,
+				F17E08661E0FF16500FDBF0B /* UIImage.swift in Sources */,
 				F12C277D1DCF761D00AEE0A3 /* FeedsViewController.swift in Sources */,
 				F12C276B1DCE6DDF00AEE0A3 /* DataSession.swift in Sources */,
 				F18839291DD877C000362B1B /* ChattingViewController.swift in Sources */,
@@ -584,6 +627,7 @@
 				F188392B1DD8A76B00362B1B /* ChattingTableViewCell.swift in Sources */,
 				F12C27711DCEFDE100AEE0A3 /* JoinViewController.swift in Sources */,
 				F18839271DD86A6F00362B1B /* EditProfileTableViewCell.swift in Sources */,
+				F17E085D1E0FF16500FDBF0B /* AKImageCropperView.swift in Sources */,
 				F12C27531DCE45A800AEE0A3 /* ViewController.swift in Sources */,
 				F1DD72031DEAADF800DE0A12 /* ChannelListViewController.swift in Sources */,
 				F12C27651DCE643D00AEE0A3 /* NetworkConnectivity.swift in Sources */,

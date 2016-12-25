@@ -62,9 +62,14 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         NSNotificationCenter.defaultCenter().removeObserver(self, name: "ContactUpdated", object: nil)
         
     }
+    
     func contactReload()
     {
         syncContactArray =  ProfileManager.sharedInstance.syncedContactArray
+       /*
+       syncContactArray =   syncContactArray.sort { (first, second) -> Bool in
+           return first.app_user_token != nil
+        }*/
         tableView.reloadData()
         
     }
@@ -80,13 +85,14 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        syncContactArray =  ProfileManager.sharedInstance.syncedContactArray
         
         dispatch_async(dispatch_get_global_queue(0, 0))
         {
             self.getContact()
         }
         
-       syncContactArray =  ProfileManager.sharedInstance.syncedContactArray
+       
         //self.navigationController?.navigationBar.hidden = true
         
     }
@@ -119,8 +125,44 @@ extension ContactViewController
         let personContact =  syncContactArray[indexPath.row]
         cell.nameLabel?.text = personContact.name
         cell.mobileLabel?.text = personContact.mobileNumber
-        cell.rateView!.rating =  personContact.reviewCount.count
-        cell.ratingLabel.text = String(personContact.reviewCount.count) + "/5"
+        //cell.rateView!.rating =  personContact.reviewCount.count
+        //cell.ratingLabel.text = String(personContact.reviewCount.count) + "/5"
+        
+       // if personContact.app_user_token != nil
+       // {
+            cell.revieBbutton.hidden = false
+            cell.rateView?.hidden    = false
+            cell.ratingLabel.hidden  = false
+            if let count = personContact.reviewCount.first?.count
+            {
+                
+                let title:String = String(count) + " reviews"
+                cell.revieBbutton.setTitle(title, forState: .Normal)
+            }else
+            {
+                let title:String = String(0) + " reviews"
+                cell.revieBbutton.setTitle(title, forState: .Normal)
+            }
+            if let ratingAverage = personContact.ratingAverage.first?.average
+            {
+                cell.rateView!.rating = Int(Float(ratingAverage)!)
+                cell.ratingLabel.text   =  String(cell.rateView!.rating) + "/5"
+            }else
+            {
+                cell.rateView!.rating =  0
+                cell.ratingLabel.text   =  String(cell.rateView!.rating) + "/5"
+            }
+
+        //}else
+        //{
+            //cell.revieBbutton.hidden = true
+            //cell.rateView?.hidden    = true
+            //cell.ratingLabel.hidden  = true
+            
+        //}
+        
+        
+        
         if let urlString = personContact.photo
         {
             
@@ -165,6 +207,7 @@ extension ContactViewController
         if self.tableView.indexPathForCell(cell) != nil
         {
             let indexPath = self.tableView.indexPathForCell(cell)
+            let personContact = syncContactArray[(indexPath?.row)!]
             if button.titleLabel?.text == " Call"
             {
                 let personContact = allValidContacts[indexPath!.row]
@@ -177,10 +220,10 @@ extension ContactViewController
                 self.navigationController!.pushViewController(chattingViewController!, animated: true)
                 
             }
-            else if button.titleLabel?.text == "reviews"
+            else if button.titleLabel?.text?.containsString("reviews") == true
             {
               
-                let personContact = syncContactArray[(indexPath?.row)!]
+               
                 let rateANdReviewViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RateANdReviewViewController") as? RateANdReviewViewController
                 rateANdReviewViewController?.idString = String(personContact.idString)
                 rateANdReviewViewController?.name = personContact.name
@@ -194,6 +237,7 @@ extension ContactViewController
             }else
             {
                 let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as? ProfileViewController
+                profileViewController?.personalProfile = personContact
                 self.navigationController!.pushViewController(profileViewController!, animated: true)
             }
         }
@@ -517,7 +561,7 @@ extension ContactViewController
                 ProfileManager.sharedInstance.syncedContactArray.appendContentsOf(contactPerson.data)
                 // self.tableView.reloadData()
                
-                NSNotificationCenter.defaultCenter().postNotificationName("ContactUpdated", object: nil)
+                self.contactReload()
                 self.view.removeSpinner()
             })
             

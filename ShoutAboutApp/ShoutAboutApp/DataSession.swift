@@ -332,6 +332,8 @@ class DataSessionManger: NSObject
                          personalProfileData.last_online_time = lastonlineTime
                         
                     }
+                    
+                    /*
                    
                     if let _ = (dataDict?.objectForKey("rating_average") as? [AnyObject])
                     {
@@ -342,6 +344,7 @@ class DataSessionManger: NSObject
                     {
                         personalProfileData.reviewCount = dataDict?.objectForKey("review_count") as! [AnyObject]
                     }
+                    */
                     
                 }
                 
@@ -443,8 +446,37 @@ class DataSessionManger: NSObject
                         }
                        
                         person.mobileNumber = (dict.objectForKey("mobile_number") as? String)!
+                        
+                        
                          //person.ratingAverage = (dict.objectForKey("rating_average") as? [AnyObject])!
                         // person.reviewCount = (dict.objectForKey("review_count") as? [AnyObject])!
+                        
+                        if let  ratingAverage = deserializedResponse.objectForKey("ratingAverage") as? [NSDictionary]
+                        {
+                            for dict in ratingAverage
+                            {
+                                let average = RatingAverage()
+                                average.average =   (dict.objectForKey("average") as? String)!
+                                person.ratingAverage.append(average)
+                                
+                            }
+                            
+                        }
+                        
+                        if let  reviewCount = deserializedResponse.objectForKey("reviewCount") as? [NSDictionary]
+                        {
+                            for dict in reviewCount
+                            {
+                                let count = ReviewCount()
+                                count.count =   (dict.objectForKey("count") as? String)!
+                                person.reviewCount.append(count)
+                                
+                            }
+                            
+                        }
+
+                        
+                        
                         personArray.append(person)
                         
                     }
@@ -743,6 +775,7 @@ class DataSessionManger: NSObject
                          searchPerson.photo = dict.objectForKey("photo") as? String
                          searchPerson.gcm_token = dict.objectForKey("gcm_token") as? String
                          searchPerson.last_online_time = dict.objectForKey("last_online_time") as? String
+                        /*
                         if let ratingAverage =  dict.objectForKey("rating_average") as? [AnyObject]
                         {
                             searchPerson.ratingAverage = ratingAverage
@@ -751,6 +784,33 @@ class DataSessionManger: NSObject
                         if let reviewcount = dict.objectForKey("review_count") as? [AnyObject]
                         {
                             searchPerson.reviewCount = reviewcount
+                        }*/
+                        
+                        if let  ratingAverage = dict.objectForKey("rating_average") as? [NSDictionary]
+                        {
+                            for dict in ratingAverage
+                            {
+                                let average = RatingAverage()
+                                if let avg = dict.objectForKey("average") as? String
+                                {
+                                    average.average =   avg
+                                }
+                                searchPerson.ratingAverage.append(average)
+                                
+                            }
+                            
+                        }
+                        
+                        if let  reviewCount = dict.objectForKey("review_count") as? [NSDictionary]
+                        {
+                            for dict in reviewCount
+                            {
+                                let count = ReviewCount()
+                                count.count =   (dict.objectForKey("count") as? String)!
+                                searchPerson.reviewCount.append(count)
+                                
+                            }
+                            
                         }
                         conatactPerson.data.append(searchPerson)
                          

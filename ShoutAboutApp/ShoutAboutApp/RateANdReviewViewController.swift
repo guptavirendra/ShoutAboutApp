@@ -406,6 +406,7 @@ extension RateANdReviewViewController:RatingControlDelegate
                 // self.tableView.reloadData()
                 self.view.removeSpinner()
                 self.activeTextView?.text = nil
+                self.getReview()
             })
             
             }) { (error) in
@@ -413,6 +414,7 @@ extension RateANdReviewViewController:RatingControlDelegate
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     // self.tableView.reloadData()
                      self.view.removeSpinner()
+                    self.getReview()
                 })
                  
         }

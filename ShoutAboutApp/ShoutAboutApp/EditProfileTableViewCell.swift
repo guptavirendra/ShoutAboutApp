@@ -11,18 +11,23 @@ import UIKit
 protocol EditProfileTableViewCellProtocol
 {
     func editButtonClickedForCell(cell:EditProfileTableViewCell)
+    func getTextForCell(text:String, cell:EditProfileTableViewCell)
 }
 
 class EditProfileTableViewCell: UITableViewCell
 {
     @IBOutlet weak var  titleLabel:UILabel!
-    @IBOutlet weak var  dataLabel :UILabel!
-    @IBOutlet weak var editButton:UIButton!
+    @IBOutlet weak var  dataTextField :UITextField!
+    @IBOutlet weak var  editButton:UIButton!
+    @IBOutlet weak var inputImage:UIImageView!
+    
     var delegate:EditProfileTableViewCellProtocol?
  
     override func awakeFromNib()
     {
         super.awakeFromNib()
+        dataTextField.userInteractionEnabled = false
+        dataTextField.addTarget(self, action:#selector(InputTableViewCell.edited), forControlEvents:UIControlEvents.EditingChanged)
         
     }
 
@@ -35,6 +40,14 @@ class EditProfileTableViewCell: UITableViewCell
     @IBAction func editButtonClicked(button:UIButton)
     {
         self.delegate?.editButtonClickedForCell(self)
+    }
+    
+    func edited()
+    {
+        
+       let inputText = dataTextField.text!
+        self.delegate?.getTextForCell(inputText, cell: self)
+        
     }
 
 }

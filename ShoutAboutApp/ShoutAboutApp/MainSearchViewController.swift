@@ -49,7 +49,8 @@ class MainSearchViewController: UIViewController, ContactTableViewCellProtocol
         
         if let historydata = self.retrievePearson()
         {
-            allValidContacts = historydata
+            
+            allValidContacts = historydata.reverse()
             self.tableView.reloadData()
             
         }

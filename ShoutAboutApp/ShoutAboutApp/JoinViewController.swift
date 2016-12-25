@@ -188,9 +188,7 @@ extension JoinViewController
             return 66
         }
         
-        
         return 44
-        
     }
 
     
@@ -286,7 +284,7 @@ extension JoinViewController
                 {
                     dispatch_async(dispatch_get_main_queue(), {
                         self.view.removeSpinner()
-                        self.displayAlert("Success", handler: self.handler)
+                        self.displayAlert("Success", handler: nil)
                         
                     });
                 }
@@ -327,8 +325,6 @@ extension JoinViewController
             self.website = text
             
         }
-        
-        
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool

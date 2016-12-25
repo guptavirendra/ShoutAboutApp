@@ -39,8 +39,9 @@ class ProfileManager:NSObject
 
 import UIKit
 import MobileCoreServices
+import AVFoundation
 
-class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CropperViewControllerDelegate, UITextFieldDelegate, EditProfileTableViewCellProtocol
 {
     var selectedImages:UIImage?
     var personalProfile:SearchPerson = SearchPerson()// since profile is vary from user to user
@@ -54,7 +55,16 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var imageView:UIImageView!
     
-    @IBOutlet weak var nameLabel:UILabel!
+    @IBOutlet weak var nameTextField:UITextField!
+    @IBOutlet weak var locationButton:UIButton!
+    @IBOutlet weak var editButton:UIButton!
+    
+    
+    var activeTextField:UITextField?
+    var name:String = ""
+    var email:String = ""
+    var address:String = ""
+    var website:String = ""
     
     override func viewDidLoad()
     {
@@ -64,13 +74,41 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         imageView.makeImageRounded()
         
-        self.nameLabel.text = personalProfile.name
+        self.nameTextField.text = personalProfile.name
+        if let _ = personalProfile.email
+        {
+            self.email    = personalProfile.email!
+        }
+        if let _ = personalProfile.address
+        {
+            self.address  = personalProfile.address!
+        }
+        if let _ = personalProfile.website
+        {
+            self.website  = personalProfile.website!
+        }
         if let photo  = personalProfile.photo
         {
             setProfileImgeForURL(photo)
         }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.showKeyBoard(_:)), name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.hideKeyBoard(_:)), name: UIKeyboardWillHideNotification, object: nil)
             
         
+    }
+    deinit
+    {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(animated: Bool)
+    {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        
+        super.viewDidDisappear(animated)
     }
 
     override func didReceiveMemoryWarning()
@@ -96,6 +134,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             self.cameraButton.hidden     = false
             self.cameraButton.hidden     = true
             self.favoriteBlockSpamConstraints.constant = 30
+        }
+        
+        if personalProfile.idString != ProfileManager.sharedInstance.personalProfile.idString
+        {
+            editButton.hidden = true
         }
         if let photo  = personalProfile.photo
         {
@@ -123,7 +166,13 @@ extension ProfileViewController
     
     func setProfileImgeForURL(urlString:String)
     {
+        if ProfileManager.sharedInstance.localStoredImage != nil
+        {
+            self.imageView.image = ProfileManager.sharedInstance.localStoredImage
+        }else
+        {
         self.imageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+        }
     }
     
     
@@ -140,6 +189,8 @@ extension ProfileViewController
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("EditProfileTableViewCell", forIndexPath: indexPath) as! EditProfileTableViewCell
+        cell.delegate = self
+        cell.dataTextField.delegate = self
         if personalProfile.idString != ProfileManager.sharedInstance.personalProfile.idString
         {
            cell.editButton.hidden = true
@@ -148,49 +199,269 @@ extension ProfileViewController
         if indexPath.row == 0
         {
             cell.titleLabel.text = "Email"
-            cell.dataLabel.text  = personalProfile.email
-           
+            cell.dataTextField.text  = personalProfile.email
+            //self.email =  cell.dataTextField.text!
+            cell.dataTextField.tag = 0
+            cell.inputImage.image = UIImage(named: kEmail)
+            
             
         }
         
         if indexPath.row == 1
         {
             cell.titleLabel.text = "Mobile"
-            cell.dataLabel.text  = personalProfile.mobileNumber
+            cell.dataTextField.text  = personalProfile.mobileNumber
+            cell.dataTextField.tag   = 1
+            cell.inputImage.image = UIImage(named: "mobile")
             
         }
         
         if indexPath.row == 2
         {
             cell.titleLabel.text = "Address"
-            cell.dataLabel.text  = personalProfile.address
+            cell.dataTextField.text  = personalProfile.address
+           // self.address = cell.dataTextField.text!
+            cell.dataTextField.tag   = 2
+            cell.inputImage.image = UIImage(named: kAddress)
             
         }
         if indexPath.row == 3
         {
             cell.titleLabel.text = "Website"
-            cell.dataLabel.text  = personalProfile.website
+            cell.dataTextField.text  = personalProfile.website
+            //self.website = cell.dataTextField.text!
+            cell.dataTextField.tag   = 3
+            cell.inputImage.image = UIImage(named: kWebsite)
         }
         
         return cell
     }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        return 60
+    }
+    
+    func getTextForCell(text: String, cell: EditProfileTableViewCell)
+    {
+        if cell.dataTextField.tag == 0
+        {
+        
+             self.email = text
+            
+        }
+        if cell.dataTextField.tag == 1
+        {
+           
+        }
+        if cell.dataTextField.tag == 2
+        {
+            self.address = text
+        }
+        if cell.dataTextField.tag == 3
+        {
+            self.website = text
+            
+        }
+    }
+    func editButtonClickedForCell(cell:EditProfileTableViewCell)
+    {
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool
+    {
+        return true
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField)
+    {
+        self.activeTextField = textField
+    }
+    func textFieldDidEndEditing(textField: UITextField)
+    {
+        
+        
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func showKeyBoard(notification: NSNotification)
+    {
+        if ((activeTextField?.superview?.superview?.superview!.isKindOfClass(EditProfileTableViewCell)) != nil)
+        {
+            if let cell = activeTextField?.superview?.superview?.superview as? EditProfileTableViewCell
+            {
+                let dictInfo: NSDictionary = notification.userInfo!
+                let kbSize :CGSize = (dictInfo.objectForKey(UIKeyboardFrameBeginUserInfoKey)?.CGRectValue().size)!
+                let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbSize.height, right: 0)
+                self.tableView.contentInset = contentInsets
+                self.tableView.scrollIndicatorInsets = contentInsets
+                self.tableView.scrollToRowAtIndexPath(self.tableView.indexPathForCell(cell)!, atScrollPosition: .Top, animated: true)
+            }
+        }
+    }
+    
+    
+    func hideKeyBoard(notification: NSNotification)
+    {
+        
+        if  activeTextField != nil
+        {
+            let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            self.tableView.contentInset = contentInsets
+            self.tableView.scrollIndicatorInsets = contentInsets
+        }
+    }
+
+    @IBAction func editButtonClicked(sender:UIButton)
+    {
+        print("join")
+        
+        
+        let visibleCells = tableView.visibleCells as! [EditProfileTableViewCell]
+        
+        if sender.titleLabel?.text == "Edit"
+        {
+            dispatch_async(dispatch_get_main_queue(),{
+                let cell =  visibleCells.first
+                cell?.dataTextField.becomeFirstResponder()
+            })
+            
+                for  cell in visibleCells
+                {
+                    if cell.dataTextField.tag != 1
+                    {
+                        cell.dataTextField.userInteractionEnabled = true
+                    }
+                    
+                }
+                
+            
+            sender.setTitle("Save", forState: .Normal)
+            
+        }else
+        {
+            self.name = nameTextField.text!
+            
+            
+            
+        print(" email:\(self.email), name:\(self.name),  web:\(self.website ), address:f \(self.address) ")
+        
+        if self.name.characters.count == 0
+        {
+            self.displayAlertMessage("Please enter name")
+            
+        }else if self.email.characters.count == 0
+        {
+            self.displayAlertMessage("Please enter email")
+        }
+        else if self.address.characters.count == 0
+        {
+            self.displayAlertMessage("Please enter address")
+            
+        }else if self.website.characters.count == 0
+        {
+            self.displayAlertMessage("Please enter website")
+            
+        }else
+        {
+            for  cell in visibleCells
+            {
+                cell.dataTextField.userInteractionEnabled = false
+                
+            }
+            let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
+            let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token) as! String
+            
+            let dict = ["name":self.name, "email":self.email, "website":self.website, "address":self.address, kapp_user_id:String(appUserId), kapp_user_token :appUserToken, "notify_token":"text"]
+            postData(dict)
+        }
+        }
+    }
+    
+    func postData(dict:[String:String])
+    {
+        activeTextField?.resignFirstResponder()
+        self.view.showSpinner()
+        DataSessionManger.sharedInstance.updateProfile(dict, onFinish: { (response, deserializedResponse) in
+            if deserializedResponse is NSDictionary
+            {
+                if deserializedResponse.objectForKey("success") != nil
+                {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.view.removeSpinner()
+                        self.editButton.setTitle("Edit", forState: .Normal)
+                        self.getProfileData()
+                        //self.displayAlertMessage("Success")
+                        
+                    });
+                }
+            }
+            
+            
+        }) { (error) in
+            dispatch_async(dispatch_get_main_queue(), {
+                self.view.removeSpinner()
+                self.displayAlertMessage(error as! String)
+                
+            });
+            
+            
+        }
+        
+        
+    }
+
+    
 }
 
 extension ProfileViewController
 {
+    
+    
     @IBAction func cameraButtonClicked(sender:UIButton)
     {
-
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet) // 1
+        let firstAction = UIAlertAction(title: "Take Photo", style: .Default) { (alert: UIAlertAction!) -> Void in
+            NSLog("You pressed button one")
+            
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+            {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+            
+        } // 2
         
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        imagePicker.mediaTypes = [kUTTypeImage as String]
-        imagePicker.allowsEditing = false
-        self.presentViewController(imagePicker, animated: true,
-                                   completion: nil)
+        let secondAction = UIAlertAction(title: "Choose Photo", style: .Default) { (alert: UIAlertAction!) -> Void in
+            NSLog("You pressed button two")
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            imagePicker.mediaTypes = [kUTTypeImage as String]
+            imagePicker.allowsEditing = false
+            self.presentViewController(imagePicker, animated: true,
+                                       completion: nil)
+        } // 3
+        
+        let thirdAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alert: UIAlertAction!) -> Void in
+            NSLog("You pressed button two")
+        } // 3
+        
+        alert.addAction(firstAction) // 4
+        alert.addAction(secondAction) // 5
+        alert.addAction(thirdAction) // 5
+        presentViewController(alert, animated: true, completion:nil) // 6
     }
     
+    /*
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         let mediaType = info[UIImagePickerControllerMediaType] as! String
@@ -206,10 +477,27 @@ extension ProfileViewController
         }
         
     }
+    */
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            
+            let storyboard = UIStoryboard(name: "Crop", bundle: nil)
+            let vc = storyboard.instantiateViewControllerWithIdentifier("cropper-vc") as! CropperViewController
+            vc._image = pickedImage
+            vc.delegate = self
+            
+            picker.pushViewController(vc, animated: true)
+        }
+    }
+
     
     
     func imageFileSelected(selectedImage: UIImage)
     {
+        
         ProfileManager.sharedInstance.localStoredImage = selectedImage
         let currentTime = NSDate().timeIntervalSince1970 as NSTimeInterval
         let extensionPathStr = "profile\(currentTime).jpg"
@@ -327,3 +615,76 @@ extension SWRevealViewController
 }
 
 
+extension ProfileViewController
+{
+    func croppedImage(image: UIImage, vc:UIViewController)
+    {
+        vc.dismissViewControllerAnimated(true, completion: nil)
+        imageView.image = image
+
+        ProfileManager.sharedInstance.localStoredImage = image
+        let currentTime = NSDate().timeIntervalSince1970 as NSTimeInterval
+        let extensionPathStr = "profile\(currentTime).jpg"
+        let documentsDirectory = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+        let fullPathToFile = "\(documentsDirectory)/\(extensionPathStr)"
+
+        print(fullPathToFile)
+
+        let imageData: NSData = UIImageJPEGRepresentation(image, 0.5)!
+
+
+
+        imageData.writeToFile(fullPathToFile, atomically: true)
+
+        let imagePath =  [ "photo"]
+
+        let mediaPathArray = [fullPathToFile]
+
+        if NetworkConnectivity.isConnectedToNetwork() != true
+        {
+
+        }else
+        {
+            self.view.showSpinner()
+            DataSessionManger.sharedInstance.postProfileImage(mediaPathArray, name: imagePath, onFinish: { (response, deserializedResponse) in
+            dispatch_async(dispatch_get_main_queue(), {
+            self.view.removeSpinner()
+            //self.displayAlert("Success", handler: self.handler)
+                self.getProfileData()
+
+            });
+
+            }) { (error) in
+            dispatch_async(dispatch_get_main_queue(),
+            {
+            self.view.removeSpinner()
+
+
+            });
+          }
+        }
+    }
+    // MARK: GET DATA
+    func  getProfileData()
+    {
+        self.view.showSpinner()
+        DataSessionManger.sharedInstance.getProfileData({ (response, personalProfile) in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.view.removeSpinner()
+                
+                ProfileManager.sharedInstance.personalProfile = personalProfile
+                
+            });
+            
+        }) { (error) in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.view.removeSpinner()
+                
+                
+            });
+            
+        }
+    }
+}
