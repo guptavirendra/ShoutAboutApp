@@ -74,6 +74,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         imageView.makeImageRounded()
         
+        
+        let tapGesture = UITapGestureRecognizer()
+        tapGesture.addTarget(self, action: #selector(self.preview))
+        tapGesture.numberOfTapsRequired = 1
+        
+        imageView.addGestureRecognizer(tapGesture)
+        
         self.nameTextField.text = personalProfile.name
         if let _ = personalProfile.email
         {
@@ -686,5 +693,30 @@ extension ProfileViewController
             });
             
         }
+    }
+}
+extension ProfileViewController:UIDocumentInteractionControllerDelegate
+{
+    @IBAction func preview()
+    {
+        
+        showFile(personalProfile.photo!)
+        
+    }
+    
+    func showFile(path:String)
+    {
+        
+            let pdfViewer:UIDocumentInteractionController = UIDocumentInteractionController(URL: NSURL.fileURLWithPath(path))
+            pdfViewer.delegate = self
+            pdfViewer.presentPreviewAnimated(true)
+            
+    
+    }
+    
+    func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController
+    {
+        return self
+        
     }
 }
