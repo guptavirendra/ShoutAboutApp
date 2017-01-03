@@ -138,39 +138,100 @@ extension RateANdReviewViewController
             }
              
             cell.name.text = name
+            var total:CGFloat = 0.0
             if let _ = reviewUser.reviewCountArray.first
             {
-            cell.reviewCount.text = (reviewUser.reviewCountArray.first?.count)! + " total"
+                cell.reviewCount.text = (reviewUser.reviewCountArray.first?.count)! + " total"
+                if let count = reviewUser.reviewCountArray.first?.count
+                {
+                   total =  CGFloat(Float(count)!)
+                }
             }
             if let ratingAverage = reviewUser.ratingAverageArray.first?.average
             {
                 cell.ratingView.rating = Int(Float(ratingAverage)!)
                 cell.ratingOutOfFive.text   =  String(cell.ratingView.rating) + "/5"
             }
+            let fixConstraints:CGFloat = cell.graphbaseView5.frame.size.width
+            var fiveCount:CGFloat = 0
+            var fourCount:CGFloat = 0
+            var threeCount:CGFloat = 0
+            var twoCount:CGFloat = 0
+            var oneCount:CGFloat = 0
             for rateGraph in reviewUser.rateGraphArray
             {
                 switch rateGraph.rate
                 {
                 case "5":
-                    cell.countLabel5.text = rateGraph.count
+                    
+                     fiveCount =  CGFloat(Int(rateGraph.count)!)
+                    
                     break
                 case "4":
-                    cell.countLabel4.text = rateGraph.count
+                    
+                      fourCount =  CGFloat(Int(rateGraph.count)!)
+                    
                     break
                 case "3":
-                    cell.countLabel3.text = rateGraph.count
+                    
+                     threeCount =  CGFloat(Int(rateGraph.count)!)
+                   
                     break
                 case "2":
-                    cell.countLabel2.text = rateGraph.count
+                    
+                      twoCount =  CGFloat(Int(rateGraph.count)!)
+                    
                     break
                 case "1":
-                    cell.countLabel1.text = rateGraph.count
+                   
+                      oneCount =  CGFloat(Int(rateGraph.count)!)
+                    
                     break
                 default:
                     break
                 }
                 
             }
+            if fiveCount > 0
+            {
+                cell.fiveConstraints.constant  = (fiveCount/total)*fixConstraints
+            }else
+            {
+                cell.fiveConstraints.constant  = 0.0
+            }
+            cell.countLabel5.text          = String(Int(fiveCount))
+            if fourCount > 0
+            {
+                cell.fourConstraints.constant  = (fourCount/total)*fixConstraints
+            }else
+            {
+                cell.fourConstraints.constant  = 0.0
+            }
+            cell.countLabel4.text          = String(Int(fourCount))
+            if threeCount > 0
+            {
+            cell.threeConstraints.constant = (threeCount/total)*fixConstraints
+            }else
+            {
+                cell.threeConstraints.constant = 0.0
+            }
+            cell.countLabel3.text          = String(Int(threeCount))
+            if twoCount > 0
+            {
+            cell.twoConstraints.constant   = (twoCount/total)*fixConstraints
+            }else
+            {
+                cell.twoConstraints.constant   = 0.0
+            }
+            cell.countLabel2.text          = String(Int(twoCount))
+            if oneCount > 0
+            {
+                cell.oneConstraints.constant   = (oneCount/total)*fixConstraints
+            }else
+            {
+                cell.oneConstraints.constant   =  0.0
+            }
+            cell.countLabel1.text          = String(Int(oneCount))
             
         
         return cell
@@ -219,7 +280,7 @@ extension RateANdReviewViewController
         
         if indexPath.row == 3-subtractCount
         {
-            return 250
+            return 210
         }
         
        return UITableViewAutomaticDimension
@@ -238,7 +299,7 @@ extension RateANdReviewViewController
         }
         if indexPath.row == 0-subtractCount
         {
-            return 250
+            return 210
         }
         
         return 100

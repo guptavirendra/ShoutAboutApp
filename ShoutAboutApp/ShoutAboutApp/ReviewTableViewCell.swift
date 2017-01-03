@@ -33,6 +33,16 @@ class ReviewTableViewCell: UITableViewCell
     
     @IBOutlet weak var view2: UIView!
     @IBOutlet weak var view1: UIView!
+    
+    
+    @IBOutlet weak var fiveConstraints:NSLayoutConstraint!
+    @IBOutlet weak var fourConstraints:NSLayoutConstraint!
+    @IBOutlet weak var threeConstraints:NSLayoutConstraint!
+    @IBOutlet weak var twoConstraints:NSLayoutConstraint!
+    @IBOutlet weak var oneConstraints:NSLayoutConstraint!
+    @IBOutlet weak var graphbaseView5: UIView!
+    
+    
     override func awakeFromNib()
     {
         super.awakeFromNib()

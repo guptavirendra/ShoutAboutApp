@@ -324,7 +324,11 @@ class DataSessionManger: NSObject
                         personalProfileData.photo = dataDict?.objectForKey(photo) as? String
                     }
                     
-                    personalProfileData.gcm_token = (dataDict?.objectForKey(gcm_token) as? String)!
+                    if let _ = dataDict?.objectForKey(gcm_token) as? String
+                    {
+                    
+                        personalProfileData.gcm_token = (dataDict?.objectForKey(gcm_token) as? String)!
+                    }
                     
                     
                     if let lastonlineTime = dataDict?.objectForKey(last_online_time) as? String

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OTPViewController: UIViewController {
+class OTPViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var textFieldBaseView:UIView!
     @IBOutlet weak var verifyButton: UIButton!
@@ -54,6 +54,15 @@ class OTPViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        dispatch_async(dispatch_get_main_queue(),{
+           self.otpTextField.becomeFirstResponder()
+        })
+        
+    }
 
     @IBAction func otpButtonClicked(sender: UIButton)
     {

@@ -762,6 +762,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kshitij Raina (Z4EB893U62)";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ShoutAboutApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.in.varyavega.shoutaboutapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -781,6 +782,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Kshitij Raina (Z4EB893U62)";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ShoutAboutApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.in.varyavega.shoutaboutapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
