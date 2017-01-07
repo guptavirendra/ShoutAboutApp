@@ -26,6 +26,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
     {
         super.viewDidLoad()
         setHistoryArray()
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "message")
         self.view.backgroundColor = appColor
         searchController.searchBar.delegate = self
         definesPresentationContext = true
@@ -36,9 +37,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
         searchController.dimsBackgroundDuringPresentation = false
         
         tableView.tableHeaderView = searchController.searchBar
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "message")
+        
         searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.translucent = true
+       // searchController.searchBar.translucent = true
+        self.extendedLayoutIncludesOpaqueBars = true
         
     }
 

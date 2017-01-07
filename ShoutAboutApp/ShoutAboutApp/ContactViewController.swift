@@ -30,16 +30,23 @@ class ContactManger:NSObject
 import UIKit
 
 import Contacts
+import ContactsUI
 
-class ContactViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ContactTableViewCellProtocol
+class ContactViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ContactTableViewCellProtocol, UISearchBarDelegate,UISearchControllerDelegate, CNContactViewControllerDelegate
 {
     @IBOutlet weak var tableView: UITableView!
     var objects = [CNContact]()
     var allValidContacts = [PersonContact]()
     var syncContactArray = [SearchPerson]()
+    var searchContactArray = [SearchPerson]()
     var nextPage         = 1
     var totalContact     = 0
     var lastPage         = 0
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    
+    var isSearching:Bool = false
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -55,6 +62,19 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         
 
         // Do any additional setup after loading the view.
+        
+        searchController.searchBar.delegate = self
+        definesPresentationContext = true
+        searchController.searchBar.barTintColor = appColor
+        searchController.searchBar.tintColor   = UIColor.whiteColor()
+        searchController.searchBar.placeholder = "Number Or Name"
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        tableView.tableHeaderView = searchController.searchBar
+        
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.translucent = true
+        self.extendedLayoutIncludesOpaqueBars = false
     }
     
     deinit
@@ -113,7 +133,7 @@ extension ContactViewController
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return  syncContactArray.count //allValidContacts.count //objects.count
+        return  isSearching ? searchContactArray.count: syncContactArray.count //allValidContacts.count //objects.count
     }
     
     
@@ -122,7 +142,7 @@ extension ContactViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("contact", forIndexPath: indexPath) as! ContactTableViewCell
         cell.delegate = self
         
-        let personContact =  syncContactArray[indexPath.row]
+        let personContact = isSearching ? searchContactArray[indexPath.row]: syncContactArray[indexPath.row]
         cell.nameLabel?.text = personContact.name
         cell.mobileLabel?.text = personContact.mobileNumber
         //cell.rateView!.rating =  personContact.reviewCount.count
@@ -207,10 +227,10 @@ extension ContactViewController
         if self.tableView.indexPathForCell(cell) != nil
         {
             let indexPath = self.tableView.indexPathForCell(cell)
-            let personContact = syncContactArray[(indexPath?.row)!]
+            let personContact =  isSearching ? searchContactArray[(indexPath?.row)!]: syncContactArray[(indexPath?.row)!]
             if button.titleLabel?.text == " Call"
             {
-                let personContact = allValidContacts[indexPath!.row]
+                //let personContact = allValidContacts[indexPath!.row]
                 let   phone = "tel://"+personContact.mobileNumber
                 UIApplication.sharedApplication().openURL(NSURL(string: phone)!)
             }
@@ -574,4 +594,121 @@ extension ContactViewController
         }
     }
     
+}
+
+extension ContactViewController
+{
+    
+    
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool
+    {
+        return true
+    }
+    
+    
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
+    {
+        
+    }
+    
+    
+    internal func searchBarSearchButtonClicked(searchBar: UISearchBar)
+    {
+        if searchBar.text?.characters.count > 0
+        {
+            isSearching = true
+            self.searchString(searchBar.text!)
+        }else
+        {
+            isSearching = false
+            tableView.reloadData()
+        }
+        
+    }
+    
+    
+    internal func searchBarCancelButtonClicked(searchBar: UISearchBar)
+    {
+        isSearching = false
+        tableView.reloadData()
+    }
+    
+    
+    internal func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        if searchText.characters.count > 0
+        {
+            isSearching = true
+        
+            self.searchString(searchText)
+        }else
+        {
+            isSearching = false
+            tableView.reloadData()
+        }
+        
+    }
+    
+    
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int)
+    {
+        
+        
+    }
+    
+    
+    func  searchString(searchString:String)
+    {
+        let phonePredicate = NSPredicate(format: "(mobileNumber BEGINSWITH[c] %@) OR (name BEGINSWITH[c] %@)", searchString, searchString)
+        
+        
+        searchContactArray =  syncContactArray.filter { phonePredicate.evaluateWithObject($0)
+            
+        };
+        
+        
+        tableView.reloadData()
+        
+    }
+
+}
+
+
+extension ContactViewController
+{
+    
+    @IBAction func  addContactScreen(sender:AnyObject)
+    {
+        
+        let con = CNMutableContact()
+        con.givenName = "Johnny"
+        con.familyName = "Appleseed"
+        con.phoneNumbers.append(CNLabeledValue(
+            label: "woods", value: CNPhoneNumber(stringValue: "555-123-4567")))
+        let unkvc = CNContactViewController(forNewContact: nil)
+        unkvc.message = "He knows his trees"
+        unkvc.contactStore = CNContactStore()
+        unkvc.delegate = self
+        unkvc.allowsActions = false
+        //self.navigationController?.pushViewController(unkvc, animated: true)
+        
+        let nav = UINavigationController(rootViewController: unkvc)
+        self.presentViewController(nav, animated: true, completion: nil)
+    
+    }
+    
+      func contactViewController(viewController: CNContactViewController, didCompleteWithContact contact: CNContact?)
+    {
+         viewController.dismissViewControllerAnimated(true, completion: nil)
+        
+        let joinVC = JoinViewController()
+        joinVC.getContacts()
+        
+    }
+    
+      func contactViewController(viewController: CNContactViewController, shouldPerformDefaultActionForContactProperty property: CNContactProperty) -> Bool
+    {
+        return true
+    }
 }

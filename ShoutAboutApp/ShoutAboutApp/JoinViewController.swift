@@ -497,10 +497,12 @@ extension JoinViewController
         var results: [CNContact] = []
         
         // Iterate all containers and append their contacts to our results array
-        for container in allContainers {
+        for container in allContainers
+        {
             let fetchPredicate = CNContact.predicateForContactsInContainerWithIdentifier(container.identifier)
             
-            do {
+            do
+            {
                 let containerResults = try contactStore.unifiedContactsMatchingPredicate(fetchPredicate, keysToFetch: keysToFetch)
                 results.appendContentsOf(containerResults)
             } catch {
@@ -515,17 +517,23 @@ extension JoinViewController
             let formatter = CNContactFormatter()
             
             let name = formatter.stringFromContact(contact)
-            let mobile = (contact.phoneNumbers.first?.value as! CNPhoneNumber).valueForKey("digits") as? String
-            
-            if name?.characters.count > 0 && mobile != nil
+            if let _ = contact.phoneNumbers.first?.value as? CNPhoneNumber
             {
-                let personContact = SearchPerson()
-                personContact.name = name!
-                personContact.mobileNumber =  mobile!
-                allValidContacts.append(personContact)
-                
+                let mobile = (contact.phoneNumbers.first?.value as! CNPhoneNumber).valueForKey("digits") as? String
+                if name?.characters.count > 0 && mobile != nil
+                {
+                    let personContact = SearchPerson()
+                    personContact.name = name!
+                    personContact.mobileNumber =  mobile!
+                    allValidContacts.append(personContact)
+                    
+                    
+                }
                 
             }
+            
+            
+            
         }
         
         //1ProfileManager.sharedInstance.syncedContactArray.appendContentsOf(allValidContacts)
@@ -533,6 +541,7 @@ extension JoinViewController
         /*allValidContacts.sortInPlace { (person1, person2) -> Bool in
          return person1.name < person2.name
          }*/
+        
         if NetworkConnectivity.isConnectedToNetwork() != true
         {
             displayAlertMessage("No Internet Connection")

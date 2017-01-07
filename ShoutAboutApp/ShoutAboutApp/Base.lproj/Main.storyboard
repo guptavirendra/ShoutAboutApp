@@ -1362,7 +1362,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fK3-LK-DGt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="952" y="-1176"/>
+            <point key="canvasLocation" x="1764" y="-1176"/>
         </scene>
         <!--My Tab View Controller-->
         <scene sceneID="nBY-V7-QZ1">
@@ -1384,7 +1384,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kFd-Ur-9IA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2305" y="-716"/>
+            <point key="canvasLocation" x="3117" y="-716"/>
         </scene>
         <!--Contact View Controller-->
         <scene sceneID="ho0-QB-wFs">
@@ -1451,10 +1451,10 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ea9-lu-XKb">
-                                                                    <rect key="frame" x="84" y="46" width="42" height="22"/>
+                                                                    <rect key="frame" x="84" y="46" width="50" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="22" id="3L5-Xl-yCh"/>
-                                                                        <constraint firstAttribute="width" constant="42" id="3hK-1Z-dV8"/>
+                                                                        <constraint firstAttribute="width" constant="50" id="3hK-1Z-dV8"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                                     <state key="normal" title=" Call" image="call">
@@ -1465,10 +1465,10 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aaN-id-nR0">
-                                                                    <rect key="frame" x="136" y="46" width="47" height="22"/>
+                                                                    <rect key="frame" x="144" y="46" width="50" height="22"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="22" id="079-C7-XYV"/>
-                                                                        <constraint firstAttribute="width" constant="47" id="HVy-6x-HBU"/>
+                                                                        <constraint firstAttribute="width" constant="50" id="HVy-6x-HBU"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                                     <state key="normal" title=" Chat" image="chat">
@@ -1637,6 +1637,12 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="g0j-Uq-LQD">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="addContactScreen:" destination="QZ4-A5-PFp" id="Tfp-6N-NTb"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="1FI-5I-pYc" id="GHf-oV-rSb"/>
@@ -1644,7 +1650,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TZX-xI-CQ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3452" y="-562"/>
+            <point key="canvasLocation" x="4264" y="-562"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="X3D-cc-4KJ">
@@ -3146,7 +3152,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="F5c-z5-XsS" kind="relationship" relationship="rootViewController" id="NHC-L6-9cs"/>
+                        <segue destination="Jh2-HR-I6c" kind="relationship" relationship="rootViewController" id="NHC-L6-9cs"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ntp-mt-ywM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4093,6 +4099,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XwT-rW-Ezt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="160" y="1456"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="CJS-TK-jkt">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jh2-HR-I6c" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="8DM-Zb-exV"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ESV-rd-Od1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="F5c-z5-XsS" kind="relationship" relationship="rootViewController" id="jZZ-aV-hM0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QJS-0n-idd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="952" y="-1176"/>
         </scene>
     </scenes>
     <resources>

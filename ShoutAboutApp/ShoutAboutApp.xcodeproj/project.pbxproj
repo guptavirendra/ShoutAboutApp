@@ -47,6 +47,7 @@
 		F11DB53B1DD9AD060084F9F4 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F11DB51C1DD9AD060084F9F4 /* UIImageView+HighlightedWebCache.m */; };
 		F11DB53C1DD9AD060084F9F4 /* UIImageView+WebCache.h in Sources */ = {isa = PBXBuildFile; fileRef = F11DB51D1DD9AD060084F9F4 /* UIImageView+WebCache.h */; };
 		F11DB53D1DD9AD060084F9F4 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F11DB51E1DD9AD060084F9F4 /* UIImageView+WebCache.m */; };
+		F11EC3BE1E20DEA7001374E9 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F11EC3BD1E20DEA7001374E9 /* ContactsUI.framework */; };
 		F1227AF91E070FE7002D9CE3 /* ContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1227AF81E070FE7002D9CE3 /* ContactTableViewCell.xib */; };
 		F12713B01DCF9E9F005928AD /* RatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12713AF1DCF9E9F005928AD /* RatingTableViewCell.swift */; };
 		F12713B21DCFC105005928AD /* WriteReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12713B11DCFC105005928AD /* WriteReviewTableViewCell.swift */; };
@@ -162,6 +163,7 @@
 		F11DB51C1DD9AD060084F9F4 /* UIImageView+HighlightedWebCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+HighlightedWebCache.m"; path = "ShoutAboutApp/SDWebImage/UIImageView+HighlightedWebCache.m"; sourceTree = "<group>"; };
 		F11DB51D1DD9AD060084F9F4 /* UIImageView+WebCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIImageView+WebCache.h"; path = "ShoutAboutApp/SDWebImage/UIImageView+WebCache.h"; sourceTree = "<group>"; };
 		F11DB51E1DD9AD060084F9F4 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+WebCache.m"; path = "ShoutAboutApp/SDWebImage/UIImageView+WebCache.m"; sourceTree = "<group>"; };
+		F11EC3BD1E20DEA7001374E9 /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		F1227AF81E070FE7002D9CE3 /* ContactTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
 		F12713AF1DCF9E9F005928AD /* RatingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingTableViewCell.swift; sourceTree = "<group>"; };
 		F12713B11DCFC105005928AD /* WriteReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteReviewTableViewCell.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F11EC3BE1E20DEA7001374E9 /* ContactsUI.framework in Frameworks */,
 				F1D1F7DE1DEE05D10046DBB2 /* GTMSessionFetcher.framework in Frameworks */,
 				F1D1F7E61DEE05D20046DBB2 /* Pods_ShoutAboutApp.framework in Frameworks */,
 				F1D1F7E41DEE05D20046DBB2 /* JSQSystemSoundPlayer.framework in Frameworks */,
@@ -238,6 +241,7 @@
 		6617F68A4E185EE720CE3C08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F11EC3BD1E20DEA7001374E9 /* ContactsUI.framework */,
 				17F0E7E11A503618876EE71A /* Pods_ShoutAboutApp.framework */,
 			);
 			name = Frameworks;

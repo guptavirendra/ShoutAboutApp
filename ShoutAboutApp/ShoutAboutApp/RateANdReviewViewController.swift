@@ -199,7 +199,7 @@ extension RateANdReviewViewController
             {
                 cell.fiveConstraints.constant  = 0.0
             }
-            cell.countLabel5.text          = String(Int(fiveCount))
+                cell.countLabel5.text          = String(Int(fiveCount))
             if fourCount > 0
             {
                 cell.fourConstraints.constant  = (fourCount/total)*fixConstraints
@@ -210,7 +210,7 @@ extension RateANdReviewViewController
             cell.countLabel4.text          = String(Int(fourCount))
             if threeCount > 0
             {
-            cell.threeConstraints.constant = (threeCount/total)*fixConstraints
+                cell.threeConstraints.constant = (threeCount/total)*fixConstraints
             }else
             {
                 cell.threeConstraints.constant = 0.0
@@ -218,7 +218,7 @@ extension RateANdReviewViewController
             cell.countLabel3.text          = String(Int(threeCount))
             if twoCount > 0
             {
-            cell.twoConstraints.constant   = (twoCount/total)*fixConstraints
+                cell.twoConstraints.constant   = (twoCount/total)*fixConstraints
             }else
             {
                 cell.twoConstraints.constant   = 0.0
