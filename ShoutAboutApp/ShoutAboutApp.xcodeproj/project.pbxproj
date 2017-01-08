@@ -88,6 +88,7 @@
 		F18839291DD877C000362B1B /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18839281DD877C000362B1B /* ChattingViewController.swift */; };
 		F188392B1DD8A76B00362B1B /* ChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F188392A1DD8A76B00362B1B /* ChattingTableViewCell.swift */; };
 		F18839331DD8D26400362B1B /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18839321DD8D26400362B1B /* LeftViewController.swift */; };
+		F1ACAD781E217DDC004AECAB /* SpamFavBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ACAD771E217DDC004AECAB /* SpamFavBlockViewController.swift */; };
 		F1D1F7DB1DEE05D10046DBB2 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7DA1DEE05D10046DBB2 /* GoogleToolboxForMac.framework */; };
 		F1D1F7DC1DEE05D10046DBB2 /* GoogleToolboxForMac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7DA1DEE05D10046DBB2 /* GoogleToolboxForMac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F1D1F7DE1DEE05D10046DBB2 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7DD1DEE05D10046DBB2 /* GTMSessionFetcher.framework */; };
@@ -207,6 +208,7 @@
 		F188392A1DD8A76B00362B1B /* ChattingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingTableViewCell.swift; sourceTree = "<group>"; };
 		F188392C1DD8CED200362B1B /* ShoutAboutApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShoutAboutApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		F18839321DD8D26400362B1B /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
+		F1ACAD771E217DDC004AECAB /* SpamFavBlockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpamFavBlockViewController.swift; sourceTree = "<group>"; };
 		F1D1F7DA1DEE05D10046DBB2 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "/Users/virendragupta/Library/Developer/Xcode/DerivedData/ShoutAboutApp-bjcvlaxyvaywimbcwmcujfhbymnm/Build/Products/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<absolute>"; };
 		F1D1F7DD1DEE05D10046DBB2 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "/Users/virendragupta/Library/Developer/Xcode/DerivedData/ShoutAboutApp-bjcvlaxyvaywimbcwmcujfhbymnm/Build/Products/Debug-iphoneos/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<absolute>"; };
 		F1D1F7E01DEE05D10046DBB2 /* JSQMessagesViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JSQMessagesViewController.framework; path = "/Users/virendragupta/Library/Developer/Xcode/DerivedData/ShoutAboutApp-bjcvlaxyvaywimbcwmcujfhbymnm/Build/Products/Debug-iphoneos/JSQMessagesViewController/JSQMessagesViewController.framework"; sourceTree = "<absolute>"; };
@@ -380,6 +382,7 @@
 				F12C27741DCF07BB00AEE0A3 /* ClickTableViewCell.swift */,
 				F12C27781DCF497F00AEE0A3 /* ContactTableViewCell.swift */,
 				F12C27541DCE45A800AEE0A3 /* Main.storyboard */,
+				F1ACAD771E217DDC004AECAB /* SpamFavBlockViewController.swift */,
 				F11B75FB1DE17B520075DDCB /* ChatImageTableViewCell.swift */,
 				F11B75F11DDF90450075DDCB /* Search */,
 				F100A7D11DDB9D9C00DD320C /* LeftView */,
@@ -577,6 +580,7 @@
 				F11DB5221DD9AD060084F9F4 /* NSData+ImageContentType.m in Sources */,
 				F17E085E1E0FF16500FDBF0B /* CropperViewController.swift in Sources */,
 				F11DB5231DD9AD060084F9F4 /* SDImageCache.h in Sources */,
+				F1ACAD781E217DDC004AECAB /* SpamFavBlockViewController.swift in Sources */,
 				F11DB5241DD9AD060084F9F4 /* SDImageCache.m in Sources */,
 				F11DB5251DD9AD060084F9F4 /* SDWebImageCompat.h in Sources */,
 				F17E08651E0FF16500FDBF0B /* ImageViewController.swift in Sources */,

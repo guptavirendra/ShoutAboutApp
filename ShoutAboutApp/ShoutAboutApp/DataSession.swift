@@ -253,6 +253,131 @@ class DataSession: BaseNSURLSession
         
     }
     
+    //MARK: block user id
+    
+    func blockUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        var dict = NSObject.getAppUserIdAndToken()
+        dict["block_user_id"] = userID
+        super.postDataWithOnFinish(mCHWebServiceMethod.block_mobile_number, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+
+            }) { (error) in
+                onError(error: error)
+
+        }
+        
+    }
+    
+    func unblockUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        var dict = NSObject.getAppUserIdAndToken()
+        dict["block_user_id"] = userID
+        super.postDataWithOnFinish(mCHWebServiceMethod.unblock_mobile_number, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+            
+        }) { (error) in
+            onError(error: error)
+            
+        }
+        
+    }
+
+    
+    
+    func getBlockUsersList(onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dict = NSObject.getAppUserIdAndToken()
+        super.getWithOnFinish(mCHWebServiceMethod.user_block_list, parameters: dict, onFinish: { (response, deserializedResponse) in
+             onFinish(response: response, deserializedResponse: deserializedResponse)
+            }) { (error) in
+                onError(error: error)
+        }
+        
+    }
+    
+    
+    //MARK SPAM
+    func spamUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        var dict = NSObject.getAppUserIdAndToken()
+        dict["spam_user_id"] = userID
+        super.postDataWithOnFinish(mCHWebServiceMethod.spam_mobile_number, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+            
+        }) { (error) in
+            onError(error: error)
+            
+        }
+        
+    }
+    
+    //MARK SPAM
+    func unspamUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        var dict = NSObject.getAppUserIdAndToken()
+        dict["spam_user_id"] = userID
+        super.postDataWithOnFinish(mCHWebServiceMethod.unspam_mobile_number, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+            
+        }) { (error) in
+            onError(error: error)
+            
+        }
+        
+    }
+    
+    func getUserSpamList(onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dict = NSObject.getAppUserIdAndToken()
+        super.getWithOnFinish(mCHWebServiceMethod.user_spam_list, parameters: dict, onFinish: { (response, deserializedResponse) in
+        onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+        onError(error: error)
+        }
+        
+    }
+
+    
+    
+    //MARK:FAVOURITE
+    func favouriteUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        var dict = NSObject.getAppUserIdAndToken()
+        dict["fav_user_id"] = userID
+        super.postDataWithOnFinish(mCHWebServiceMethod.favourite_mobile_number, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+            
+        }) { (error) in
+            onError(error: error)
+            
+        }
+    }
+
+    func unfavouriteUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        var dict = NSObject.getAppUserIdAndToken()
+        dict["fav_user_id"] = userID
+        super.postDataWithOnFinish(mCHWebServiceMethod.favourite_mobile_number, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+            
+        }) { (error) in
+            onError(error: error)
+            
+        }
+        
+    }
+    
+    func getUserfavoriteList(onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dict = NSObject.getAppUserIdAndToken()
+        super.getWithOnFinish(mCHWebServiceMethod.user_favourite_list, parameters: dict, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }
+        
+    }
     
 }
 
@@ -931,6 +1056,143 @@ class DataSessionManger: NSObject
     
     }
     
+    //MARK: BLOCK
+    func blockUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        
+        let dataSession = DataSession()
+        dataSession.blockUserID(userID, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+            }) { (error) in
+                onError(error: error)
+        }
+        
+    }
+    
+    func unblockUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.unblockUserID(userID, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }
+        
+    }
+    
+    
+    func getBlockUserList(onFinish:(response:AnyObject, blockUserArray:[SearchPerson])->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.getBlockUsersList({ (response, deserializedResponse) in
+            
+            var lBlockUserArray = [SearchPerson]()
+            
+            if  deserializedResponse.isKindOfClass(NSArray)
+            {
+                
+                for i in 0..<deserializedResponse.count
+                {
+                    let lBlockUser = SearchPerson()
+                    let dict = deserializedResponse[i]
+                    if let _ = dict.objectForKey("id") as? Int
+                    {
+                        lBlockUser.idString = (dict.objectForKey("id") as? Int)!
+                    }
+                    if let name = dict.objectForKey("name") as? String
+                    {
+                        lBlockUser.name   = name
+                    }
+                    
+                    if let _ = dict.objectForKey("email") as? String
+                    {
+                    
+                        lBlockUser.email = (dict.objectForKey("email") as? String)!
+                    }
+                    if let mobileNumber = dict.objectForKey("mobile_number") as? String
+                    {
+                        lBlockUser.mobileNumber = mobileNumber
+                    }
+                    
+                    lBlockUser.app_user_token = dict.objectForKey("app_user_token") as? String
+                    lBlockUser.created_at = dict.objectForKey("created_at") as? String
+                    lBlockUser.updated_at = dict.objectForKey("updated_at") as? String
+                    lBlockUser.dob = dict.objectForKey("dob") as? String
+                    lBlockUser.address = dict.objectForKey("address") as? String
+                    lBlockUser.website = dict.objectForKey("website") as? String
+                    lBlockUser.photo = dict.objectForKey("photo") as? String
+                    lBlockUser.gcm_token = dict.objectForKey("gcm_token") as? String
+                    lBlockUser.last_online_time = dict.objectForKey("last_online_time") as? String
+                    
+                   lBlockUserArray.append(lBlockUser)
+                    
+                }
+            }
+            
+             onFinish(response: response, blockUserArray: lBlockUserArray)
+            
+            }) { (error) in
+            onError(error: error)
+        }
+        
+        
+        
+        
+        
+        
+
+    }
+    //MARK: SPAM
+    func spamUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.spamUserID(userID, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }
+     }
+    
+    //MARK: SPAM
+    func unspamUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.unspamUserID(userID, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }
+    }
+
+    
+    //MARK:FAVOURITE
+    func favouriteUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.favouriteUserID(userID, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }
+
+        
+    }
+    
+    //MARK:FAVOURITE
+    func unfavouriteUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.unfavouriteUserID(userID, onFinish: { (response, deserializedResponse) in
+            onFinish(response: response, deserializedResponse: deserializedResponse)
+        }) { (error) in
+            onError(error: error)
+        }
+        
+    }
+    
+    
+    
+    
 }
 
 extension NSObject
@@ -985,6 +1247,12 @@ class AppUser:NSObject
     var photo :String = String()
     var gcmToken : String = String()
     var lastOnlineTime : String = String()
+}
+
+class BlockUser:AppUser
+{
+    var ratingAverageArray = [RatingAverage]()
+    var reviewCountArray   = [ReviewCount]()
 }
 
 class ReviewCount:NSObject
