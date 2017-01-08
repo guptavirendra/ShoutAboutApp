@@ -150,27 +150,27 @@ extension ContactViewController
         
        // if personContact.app_user_token != nil
        // {
-            cell.revieBbutton.hidden = false
+            cell.revieBbutton!.hidden = false
             cell.rateView?.hidden    = false
-            cell.ratingLabel.hidden  = false
+            cell.ratingLabel!.hidden  = false
             if let count = personContact.reviewCount.first?.count
             {
                 
                 let title:String = String(count) + " reviews"
-                cell.revieBbutton.setTitle(title, forState: .Normal)
+                cell.revieBbutton!.setTitle(title, forState: .Normal)
             }else
             {
                 let title:String = String(0) + " reviews"
-                cell.revieBbutton.setTitle(title, forState: .Normal)
+                cell.revieBbutton!.setTitle(title, forState: .Normal)
             }
             if let ratingAverage = personContact.ratingAverage.first?.average
             {
                 cell.rateView!.rating = Int(Float(ratingAverage)!)
-                cell.ratingLabel.text   =  String(cell.rateView!.rating) + "/5"
+                cell.ratingLabel!.text   =  String(cell.rateView!.rating) + "/5"
             }else
             {
                 cell.rateView!.rating =  0
-                cell.ratingLabel.text   =  String(cell.rateView!.rating) + "/5"
+                cell.ratingLabel!.text   =  String(cell.rateView!.rating) + "/5"
             }
 
         //}else

@@ -17,9 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 {
 
     var window: UIWindow?
-    
-    
-    
     func retrieveContacts() -> [SearchPerson]?
     {
         if let unarchivedObject = NSUserDefaults.standardUserDefaults().objectForKey(contactStored) as? NSData {
@@ -114,7 +111,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
+      //  UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
         let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id)
         let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token)

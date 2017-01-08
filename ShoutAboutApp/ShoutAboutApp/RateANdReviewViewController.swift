@@ -28,7 +28,7 @@ class RateANdReviewViewController: UIViewController,UITableViewDataSource, UITab
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+        setBackIndicatorImage()
         
         let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
         if String(appUserId) == idString
@@ -237,28 +237,32 @@ extension RateANdReviewViewController
         return cell
         }
         
-        let rateReviewer = reviewUser.rateReviewList[indexPath.row-4-subtractCount]
+        if reviewUser.rateReviewList.count > (indexPath.row-4)-subtractCount
+        {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("UesrReviewTableViewCell", forIndexPath: indexPath) as! UesrReviewTableViewCell
-        cell.nameLabel.text    = rateReviewer.appUser.name
-        cell.commentLabel.text = rateReviewer.review
-        cell.rateView.rating   = Int(rateReviewer.rate)!
-        cell.timeLabel.text    = rateReviewer.created_at
-        let urlString       = rateReviewer.appUser.photo
-         if urlString.characters.count != 0
-        {
+            let rateReviewer = reviewUser.rateReviewList[(indexPath.row-4)-subtractCount]
             
-            cell.profileImageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+            let cell = tableView.dequeueReusableCellWithIdentifier("UesrReviewTableViewCell", forIndexPath: indexPath) as! UesrReviewTableViewCell
+            cell.nameLabel.text    = rateReviewer.appUser.name
+            cell.commentLabel.text = rateReviewer.review
+            cell.rateView.rating   = Int(rateReviewer.rate)!
+            cell.timeLabel.text    = rateReviewer.created_at
+            let urlString       = rateReviewer.appUser.photo
+             if urlString.characters.count != 0
+            {
+                
+                cell.profileImageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+                
+            }else
+            {
+                cell.profileImageView.image = UIImage(named: "profile")
+            }
             
-        }else
-        {
-            cell.profileImageView.image = UIImage(named: "profile")
+            
+            return cell
         }
         
-        
-        return cell
-        
-        
+        return UITableViewCell()
         
     }
     
@@ -510,6 +514,15 @@ extension RateANdReviewViewController:RatingControlDelegate
             })
             }
         }
+        
+    }
+}
+
+extension UIViewController
+{
+    func setBackIndicatorImage()
+    {
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         
     }
 }

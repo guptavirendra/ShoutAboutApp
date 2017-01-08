@@ -720,3 +720,68 @@ extension ProfileViewController:UIDocumentInteractionControllerDelegate
         
     }
 }
+
+extension ProfileViewController
+{
+    
+    @IBAction func favoriteButtonClicked(sender:UIButton)
+    {
+        self.view.showSpinner()
+        DataSessionManger.sharedInstance.favouriteUserID(String(personalProfile.idString), onFinish: { (response, deserializedResponse) in
+            dispatch_async(dispatch_get_main_queue(), {
+                self.view.removeSpinner()
+                
+                
+            });
+            }) { (error) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.view.removeSpinner()
+                    
+                    
+                });
+        }
+    }
+    
+    @IBAction func blockButtonClicked(sender:UIButton)
+    {
+        self.view.showSpinner()
+       DataSessionManger.sharedInstance.blockUserID(String(personalProfile.idString), onFinish:
+        { (response, deserializedResponse) in
+        
+            dispatch_async(dispatch_get_main_queue(), {
+                self.view.removeSpinner()
+                
+                
+            });
+        }) { (error) in
+            dispatch_async(dispatch_get_main_queue(), {
+                self.view.removeSpinner()
+                
+                
+            });
+        }
+        
+    }
+    
+    @IBAction func spamButtonClicked(sender:UIButton)
+    {
+        self.view.showSpinner()
+        DataSessionManger.sharedInstance.spamUserID(String(personalProfile.idString), onFinish: { (response, deserializedResponse) in
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.view.removeSpinner()
+                
+                
+            });
+            }) { (error) in
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.view.removeSpinner()
+                    
+                    
+                });
+        }
+        
+    }
+    
+}

@@ -18,6 +18,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
         choiceArray = ["Block","Spam","Settings","Favorites","Premium","Logout"]
         profileImageView.makeImageRounded()
         
@@ -33,6 +34,8 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBarHidden = true
+       // self.revealViewController().rearViewRevealWidth = 120
         self.nameLabel.text = ProfileManager.sharedInstance.personalProfile.name
         // else need to update
         if ProfileManager.sharedInstance.localStoredImage != nil
@@ -91,6 +94,30 @@ extension LeftViewController
             appDelegate.window?.backgroundColor = UIColor(red: 236.0, green: 238.0, blue: 241.0, alpha: 1.0)
             appDelegate.window?.rootViewController = vc
             appDelegate.window?.makeKeyAndVisible()
+        }else
+        {
+        
+            if  let vc = self.storyboard?.instantiateViewControllerWithIdentifier("SpamFavBlockViewController") as? SpamFavBlockViewController
+            {
+                
+                //0,1,3 bsf
+                
+                if indexPath.row == 0
+                {
+                    vc.favSpamBlock = .block
+                }
+                if indexPath.row == 1
+                {
+                    vc.favSpamBlock = .spam
+                }
+                if indexPath.row == 3
+                {
+                    vc.favSpamBlock = .fav
+                }
+                
+                self.navigationController?.navigationBar.barTintColor = appColor
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
         
     }

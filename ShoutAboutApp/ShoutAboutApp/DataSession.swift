@@ -258,7 +258,11 @@ class DataSession: BaseNSURLSession
     func blockUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
         var dict = NSObject.getAppUserIdAndToken()
-        dict["block_user_id"] = userID
+        let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
+        
+        dict["block_user_id"] = String(appUserId)
+        dict ["for_user_id"]  = userID
+        
         super.postDataWithOnFinish(mCHWebServiceMethod.block_mobile_number, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
             onFinish(response: response, deserializedResponse: deserializedResponse)
 
@@ -301,6 +305,10 @@ class DataSession: BaseNSURLSession
     func spamUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
         var dict = NSObject.getAppUserIdAndToken()
+        dict.removeValueForKey(kapp_user_id)
+        let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
+        
+        dict["by_user_id"] = String(appUserId)
         dict["spam_user_id"] = userID
         super.postDataWithOnFinish(mCHWebServiceMethod.spam_mobile_number, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
             onFinish(response: response, deserializedResponse: deserializedResponse)
@@ -378,6 +386,10 @@ class DataSession: BaseNSURLSession
         }
         
     }
+    
+    
+    
+    
     
 }
 
@@ -1081,6 +1093,61 @@ class DataSessionManger: NSObject
     }
     
     
+    
+    
+    
+    func getSearchPersonArray(deserializedResponse:NSArray)->[SearchPerson]
+    {
+        var lBlockUserArray = [SearchPerson]()
+        
+        if  deserializedResponse.isKindOfClass(NSArray)
+        {
+            
+            for i in 0..<deserializedResponse.count
+            {
+                let lBlockUser = SearchPerson()
+                let dict = deserializedResponse[i]
+                if let _ = dict.objectForKey("id") as? Int
+                {
+                    lBlockUser.idString = (dict.objectForKey("id") as? Int)!
+                }
+                if let name = dict.objectForKey("name") as? String
+                {
+                    lBlockUser.name   = name
+                }
+                
+                if let _ = dict.objectForKey("email") as? String
+                {
+                    
+                    lBlockUser.email = (dict.objectForKey("email") as? String)!
+                }
+                if let mobileNumber = dict.objectForKey("mobile_number") as? String
+                {
+                    lBlockUser.mobileNumber = mobileNumber
+                }
+                
+                lBlockUser.app_user_token = dict.objectForKey("app_user_token") as? String
+                lBlockUser.created_at = dict.objectForKey("created_at") as? String
+                lBlockUser.updated_at = dict.objectForKey("updated_at") as? String
+                lBlockUser.dob = dict.objectForKey("dob") as? String
+                lBlockUser.address = dict.objectForKey("address") as? String
+                lBlockUser.website = dict.objectForKey("website") as? String
+                lBlockUser.photo = dict.objectForKey("photo") as? String
+                lBlockUser.gcm_token = dict.objectForKey("gcm_token") as? String
+                lBlockUser.last_online_time = dict.objectForKey("last_online_time") as? String
+                
+                lBlockUserArray.append(lBlockUser)
+                
+            }
+        }
+        
+        return lBlockUserArray
+        
+    }
+    
+    
+    
+    
     func getBlockUserList(onFinish:(response:AnyObject, blockUserArray:[SearchPerson])->(), onError:(error:AnyObject)->())
     {
         let dataSession = DataSession()
@@ -1094,7 +1161,7 @@ class DataSessionManger: NSObject
                 for i in 0..<deserializedResponse.count
                 {
                     let lBlockUser = SearchPerson()
-                    let dict = deserializedResponse[i]
+                    let dict = deserializedResponse.objectAtIndex(i)
                     if let _ = dict.objectForKey("id") as? Int
                     {
                         lBlockUser.idString = (dict.objectForKey("id") as? Int)!
@@ -1163,6 +1230,20 @@ class DataSessionManger: NSObject
             onError(error: error)
         }
     }
+    
+    func getUserSpamList(onFinish:(response:AnyObject,spamUserArray:[SearchPerson])->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.getUserSpamList({ (response, deserializedResponse) in
+            var lBlockUserArray = [SearchPerson]()
+            lBlockUserArray =   self.getSearchPersonArray(deserializedResponse as! NSArray)
+            onFinish(response: response, spamUserArray: lBlockUserArray)
+            }) { (error) in
+                onError(error: error)
+
+        }
+
+    }
 
     
     //MARK:FAVOURITE
@@ -1191,7 +1272,19 @@ class DataSessionManger: NSObject
     }
     
     
-    
+    func getUserfavoriteList(onFinish:(response:AnyObject,favUserArray:[SearchPerson])->(), onError:(error:AnyObject)->())
+    {
+        let dataSession = DataSession()
+        dataSession.getUserfavoriteList({ (response, deserializedResponse) in
+            var lBlockUserArray = [SearchPerson]()
+            lBlockUserArray =   self.getSearchPersonArray(deserializedResponse as! NSArray)
+            onFinish(response: response, favUserArray: lBlockUserArray)
+            }) { (error) in
+                onError(error: error)
+
+        }
+        
+    }
     
 }
 

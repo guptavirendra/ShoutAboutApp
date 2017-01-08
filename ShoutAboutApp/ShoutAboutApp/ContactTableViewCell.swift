@@ -19,10 +19,10 @@ class ContactTableViewCell: UITableViewCell
      @IBOutlet weak var profileButton: UIButton!
      @IBOutlet weak var nameLabel: UILabel!
      @IBOutlet weak var mobileLabel: UILabel!
-     @IBOutlet weak var ratingLabel: UILabel!
+     @IBOutlet weak var ratingLabel: UILabel?
      @IBOutlet weak var callButton: UIButton!
      @IBOutlet weak var chaBbutton: UIButton!
-     @IBOutlet weak var revieBbutton: UIButton!
+     @IBOutlet weak var revieBbutton: UIButton?
      @IBOutlet weak var rateView: RatingControl?
     
      var delegate:ContactTableViewCellProtocol?

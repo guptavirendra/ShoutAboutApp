@@ -98,8 +98,7 @@ extension MainSearchViewController
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        
-            return  allValidContacts.count //objects.count
+        return  allValidContacts.count //objects.count
         
     }
     
@@ -142,8 +141,6 @@ extension MainSearchViewController
     //MARK: CALL
     func buttonClicked(cell: ContactTableViewCell, button: UIButton)
     {
-        
-        
         if self.tableView.indexPathForCell(cell) != nil
         {
             let indexPath = self.tableView.indexPathForCell(cell)
