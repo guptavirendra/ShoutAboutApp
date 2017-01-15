@@ -276,7 +276,9 @@ class DataSession: BaseNSURLSession
     func unblockUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
         var dict = NSObject.getAppUserIdAndToken()
-        dict["block_user_id"] = userID
+        let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
+        dict["block_user_id"] = String(appUserId)
+        dict ["for_user_id"]  = userID
         super.postDataWithOnFinish(mCHWebServiceMethod.unblock_mobile_number, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
             onFinish(response: response, deserializedResponse: deserializedResponse)
             
@@ -305,7 +307,7 @@ class DataSession: BaseNSURLSession
     func spamUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
         var dict = NSObject.getAppUserIdAndToken()
-        dict.removeValueForKey(kapp_user_id)
+        //dict.removeValueForKey(kapp_user_id)
         let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
         
         dict["by_user_id"] = String(appUserId)
@@ -324,6 +326,8 @@ class DataSession: BaseNSURLSession
     func unspamUserID(userID:String, onFinish:(response:AnyObject,deserializedResponse:AnyObject)->(), onError:(error:AnyObject)->())
     {
         var dict = NSObject.getAppUserIdAndToken()
+         let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
+        dict["by_user_id"] = String(appUserId)
         dict["spam_user_id"] = userID
         super.postDataWithOnFinish(mCHWebServiceMethod.unspam_mobile_number, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
             onFinish(response: response, deserializedResponse: deserializedResponse)
@@ -366,7 +370,7 @@ class DataSession: BaseNSURLSession
     {
         var dict = NSObject.getAppUserIdAndToken()
         dict["fav_user_id"] = userID
-        super.postDataWithOnFinish(mCHWebServiceMethod.favourite_mobile_number, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
+        super.postDataWithOnFinish(mCHWebServiceMethod.unfavourite_mobile_number, parameters: dict, postBody: nil, onFinish: { (response, deserializedResponse) in
             onFinish(response: response, deserializedResponse: deserializedResponse)
             
         }) { (error) in
@@ -895,7 +899,18 @@ class DataSessionManger: NSObject
                         
                         let searchPerson = SearchPerson()
                         
-                        searchPerson.idString = (dict.objectForKey("id") as? Int)!
+                        if let _ = dict.objectForKey("id") as? Int
+                        {
+                             searchPerson.idString = (dict.objectForKey("id") as? Int)!
+                            
+                        }
+                        if let  idString = dict.objectForKey("id") as? String
+                        {
+                            searchPerson.idString =  Int(idString)!
+                            
+                        }
+                        
+                       
                         if let name = dict.objectForKey("name") as? String
                         {
                             searchPerson.name   = name

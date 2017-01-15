@@ -176,13 +176,36 @@ extension ProfileViewController
         if ProfileManager.sharedInstance.localStoredImage != nil
         {
             self.imageView.image = ProfileManager.sharedInstance.localStoredImage
-        }else
-        {
-        self.imageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
         }
+       self.imageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+            SDWebImageDownloader.sharedDownloader().downloadImageWithURL(NSURL(string:urlString ), options: .ProgressiveDownload, progress: { (recievedSize, expectedSize) in
+            
+            }, completed: { (image, data, error, finished) in
+              
+               
+                if image != nil && finished == true
+                {
+                    
+                    let documents   = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+                    let url = NSURL(string:urlString )
+                   
+                    let writePath = documents.stringByAppendingPathComponent((url?.lastPathComponent)!)
+                    
+                    do
+                    {
+                    
+                     try data.writeToFile(writePath, options: .AtomicWrite)
+                    }catch
+                    {
+                        
+                    }
+                    
+                }
+                
+                
+          })
+        
     }
-    
-    
 }
 
 extension ProfileViewController
@@ -681,6 +704,10 @@ extension ProfileViewController
                 self.view.removeSpinner()
                 
                 ProfileManager.sharedInstance.personalProfile = personalProfile
+                if let photo  = personalProfile.photo
+                {
+                    self.setProfileImgeForURL(photo)
+                }
                 
             });
             
@@ -699,18 +726,28 @@ extension ProfileViewController:UIDocumentInteractionControllerDelegate
 {
     @IBAction func preview()
     {
-        
-        showFile(personalProfile.photo!)
+        if let _ = personalProfile.photo
+        {
+            showFile(personalProfile.photo!)
+        }
         
     }
     
-    func showFile(path:String)
+    func showFile(urlString:String)
     {
         
-            let pdfViewer:UIDocumentInteractionController = UIDocumentInteractionController(URL: NSURL.fileURLWithPath(path))
-            pdfViewer.delegate = self
-            pdfViewer.presentPreviewAnimated(true)
-            
+        let documents   = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let url = NSURL(string:urlString )
+        
+        let writePath = documents.stringByAppendingPathComponent((url?.lastPathComponent)!)
+        
+        
+        let documentURL = NSURL.fileURLWithPath(writePath)
+
+        let pdfViewer:UIDocumentInteractionController = UIDocumentInteractionController(URL: documentURL)
+        pdfViewer.delegate = self
+        pdfViewer.presentPreviewAnimated(true)
+        
     
     }
     
@@ -775,7 +812,8 @@ extension ProfileViewController
             });
             }) { (error) in
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                dispatch_async(dispatch_get_main_queue(),
+                {
                     self.view.removeSpinner()
                     
                     

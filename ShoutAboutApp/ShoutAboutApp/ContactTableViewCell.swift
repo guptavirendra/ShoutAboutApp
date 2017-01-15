@@ -25,6 +25,10 @@ class ContactTableViewCell: UITableViewCell
      @IBOutlet weak var revieBbutton: UIButton?
      @IBOutlet weak var rateView: RatingControl?
     
+    @IBOutlet weak var blockButton: UIButton?
+    
+    
+    
      var delegate:ContactTableViewCellProtocol?
     
     override func awakeFromNib()

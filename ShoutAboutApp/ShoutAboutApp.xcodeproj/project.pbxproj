@@ -88,6 +88,7 @@
 		F18839291DD877C000362B1B /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18839281DD877C000362B1B /* ChattingViewController.swift */; };
 		F188392B1DD8A76B00362B1B /* ChattingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F188392A1DD8A76B00362B1B /* ChattingTableViewCell.swift */; };
 		F18839331DD8D26400362B1B /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18839321DD8D26400362B1B /* LeftViewController.swift */; };
+		F1A1D13C1E2BA1C2004A4E8E /* FeedsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A1D13B1E2BA1C1004A4E8E /* FeedsTableViewCell.swift */; };
 		F1ACAD781E217DDC004AECAB /* SpamFavBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ACAD771E217DDC004AECAB /* SpamFavBlockViewController.swift */; };
 		F1D1F7DB1DEE05D10046DBB2 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7DA1DEE05D10046DBB2 /* GoogleToolboxForMac.framework */; };
 		F1D1F7DC1DEE05D10046DBB2 /* GoogleToolboxForMac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7DA1DEE05D10046DBB2 /* GoogleToolboxForMac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -208,6 +209,7 @@
 		F188392A1DD8A76B00362B1B /* ChattingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChattingTableViewCell.swift; sourceTree = "<group>"; };
 		F188392C1DD8CED200362B1B /* ShoutAboutApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShoutAboutApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		F18839321DD8D26400362B1B /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
+		F1A1D13B1E2BA1C1004A4E8E /* FeedsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedsTableViewCell.swift; sourceTree = "<group>"; };
 		F1ACAD771E217DDC004AECAB /* SpamFavBlockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpamFavBlockViewController.swift; sourceTree = "<group>"; };
 		F1D1F7DA1DEE05D10046DBB2 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "/Users/virendragupta/Library/Developer/Xcode/DerivedData/ShoutAboutApp-bjcvlaxyvaywimbcwmcujfhbymnm/Build/Products/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<absolute>"; };
 		F1D1F7DD1DEE05D10046DBB2 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "/Users/virendragupta/Library/Developer/Xcode/DerivedData/ShoutAboutApp-bjcvlaxyvaywimbcwmcujfhbymnm/Build/Products/Debug-iphoneos/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<absolute>"; };
@@ -391,6 +393,7 @@
 				F18839241DD8573B00362B1B /* UesrReviewTableViewCell.swift */,
 				F12713B11DCFC105005928AD /* WriteReviewTableViewCell.swift */,
 				F12C277C1DCF761D00AEE0A3 /* FeedsViewController.swift */,
+				F1A1D13B1E2BA1C1004A4E8E /* FeedsTableViewCell.swift */,
 				F100A7CE1DDB9B5D00DD320C /* Profile */,
 				F12C27761DCF3DFA00AEE0A3 /* ContactViewController.swift */,
 				F12C27821DCF85CB00AEE0A3 /* RateANdReviewViewController.swift */,
@@ -632,6 +635,7 @@
 				F18839291DD877C000362B1B /* ChattingViewController.swift in Sources */,
 				F12C27671DCE662800AEE0A3 /* BaseNSURLSession.swift in Sources */,
 				F18839251DD8573B00362B1B /* UesrReviewTableViewCell.swift in Sources */,
+				F1A1D13C1E2BA1C2004A4E8E /* FeedsTableViewCell.swift in Sources */,
 				F188392B1DD8A76B00362B1B /* ChattingTableViewCell.swift in Sources */,
 				F12C27711DCEFDE100AEE0A3 /* JoinViewController.swift in Sources */,
 				F18839271DD86A6F00362B1B /* EditProfileTableViewCell.swift in Sources */,
@@ -774,7 +778,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.in.varyavega.shoutaboutapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2ce0adf8-ae77-4bc7-9933-d75274edd747";
+				PROVISIONING_PROFILE = "6a778831-fb34-44a6-afca-b9b9dbfaafb7";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShoutAboutApp/ShoutAboutApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -794,7 +798,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.in.varyavega.shoutaboutapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2ce0adf8-ae77-4bc7-9933-d75274edd747";
+				PROVISIONING_PROFILE = "6a778831-fb34-44a6-afca-b9b9dbfaafb7";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShoutAboutApp/ShoutAboutApp-Bridging-Header.h";
 			};
 			name = Release;

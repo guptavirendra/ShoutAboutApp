@@ -59,9 +59,15 @@ class OTPViewController: UIViewController, UITextFieldDelegate {
     {
         super.viewDidAppear(animated)
         dispatch_async(dispatch_get_main_queue(),{
-           self.otpTextField.becomeFirstResponder()
+           //self.otpTextField.becomeFirstResponder()
         })
         
+    }
+    
+    
+    deinit
+    {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
 
     @IBAction func otpButtonClicked(sender: UIButton)

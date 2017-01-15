@@ -26,11 +26,11 @@ class SpamFavBlockViewController: UIViewController
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         self.navigationController?.navigationBarHidden = false
-        if self.revealViewController() != nil {
-           // menuButton!.target = self //self.revealViewController()
-            //menuButton!.action = #selector(SpamFavBlockViewController.popVC)
-             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-           // self.revealViewController().rearViewRevealWidth = UIScreen.mainScreen().bounds.width
+        if self.revealViewController() != nil
+        {
+            menuButton!.target = self.revealViewController()
+            menuButton!.action = #selector(SWRevealViewController.revealToggle(_:))
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
         switch favSpamBlock
@@ -94,6 +94,29 @@ class SpamFavBlockViewController: UIViewController
     }
     
     
+    func unBlock(userId:String)
+    {
+        self.view.showSpinner()
+        DataSessionManger.sharedInstance.unblockUserID(userId, onFinish: { (response, deserializedResponse) in
+            dispatch_async(dispatch_get_main_queue(), {
+                self.view.removeSpinner()
+                self.blockList()
+                
+            });
+            }) { (error) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.view.removeSpinner()
+                    
+                    
+                });
+        }
+        
+        
+        
+        
+    }
+    
+    
     func favoriteList()
     {
         self.view.showSpinner()
@@ -103,6 +126,25 @@ class SpamFavBlockViewController: UIViewController
                 self.allValidContacts.removeAll()
                 self.allValidContacts = favUserArray
                 self.tableView?.reloadData()
+                
+            });
+            }) { (error) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.view.removeSpinner()
+                    
+                    
+                });
+        }
+    }
+    
+    
+    func unFavorite(userId:String)
+    {
+        self.view.showSpinner()
+        DataSessionManger.sharedInstance.unfavouriteUserID(userId, onFinish: { (response, deserializedResponse) in
+            dispatch_async(dispatch_get_main_queue(), {
+                self.view.removeSpinner()
+                self.favoriteList()
                 
             });
             }) { (error) in
@@ -132,8 +174,32 @@ class SpamFavBlockViewController: UIViewController
         }
     }
     
+    func unSpam(userId:String)
+    {
+        
+        self.view.showSpinner()
+        DataSessionManger.sharedInstance.unspamUserID(userId, onFinish: { (response, deserializedResponse) in
+            dispatch_async(dispatch_get_main_queue(), {
+                self.view.removeSpinner()
+                self.spamList()
+                
+            });
+
+            }) { (error) in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.view.removeSpinner()
+                    
+                    
+                });
+
+        }
+        
+        
+        
+    }
+    
 }
-extension SpamFavBlockViewController
+extension SpamFavBlockViewController:ContactTableViewCellProtocol
 {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -147,7 +213,7 @@ extension SpamFavBlockViewController
     {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("contact", forIndexPath: indexPath) as! ContactTableViewCell
-        //cell.delegate = self
+        cell.delegate = self
         
         let personContact = allValidContacts[indexPath.row]
         cell.nameLabel?.text = personContact.name
@@ -160,6 +226,28 @@ extension SpamFavBlockViewController
         }else
         {
             cell.profileImageView.image = UIImage(named: "profile")
+        }
+        
+        
+        
+        switch favSpamBlock
+        {
+        case .fav:
+            cell.blockButton?.setTitle("UnFavorite", forState: .Normal)
+            
+            
+            break
+        case .spam:
+            
+            cell.blockButton?.setTitle("UnSpam", forState: .Normal)
+            
+            break
+        case .block:
+             cell.blockButton?.setTitle("UnBlock", forState: .Normal)
+            
+            
+            break
+            
         }
         
         return cell
@@ -185,7 +273,7 @@ extension SpamFavBlockViewController
             let personContact = allValidContacts[indexPath!.row]
             if button.titleLabel?.text == " Call"
             {
-                let personContact = allValidContacts[indexPath!.row]
+                
                 let   phone = "tel://"+personContact.mobileNumber
                 UIApplication.sharedApplication().openURL(NSURL(string: phone)!)
             }
@@ -209,7 +297,34 @@ extension SpamFavBlockViewController
                 self.navigationController!.pushViewController(rateANdReviewViewController!, animated: true)
                 
                 
-            }else
+            }
+                
+            else if button.titleLabel?.text == "UnFavorite" || button.titleLabel?.text == "UnSpam" || button.titleLabel?.text == "UnBlock"
+            {
+                
+                
+                
+                switch favSpamBlock
+                {
+                case .fav:
+                    
+                     unFavorite(String(personContact.idString))
+                    break
+                case .spam:
+                    
+                    unSpam(String(personContact.idString))
+                    break
+                case .block:
+                    
+                    unBlock(String(personContact.idString))
+                    break
+                    
+                }
+                
+                
+            }
+            
+            else
             {
                 let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as? ProfileViewController
                 profileViewController?.personalProfile = personContact

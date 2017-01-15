@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseMessaging
 
 @UIApplicationMain
 
@@ -38,7 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         connectToFcm()
         
     }
-     func connectToFcm()
+    
+    func connectToFcm()
         
     {
 
@@ -111,6 +113,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+        
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(tokenRefreshNotification(_:)),
+                                                         name: kFIRInstanceIDTokenRefreshNotification,
+                                                         object: nil)
         
       //  UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
@@ -202,4 +209,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 }
+
+
+
+func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError)
+{
+    print(error)
+}
+
+
+
+
 

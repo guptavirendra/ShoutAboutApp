@@ -19,9 +19,10 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
     {
         super.viewDidLoad()
         
-        choiceArray = ["Block","Spam","Settings","Favorites","Premium","Logout"]
+        choiceArray = ["Recent Search", "Block", "Spam", "Favorites", "Settings", "Premium", "Logout"]
         profileImageView.makeImageRounded()
         
+
 
     }
 
@@ -83,7 +84,16 @@ extension LeftViewController
     //MARK: SELECTION
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        if indexPath.row == 5
+       let cell = tableView.cellForRowAtIndexPath(indexPath)
+        
+        if indexPath.row == 0
+        {
+            
+            self.performSegueWithIdentifier("recent", sender: cell)
+        }
+        
+        
+        else if indexPath.row == 6
         {
             NSUserDefaults.standardUserDefaults().removeObjectForKey(kapp_user_id)
             NSUserDefaults.standardUserDefaults().removeObjectForKey(kapp_user_token)
@@ -96,7 +106,8 @@ extension LeftViewController
             appDelegate.window?.makeKeyAndVisible()
         }else
         {
-        
+            self.performSegueWithIdentifier("spam", sender: cell)
+           /*
             if  let vc = self.storyboard?.instantiateViewControllerWithIdentifier("SpamFavBlockViewController") as? SpamFavBlockViewController
             {
                 
@@ -118,14 +129,56 @@ extension LeftViewController
                 self.navigationController?.navigationBar.barTintColor = appColor
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+            */
         }
         
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 60
+        return 50
         
     }
+    
+}
+
+extension LeftViewController
+{
+    
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+     {
+        if  let vc = (segue.destinationViewController as? UINavigationController)?.viewControllers.first as? SpamFavBlockViewController
+        {
+        
+            if let cell = sender as? UITableViewCell
+            {
+                if let  indexPath = tableView.indexPathForCell(cell)
+                {
+                
+                    if indexPath.row == 1
+                    {
+                        vc.favSpamBlock = .block
+                    }
+                    if indexPath.row == 2
+                    {
+                        vc.favSpamBlock = .spam
+                    }
+                    if indexPath.row == 3
+                    {
+                        vc.favSpamBlock = .fav
+                    }
+                }
+                
+            }
+        }
+        
+        
+        
+    }
+    
+   
     
 }
