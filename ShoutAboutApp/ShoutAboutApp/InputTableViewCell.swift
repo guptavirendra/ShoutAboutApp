@@ -41,5 +41,4 @@ class InputTableViewCell: UITableViewCell
         self.delegate?.getTextForCell(inputText, cell: self)
         
     }
-
 }

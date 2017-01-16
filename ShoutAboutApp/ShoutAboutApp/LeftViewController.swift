@@ -14,6 +14,7 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var tableView:UITableView!
     @IBOutlet weak var profileImageView:UIImageView!
     @IBOutlet weak var nameLabel:UILabel!
+    
     var choiceArray = [String]()
     override func viewDidLoad()
     {
@@ -22,8 +23,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
         choiceArray = ["Recent Search", "Block", "Spam", "Favorites", "Settings", "Premium", "Logout"]
         profileImageView.makeImageRounded()
         
-
-
     }
 
     override func didReceiveMemoryWarning()
@@ -36,7 +35,6 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
     {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBarHidden = true
-       // self.revealViewController().rearViewRevealWidth = 120
         self.nameLabel.text = ProfileManager.sharedInstance.personalProfile.name
         // else need to update
         if ProfileManager.sharedInstance.localStoredImage != nil
@@ -91,7 +89,11 @@ extension LeftViewController
             
             self.performSegueWithIdentifier("recent", sender: cell)
         }
-        
+        else if (indexPath.row == 1 ||  indexPath.row == 2 || indexPath.row == 3)
+        {
+             self.performSegueWithIdentifier("spam", sender: cell)
+            
+        }
         
         else if indexPath.row == 6
         {
@@ -106,30 +108,8 @@ extension LeftViewController
             appDelegate.window?.makeKeyAndVisible()
         }else
         {
-            self.performSegueWithIdentifier("spam", sender: cell)
-           /*
-            if  let vc = self.storyboard?.instantiateViewControllerWithIdentifier("SpamFavBlockViewController") as? SpamFavBlockViewController
-            {
-                
-                //0,1,3 bsf
-                
-                if indexPath.row == 0
-                {
-                    vc.favSpamBlock = .block
-                }
-                if indexPath.row == 1
-                {
-                    vc.favSpamBlock = .spam
-                }
-                if indexPath.row == 3
-                {
-                    vc.favSpamBlock = .fav
-                }
-                
-                self.navigationController?.navigationBar.barTintColor = appColor
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            */
+           
+          
         }
         
     }
@@ -157,7 +137,6 @@ extension LeftViewController
             {
                 if let  indexPath = tableView.indexPathForCell(cell)
                 {
-                
                     if indexPath.row == 1
                     {
                         vc.favSpamBlock = .block
@@ -171,14 +150,7 @@ extension LeftViewController
                         vc.favSpamBlock = .fav
                     }
                 }
-                
             }
         }
-        
-        
-        
     }
-    
-   
-    
 }

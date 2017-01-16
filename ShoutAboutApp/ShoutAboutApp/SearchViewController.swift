@@ -21,7 +21,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
     var isSeaechingLocal:Bool = true
     var isSearching:Bool      = false
     
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -40,7 +39,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
         
         searchController.hidesNavigationBarDuringPresentation = false
        // searchController.searchBar.translucent = true
-        self.extendedLayoutIncludesOpaqueBars = true
+        //self.extendedLayoutIncludesOpaqueBars = true
         
     }
 
@@ -62,11 +61,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate,UISearchContro
     {
         super.viewDidAppear(animated)
         self.searchController.active = true
-        dispatch_async(dispatch_get_main_queue(),{
+        dispatch_async(dispatch_get_main_queue(),
+                       {
             self.searchController.searchBar.becomeFirstResponder()
         })
-        //searchController.searchBar.delegate?.searchBarTextDidBeginEditing!(searchController.searchBar)
-        //searchController.searchBar.delegate?.searchBarShouldBeginEditing!(searchController.searchBar)
+        
     }
     
     
@@ -181,8 +180,6 @@ extension SearchViewController
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        
-        
         if isSearching == false
         {
             

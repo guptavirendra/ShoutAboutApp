@@ -14,8 +14,8 @@ class OTPViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var verifyButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var otpTextField: UITextField!
-    
     @IBOutlet var countDownLabel: UILabel!
+    
     var count = 120
     var otpString:String = ""
     var mobileNumberString:String = ""
@@ -24,7 +24,6 @@ class OTPViewController: UIViewController, UITextFieldDelegate {
     {
         super.viewDidLoad()
         startTimer()
-        
         otpTextField.addTarget(self, action:#selector(ViewController.edited), forControlEvents:UIControlEvents.EditingChanged)
         verifyButton.userInteractionEnabled = false
         verifyButton.alpha = 0.5
@@ -90,9 +89,7 @@ class OTPViewController: UIViewController, UITextFieldDelegate {
             
         }else
         {
-            
             self.otpTextField.text = nil
-            
             self.view.showSpinner()
             DataSessionManger.sharedInstance.getOTPValidateForMobileNumber(mobileNumberString, otp: otpString, onFinish: { (response, deserializedResponse) in
                 print("deserializedResponse \(deserializedResponse)")

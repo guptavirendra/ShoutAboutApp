@@ -73,6 +73,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.navigationController?.navigationBar.tintColor = appColor
         
         imageView.makeImageRounded()
+        setBackIndicatorImage()
         
         
         let tapGesture = UITapGestureRecognizer()

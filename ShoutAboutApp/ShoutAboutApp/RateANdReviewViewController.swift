@@ -435,8 +435,6 @@ extension RateANdReviewViewController:RatingControlDelegate
         
         if self.tableView.indexPathForCell(cell) != nil
         {
-            
-            
             let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
             let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token) as! String
             

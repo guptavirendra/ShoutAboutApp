@@ -15,6 +15,7 @@ class MainSearchViewController: UIViewController, ContactTableViewCellProtocol
     @IBOutlet weak var searchButton:UIButton!
     @IBOutlet weak var clearButton:UIButton!
     @IBOutlet weak var clearButtonBaseView:UIView!
+    
     var allValidContacts = [SearchPerson]()
     override func viewDidLoad()
     {
@@ -213,8 +214,6 @@ extension MainSearchViewController
     
    @IBAction func displayClearAlert()
     {
-        
-        
         let alert = UIAlertController(title: "Clear Recent Searchs", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
         let okAction = UIAlertAction(title: "Yes", style: .Default) { (action) in
             self.clearSearchHistory()

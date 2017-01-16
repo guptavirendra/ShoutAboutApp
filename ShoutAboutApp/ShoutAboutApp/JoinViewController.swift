@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import Contacts
 
- class ContactManager: NSObject
+class ContactManager: NSObject
 {
     static let sharedInstance = ContactManager()
      
@@ -53,7 +53,8 @@ class JoinViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var address:String = ""
     var website:String = ""
 
-    var completionHandler: (Float)->Void = {
+    var completionHandler: (Float)->Void =
+        {
         (arg: Float) -> Void in
     }
     var handler :(UIAlertAction) -> Void =
@@ -174,8 +175,7 @@ extension JoinViewController
         return cell
         }
         
-        
-               let cell = tableView.dequeueReusableCellWithIdentifier("FaceBookGoogleTableViewCell", forIndexPath: indexPath) as! FaceBookGoogleTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("FaceBookGoogleTableViewCell", forIndexPath: indexPath) as! FaceBookGoogleTableViewCell
                 //cell.button.setTitle("Skip", forState: .Normal)
         return cell
         
@@ -191,8 +191,6 @@ extension JoinViewController
         return 44
     }
 
-    
-
 }
 extension JoinViewController
 {
@@ -203,14 +201,10 @@ extension JoinViewController
         dispatch_async(dispatch_get_global_queue(0, 0),
                        {
                         self.getContacts()
-                        
         })
         
         if cell.button.titleLabel?.text == "Skip"
         {
-            
-            
-            
             print("Skip")
             self.dismissViewControllerAnimated(false, completion: nil)
             let tabBarVC = self.storyboard?.instantiateViewControllerWithIdentifier("SWRevealViewController") as? SWRevealViewController
@@ -367,8 +361,7 @@ extension JoinViewController
     
     func hideKeyBoard(notification: NSNotification)
     {
-        
-        if  activeTextField != nil
+       if  activeTextField != nil
         {
             let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             self.tableView.contentInset = contentInsets

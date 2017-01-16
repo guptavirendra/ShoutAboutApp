@@ -761,7 +761,7 @@
                                                                 <constraint firstAttribute="width" constant="102" id="tIf-i4-rJI"/>
                                                             </constraints>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2xd-OI-j9l">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is good" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2xd-OI-j9l">
                                                             <rect key="frame" x="10" y="81" width="564" height="21"/>
                                                             <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -901,7 +901,7 @@
                                                                 <constraint firstAttribute="height" constant="45" id="gmp-G0-ZJQ"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caf-SF-xtq">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ram chandra" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caf-SF-xtq">
                                                             <rect key="frame" x="63" y="8" width="501" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="8Xp-2b-dOJ"/>
@@ -960,7 +960,7 @@
                                                                 <constraint firstAttribute="width" constant="102" id="kK3-0b-gaY"/>
                                                             </constraints>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xl8-P5-MXI">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xl8-P5-MXI">
                                                             <rect key="frame" x="10" y="81" width="564" height="21"/>
                                                             <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1087,6 +1087,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="rWj-xD-9LE" id="QlM-Zx-cIV"/>
+                                    <outlet property="delegate" destination="rWj-xD-9LE" id="E8b-xB-lP3"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1116,6 +1120,9 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="di6-nO-Pmw" id="dp7-4c-K1S"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1I-gR-fb6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -4338,7 +4345,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="O3l-L7-ch0">
-                        <barButtonItem key="leftBarButtonItem" image="menu" id="9fP-4T-N16"/>
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="9fP-4T-N16">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="menuButton" destination="9fP-4T-N16" id="9qy-3d-rhX"/>
@@ -4358,6 +4367,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5nc-zS-grc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.066666666669999999" green="0.47450980390000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -4424,6 +4434,6 @@
         <image name="timer_blue" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Bjg-hP-bfM"/>
+        <segue reference="cXK-Rm-WyI"/>
     </inferredMetricsTieBreakers>
 </document>

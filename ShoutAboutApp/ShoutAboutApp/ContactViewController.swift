@@ -680,20 +680,11 @@ extension ContactViewController
     
     @IBAction func  addContactScreen(sender:AnyObject)
     {
-        
-        let con = CNMutableContact()
-        con.givenName = "Johnny"
-        con.familyName = "Appleseed"
-        con.phoneNumbers.append(CNLabeledValue(
-            label: "woods", value: CNPhoneNumber(stringValue: "555-123-4567")))
-        let unkvc = CNContactViewController(forNewContact: nil)
-        unkvc.message = "He knows his trees"
-        unkvc.contactStore = CNContactStore()
-        unkvc.delegate = self
-        unkvc.allowsActions = false
-        //self.navigationController?.pushViewController(unkvc, animated: true)
-        
-        let nav = UINavigationController(rootViewController: unkvc)
+        let addNewContactVC = CNContactViewController(forNewContact: nil)
+        addNewContactVC.contactStore = CNContactStore()
+        addNewContactVC.delegate = self
+        addNewContactVC.allowsActions = false
+        let nav = UINavigationController(rootViewController: addNewContactVC)
         self.presentViewController(nav, animated: true, completion: nil)
     
     }

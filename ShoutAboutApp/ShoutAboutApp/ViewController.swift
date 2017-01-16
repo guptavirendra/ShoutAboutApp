@@ -10,10 +10,10 @@ import UIKit
 
 class ViewController: UIViewController
 {
-
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var mobileNumberTextField: UITextField!
     @IBOutlet weak var textFieldBaseView:UIView!
+    
     var mobileNumberString:String = ""
     override func viewDidLoad()
     {
@@ -23,10 +23,10 @@ class ViewController: UIViewController
         submitButton.alpha = 0.5
         textFieldBaseView.makeBorder()
         //self.view.backgroundColor = bgColor
-        
     }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -36,14 +36,6 @@ class ViewController: UIViewController
         ///print hit webservice
         print("Mobile Number to Submit \(mobileNumberString)")
         mobileNumberTextField.resignFirstResponder()
-        /*
-        dispatch_async(dispatch_get_main_queue(), {
-            let otpViewController = self.storyboard?.instantiateViewControllerWithIdentifier("OTPViewController") as? OTPViewController
-            otpViewController?.mobileNumberString = self.mobileNumberString
-            self.presentViewController(otpViewController!, animated: true, completion: nil)
-            
-        });
-        */
         
         if NetworkConnectivity.isConnectedToNetwork() != true
         {
@@ -52,7 +44,7 @@ class ViewController: UIViewController
         }else
         {
             //hit webservice
-            self
+            
             self.view.showSpinner()
             DataSessionManger.sharedInstance.getOTPForMobileNumber(mobileNumberString, onFinish: { (response, deserializedResponse) in
                 
@@ -161,10 +153,6 @@ extension UIViewController
         self.presentViewController(alert, animated: true, completion: nil)
         
     }
-    
-
-    
-    
 }
 
 
@@ -177,12 +165,6 @@ public extension UIView
     
     func setGraphicEffects()
     {
-        //        self.layer.cornerRadius = 0.0
-        //        self.layer.shadowRadius = 7
-        //        self.layer.shadowOpacity = 0.30
-        //        self.layer.shadowOffset = CGSizeMake(0, 4)
-        
-        // Changed Shadow As discussed dated on 4 Aug
         self.layer.shadowColor   = UIColor.lightGrayColor().CGColor
         self.layer.shadowOpacity = 1.0
         self.layer.shadowRadius  = 3.0

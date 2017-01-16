@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 {
 
     var window: UIWindow?
+    
+    //MARK:// GET CONTACT
     func retrieveContacts() -> [SearchPerson]?
     {
         if let unarchivedObject = NSUserDefaults.standardUserDefaults().objectForKey(contactStored) as? NSData {
@@ -27,89 +29,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     }
     
     
+    //MARK: Refresh Token
     func tokenRefreshNotification(notification: NSNotification)
     {
         if let refreshedToken = FIRInstanceID.instanceID().token()
         {
             print("InstanceID token: \(refreshedToken)")
-            
         }
         // Connect to FCM since connection may have failed when attempted before having a token.
-        
         connectToFcm()
-        
-    }
-    
-    func connectToFcm()
-        
-    {
-
-        FIRMessaging.messaging().connectWithCompletion { (error) in
-        if error != nil
-        {
-                
-                print("Unable to connect with FCM. \(error)")
-        } else{
-                
-                let refreshedToken = FIRInstanceID.instanceID().token()
-                print("InstanceID token: \(refreshedToken)")
-                print("Connected to FCM.")
-                
-            }
-        }
-        
-    }
-    
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void)
-    {
-        if userInfo["gcm.message_id"] != nil
-        {
-            print("Message ID: \(userInfo["gcm.message_id"]!)")
-            
-        }
-        // Print full message.
-        
-        print(userInfo)
-        
-    }
-    
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject])
-        
-    {
-        
-        // If you are receiving a notification message while your app is in the background,
-        
-        // this callback will not be fired till the user taps on the notification launching the application.
-        
-        // TODO: Handle data of notification
-        // Print message ID.
-        
-        print("Message ID: \(userInfo["gcm.message_id"]!)")
-        // Print full message.
-        
-        print(userInfo)
-        FIRMessaging.messaging().appDidReceiveMessage(userInfo)
-        
     }
     
     
-    
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        
-        let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
-        
-        var tokenString = ""
-        for i in 0..<deviceToken.length
-        {
-            
-            tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
-            
-        }
-        
-        FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Sandbox)
-        
-        print("Device Token:", tokenString)
-    }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
@@ -217,7 +148,69 @@ func application(application: UIApplication, didFailToRegisterForRemoteNotificat
     print(error)
 }
 
+func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData)
+{
+    
+    let tokenChars = UnsafePointer<CChar>(deviceToken.bytes)
+    
+    var tokenString = ""
+    for i in 0..<deviceToken.length
+    {
+        
+        tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
+        
+    }
+    
+    FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Sandbox)
+    
+    print("Device Token:", tokenString)
+}
 
 
 
+func connectToFcm()
+{
+    FIRMessaging.messaging().connectWithCompletion { (error) in
+        if error != nil
+        {
+           print("Unable to connect with FCM. \(error)")
+        } else
+        {
+            let refreshedToken = FIRInstanceID.instanceID().token()
+            print("InstanceID token: \(refreshedToken)")
+            print("Connected to FCM.")
+            
+        }
+    }
+    
+}
 
+
+func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void)
+{
+    if userInfo["gcm.message_id"] != nil
+    {
+        print("Message ID: \(userInfo["gcm.message_id"]!)")
+        
+    }
+    // Print full message.
+    print(userInfo)
+}
+
+func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject])
+{
+    
+    // If you are receiving a notification message while your app is in the background,
+    
+    // this callback will not be fired till the user taps on the notification launching the application.
+    
+    // TODO: Handle data of notification
+    // Print message ID.
+    
+    print("Message ID: \(userInfo["gcm.message_id"]!)")
+    // Print full message.
+    
+    print(userInfo)
+    FIRMessaging.messaging().appDidReceiveMessage(userInfo)
+    
+}

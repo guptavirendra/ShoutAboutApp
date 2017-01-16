@@ -26,6 +26,8 @@ class SpamFavBlockViewController: UIViewController
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         self.navigationController?.navigationBarHidden = false
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.whiteColor()]
         if self.revealViewController() != nil
         {
             menuButton!.target = self.revealViewController()
@@ -49,9 +51,7 @@ class SpamFavBlockViewController: UIViewController
                 break
 
         }
-         //blockList()
-         // spamList()
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning()
@@ -70,9 +70,7 @@ class SpamFavBlockViewController: UIViewController
     
     func blockList()
     {
-        
         self.view.showSpinner()
-        
         DataSessionManger.sharedInstance.getBlockUserList({ (response, blockUserArray) in
             
             dispatch_async(dispatch_get_main_queue(), {
@@ -86,11 +84,8 @@ class SpamFavBlockViewController: UIViewController
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     self.view.removeSpinner()
-                    
-                    
                 });
-                
-        }
+            }
     }
     
     
@@ -110,10 +105,6 @@ class SpamFavBlockViewController: UIViewController
                     
                 });
         }
-        
-        
-        
-        
     }
     
     
@@ -193,9 +184,6 @@ class SpamFavBlockViewController: UIViewController
                 });
 
         }
-        
-        
-        
     }
     
 }
@@ -234,18 +222,16 @@ extension SpamFavBlockViewController:ContactTableViewCellProtocol
         {
         case .fav:
             cell.blockButton?.setTitle("UnFavorite", forState: .Normal)
-            
-            
+            cell.blockButton?.setImage(UIImage( named: "Favorites"), forState: .Normal)
             break
         case .spam:
-            
             cell.blockButton?.setTitle("UnSpam", forState: .Normal)
+            cell.blockButton?.setImage(UIImage( named: "Spam"), forState: .Normal)
             
             break
         case .block:
              cell.blockButton?.setTitle("UnBlock", forState: .Normal)
-            
-            
+             cell.blockButton?.setImage(UIImage( named: "Block"), forState: .Normal)
             break
             
         }
@@ -301,8 +287,6 @@ extension SpamFavBlockViewController:ContactTableViewCellProtocol
                 
             else if button.titleLabel?.text == "UnFavorite" || button.titleLabel?.text == "UnSpam" || button.titleLabel?.text == "UnBlock"
             {
-                
-                
                 
                 switch favSpamBlock
                 {

@@ -14,22 +14,19 @@ protocol ContactTableViewCellProtocol {
 
 class ContactTableViewCell: UITableViewCell
 {
-     @IBOutlet weak var profileImageView: UIImageView!
-     @IBOutlet weak var baseView: UIView!
-     @IBOutlet weak var profileButton: UIButton!
-     @IBOutlet weak var nameLabel: UILabel!
-     @IBOutlet weak var mobileLabel: UILabel!
-     @IBOutlet weak var ratingLabel: UILabel?
-     @IBOutlet weak var callButton: UIButton!
-     @IBOutlet weak var chaBbutton: UIButton!
-     @IBOutlet weak var revieBbutton: UIButton?
-     @IBOutlet weak var rateView: RatingControl?
-    
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var baseView: UIView!
+    @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var mobileLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel?
+    @IBOutlet weak var callButton: UIButton!
+    @IBOutlet weak var chaBbutton: UIButton!
+    @IBOutlet weak var revieBbutton: UIButton?
+    @IBOutlet weak var rateView: RatingControl?
     @IBOutlet weak var blockButton: UIButton?
     
-    
-    
-     var delegate:ContactTableViewCellProtocol?
+    var delegate:ContactTableViewCellProtocol?
     
     override func awakeFromNib()
     {
@@ -40,8 +37,8 @@ class ContactTableViewCell: UITableViewCell
         profileImageView.makeImageRoundedWithGray()
         if let _ = rateView
         {
-        rateView!.color = UIColor.grayColor()
-        rateView!.userInteractionEnabled = false
+            rateView!.color = UIColor.grayColor()
+            rateView!.userInteractionEnabled = false
         }
         // Initialization code
     }
