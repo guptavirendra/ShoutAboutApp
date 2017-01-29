@@ -49,15 +49,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var callChatBaseView:UIView!
     @IBOutlet weak var favoriteBlockSpamConstraints:NSLayoutConstraint!
     
-    @IBOutlet weak var reviewButton:UIButton!
+    @IBOutlet weak var reviewButton:UIButton?
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var cameraButton: UIButton!
-    @IBOutlet weak var imageView:UIImageView!
+    @IBOutlet weak var tableView: UITableView?
+    @IBOutlet weak var cameraButton: UIButton?
+    @IBOutlet weak var imageView:UIImageView?
     
-    @IBOutlet weak var nameTextField:UITextField!
-    @IBOutlet weak var locationButton:UIButton!
-    @IBOutlet weak var editButton:UIButton!
+    @IBOutlet weak var nameTextField:UITextField?
+    @IBOutlet weak var locationButton:UIButton?
+    @IBOutlet weak var editButton:UIButton?
     
     
     var activeTextField:UITextField?
@@ -72,7 +72,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         self.navigationController?.navigationBar.hidden = false
         self.navigationController?.navigationBar.tintColor = appColor
         
-        imageView.makeImageRounded()
+        //imageView!.makeImageRounded()
         setBackIndicatorImage()
         
         
@@ -80,9 +80,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         tapGesture.addTarget(self, action: #selector(self.preview))
         tapGesture.numberOfTapsRequired = 1
         
-        imageView.addGestureRecognizer(tapGesture)
-        
-        self.nameTextField.text = personalProfile.name
+        imageView!.addGestureRecognizer(tapGesture)
+        /*
+        self.nameTextField!.text = personalProfile.name
         if let _ = personalProfile.email
         {
             self.email    = personalProfile.email!
@@ -103,7 +103,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.showKeyBoard(_:)), name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.hideKeyBoard(_:)), name: UIKeyboardWillHideNotification, object: nil)
             
-        
+        */
     }
     deinit
     {
@@ -128,26 +128,28 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        
+        /*
         if personalProfile.idString == ProfileManager.sharedInstance.personalProfile.idString
         {
             self.favoriteBlockSpamConstraints.constant = 0
             self.callChatBaseView.hidden = true
-            self.cameraButton.hidden    = false
+            self.cameraButton!.hidden    = false
             self.callChatBaseView.hidden = true
            
         }else
         {
             self.callChatBaseView.hidden = false
-            self.cameraButton.hidden     = false
-            self.cameraButton.hidden     = true
+            self.cameraButton!.hidden     = false
+            self.cameraButton!.hidden     = true
             self.favoriteBlockSpamConstraints.constant = 30
         }
+ 
         
         if personalProfile.idString != ProfileManager.sharedInstance.personalProfile.idString
         {
-            editButton.hidden = true
+            editButton!.hidden = true
         }
+ */
         if let photo  = personalProfile.photo
         {
             setProfileImgeForURL(photo)
@@ -176,9 +178,9 @@ extension ProfileViewController
     {
         if ProfileManager.sharedInstance.localStoredImage != nil
         {
-            self.imageView.image = ProfileManager.sharedInstance.localStoredImage
+            self.imageView!.image = ProfileManager.sharedInstance.localStoredImage
         }
-       self.imageView.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
+       self.imageView!.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
             SDWebImageDownloader.sharedDownloader().downloadImageWithURL(NSURL(string:urlString ), options: .ProgressiveDownload, progress: { (recievedSize, expectedSize) in
             
             }, completed: { (image, data, error, finished) in
@@ -329,9 +331,9 @@ extension ProfileViewController
                 let dictInfo: NSDictionary = notification.userInfo!
                 let kbSize :CGSize = (dictInfo.objectForKey(UIKeyboardFrameBeginUserInfoKey)?.CGRectValue().size)!
                 let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbSize.height, right: 0)
-                self.tableView.contentInset = contentInsets
-                self.tableView.scrollIndicatorInsets = contentInsets
-                self.tableView.scrollToRowAtIndexPath(self.tableView.indexPathForCell(cell)!, atScrollPosition: .Top, animated: true)
+                self.tableView!.contentInset = contentInsets
+                self.tableView!.scrollIndicatorInsets = contentInsets
+                self.tableView!.scrollToRowAtIndexPath(self.tableView!.indexPathForCell(cell)!, atScrollPosition: .Top, animated: true)
             }
         }
     }
@@ -343,8 +345,8 @@ extension ProfileViewController
         if  activeTextField != nil
         {
             let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            self.tableView.contentInset = contentInsets
-            self.tableView.scrollIndicatorInsets = contentInsets
+            self.tableView!.contentInset = contentInsets
+            self.tableView!.scrollIndicatorInsets = contentInsets
         }
     }
 
@@ -353,7 +355,7 @@ extension ProfileViewController
         print("join")
         
         
-        let visibleCells = tableView.visibleCells as! [EditProfileTableViewCell]
+        let visibleCells = tableView!.visibleCells as! [EditProfileTableViewCell]
         
         if sender.titleLabel?.text == "Edit"
         {
@@ -376,7 +378,7 @@ extension ProfileViewController
             
         }else
         {
-            self.name = nameTextField.text!
+            self.name = nameTextField!.text!
             
             
             
@@ -425,7 +427,7 @@ extension ProfileViewController
                 {
                     dispatch_async(dispatch_get_main_queue(), {
                         self.view.removeSpinner()
-                        self.editButton.setTitle("Edit", forState: .Normal)
+                        self.editButton!.setTitle("Edit", forState: .Normal)
                         self.getProfileData()
                         //self.displayAlertMessage("Success")
                         
@@ -596,10 +598,33 @@ public extension UIView
     
     func makeImageRoundedWithWidth(widthFloat:CGFloat, color:UIColor)
     {
-        self.layer.cornerRadius = self.frame.size.width / 2
+        /*
+        
         self.clipsToBounds = true
-        self.layer.borderWidth = widthFloat
-        self.layer.borderColor = color.CGColor
+        
+       
+        self.layer.shadowColor = color.CGColor
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOffset  = CGSize(width: 2, height: 2)
+ 
+        
+        
+        
+        self.layer.shadowColor = color.CGColor
+        self.layer.shadowOpacity = 1.0
+        //self.layer.shadowRadius = 3.0
+       self.layer.shadowOffset = CGSizeMake(1.0, 1.0)
+        self.layer.masksToBounds = false
+ */
+        
+        self.layer.borderColor =  UIColor.lightGrayColor().CGColor
+        self.layer.borderWidth = 1
+        self.layer.cornerRadius = self.frame.size.width / 2
+        self.layer.shadowColor   = UIColor.lightGrayColor().CGColor
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius  = 3.0
+        self.layer.shadowOffset  = CGSizeMake(1.0, 1.0)
+        self.layer.masksToBounds = false
     }
     
     func makeImageRoundedWithGray()
@@ -651,7 +676,7 @@ extension ProfileViewController
     func croppedImage(image: UIImage, vc:UIViewController)
     {
         vc.dismissViewControllerAnimated(true, completion: nil)
-        imageView.image = image
+        imageView!.image = image
 
         ProfileManager.sharedInstance.localStoredImage = image
         let currentTime = NSDate().timeIntervalSince1970 as NSTimeInterval
@@ -806,7 +831,8 @@ extension ProfileViewController
         self.view.showSpinner()
         DataSessionManger.sharedInstance.spamUserID(String(personalProfile.idString), onFinish: { (response, deserializedResponse) in
             
-            dispatch_async(dispatch_get_main_queue(), {
+            dispatch_async(dispatch_get_main_queue(),
+                {
                 self.view.removeSpinner()
                 
                 
@@ -816,11 +842,7 @@ extension ProfileViewController
                 dispatch_async(dispatch_get_main_queue(),
                 {
                     self.view.removeSpinner()
-                    
-                    
                 });
         }
-        
     }
-    
 }

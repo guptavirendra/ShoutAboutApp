@@ -123,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
         
-        FIRMessaging.messaging().disconnect()
+       // FIRMessaging.messaging().disconnect()
         print("Disconnected from FCM.")
 
     }
@@ -161,7 +161,7 @@ func application(application: UIApplication, didRegisterForRemoteNotificationsWi
         
     }
     
-    FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Sandbox)
+    FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.Unknown)
     
     print("Device Token:", tokenString)
 }

@@ -55,7 +55,7 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         
         
         
-        //self.tableView.addBackGroundImageView()
+        self.tableView.addBackGroundImageView()
         
        // self.tableView.backgroundColor = bgColor
        // self.getContacts()
@@ -256,7 +256,7 @@ extension ContactViewController
                 
             }else
             {
-                let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as? ProfileViewController
+                let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("NewProfileViewController") as? NewProfileViewController
                 profileViewController?.personalProfile = personContact
                 self.navigationController!.pushViewController(profileViewController!, animated: true)
             }

@@ -90,6 +90,7 @@
 		F18839331DD8D26400362B1B /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18839321DD8D26400362B1B /* LeftViewController.swift */; };
 		F1A1D13C1E2BA1C2004A4E8E /* FeedsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A1D13B1E2BA1C1004A4E8E /* FeedsTableViewCell.swift */; };
 		F1ACAD781E217DDC004AECAB /* SpamFavBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ACAD771E217DDC004AECAB /* SpamFavBlockViewController.swift */; };
+		F1C9A81F1E3DE0CD003354B6 /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C9A81E1E3DE0CD003354B6 /* NewProfileViewController.swift */; };
 		F1D1F7DB1DEE05D10046DBB2 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7DA1DEE05D10046DBB2 /* GoogleToolboxForMac.framework */; };
 		F1D1F7DC1DEE05D10046DBB2 /* GoogleToolboxForMac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7DA1DEE05D10046DBB2 /* GoogleToolboxForMac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F1D1F7DE1DEE05D10046DBB2 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7DD1DEE05D10046DBB2 /* GTMSessionFetcher.framework */; };
@@ -202,6 +203,7 @@
 		F17E08591E0FF16500FDBF0B /* Crop.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Crop.storyboard; sourceTree = "<group>"; };
 		F17E085A1E0FF16500FDBF0B /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		F17E085B1E0FF16500FDBF0B /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		F17E0A251E3D23B60023F4B3 /* ShoutAboutApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ShoutAboutApp.entitlements; sourceTree = "<group>"; };
 		F18839221DD83BE400362B1B /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		F18839241DD8573B00362B1B /* UesrReviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UesrReviewTableViewCell.swift; sourceTree = "<group>"; };
 		F18839261DD86A6F00362B1B /* EditProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileTableViewCell.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 		F18839321DD8D26400362B1B /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		F1A1D13B1E2BA1C1004A4E8E /* FeedsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedsTableViewCell.swift; sourceTree = "<group>"; };
 		F1ACAD771E217DDC004AECAB /* SpamFavBlockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpamFavBlockViewController.swift; sourceTree = "<group>"; };
+		F1C9A81E1E3DE0CD003354B6 /* NewProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProfileViewController.swift; sourceTree = "<group>"; };
 		F1D1F7DA1DEE05D10046DBB2 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "/Users/virendragupta/Library/Developer/Xcode/DerivedData/ShoutAboutApp-bjcvlaxyvaywimbcwmcujfhbymnm/Build/Products/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<absolute>"; };
 		F1D1F7DD1DEE05D10046DBB2 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "/Users/virendragupta/Library/Developer/Xcode/DerivedData/ShoutAboutApp-bjcvlaxyvaywimbcwmcujfhbymnm/Build/Products/Debug-iphoneos/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<absolute>"; };
 		F1D1F7E01DEE05D10046DBB2 /* JSQMessagesViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JSQMessagesViewController.framework; path = "/Users/virendragupta/Library/Developer/Xcode/DerivedData/ShoutAboutApp-bjcvlaxyvaywimbcwmcujfhbymnm/Build/Products/Debug-iphoneos/JSQMessagesViewController/JSQMessagesViewController.framework"; sourceTree = "<absolute>"; };
@@ -264,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				F12C277E1DCF763F00AEE0A3 /* ProfileViewController.swift */,
+				F1C9A81E1E3DE0CD003354B6 /* NewProfileViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -398,6 +402,7 @@
 		F12C274F1DCE45A800AEE0A3 /* ShoutAboutApp */ = {
 			isa = PBXGroup;
 			children = (
+				F17E0A251E3D23B60023F4B3 /* ShoutAboutApp.entitlements */,
 				F17E08511E0FF16500FDBF0B /* AKImageCropperOverlayView.swift */,
 				F17E08521E0FF16500FDBF0B /* AKImageCropperView.swift */,
 				F17E08531E0FF16500FDBF0B /* CropperViewController.swift */,
@@ -505,6 +510,9 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = DAU95HF65T;
 						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -624,6 +632,7 @@
 				F11DB52E1DD9AD060084F9F4 /* SDWebImageManager.m in Sources */,
 				F11DB52F1DD9AD060084F9F4 /* SDWebImageOperation.h in Sources */,
 				F11DB5301DD9AD060084F9F4 /* SDWebImagePrefetcher.h in Sources */,
+				F1C9A81F1E3DE0CD003354B6 /* NewProfileViewController.swift in Sources */,
 				F11DB5311DD9AD060084F9F4 /* SDWebImagePrefetcher.m in Sources */,
 				F11DB5321DD9AD060084F9F4 /* UIButton+WebCache.h in Sources */,
 				F11DB5331DD9AD060084F9F4 /* UIButton+WebCache.m in Sources */,
@@ -802,7 +811,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.in.varyavega.shoutaboutapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6a778831-fb34-44a6-afca-b9b9dbfaafb7";
+				PROVISIONING_PROFILE = "2ce0adf8-ae77-4bc7-9933-d75274edd747";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShoutAboutApp/ShoutAboutApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -822,7 +831,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.in.varyavega.shoutaboutapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6a778831-fb34-44a6-afca-b9b9dbfaafb7";
+				PROVISIONING_PROFILE = "2ce0adf8-ae77-4bc7-9933-d75274edd747";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShoutAboutApp/ShoutAboutApp-Bridging-Header.h";
 			};
 			name = Release;

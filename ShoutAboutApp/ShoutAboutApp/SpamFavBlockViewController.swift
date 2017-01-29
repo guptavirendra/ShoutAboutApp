@@ -310,7 +310,7 @@ extension SpamFavBlockViewController:ContactTableViewCellProtocol
             
             else
             {
-                let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileViewController") as? ProfileViewController
+                let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("NewProfileViewController") as? NewProfileViewController
                 profileViewController?.personalProfile = personContact
                 
                 self.navigationController!.pushViewController(profileViewController!, animated: true)

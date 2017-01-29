@@ -39,7 +39,7 @@ class MyTabViewController: UITabBarController, UITabBarControllerDelegate
         
         if let vc = viewController as? UINavigationController
         {
-            if let profilevc = vc.viewControllers.first as? ProfileViewController
+            if let profilevc = vc.viewControllers.first as? NewProfileViewController
             {
              profilevc.personalProfile = ProfileManager.sharedInstance.personalProfile
             }
