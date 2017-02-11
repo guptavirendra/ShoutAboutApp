@@ -26,6 +26,7 @@ class EditProfileTableViewCell: UITableViewCell
     override func awakeFromNib()
     {
         super.awakeFromNib()
+        self.editButton.hidden = true
        // dataTextField.userInteractionEnabled = false
         dataTextField.addTarget(self, action:#selector(InputTableViewCell.edited), forControlEvents:UIControlEvents.EditingChanged)
         

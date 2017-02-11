@@ -1781,6 +1781,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="15"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitButtonClicked:" destination="8iz-iB-Jya" eventType="touchUpInside" id="Ibx-mW-kqU"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2887,7 +2890,7 @@
                                             <constraint firstAttribute="height" constant="21" id="17Q-lu-sP0"/>
                                             <constraint firstAttribute="width" constant="240" id="cSM-fh-CY6"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="21"/>
+                                        <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="17"/>
                                         <color key="textColor" red="0.066666666669999999" green="0.47450980390000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -2897,7 +2900,7 @@
                                             <constraint firstAttribute="height" constant="21" id="sU6-O0-pnC"/>
                                             <constraint firstAttribute="width" constant="240" id="wxN-dq-7k0"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="TitilliumWeb-Regular" family="Titillium Web" pointSize="14"/>
                                         <color key="textColor" red="0.066666666669999999" green="0.47450980390000003" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>

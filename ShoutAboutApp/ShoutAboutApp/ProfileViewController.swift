@@ -811,12 +811,7 @@ extension ProfileViewController
     
     @IBAction func submitButtonClicked(sender:UIButton)
     {
-        let visibleCells = tableView!.visibleCells as! [EditProfileTableViewCell]
-        
-  
-            self.name = nameTextField!.text!
-            
-            print(" email:\(self.email), name:\(self.name),  web:\(self.website ), address:f \(self.address) ")
+        print(" email:\(self.email), name:\(self.name),  web:\(self.website ), address:f \(self.address) ")
             
             if self.name.characters.count == 0
             {

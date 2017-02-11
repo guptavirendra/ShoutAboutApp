@@ -133,6 +133,7 @@ class NewProfileViewController: ProfileViewController, UIPopoverPresentationCont
         let navController = self.storyboard?.instantiateViewControllerWithIdentifier("prfileNav") as? UINavigationController
         
         let profileViewController = navController?.viewControllers.first as? ProfileViewController
+        profileViewController?.personalProfile = self.personalProfile
         navController!.modalPresentationStyle = .Popover
         popOver = navController!.popoverPresentationController
         
@@ -142,7 +143,7 @@ class NewProfileViewController: ProfileViewController, UIPopoverPresentationCont
         
         popOver.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
         
-        profileViewController!.preferredContentSize = CGSize(width: 300, height:330)
+        profileViewController!.preferredContentSize = CGSize(width: 300, height:337)
        // navController.title = "Detail"
         //controller!.popoverPresentationController!.delegate = self
         //profileViewController!.view.backgroundColor = UIColor.clearColor()
