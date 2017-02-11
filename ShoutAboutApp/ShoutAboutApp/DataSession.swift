@@ -452,7 +452,10 @@ class DataSessionManger: NSObject
                     
                     let dataDict = arrayDict.first
                     personalProfileData.idString = (dataDict?.objectForKey("id") as? Int)!
-                    personalProfileData.name = dataDict?.objectForKey(name) as! String
+                    if let  name = dataDict?.objectForKey(name) as? String
+                    {
+                        personalProfileData.name = name
+                    }
                     personalProfileData.email = (dataDict?.objectForKey(email))! as? String
                     personalProfileData.mobileNumber = dataDict?.objectForKey(mobile_number) as! String
                    

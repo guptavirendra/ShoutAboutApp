@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewProfileViewController: ProfileViewController
+class NewProfileViewController: ProfileViewController, UIPopoverPresentationControllerDelegate
 {
 
     @IBOutlet weak var spamBlockBaseView:UIView?
@@ -28,11 +28,12 @@ class NewProfileViewController: ProfileViewController
      @IBOutlet weak var spamLabel:UILabel?
      @IBOutlet weak var favoriteLabel:UILabel?
 
-    
+    var popOver : UIPopoverPresentationController!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        /*
         //self.view.addBackGroundImageView()
         callButton?.makeImageRoundedWithGray()
         chatButton?.makeImageRoundedWithGray()
@@ -40,6 +41,7 @@ class NewProfileViewController: ProfileViewController
         blockButton?.makeImageRoundedWithGray()
         spamButton?.makeImageRoundedWithGray()
         favoriteButton?.makeImageRoundedWithGray()
+        */
     }
 
     override func didReceiveMemoryWarning()
@@ -100,6 +102,22 @@ class NewProfileViewController: ProfileViewController
         if  callLabel?.text == "Status"
         {
             
+            var inputTextField: UITextField?
+            let passwordPrompt = UIAlertController(title: "Status", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+            passwordPrompt.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+            passwordPrompt.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                // Now do whatever you want with inputTextField (remember to unwrap the optional)
+                
+                print(" sta\(inputTextField!.text)")
+            }))
+            passwordPrompt.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+                textField.placeholder = "Status"
+                textField.borderStyle = .None
+                inputTextField = textField
+            })
+            
+            presentViewController(passwordPrompt, animated: true, completion: nil)
+            
             
         }else
         {
@@ -107,5 +125,38 @@ class NewProfileViewController: ProfileViewController
             let   phone = "tel://"+personalProfile.mobileNumber
             UIApplication.sharedApplication().openURL(NSURL(string: phone)!)
         }
+    }
+    
+    
+    @IBAction func goToDetailScreen(sender:UIButton)
+    {
+        let navController = self.storyboard?.instantiateViewControllerWithIdentifier("prfileNav") as? UINavigationController
+        
+        let profileViewController = navController?.viewControllers.first as? ProfileViewController
+        navController!.modalPresentationStyle = .Popover
+        popOver = navController!.popoverPresentationController
+        
+        popOver.delegate = self
+        popOver.sourceView = sender
+        popOver.sourceRect = sender.bounds
+        
+        popOver.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        
+        profileViewController!.preferredContentSize = CGSize(width: 300, height:330)
+       // navController.title = "Detail"
+        //controller!.popoverPresentationController!.delegate = self
+        //profileViewController!.view.backgroundColor = UIColor.clearColor()
+        profileViewController!.popoverPresentationController?.backgroundColor = UIColor.grayColor()
+        
+        
+        self.presentViewController(navController!, animated: true, completion: nil)
+
+        
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle
+    {
+        // Return no adaptive presentation style, use default presentation behaviour
+        return .None
     }
 }

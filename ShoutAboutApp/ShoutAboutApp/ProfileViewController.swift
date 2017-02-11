@@ -75,12 +75,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         //imageView!.makeImageRounded()
         setBackIndicatorImage()
         
-        
+        self.automaticallyAdjustsScrollViewInsets = false
         let tapGesture = UITapGestureRecognizer()
         tapGesture.addTarget(self, action: #selector(self.preview))
         tapGesture.numberOfTapsRequired = 1
-        
-        imageView!.addGestureRecognizer(tapGesture)
+        if let _ = imageView
+        {
+            imageView!.addGestureRecognizer(tapGesture)
+        }
         /*
         self.nameTextField!.text = personalProfile.name
         if let _ = personalProfile.email
@@ -215,7 +217,7 @@ extension ProfileViewController
 {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 4
+        return 5
     }
     
     
@@ -228,42 +230,53 @@ extension ProfileViewController
         {
            cell.editButton.hidden = true
         }
-        
         if indexPath.row == 0
+        {
+            cell.titleLabel.text = "Name"
+            cell.dataTextField.text  = personalProfile.name
+            //self.email =  cell.dataTextField.text!
+            cell.dataTextField.tag = 0
+            cell.inputImage.image = UIImage(named: kName)
+            
+            
+        }
+        
+        
+        if indexPath.row == 1
         {
             cell.titleLabel.text = "Email"
             cell.dataTextField.text  = personalProfile.email
             //self.email =  cell.dataTextField.text!
-            cell.dataTextField.tag = 0
+            cell.dataTextField.tag = 1
             cell.inputImage.image = UIImage(named: kEmail)
             
             
         }
         
-        if indexPath.row == 1
+        if indexPath.row == 2
         {
             cell.titleLabel.text = "Mobile"
             cell.dataTextField.text  = personalProfile.mobileNumber
-            cell.dataTextField.tag   = 1
+            cell.dataTextField.tag   = 2
             cell.inputImage.image = UIImage(named: "mobile")
             
         }
         
-        if indexPath.row == 2
+        if indexPath.row == 3
         {
             cell.titleLabel.text = "Address"
             cell.dataTextField.text  = personalProfile.address
            // self.address = cell.dataTextField.text!
-            cell.dataTextField.tag   = 2
+            cell.dataTextField.tag   = 3
             cell.inputImage.image = UIImage(named: kAddress)
             
         }
-        if indexPath.row == 3
+        if indexPath.row == 4
         {
             cell.titleLabel.text = "Website"
             cell.dataTextField.text  = personalProfile.website
             //self.website = cell.dataTextField.text!
-            cell.dataTextField.tag   = 3
+            cell.dataTextField.tag   = 4
             cell.inputImage.image = UIImage(named: kWebsite)
         }
         
@@ -279,22 +292,24 @@ extension ProfileViewController
     {
         if cell.dataTextField.tag == 0
         {
-        
-             self.email = text
-            
+            self.name = text
         }
         if cell.dataTextField.tag == 1
         {
-           
+           self.email = text
         }
         if cell.dataTextField.tag == 2
         {
-            self.address = text
+        
         }
         if cell.dataTextField.tag == 3
         {
-            self.website = text
+            self.address = text
             
+        }
+        if cell.dataTextField.tag == 4
+        {
+            self.website = text
         }
     }
     func editButtonClickedForCell(cell:EditProfileTableViewCell)
@@ -350,71 +365,7 @@ extension ProfileViewController
         }
     }
 
-    @IBAction func editButtonClicked(sender:UIButton)
-    {
-        print("join")
-        
-        
-        let visibleCells = tableView!.visibleCells as! [EditProfileTableViewCell]
-        
-        if sender.titleLabel?.text == "Edit"
-        {
-            dispatch_async(dispatch_get_main_queue(),{
-                let cell =  visibleCells.first
-                cell?.dataTextField.becomeFirstResponder()
-            })
-            
-                for  cell in visibleCells
-                {
-                    if cell.dataTextField.tag != 1
-                    {
-                        cell.dataTextField.userInteractionEnabled = true
-                    }
-                    
-                }
-                
-            
-            sender.setTitle("Save", forState: .Normal)
-            
-        }else
-        {
-            self.name = nameTextField!.text!
-            
-            
-            
-        print(" email:\(self.email), name:\(self.name),  web:\(self.website ), address:f \(self.address) ")
-        
-        if self.name.characters.count == 0
-        {
-            self.displayAlertMessage("Please enter name")
-            
-        }else if self.email.characters.count == 0
-        {
-            self.displayAlertMessage("Please enter email")
-        }
-        else if self.address.characters.count == 0
-        {
-            self.displayAlertMessage("Please enter address")
-            
-        }else if self.website.characters.count == 0
-        {
-            self.displayAlertMessage("Please enter website")
-            
-        }else
-        {
-            for  cell in visibleCells
-            {
-                cell.dataTextField.userInteractionEnabled = false
-                
-            }
-            let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
-            let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token) as! String
-            
-            let dict = ["name":self.name, "email":self.email, "website":self.website, "address":self.address, kapp_user_id:String(appUserId), kapp_user_token :appUserToken, "notify_token":"text"]
-            postData(dict)
-        }
-        }
-    }
+    
     
     func postData(dict:[String:String])
     {
@@ -427,8 +378,12 @@ extension ProfileViewController
                 {
                     dispatch_async(dispatch_get_main_queue(), {
                         self.view.removeSpinner()
-                        self.editButton!.setTitle("Edit", forState: .Normal)
+                        
                         self.getProfileData()
+                        self.dismissViewControllerAnimated(true)
+                        {
+                            
+                        }
                         //self.displayAlertMessage("Success")
                         
                     });
@@ -845,4 +800,48 @@ extension ProfileViewController
                 });
         }
     }
+    
+    @IBAction func cancelButtonClicked(sender:UIButton)
+    {
+        self.dismissViewControllerAnimated(true)
+        {
+             
+        }
+    }
+    
+    @IBAction func submitButtonClicked(sender:UIButton)
+    {
+        let visibleCells = tableView!.visibleCells as! [EditProfileTableViewCell]
+        
+  
+            self.name = nameTextField!.text!
+            
+            print(" email:\(self.email), name:\(self.name),  web:\(self.website ), address:f \(self.address) ")
+            
+            if self.name.characters.count == 0
+            {
+                self.displayAlertMessage("Please enter name")
+                
+            }else if self.email.characters.count == 0
+            {
+                self.displayAlertMessage("Please enter email")
+            }
+            else if self.address.characters.count == 0
+            {
+                self.displayAlertMessage("Please enter address")
+                
+            }else if self.website.characters.count == 0
+            {
+                self.displayAlertMessage("Please enter website")
+                
+            }else
+            {
+                let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id) as! Int
+                let appUserToken = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_token) as! String
+                
+                let dict = ["name":self.name, "email":self.email, "website":self.website, "address":self.address, kapp_user_id:String(appUserId), kapp_user_token :appUserToken, "notify_token":"text"]
+                postData(dict)
+            }
+        }
+    
 }
