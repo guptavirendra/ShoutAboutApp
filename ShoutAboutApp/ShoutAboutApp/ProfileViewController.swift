@@ -37,6 +37,11 @@ class ProfileManager:NSObject
 
 
 
+protocol ProfileViewControllerDelegate
+{
+    func profileDismissied()
+}
+
 import UIKit
 import MobileCoreServices
 import AVFoundation
@@ -44,8 +49,19 @@ import AVFoundation
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CropperViewControllerDelegate, UITextFieldDelegate, EditProfileTableViewCellProtocol
 {
     var selectedImages:UIImage?
-    var personalProfile:SearchPerson = SearchPerson()// since profile is vary from user to user
+    var personalProfile:SearchPerson = SearchPerson()
+        {
+        didSet
+        {
+            
+            print("profile has been changed")
+            self.tableView?.reloadData()
+            
+        }
     
+    } //= SearchPerson()// since profile is vary from user to user
+    
+    var delegate:ProfileViewControllerDelegate?
     @IBOutlet weak var callChatBaseView:UIView!
     @IBOutlet weak var favoriteBlockSpamConstraints:NSLayoutConstraint!
     
@@ -83,8 +99,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         {
             imageView!.addGestureRecognizer(tapGesture)
         }
-        /*
-        self.nameTextField!.text = personalProfile.name
+        
+        self.name = personalProfile.name
+        
         if let _ = personalProfile.email
         {
             self.email    = personalProfile.email!
@@ -101,6 +118,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         {
             setProfileImgeForURL(photo)
         }
+        /*
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.showKeyBoard(_:)), name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.hideKeyBoard(_:)), name: UIKeyboardWillHideNotification, object: nil)
@@ -178,11 +196,14 @@ extension ProfileViewController
     
     func setProfileImgeForURL(urlString:String)
     {
-        if ProfileManager.sharedInstance.localStoredImage != nil
+        if let _ = self.imageView
         {
-            self.imageView!.image = ProfileManager.sharedInstance.localStoredImage
+            if ProfileManager.sharedInstance.localStoredImage != nil
+            {
+                self.imageView!.image = ProfileManager.sharedInstance.localStoredImage
+            }
+            self.imageView!.setImageWithURL(NSURL(string:urlString ), placeholderImage: self.imageView!.image)
         }
-       self.imageView!.setImageWithURL(NSURL(string:urlString ), placeholderImage: UIImage(named: "profile"))
             SDWebImageDownloader.sharedDownloader().downloadImageWithURL(NSURL(string:urlString ), options: .ProgressiveDownload, progress: { (recievedSize, expectedSize) in
             
             }, completed: { (image, data, error, finished) in
@@ -259,7 +280,7 @@ extension ProfileViewController
             cell.dataTextField.text  = personalProfile.mobileNumber
             cell.dataTextField.tag   = 2
             cell.inputImage.image = UIImage(named: "mobile")
-            
+            cell.userInteractionEnabled = false
         }
         
         if indexPath.row == 3
@@ -380,10 +401,7 @@ extension ProfileViewController
                         self.view.removeSpinner()
                         
                         self.getProfileData()
-                        self.dismissViewControllerAnimated(true)
-                        {
-                            
-                        }
+                        
                         //self.displayAlertMessage("Success")
                         
                     });
@@ -685,10 +703,17 @@ extension ProfileViewController
                 self.view.removeSpinner()
                 
                 ProfileManager.sharedInstance.personalProfile = personalProfile
+                self.personalProfile = ProfileManager.sharedInstance.personalProfile
                 if let photo  = personalProfile.photo
                 {
                     self.setProfileImgeForURL(photo)
                 }
+                self.dismissViewControllerAnimated(true)
+                {
+                    
+                    self.delegate?.profileDismissied()
+                }
+                
                 
             });
             

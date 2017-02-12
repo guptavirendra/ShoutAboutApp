@@ -1304,6 +1304,11 @@ class DataSessionManger: NSObject
         
     }
     
+    
+    func updateStatus()
+    {
+    }
+    
 }
 
 extension NSObject

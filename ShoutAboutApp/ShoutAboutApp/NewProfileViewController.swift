@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewProfileViewController: ProfileViewController, UIPopoverPresentationControllerDelegate
+class NewProfileViewController: ProfileViewController, UIPopoverPresentationControllerDelegate, ProfileViewControllerDelegate
 {
 
     @IBOutlet weak var spamBlockBaseView:UIView?
@@ -30,9 +30,20 @@ class NewProfileViewController: ProfileViewController, UIPopoverPresentationCont
 
     var popOver : UIPopoverPresentationController!
     
+    override var personalProfile: SearchPerson
+        {
+        didSet
+        {
+            nameLabel?.text     = personalProfile.name
+            locationLabel?.text = personalProfile.address
+            
+        }
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+         
         /*
         //self.view.addBackGroundImageView()
         callButton?.makeImageRoundedWithGray()
@@ -133,6 +144,7 @@ class NewProfileViewController: ProfileViewController, UIPopoverPresentationCont
         let navController = self.storyboard?.instantiateViewControllerWithIdentifier("prfileNav") as? UINavigationController
         
         let profileViewController = navController?.viewControllers.first as? ProfileViewController
+        profileViewController?.delegate = self
         profileViewController?.personalProfile = self.personalProfile
         navController!.modalPresentationStyle = .Popover
         popOver = navController!.popoverPresentationController
@@ -160,4 +172,10 @@ class NewProfileViewController: ProfileViewController, UIPopoverPresentationCont
         // Return no adaptive presentation style, use default presentation behaviour
         return .None
     }
+    
+    func profileDismissied()
+    {
+         self.personalProfile = ProfileManager.sharedInstance.personalProfile
+    }
+    
 }
