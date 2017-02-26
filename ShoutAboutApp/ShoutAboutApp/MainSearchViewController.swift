@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import XMPPFramework
+import xmpp_messenger_ios
 
 class MainSearchViewController: UIViewController, ContactTableViewCellProtocol
 {
@@ -34,6 +36,30 @@ class MainSearchViewController: UIViewController, ContactTableViewCellProtocol
         self.searchButton.setImage(UIImage(named: "tab_search-h@x")!.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         
         self.searchButton.tintColor = UIColor.grayColor()
+        
+        
+        
+        
+        
+        
+        let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id)
+        
+        let ejabberID = "rohan@localhost"
+        
+        
+        OneChat.sharedInstance.connect(username: ejabberID, password: "rohan") { (stream, error) -> Void in
+            if let _ = error
+            {
+                let alertController = UIAlertController(title: "Sorry", message: "An error occured: \(error)", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                    //do something
+                }))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            } else
+            {
+                 
+            }
+        }
 
         
     }

@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import Contacts
+import XMPPFramework
+import xmpp_messenger_ios
 
 class ContactManager: NSObject
 {
@@ -196,7 +198,7 @@ extension JoinViewController
 {
     func buttonClicked(cell: ClickTableViewCell)
     {
-        getFireBaseAuth()
+        //getFireBaseAuth()
         
         dispatch_async(dispatch_get_global_queue(0, 0),
                        {
@@ -212,6 +214,10 @@ extension JoinViewController
             appDelegate.window?.backgroundColor = UIColor(red: 236.0, green: 238.0, blue: 241.0, alpha: 1.0)
             appDelegate.window?.rootViewController = tabBarVC
             appDelegate.window?.makeKeyAndVisible()
+            
+          
+        
+            
 
         }
         

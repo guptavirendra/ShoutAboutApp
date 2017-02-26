@@ -91,14 +91,6 @@
 		F1A1D13C1E2BA1C2004A4E8E /* FeedsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A1D13B1E2BA1C1004A4E8E /* FeedsTableViewCell.swift */; };
 		F1ACAD781E217DDC004AECAB /* SpamFavBlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ACAD771E217DDC004AECAB /* SpamFavBlockViewController.swift */; };
 		F1C9A81F1E3DE0CD003354B6 /* NewProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C9A81E1E3DE0CD003354B6 /* NewProfileViewController.swift */; };
-		F1D1F7DB1DEE05D10046DBB2 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7DA1DEE05D10046DBB2 /* GoogleToolboxForMac.framework */; };
-		F1D1F7DC1DEE05D10046DBB2 /* GoogleToolboxForMac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7DA1DEE05D10046DBB2 /* GoogleToolboxForMac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F1D1F7DE1DEE05D10046DBB2 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7DD1DEE05D10046DBB2 /* GTMSessionFetcher.framework */; };
-		F1D1F7DF1DEE05D10046DBB2 /* GTMSessionFetcher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7DD1DEE05D10046DBB2 /* GTMSessionFetcher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F1D1F7E11DEE05D20046DBB2 /* JSQMessagesViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7E01DEE05D10046DBB2 /* JSQMessagesViewController.framework */; };
-		F1D1F7E21DEE05D20046DBB2 /* JSQMessagesViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7E01DEE05D10046DBB2 /* JSQMessagesViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F1D1F7E41DEE05D20046DBB2 /* JSQSystemSoundPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7E31DEE05D20046DBB2 /* JSQSystemSoundPlayer.framework */; };
-		F1D1F7E51DEE05D20046DBB2 /* JSQSystemSoundPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1D1F7E31DEE05D20046DBB2 /* JSQSystemSoundPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F1D1F7E61DEE05D20046DBB2 /* Pods_ShoutAboutApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17F0E7E11A503618876EE71A /* Pods_ShoutAboutApp.framework */; };
 		F1DD72031DEAADF800DE0A12 /* ChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD72001DEAADF800DE0A12 /* ChannelListViewController.swift */; };
 		F1DD72041DEAADF800DE0A12 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD72011DEAADF800DE0A12 /* ChatsViewController.swift */; };
@@ -112,10 +104,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F1D1F7E21DEE05D20046DBB2 /* JSQMessagesViewController.framework in Embed Frameworks */,
-				F1D1F7DF1DEE05D10046DBB2 /* GTMSessionFetcher.framework in Embed Frameworks */,
-				F1D1F7DC1DEE05D10046DBB2 /* GoogleToolboxForMac.framework in Embed Frameworks */,
-				F1D1F7E51DEE05D20046DBB2 /* JSQSystemSoundPlayer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,10 +202,6 @@
 		F1A1D13B1E2BA1C1004A4E8E /* FeedsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedsTableViewCell.swift; sourceTree = "<group>"; };
 		F1ACAD771E217DDC004AECAB /* SpamFavBlockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpamFavBlockViewController.swift; sourceTree = "<group>"; };
 		F1C9A81E1E3DE0CD003354B6 /* NewProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProfileViewController.swift; sourceTree = "<group>"; };
-		F1D1F7DA1DEE05D10046DBB2 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = "/Users/virendragupta/Library/Developer/Xcode/DerivedData/ShoutAboutApp-bjcvlaxyvaywimbcwmcujfhbymnm/Build/Products/Debug-iphoneos/GoogleToolboxForMac/GoogleToolboxForMac.framework"; sourceTree = "<absolute>"; };
-		F1D1F7DD1DEE05D10046DBB2 /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = GTMSessionFetcher.framework; path = "/Users/virendragupta/Library/Developer/Xcode/DerivedData/ShoutAboutApp-bjcvlaxyvaywimbcwmcujfhbymnm/Build/Products/Debug-iphoneos/GTMSessionFetcher/GTMSessionFetcher.framework"; sourceTree = "<absolute>"; };
-		F1D1F7E01DEE05D10046DBB2 /* JSQMessagesViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JSQMessagesViewController.framework; path = "/Users/virendragupta/Library/Developer/Xcode/DerivedData/ShoutAboutApp-bjcvlaxyvaywimbcwmcujfhbymnm/Build/Products/Debug-iphoneos/JSQMessagesViewController/JSQMessagesViewController.framework"; sourceTree = "<absolute>"; };
-		F1D1F7E31DEE05D20046DBB2 /* JSQSystemSoundPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = JSQSystemSoundPlayer.framework; path = "/Users/virendragupta/Library/Developer/Xcode/DerivedData/ShoutAboutApp-bjcvlaxyvaywimbcwmcujfhbymnm/Build/Products/Debug-iphoneos/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework"; sourceTree = "<absolute>"; };
 		F1DD71F91DE8B81700DE0A12 /* TitilliumWeb-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Bold.ttf"; sourceTree = "<group>"; };
 		F1DD71FA1DE8B81700DE0A12 /* TitilliumWeb-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Italic.ttf"; sourceTree = "<group>"; };
 		F1DD71FB1DE8B81700DE0A12 /* TitilliumWeb-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TitilliumWeb-Light.ttf"; sourceTree = "<group>"; };
@@ -234,11 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11EC3BE1E20DEA7001374E9 /* ContactsUI.framework in Frameworks */,
-				F1D1F7DE1DEE05D10046DBB2 /* GTMSessionFetcher.framework in Frameworks */,
 				F1D1F7E61DEE05D20046DBB2 /* Pods_ShoutAboutApp.framework in Frameworks */,
-				F1D1F7E41DEE05D20046DBB2 /* JSQSystemSoundPlayer.framework in Frameworks */,
-				F1D1F7DB1DEE05D10046DBB2 /* GoogleToolboxForMac.framework in Frameworks */,
-				F1D1F7E11DEE05D20046DBB2 /* JSQMessagesViewController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,10 +359,6 @@
 		F12C27441DCE45A800AEE0A3 = {
 			isa = PBXGroup;
 			children = (
-				F1D1F7E31DEE05D20046DBB2 /* JSQSystemSoundPlayer.framework */,
-				F1D1F7E01DEE05D10046DBB2 /* JSQMessagesViewController.framework */,
-				F1D1F7DD1DEE05D10046DBB2 /* GTMSessionFetcher.framework */,
-				F1D1F7DA1DEE05D10046DBB2 /* GoogleToolboxForMac.framework */,
 				F11DB53E1DD9ADC70084F9F4 /* SDWebImage */,
 				F12C274F1DCE45A800AEE0A3 /* ShoutAboutApp */,
 				F12C274E1DCE45A800AEE0A3 /* Products */,

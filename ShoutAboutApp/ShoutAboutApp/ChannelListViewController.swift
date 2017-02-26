@@ -146,10 +146,10 @@ class ChannelListViewController: UITableViewController
         if let channel = sender as? Channel
         {
             let chatVc = segue.destinationViewController as! ChatsViewController
-            
             chatVc.senderDisplayName = senderDisplayName
+            
             //chatVc.channel = channel
-            chatVc.channelRef = channelRef.child(channel.id)
+            //chatVc.channelRef = channelRef.child(channel.id)
         }
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)

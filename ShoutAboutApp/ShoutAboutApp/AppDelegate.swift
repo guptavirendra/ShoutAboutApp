@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import FirebaseMessaging
+import xmpp_messenger_ios
+
 
 @UIApplicationMain
 
@@ -45,6 +47,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         
+        OneChat.start(true, delegate: nil) { (stream, error) -> Void in
+            if let _ = error {
+                //handle start errors here
+                print("errors from appdelegate")
+            } else {
+                print("Yayyyy")
+                //Activate online UI
+            }
+        }
         NSNotificationCenter.defaultCenter().addObserver(self,
                                                          selector: #selector(tokenRefreshNotification(_:)),
                                                          name: kFIRInstanceIDTokenRefreshNotification,
