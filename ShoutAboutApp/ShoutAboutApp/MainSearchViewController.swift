@@ -43,11 +43,11 @@ class MainSearchViewController: UIViewController, ContactTableViewCellProtocol
         
         
         let appUserId = NSUserDefaults.standardUserDefaults().objectForKey(kapp_user_id)
+        let stringID = String(appUserId!)
+        let ejabberID = stringID+"@localhost"
         
-        let ejabberID = "rohan@localhost"
         
-        
-        OneChat.sharedInstance.connect(username: ejabberID, password: "rohan") { (stream, error) -> Void in
+        OneChat.sharedInstance.connect(username: ejabberID, password: "12345") { (stream, error) -> Void in
             if let _ = error
             {
                 let alertController = UIAlertController(title: "Sorry", message: "An error occured: \(error)", preferredStyle: UIAlertControllerStyle.Alert)
