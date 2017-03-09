@@ -18,6 +18,7 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
     var recipient: XMPPUserCoreDataStorageObject?
     var firstTime = true
     var userDetails = UIView?()
+    var reciepientPerson:SearchPerson?
     
     // Mark: Life Cycle
     
@@ -25,7 +26,7 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
     {
         super.viewDidLoad()
         
-        recipient = OneRoster.userFromRosterForJID(jid: "virendra@localhost" )
+        recipient = OneRoster.userFromRosterForJID(jid: "\(reciepientPerson)@localhost" )
         
         //recipient = XMPPUserCoreDataStorageObject(entity: <#T##NSEntityDescription#>, insertIntoManagedObjectContext: <#T##NSManagedObjectContext?#>)
         
@@ -116,11 +117,16 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
             }
         } else {
             timer?.invalidate()
-            if !isComposing {
+            if !isComposing
+            {
                 self.isComposing = true
-                OneMessage.sendIsComposingMessage((recipient?.jidStr)!, completionHandler: { (stream, message) -> Void in
-                    self.timer = NSTimer.scheduledTimerWithTimeInterval(4.0, target: self, selector: #selector(ChatsViewController.hideTypingIndicator), userInfo: nil, repeats: false)
-                })
+                
+                if recipient != nil
+                {
+                    OneMessage.sendIsComposingMessage((recipient?.jidStr)!, completionHandler: { (stream, message) -> Void in
+                        self.timer = NSTimer.scheduledTimerWithTimeInterval(4.0, target: self, selector: #selector(ChatsViewController.hideTypingIndicator), userInfo: nil, repeats: false)
+                    })
+                }
             } else {
                 self.timer = NSTimer.scheduledTimerWithTimeInterval(4.0, target: self, selector: #selector(ChatsViewController.hideTypingIndicator), userInfo: nil, repeats: false)
             }
@@ -140,7 +146,8 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
         let fullMessage = JSQMessage(senderId: OneChat.sharedInstance.xmppStream?.myJID.bare(), senderDisplayName: OneChat.sharedInstance.xmppStream?.myJID.bare(), date: NSDate(), text: text)
         messages.addObject(fullMessage)
         
-        if let recipient = recipient {
+        if let recipient = recipient
+        {
             OneMessage.sendMessage(text, to: recipient.jidStr, completionHandler: { (stream, message) -> Void in
                 JSQSystemSoundPlayer.jsq_playMessageSentSound()
                 self.finishSendingMessageAnimated(true)

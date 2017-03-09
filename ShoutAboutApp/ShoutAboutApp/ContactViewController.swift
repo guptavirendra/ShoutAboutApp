@@ -236,7 +236,7 @@ extension ContactViewController
             }
             else if button.titleLabel?.text == " Chat"
             {
-                let chattingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChattingViewController") as? ChattingViewController
+                //let chattingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChattingViewController") as? ChattingViewController
                 
                 
                 
@@ -244,6 +244,7 @@ extension ContactViewController
                 
                 chatVc!.senderDisplayName = ProfileManager.sharedInstance.personalProfile.name
                 chatVc?.senderId          = String(ProfileManager.sharedInstance.personalProfile.idString)
+                chatVc?.reciepientPerson         = personContact
                 self.navigationController!.pushViewController(chatVc!, animated: true)
                 
             }
