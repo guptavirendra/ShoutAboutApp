@@ -718,7 +718,7 @@ public class BaseNSURLSession: NSObject
                                     {
                                         
                                         do  {
-                                            let json = try NSJSONSerialization.JSONObjectWithData(dataInAnyObject, options: .MutableLeaves) as? NSString
+                                            let json = try NSJSONSerialization.JSONObjectWithData(dataInAnyObject, options: .MutableLeaves) as? NSArray
                                             onFinish(response: data!,deserializedResponse: json!)
                                         }
                                         catch

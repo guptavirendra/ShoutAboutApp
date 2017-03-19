@@ -31,6 +31,8 @@ import UIKit
 
 import Contacts
 import ContactsUI
+import XMPPFramework
+import xmpp_messenger_ios
 
 class ContactViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ContactTableViewCellProtocol, UISearchBarDelegate,UISearchControllerDelegate, CNContactViewControllerDelegate
 {
@@ -50,6 +52,9 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(ContactViewController.contactReload) , name: "ContactUpdated", object: nil)
         
@@ -86,10 +91,18 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
     func contactReload()
     {
         syncContactArray =  ProfileManager.sharedInstance.syncedContactArray
-       /*
+       
        syncContactArray =   syncContactArray.sort { (first, second) -> Bool in
            return first.app_user_token != nil
-        }*/
+        }
+        for person in syncContactArray
+        {
+            let stringID = String(person.idString)
+            let ejabberID = stringID+"@localhost"
+            OneChat.sharedInstance.xmppRoster?.addUser(XMPPJID.jidWithString(ejabberID), withNickname: person.name)
+        }
+        
+        
         tableView.reloadData()
         
     }
@@ -133,18 +146,36 @@ extension ContactViewController
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return  isSearching ? searchContactArray.count: syncContactArray.count //allValidContacts.count //objects.count
+        
+        let sections: NSArray? =  OneRoster.buddyList.sections
+        
+        if section < sections!.count
+        {
+            let sectionInfo: AnyObject = sections![section]
+            print("\(sectionInfo.numberOfObjects)")
+            
+            
+            return sectionInfo.numberOfObjects
+        }
+        
+        return 0;
+        
+        //return  isSearching ? searchContactArray.count: syncContactArray.count //allValidContacts.count //objects.count
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
+        
+        let user = OneRoster.userFromRosterAtIndexPath(indexPath: indexPath)
         let cell = tableView.dequeueReusableCellWithIdentifier("contact", forIndexPath: indexPath) as! ContactTableViewCell
         cell.delegate = self
+        cell.nameLabel?.text =  user.displayName
+        /*
         
-        let personContact = isSearching ? searchContactArray[indexPath.row]: syncContactArray[indexPath.row]
-        cell.nameLabel?.text = personContact.name
-        cell.mobileLabel?.text = personContact.mobileNumber
+        //let personContact = isSearching ? searchContactArray[indexPath.row]: syncContactArray[indexPath.row]
+        cell.nameLabel?.text =  user.displayName//personContact.name
+        //cell.mobileLabel?.text = personContact.mobileNumber
         //cell.rateView!.rating =  personContact.reviewCount.count
         //cell.ratingLabel.text = String(personContact.reviewCount.count) + "/5"
         
@@ -192,6 +223,8 @@ extension ContactViewController
         {
             cell.profileImageView.image = UIImage(named: "profile")
         }
+        
+        */
         return cell
     }
     
@@ -227,24 +260,27 @@ extension ContactViewController
         if self.tableView.indexPathForCell(cell) != nil
         {
             let indexPath = self.tableView.indexPathForCell(cell)
-            let personContact =  isSearching ? searchContactArray[(indexPath?.row)!]: syncContactArray[(indexPath?.row)!]
+            //let personContact =  isSearching ? searchContactArray[(indexPath?.row)!]: syncContactArray[(indexPath?.row)!]
             if button.titleLabel?.text == " Call"
             {
                 //let personContact = allValidContacts[indexPath!.row]
-                let   phone = "tel://"+personContact.mobileNumber
-                UIApplication.sharedApplication().openURL(NSURL(string: phone)!)
+               // let   phone = "tel://"+personContact.mobileNumber
+                //UIApplication.sharedApplication().openURL(NSURL(string: phone)!)
             }
             else if button.titleLabel?.text == " Chat"
             {
+                
+                print("\(OneRoster.buddyList.sections)")
                 //let chattingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChattingViewController") as? ChattingViewController
                 
-                
+              let user =   OneRoster.userFromRosterAtIndexPath(indexPath: indexPath!)
                 
                 let chatVc = self.storyboard?.instantiateViewControllerWithIdentifier("ChatsViewController") as? ChatsViewController
                 
                 chatVc!.senderDisplayName = ProfileManager.sharedInstance.personalProfile.name
                 chatVc?.senderId          = String(ProfileManager.sharedInstance.personalProfile.idString)
-                chatVc?.reciepientPerson         = personContact
+                //chatVc?.reciepientPerson         = personContact
+                chatVc?.recipient = user
                 self.navigationController!.pushViewController(chatVc!, animated: true)
                 
             }
@@ -253,19 +289,19 @@ extension ContactViewController
               
                
                 let rateANdReviewViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RateANdReviewViewController") as? RateANdReviewViewController
-                rateANdReviewViewController?.idString = String(personContact.idString)
-                rateANdReviewViewController?.name = personContact.name
-                if let _ = personContact.photo
-                {
-                 rateANdReviewViewController?.photo = personContact.photo!
-                }
-                 self.navigationController!.pushViewController(rateANdReviewViewController!, animated: true)
+               // rateANdReviewViewController?.idString = String(personContact.idString)
+                //rateANdReviewViewController?.name = personContact.name
+                //if let _ = personContact.photo
+                //{
+                 //rateANdReviewViewController?.photo = personContact.photo!
+               // }
+                 //self.navigationController!.pushViewController(rateANdReviewViewController!, animated: true)
                 
                 
             }else
             {
                 let profileViewController = self.storyboard?.instantiateViewControllerWithIdentifier("NewProfileViewController") as? NewProfileViewController
-                profileViewController?.personalProfile = personContact
+                //profileViewController?.personalProfile = personContact
                 self.navigationController!.pushViewController(profileViewController!, animated: true)
             }
         }

@@ -26,7 +26,7 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
     {
         super.viewDidLoad()
         
-        recipient = OneRoster.userFromRosterForJID(jid: "\(reciepientPerson)@localhost" )
+        //recipient = OneRoster.userFromRosterForJID(jid: "\(reciepientPerson)@localhost" )
         
         //recipient = XMPPUserCoreDataStorageObject(entity: <#T##NSEntityDescription#>, insertIntoManagedObjectContext: <#T##NSManagedObjectContext?#>)
         

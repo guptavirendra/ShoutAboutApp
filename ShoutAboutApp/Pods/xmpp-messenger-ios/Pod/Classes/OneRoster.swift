@@ -49,10 +49,10 @@ public class OneRoster: NSObject, NSFetchedResultsControllerDelegate {
 		if fetchedResultsControllerVar == nil {
 			let moc = OneRoster.sharedInstance.managedObjectContext_roster() as NSManagedObjectContext?
 			let entity = NSEntityDescription.entityForName("XMPPUserCoreDataStorageObject", inManagedObjectContext: moc!)
-			let sd1 = NSSortDescriptor(key: "sectionNum", ascending: true)
+			//let sd1 = NSSortDescriptor(key: "sectionNum", ascending: true)
 			let sd2 = NSSortDescriptor(key: "displayName", ascending: true)
 			
-			let sortDescriptors = [sd1, sd2]
+			let sortDescriptors = [ sd2]
 			let fetchRequest = NSFetchRequest()
 			
 			fetchRequest.entity = entity
