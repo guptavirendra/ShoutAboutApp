@@ -58,7 +58,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_WARN;
 @dynamic groups;
 @dynamic primaryResource;
 @dynamic resources;
-
+@dynamic number;
 - (XMPPJID *)jid
 {
   // Create and cache the jid on demand
@@ -219,6 +219,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_WARN;
                   streamBareJidStr:(NSString *)streamBareJidStr
 {
 	NSString *jidStr = [item attributeStringValueForName:@"jid"];
+    NSString *number = [item attributeStringValueForName:@"number"];
 	XMPPJID *jid = [XMPPJID jidWithString:jidStr];
 	
 	if (jid == nil)
@@ -232,6 +233,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_WARN;
 	                                        inManagedObjectContext:moc];
 	
 	newUser.streamBareJidStr = streamBareJidStr;
+    newUser.number           = number;
 	
 	[newUser updateWithItem:item];
 	
@@ -280,6 +282,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_WARN;
 	
 	self.subscription = [item attributeStringValueForName:@"subscription"];
 	self.ask = [item attributeStringValueForName:@"ask"];
+    self.number = [item attributeStringValueForName:@"number"];
 	
 	[self updateGroupsWithItem:item];
 }

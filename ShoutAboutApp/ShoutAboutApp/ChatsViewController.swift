@@ -20,6 +20,9 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
     var userDetails = UIView?()
     var reciepientPerson:SearchPerson?
     
+    
+    @IBOutlet weak var titleLabel:UILabel?
+    
     // Mark: Life Cycle
     
     override func viewDidLoad()
@@ -298,18 +301,48 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
             
             if let msg = message.elementForName("body")?.stringValue()
             {
-                if let from = message.attributeForName("from")?.stringValue()
+                if let  messageDict = self.convertStringToDictionary(msg)
                 {
-                    let message = JSQMessage(senderId: from, senderDisplayName: from , date: NSDate(), text: msg)
-                    messages.addObject(message)
                     
-                    self.finishReceivingMessageAnimated(true)
+                    
+                    if let from = message.attributeForName("from")?.stringValue()
+                    {
+                        if let msgText = messageDict["msg"] as? String
+                        {
+                            let message = JSQMessage(senderId: from, senderDisplayName: from , date: NSDate(), text: msgText)
+                            messages.addObject(message)
+                            
+                            self.finishReceivingMessageAnimated(true)
+                        }
+                    }
+                }else
+                {
+                   if let from = message.attributeForName("from")?.stringValue()
+                    {
+                        let message = JSQMessage(senderId: from, senderDisplayName: from , date: NSDate(), text: msg)
+                        messages.addObject(message)
+                        
+                        self.finishReceivingMessageAnimated(true)
+                    }
                 }
             }
         }
         
     
         
+    }
+    
+    
+    func convertStringToDictionary(text: String) -> [String:AnyObject]?
+    {
+        if let data = text.dataUsingEncoding(NSUTF8StringEncoding) {
+            do {
+                return try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [String:AnyObject]
+            } catch let error as NSError {
+                print(error)
+            }
+        }
+        return nil
     }
     
     func oneStream(sender: XMPPStream, userIsComposing user: XMPPUserCoreDataStorageObject) {

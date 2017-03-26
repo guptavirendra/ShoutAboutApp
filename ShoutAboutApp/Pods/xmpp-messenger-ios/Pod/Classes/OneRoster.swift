@@ -59,7 +59,7 @@ public class OneRoster: NSObject, NSFetchedResultsControllerDelegate {
 			fetchRequest.sortDescriptors = sortDescriptors
 			fetchRequest.fetchBatchSize = 10
 			
-			fetchedResultsControllerVar = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc!, sectionNameKeyPath: "sectionNum", cacheName: nil)
+			fetchedResultsControllerVar = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc!, sectionNameKeyPath: nil, cacheName: nil)
 			fetchedResultsControllerVar?.delegate = self
 			
 			do {

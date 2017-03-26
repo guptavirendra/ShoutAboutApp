@@ -4087,6 +4087,9 @@
                             </constraints>
                         </view>
                     </navigationItem>
+                    <connections>
+                        <outlet property="titleLabel" destination="OnG-z7-q5Z" id="olH-OL-ye4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vbW-gT-Ssm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

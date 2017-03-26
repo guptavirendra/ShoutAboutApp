@@ -173,6 +173,7 @@
 **/
 - (void)fetchRoster;
 - (void)fetchRosterVersion:(NSString *)version;
+- (void)addUser:(XMPPJID *)jid withNickname:(NSString *)optionalName andConatctNumber:(NSString *)number;
 
 /**
  * Adds the given user to the roster with an optional nickname 

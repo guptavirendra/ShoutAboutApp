@@ -210,7 +210,8 @@ NSString *const XMPPGoogleSharedStatusShowIdle = @"away";
 // subscription IQ, it contains the maximum string length and list count
 // information attributes as well, so save those.
 // If we received a discovery IQ, determine shared status support.
-- (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq {
+- (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq
+{
 	XMPPElement *query = (XMPPElement *) [iq children][0];
 	if([query.xmlns isEqualToString:GOOGLE_SHARED_STATUS] && self.sharedStatusSupported) {
 		self.sharedStatus = [self unpackSharedStatus:query];

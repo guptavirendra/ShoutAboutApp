@@ -99,7 +99,7 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
         {
             let stringID = String(person.idString)
             let ejabberID = stringID+"@localhost"
-            OneChat.sharedInstance.xmppRoster?.addUser(XMPPJID.jidWithString(ejabberID), withNickname: person.name)
+            OneChat.sharedInstance.xmppRoster?.addUser(XMPPJID.jidWithString(ejabberID), withNickname: person.name, andConatctNumber:person.mobileNumber )
         }
         
         
@@ -169,8 +169,9 @@ extension ContactViewController
         
         let user = OneRoster.userFromRosterAtIndexPath(indexPath: indexPath)
         let cell = tableView.dequeueReusableCellWithIdentifier("contact", forIndexPath: indexPath) as! ContactTableViewCell
-        cell.delegate = self
-        cell.nameLabel?.text =  user.displayName
+        cell.delegate          = self
+        cell.nameLabel?.text   = user.displayName
+        cell.mobileLabel?.text = user.number
         /*
         
         //let personContact = isSearching ? searchContactArray[indexPath.row]: syncContactArray[indexPath.row]
