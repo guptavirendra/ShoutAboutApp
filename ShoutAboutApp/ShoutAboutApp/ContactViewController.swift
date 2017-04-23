@@ -33,6 +33,8 @@ import Contacts
 import ContactsUI
 import XMPPFramework
 import xmpp_messenger_ios
+import CoreData
+
 
 class ContactViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ContactTableViewCellProtocol, UISearchBarDelegate,UISearchControllerDelegate, CNContactViewControllerDelegate
 {
@@ -95,12 +97,13 @@ class ContactViewController: UIViewController, UITableViewDataSource, UITableVie
        syncContactArray =   syncContactArray.sort { (first, second) -> Bool in
            return first.app_user_token != nil
         }
+        /*
         for person in syncContactArray
         {
             let stringID = String(person.idString)
             let ejabberID = stringID+"@localhost"
-            OneChat.sharedInstance.xmppRoster?.addUser(XMPPJID.jidWithString(ejabberID), withNickname: person.name, andConatctNumber:person.mobileNumber )
-        }
+            //OneChat.sharedInstance.xmppRoster?.addUser(XMPPJID.jidWithString(ejabberID), withNickname: person.name, andConatctNumber:person.mobileNumber )
+        }*/
         
         
         tableView.reloadData()
@@ -147,38 +150,43 @@ extension ContactViewController
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         
-        let sections: NSArray? =  OneRoster.buddyList.sections
+        //let sections: NSArray? =  OneRoster.buddyList.sections
         
-        if section < sections!.count
-        {
-            let sectionInfo: AnyObject = sections![section]
-            print("\(sectionInfo.numberOfObjects)")
+       // if section < sections!.count
+        //{
+            //let sectionInfo: AnyObject = sections![section]
+            //print("\(sectionInfo.numberOfObjects)")
             
             
-            return sectionInfo.numberOfObjects
-        }
+            //return sectionInfo.numberOfObjects
+        //}
         
-        return 0;
+        //return 0;
         
-        //return  isSearching ? searchContactArray.count: syncContactArray.count //allValidContacts.count //objects.count
+        return  isSearching ? searchContactArray.count: syncContactArray.count //allValidContacts.count //objects.count
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        
-        let user = OneRoster.userFromRosterAtIndexPath(indexPath: indexPath)
         let cell = tableView.dequeueReusableCellWithIdentifier("contact", forIndexPath: indexPath) as! ContactTableViewCell
-        cell.delegate          = self
+         cell.delegate          = self
+        /*
+        let user = OneRoster.userFromRosterAtIndexPath(indexPath: indexPath)
+        
+       
         cell.nameLabel?.text   = user.displayName
         cell.mobileLabel?.text = user.number
-        /*
+        self.configurePhotoForCell(cell, user: user)
+ */
+
         
-        //let personContact = isSearching ? searchContactArray[indexPath.row]: syncContactArray[indexPath.row]
-        cell.nameLabel?.text =  user.displayName//personContact.name
-        //cell.mobileLabel?.text = personContact.mobileNumber
-        //cell.rateView!.rating =  personContact.reviewCount.count
-        //cell.ratingLabel.text = String(personContact.reviewCount.count) + "/5"
+        
+        let personContact = isSearching ? searchContactArray[indexPath.row]: syncContactArray[indexPath.row]
+        cell.nameLabel?.text =  personContact.name
+        cell.mobileLabel?.text = personContact.mobileNumber
+        cell.rateView!.rating =  personContact.reviewCount.count
+        cell.ratingLabel?.text = String(personContact.reviewCount.count) + "/5"
         
        // if personContact.app_user_token != nil
        // {
@@ -225,8 +233,28 @@ extension ContactViewController
             cell.profileImageView.image = UIImage(named: "profile")
         }
         
-        */
+        
         return cell
+    }
+    
+    
+    // Mark: UITableViewCell helpers
+    
+    internal func configurePhotoForCell(cell: ContactTableViewCell, user: XMPPUserCoreDataStorageObject) {
+        // Our xmppRosterStorage will cache photos as they arrive from the xmppvCardAvatarModule.
+        // We only need to ask the avatar module for a photo, if the roster doesn't have it.
+        cell.profileImageView.clipsToBounds = true
+        if user.photo != nil {
+            cell.profileImageView.image = user.photo!;
+        } else {
+            let photoData = OneChat.sharedInstance.xmppvCardAvatarModule?.photoDataForJID(user.jid)
+            
+            if let photoData = photoData {
+                cell.profileImageView.image = UIImage(data: photoData)
+            } else {
+                cell.profileImageView.image = UIImage(named: "profile")
+            }
+        }
     }
     
      func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -261,20 +289,22 @@ extension ContactViewController
         if self.tableView.indexPathForCell(cell) != nil
         {
             let indexPath = self.tableView.indexPathForCell(cell)
-            //let personContact =  isSearching ? searchContactArray[(indexPath?.row)!]: syncContactArray[(indexPath?.row)!]
+            let personContact =  isSearching ? searchContactArray[(indexPath?.row)!]: syncContactArray[(indexPath?.row)!]
             if button.titleLabel?.text == " Call"
             {
                 //let personContact = allValidContacts[indexPath!.row]
-               // let   phone = "tel://"+personContact.mobileNumber
-                //UIApplication.sharedApplication().openURL(NSURL(string: phone)!)
+                let   phone = "tel://"+personContact.mobileNumber
+                UIApplication.sharedApplication().openURL(NSURL(string: phone)!)
             }
             else if button.titleLabel?.text == " Chat"
             {
-                
+                let stringID = String(personContact.idString)
+                let ejabberID = stringID+"@localhost"
+                let user =  OneRoster.userFromRosterForJID(jid: ejabberID)
                 print("\(OneRoster.buddyList.sections)")
                 //let chattingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ChattingViewController") as? ChattingViewController
                 
-              let user =   OneRoster.userFromRosterAtIndexPath(indexPath: indexPath!)
+              //let user =   OneRoster.userFromRosterAtIndexPath(indexPath: indexPath!)
                 
                 let chatVc = self.storyboard?.instantiateViewControllerWithIdentifier("ChatsViewController") as? ChatsViewController
                 

@@ -28,9 +28,6 @@
 @property (nonatomic, strong) NSString * subscription;
 @property (nonatomic, strong) NSString * ask;
 @property (nonatomic, strong) NSNumber * unreadMessages;
-@property (nonatomic, strong) NSString * number;
-
-
 
 #if TARGET_OS_IPHONE
 @property (nonatomic, strong) UIImage *photo;

@@ -30,7 +30,6 @@
 @property (nonatomic, strong) NSNumber * showNum;
 
 @property (nonatomic, strong) XMPPUserCoreDataStorageObject * user;
-@property (nonatomic, strong) NSString* number;
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext *)moc
                       withPresence:(XMPPPresence *)presence

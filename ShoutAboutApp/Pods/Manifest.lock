@@ -1,225 +1,81 @@
 PODS:
-  - CocoaAsyncSocket (7.4.3):
-    - CocoaAsyncSocket/All (= 7.4.3)
-  - CocoaAsyncSocket/All (7.4.3):
-    - CocoaAsyncSocket/GCD
-    - CocoaAsyncSocket/RunLoop
-  - CocoaAsyncSocket/GCD (7.4.3)
-  - CocoaAsyncSocket/RunLoop (7.4.3)
-  - CocoaLumberjack (1.9.2):
-    - CocoaLumberjack/Extensions (= 1.9.2)
-  - CocoaLumberjack/Core (1.9.2)
-  - CocoaLumberjack/Extensions (1.9.2):
+  - CocoaAsyncSocket (7.6.0)
+  - CocoaLumberjack (2.4.0):
+    - CocoaLumberjack/Default (= 2.4.0)
+    - CocoaLumberjack/Extensions (= 2.4.0)
+  - CocoaLumberjack/Core (2.4.0)
+  - CocoaLumberjack/Default (2.4.0):
     - CocoaLumberjack/Core
-  - Firebase/Auth (3.10.0):
+  - CocoaLumberjack/Extensions (2.4.0):
+    - CocoaLumberjack/Default
+  - Firebase/Auth (3.16.0):
     - Firebase/Core
-    - FirebaseAuth (= 3.0.6)
-  - Firebase/Core (3.10.0):
-    - FirebaseAnalytics (= 3.6.0)
-    - FirebaseCore (= 3.4.5)
-  - Firebase/Database (3.10.0):
+    - FirebaseAuth (= 3.1.1)
+  - Firebase/Core (3.16.0):
+    - FirebaseAnalytics (= 3.8.0)
+    - FirebaseCore (= 3.6.0)
+  - Firebase/Database (3.16.0):
     - Firebase/Core
-    - FirebaseDatabase (= 3.1.1)
-  - Firebase/Messaging (3.10.0):
+    - FirebaseDatabase (= 3.1.2)
+  - Firebase/Messaging (3.16.0):
     - Firebase/Core
-    - FirebaseMessaging (= 1.2.1)
-  - Firebase/Storage (3.10.0):
+    - FirebaseMessaging (= 1.2.3)
+  - Firebase/Storage (3.16.0):
     - Firebase/Core
-    - FirebaseStorage (= 1.0.5)
-  - FirebaseAnalytics (3.6.0):
-    - FirebaseCore (~> 3.4)
+    - FirebaseStorage (= 1.1.0)
+  - FirebaseAnalytics (3.8.0):
+    - FirebaseCore (~> 3.6)
     - FirebaseInstanceID (~> 1.0)
-    - GoogleInterchangeUtilities (~> 1.2)
-    - GoogleSymbolUtilities (~> 1.1)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseAuth (3.0.6):
-    - FirebaseAnalytics (~> 3.4)
+  - FirebaseAuth (3.1.1):
+    - FirebaseAnalytics (~> 3.7)
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (3.4.5):
-    - GoogleInterchangeUtilities (~> 1.2)
+  - FirebaseCore (3.6.0):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseDatabase (3.1.1):
-    - FirebaseAnalytics (~> 3.5)
-  - FirebaseInstanceID (1.0.8)
-  - FirebaseMessaging (1.2.1):
-    - FirebaseAnalytics (~> 3.4)
+  - FirebaseDatabase (3.1.2):
+    - FirebaseAnalytics (~> 3.7)
+  - FirebaseInstanceID (1.0.10):
+    - FirebaseCore (~> 3.6)
+  - FirebaseMessaging (1.2.3):
+    - FirebaseAnalytics (~> 3.8)
     - FirebaseInstanceID (~> 1.0)
-    - GoogleInterchangeUtilities (~> 1.2)
-    - GoogleSymbolUtilities (~> 1.1)
     - GoogleToolboxForMac/Logger (~> 2.1)
-  - FirebaseStorage (1.0.5):
-    - FirebaseAnalytics (~> 3.5)
+    - Protobuf (~> 3.1)
+  - FirebaseStorage (1.1.0):
+    - FirebaseAnalytics (~> 3.7)
     - GTMSessionFetcher/Core (~> 1.1)
   - FMDB (1.5.1)
-  - GoogleInterchangeUtilities (1.2.2):
-    - GoogleSymbolUtilities (~> 1.1)
-  - GoogleSymbolUtilities (1.1.2)
-  - GoogleToolboxForMac/DebugUtils (2.1.0):
-    - GoogleToolboxForMac/Defines (= 2.1.0)
-  - GoogleToolboxForMac/Defines (2.1.0)
-  - GoogleToolboxForMac/Logger (2.1.0):
-    - GoogleToolboxForMac/Defines (= 2.1.0)
-  - GoogleToolboxForMac/NSData+zlib (2.1.0):
-    - GoogleToolboxForMac/Defines (= 2.1.0)
-  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.0):
-    - GoogleToolboxForMac/DebugUtils (= 2.1.0)
-    - GoogleToolboxForMac/Defines (= 2.1.0)
-    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.0)
-  - GoogleToolboxForMac/NSString+URLArguments (2.1.0)
-  - GTMSessionFetcher/Core (1.1.7)
+  - GoogleToolboxForMac/DebugUtils (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/Logger (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+  - GTMSessionFetcher/Core (1.1.9)
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
+  - KissXML (5.2.0)
+  - Protobuf (3.2.1)
   - xmpp-messenger-ios (1.0.1):
     - FMDB (~> 1.0)
     - JSQMessagesViewController
     - JSQSystemSoundPlayer (~> 2.0)
     - XMPPFramework
-  - XMPPFramework (3.6.6):
-    - XMPPFramework/Authentication (= 3.6.6)
-    - XMPPFramework/BandwidthMonitor (= 3.6.6)
-    - XMPPFramework/Categories (= 3.6.6)
-    - XMPPFramework/Core (= 3.6.6)
-    - XMPPFramework/CoreDataStorage (= 3.6.6)
-    - XMPPFramework/GoogleSharedStatus (= 3.6.6)
-    - XMPPFramework/KissXML (= 3.6.6)
-    - XMPPFramework/ProcessOne (= 3.6.6)
-    - XMPPFramework/Reconnect (= 3.6.6)
-    - XMPPFramework/Roster (= 3.6.6)
-    - XMPPFramework/SystemInputActivityMonitor (= 3.6.6)
-    - XMPPFramework/Utilities (= 3.6.6)
-    - XMPPFramework/XEP-0009 (= 3.6.6)
-    - XMPPFramework/XEP-0012 (= 3.6.6)
-    - XMPPFramework/XEP-0016 (= 3.6.6)
-    - XMPPFramework/XEP-0045 (= 3.6.6)
-    - XMPPFramework/XEP-0054 (= 3.6.6)
-    - XMPPFramework/XEP-0059 (= 3.6.6)
-    - XMPPFramework/XEP-0060 (= 3.6.6)
-    - XMPPFramework/XEP-0065 (= 3.6.6)
-    - XMPPFramework/XEP-0066 (= 3.6.6)
-    - XMPPFramework/XEP-0082 (= 3.6.6)
-    - XMPPFramework/XEP-0085 (= 3.6.6)
-    - XMPPFramework/XEP-0092 (= 3.6.6)
-    - XMPPFramework/XEP-0100 (= 3.6.6)
-    - XMPPFramework/XEP-0106 (= 3.6.6)
-    - XMPPFramework/XEP-0115 (= 3.6.6)
-    - XMPPFramework/XEP-0136 (= 3.6.6)
-    - XMPPFramework/XEP-0153 (= 3.6.6)
-    - XMPPFramework/XEP-0172 (= 3.6.6)
-    - XMPPFramework/XEP-0184 (= 3.6.6)
-    - XMPPFramework/XEP-0191 (= 3.6.6)
-    - XMPPFramework/XEP-0198 (= 3.6.6)
-    - XMPPFramework/XEP-0199 (= 3.6.6)
-    - XMPPFramework/XEP-0202 (= 3.6.6)
-    - XMPPFramework/XEP-0203 (= 3.6.6)
-    - XMPPFramework/XEP-0223 (= 3.6.6)
-    - XMPPFramework/XEP-0224 (= 3.6.6)
-    - XMPPFramework/XEP-0280 (= 3.6.6)
-    - XMPPFramework/XEP-0297 (= 3.6.6)
-    - XMPPFramework/XEP-0308 (= 3.6.6)
-    - XMPPFramework/XEP-0333 (= 3.6.6)
-    - XMPPFramework/XEP-0335 (= 3.6.6)
-  - XMPPFramework/Authentication (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/BandwidthMonitor (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/Categories (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/Core (3.6.6):
-    - CocoaAsyncSocket (~> 7.4.1)
-    - CocoaLumberjack (~> 1.9)
-    - XMPPFramework/KissXML
-  - XMPPFramework/CoreDataStorage (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/GoogleSharedStatus (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/KissXML (3.6.6)
-  - XMPPFramework/ProcessOne (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/Reconnect (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/Roster (3.6.6):
-    - XMPPFramework/Core
-    - XMPPFramework/CoreDataStorage
-  - XMPPFramework/SystemInputActivityMonitor (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/Utilities (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0009 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0012 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0016 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0045 (3.6.6):
-    - XMPPFramework/Core
-    - XMPPFramework/CoreDataStorage
-    - XMPPFramework/XEP-0203
-  - XMPPFramework/XEP-0054 (3.6.6):
-    - XMPPFramework/Core
-    - XMPPFramework/Roster
-  - XMPPFramework/XEP-0059 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0060 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0065 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0066 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0082 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0085 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0092 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0100 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0106 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0115 (3.6.6):
-    - XMPPFramework/Core
-    - XMPPFramework/CoreDataStorage
-  - XMPPFramework/XEP-0136 (3.6.6):
-    - XMPPFramework/CoreDataStorage
-    - XMPPFramework/XEP-0085
-    - XMPPFramework/XEP-0203
-  - XMPPFramework/XEP-0153 (3.6.6):
-    - XMPPFramework/Core
-    - XMPPFramework/XEP-0054
-  - XMPPFramework/XEP-0172 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0184 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0191 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0198 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0199 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0202 (3.6.6):
-    - XMPPFramework/Core
-    - XMPPFramework/XEP-0082
-  - XMPPFramework/XEP-0203 (3.6.6):
-    - XMPPFramework/Core
-    - XMPPFramework/XEP-0082
-  - XMPPFramework/XEP-0223 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0224 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0280 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0297 (3.6.6):
-    - XMPPFramework/Core
-    - XMPPFramework/XEP-0203
-  - XMPPFramework/XEP-0308 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0333 (3.6.6):
-    - XMPPFramework/Core
-  - XMPPFramework/XEP-0335 (3.6.6):
-    - XMPPFramework/Core
+  - XMPPFramework (3.7.0):
+    - CocoaAsyncSocket (~> 7.6.0)
+    - CocoaLumberjack
+    - KissXML (~> 5.2.0)
 
 DEPENDENCIES:
+  - CocoaLumberjack (~> 2.4.0)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -229,26 +85,26 @@ DEPENDENCIES:
   - xmpp-messenger-ios
 
 SPEC CHECKSUMS:
-  CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
-  CocoaLumberjack: 628fca2e88ef06f7cf6817309aa405f325d9a6fa
-  Firebase: 387f37c7dca894a02708da9ff35ba147040eae9e
-  FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
-  FirebaseAuth: 96e9674ff31d6e1f826d53e26aa003a57cab0295
-  FirebaseCore: 1e383fdfe37b6b5d6ff88e84204bdee30276af0f
-  FirebaseDatabase: 6de92187481ff0e8e124064f21742e95ee883b02
-  FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
-  FirebaseMessaging: acf66347e43c5637c697060c3001d25c809a4131
-  FirebaseStorage: 5738284835edb57f0e81d4ae5832bb17c1e4b5fa
+  CocoaAsyncSocket: b9d5589f07baf9de8f34cc25abd4fcba28f13805
+  CocoaLumberjack: aa9dcab71bdf9eaf2a63bbd9ddc87863efe45457
+  Firebase: 21bf4a89d3f01bfbe11adc3a5d934a4a3d3a5fd6
+  FirebaseAnalytics: 920e46455f27b0a52a80907a6d9b73ee4bd1c635
+  FirebaseAuth: cc8a1824170adbd351edb7f994490a3fb5c18be6
+  FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
+  FirebaseDatabase: 05c96d7b43a7368dc91c07791adb49683e1738d1
+  FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
+  FirebaseMessaging: 753d05a925e9eb8eadd09a0ffc9b808578b72fac
+  FirebaseStorage: a5c55b23741a49a72af8f30f95b3bb5ddbeda12d
   FMDB: 0c3eed7342fdf9dc03b8fe3d8de8e7a9f08bfacc
-  GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
-  GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
-  GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
-  GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  KissXML: 1c1eeeb6b94e4522cd2f2373e5d0d03c9227738f
+  Protobuf: 2ccbaf193f6c65adc67745453ca0c13234c32796
   xmpp-messenger-ios: e1a81270a0d62f1307c86b493209f01853e82e6b
-  XMPPFramework: b06c210b0b71c08aa41a646bffd2021fa43bb43b
+  XMPPFramework: 6f99ad1afcdb0cdbec7192a8e4c542c3fc3de6f8
 
-PODFILE CHECKSUM: 9293201b3be5bb6b3dc2f29f5d14a138e47ae6ee
+PODFILE CHECKSUM: 271170a3d69a20d8b11e25eecac85f025f33661d
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.1

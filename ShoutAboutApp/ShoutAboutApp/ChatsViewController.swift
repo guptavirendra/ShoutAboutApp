@@ -10,8 +10,10 @@ import UIKit
 import xmpp_messenger_ios
 import JSQMessagesViewController
 import XMPPFramework
+import MobileCoreServices
 
-class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
+
+class ChatsViewController: JSQMessagesViewController, OneMessageDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
     let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
     var messages = NSMutableArray()
@@ -25,6 +27,44 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
     
     // Mark: Life Cycle
     
+    
+     override func didPressAccessoryButton(sender: UIButton!)
+     {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet) // 1
+        let firstAction = UIAlertAction(title: "Take Photo", style: .Default) { (alert: UIAlertAction!) -> Void in
+            NSLog("You pressed button one")
+            
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+            {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+                imagePicker.allowsEditing = false
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            }
+            
+        } // 2
+        
+        let secondAction = UIAlertAction(title: "Choose Photo", style: .Default) { (alert: UIAlertAction!) -> Void in
+            NSLog("You pressed button two")
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            imagePicker.mediaTypes = [kUTTypeImage as String]
+            imagePicker.allowsEditing = false
+            self.presentViewController(imagePicker, animated: true,
+                                       completion: nil)
+        } // 3
+        
+        let thirdAction = UIAlertAction(title: "Cancel", style: .Cancel) { (alert: UIAlertAction!) -> Void in
+            NSLog("You pressed button two")
+        } // 3
+        
+        alert.addAction(firstAction) // 4
+        alert.addAction(secondAction) // 5
+        alert.addAction(thirdAction) // 5
+        presentViewController(alert, animated: true, completion:nil) // 6
+    }
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -44,9 +84,11 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
         }
         
         self.collectionView!.collectionViewLayout.springinessEnabled = false
-        //self.inputToolbar!.contentView!.leftBarButtonItem!.hidden = true
+        self.inputToolbar!.contentView!.leftBarButtonItem!.hidden = false
     }
     
+    
+
     override func viewWillAppear(animated: Bool)
     {
         if let recipient = recipient
@@ -54,7 +96,7 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
             self.navigationItem.rightBarButtonItems = []
             
             navigationItem.title = recipient.displayName
-            
+            self.titleLabel?.text = reciepientPerson?.name  //recipient.nickname
            
             
             dispatch_async(dispatch_get_main_queue(),
@@ -66,7 +108,7 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
         {
             if userDetails == nil
             {
-                navigationItem.title = "New message"
+                self.titleLabel?.text = "New message"
             }
             
             self.inputToolbar!.contentView!.rightBarButtonItem!.enabled = false
@@ -299,13 +341,13 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
             
             JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
             
-            if let msg = message.elementForName("body")?.stringValue()
+            if let msg = message.elementForName("body")?.stringValue!
             {
                 if let  messageDict = self.convertStringToDictionary(msg)
                 {
                     
                     
-                    if let from = message.attributeForName("from")?.stringValue()
+                    if let from = message.attributeForName("from")?.stringValue
                     {
                         if let msgText = messageDict["msg"] as? String
                         {
@@ -317,7 +359,7 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
                     }
                 }else
                 {
-                   if let from = message.attributeForName("from")?.stringValue()
+                   if let from = message.attributeForName("from")?.stringValue!
                     {
                         let message = JSQMessage(senderId: from, senderDisplayName: from , date: NSDate(), text: msg)
                         messages.addObject(message)
@@ -359,8 +401,35 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate {
     }
     
     
-    override func didPressAccessoryButton(sender: UIButton!)
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
-//super.didPressAccessoryButton(sender)
+        
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        {
+            let data =  JSQPhotoMediaItem(image: pickedImage)
+            
+            //JSQMessage(senderId: <#T##String!#>, senderDisplayName: <#T##String!#>, date: <#T##NSDate!#>, media: JSQMessageMediaData!)
+            let fullMessage = JSQMessage(senderId: OneChat.sharedInstance.xmppStream?.myJID.bare(), senderDisplayName: OneChat.sharedInstance.xmppStream?.myJID.bare(), date: NSDate(), media: data)
+            messages.addObject(fullMessage)
+            
+            if let recipient = recipient
+            {
+                OneMessage.sendMessageImage(pickedImage, to: recipient.jidStr, completionHandler: { (stream, message) -> Void in
+                    
+                    JSQSystemSoundPlayer.jsq_playMessageSentSound()
+                    self.finishSendingMessageAnimated(true)
+                })
+            }
+        }
+        picker.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController)
+    {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    
+    
+    
 }

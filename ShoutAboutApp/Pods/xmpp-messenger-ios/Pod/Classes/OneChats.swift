@@ -22,9 +22,12 @@ public class OneChats: NSObject, NSFetchedResultsControllerDelegate {
 		return OneChatsSingleton.instance
 	}
 	
-	public class func getChatsList() -> NSArray {
-		if 0 == sharedInstance.chatList.count {
-			if let chatList: NSMutableArray = sharedInstance.getActiveUsersFromCoreDataStorage() as? NSMutableArray {//NSUserDefaults.standardUserDefaults().objectForKey("openChatList")
+	public class func getChatsList() -> NSArray
+    {
+		if 0 == sharedInstance.chatList.count
+        {
+			if let chatList: NSMutableArray = sharedInstance.getActiveUsersFromCoreDataStorage() as? NSMutableArray
+            {//NSUserDefaults.standardUserDefaults().objectForKey("openChatList")
 				chatList.enumerateObjectsUsingBlock({ (jidStr, index, finished) -> Void in
 					OneChats.sharedInstance.getUserFromXMPPCoreDataObject(jidStr: jidStr as! String)
 					

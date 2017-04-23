@@ -49,15 +49,18 @@ public class OneMessage: NSObject {
 	
 	// MARK: public methods
 	
-	public class func sendMessage(message: String, to receiver: String, completionHandler completion:OneChatMessageCompletionHandler) {
+	public class func sendMessage(message: String?, to receiver: String, completionHandler completion:OneChatMessageCompletionHandler) {
 		let body = DDXMLElement.elementWithName("body") as! DDXMLElement
 		let messageID = OneChat.sharedInstance.xmppStream?.generateUUID()
-		
-		body.setStringValue(message)
+        if let _ = message
+        {
+            body.setValue(message, forKey: "message")
+		  //body.setStringValue(message)
+        }
 		
 		let completeMessage = DDXMLElement.elementWithName("message") as! DDXMLElement
 		
-		completeMessage.addAttributeWithName("id", stringValue: messageID)
+		completeMessage.addAttributeWithName("id", stringValue: messageID!)
 		completeMessage.addAttributeWithName("type", stringValue: "chat")
 		completeMessage.addAttributeWithName("to", stringValue: receiver)
 		completeMessage.addChild(body)
@@ -65,6 +68,30 @@ public class OneMessage: NSObject {
 		sharedInstance.didSendMessageCompletionBlock = completion
 		OneChat.sharedInstance.xmppStream?.sendElement(completeMessage)
 	}
+    public class func sendMessageImage(image: UIImage, to receiver: String, completionHandler completion:OneChatMessageCompletionHandler) {
+    
+    
+    let data = UIImageJPEGRepresentation(image, 0.01)
+    let imageStr =  /*"https://www.gstatic.com/webp/gallery3/1.png"*/data?.base64Encoded()
+    
+    let body = DDXMLElement.elementWithName("body") as! DDXMLElement
+    let messageID = OneChat.sharedInstance.xmppStream?.generateUUID()
+    let imageAttachement = DDXMLElement.elementWithName( "attachment", stringValue: imageStr!) as! DDXMLElement
+        
+        body.setValue(imageStr, forKey: "message")
+        //body.setStringValue(imageStr)
+        let completeMessage = DDXMLElement.elementWithName("message") as! DDXMLElement
+        
+        completeMessage.addAttributeWithName("id", stringValue: messageID!)
+        completeMessage.addAttributeWithName("type", stringValue: "chat")
+        completeMessage.addAttributeWithName("to", stringValue: receiver)
+        completeMessage.addChild(body)
+        completeMessage.addChild(imageAttachement)
+        
+        sharedInstance.didSendMessageCompletionBlock = completion
+        OneChat.sharedInstance.xmppStream?.sendElement(completeMessage)
+    
+    }
 	
 	public class func sendIsComposingMessage(recipient: String, completionHandler completion:OneChatMessageCompletionHandler) {
 		if recipient.characters.count > 0 {
@@ -127,6 +154,8 @@ public class OneMessage: NSObject {
 				} else {
 					body = ""
 				}
+                
+                
 				
 				if element.attributeStringValueForName("to") == jid {
 					let displayName = OneChat.sharedInstance.xmppStream?.myJID
@@ -135,6 +164,13 @@ public class OneMessage: NSObject {
 					sender = jid
 				}
 				
+                if (message.media?() != nil)
+                {
+                    let fullMessage = JSQMessage(senderId: sender, senderDisplayName: sender, date: date, media: message.media!())
+                    
+                }
+                
+                
 				let fullMessage = JSQMessage(senderId: sender, senderDisplayName: sender, date: date, text: body)
 				retrievedMessages.addObject(fullMessage)
 			}

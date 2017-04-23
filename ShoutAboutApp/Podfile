@@ -11,7 +11,7 @@ pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'JSQMessagesViewController'
 pod 'xmpp-messenger-ios'
-
+pod 'CocoaLumberjack', '~> 2.4.0'
 
   # Pods for ShoutAboutApp
 

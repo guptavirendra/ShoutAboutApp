@@ -58,10 +58,10 @@
     return nil;
   }
   
-        NSEntityDescription *entity = [NSEntityDescription entityForName:NSStringFromClass([self class])
+  NSEntityDescription *entity = [NSEntityDescription entityForName:NSStringFromClass([self class])
 	                                          inManagedObjectContext:moc];
 	
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", groupName];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", groupName];
 	
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 	[fetchRequest setEntity:entity];

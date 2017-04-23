@@ -43,7 +43,6 @@
 
 @dynamic priorityNum;
 @dynamic showNum;
-@dynamic number;
 
 @dynamic user;
 
@@ -106,11 +105,6 @@
 - (void)setIntShow:(int)intShow
 {
 	self.showNum = @(intShow);
-}
-
-- (void)setNumber:(NSString *)number
-{
-    self.number = number;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -183,7 +177,6 @@
 	self.type = [presence type];
 	self.show = [presence show];
 	self.status = [presence status];
-     
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

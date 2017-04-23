@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FFB488F73B09B5ABB68F9BE634287353"
+               BlueprintIdentifier = "A8511E83251000118EFEA17463A61F90"
                BuildableName = "xmpp_messenger_ios.framework"
                BlueprintName = "xmpp-messenger-ios"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FFB488F73B09B5ABB68F9BE634287353"
+            BlueprintIdentifier = "A8511E83251000118EFEA17463A61F90"
             BuildableName = "xmpp_messenger_ios.framework"
             BlueprintName = "xmpp-messenger-ios"
             ReferencedContainer = "container:Pods.xcodeproj">
