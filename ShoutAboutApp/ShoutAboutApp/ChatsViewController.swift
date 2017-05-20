@@ -205,7 +205,19 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate, UIImag
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
         let message: JSQMessage = self.messages[indexPath.item] as! JSQMessage
         
-        return message
+        
+        if message.isMediaMessage
+        {
+            
+            let mediaItem = message.media
+            if mediaItem.isKindOfClass(JSQPhotoMediaItem)
+            {
+                let photoItem = mediaItem as! JSQPhotoMediaItem
+                let image = photoItem.image
+            }
+        }
+        
+    return message
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
@@ -409,7 +421,12 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate, UIImag
             let data =  JSQPhotoMediaItem(image: pickedImage)
             
             //JSQMessage(senderId: <#T##String!#>, senderDisplayName: <#T##String!#>, date: <#T##NSDate!#>, media: JSQMessageMediaData!)
-            let fullMessage = JSQMessage(senderId: OneChat.sharedInstance.xmppStream?.myJID.bare(), senderDisplayName: OneChat.sharedInstance.xmppStream?.myJID.bare(), date: NSDate(), media: data)
+           let fullMessage =   JSQMessage(senderId: OneChat.sharedInstance.xmppStream?.myJID.bare(), senderDisplayName: OneChat.sharedInstance.xmppStream?.myJID.bare(), date:  NSDate(), media: data)
+            
+            
+            
+            
+            //let fullMessage = JSQMessage(senderId: OneChat.sharedInstance.xmppStream?.myJID.bare(), senderDisplayName: OneChat.sharedInstance.xmppStream?.myJID.bare(), date: NSDate(), media: data)
             messages.addObject(fullMessage)
             
             if let recipient = recipient
@@ -420,6 +437,17 @@ class ChatsViewController: JSQMessagesViewController, OneMessageDelegate, UIImag
                     self.finishSendingMessageAnimated(true)
                 })
             }
+ 
+            /*
+            
+            if let recipient = recipient
+            {
+                OneMessage.sendMessage("", to: recipient.jidStr, completionHandler: { (stream, message) -> Void in
+                    JSQSystemSoundPlayer.jsq_playMessageSentSound()
+                    self.finishSendingMessageAnimated(true)
+                })
+            }
+            */
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
     }

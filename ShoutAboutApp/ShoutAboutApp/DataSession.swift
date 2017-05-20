@@ -965,7 +965,7 @@ class DataSessionManger: NSObject
                             for dict in reviewCount
                             {
                                 let count = ReviewCount()
-                                count.count =   (dict.objectForKey("count") as? String)!
+                                //21                                            2                               1   count.count =   (dict.objectForKey("count") as? String)!
                                 searchPerson.reviewCount.append(count)
                                 
                             }

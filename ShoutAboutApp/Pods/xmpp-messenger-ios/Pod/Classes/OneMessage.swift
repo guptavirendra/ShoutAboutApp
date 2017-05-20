@@ -52,11 +52,9 @@ public class OneMessage: NSObject {
 	public class func sendMessage(message: String?, to receiver: String, completionHandler completion:OneChatMessageCompletionHandler) {
 		let body = DDXMLElement.elementWithName("body") as! DDXMLElement
 		let messageID = OneChat.sharedInstance.xmppStream?.generateUUID()
-        if let _ = message
-        {
-            body.setValue(message, forKey: "message")
-		  //body.setStringValue(message)
-        }
+        body.stringValue = message
+		    
+        
 		
 		let completeMessage = DDXMLElement.elementWithName("message") as! DDXMLElement
 		
@@ -77,8 +75,8 @@ public class OneMessage: NSObject {
     let body = DDXMLElement.elementWithName("body") as! DDXMLElement
     let messageID = OneChat.sharedInstance.xmppStream?.generateUUID()
     let imageAttachement = DDXMLElement.elementWithName( "attachment", stringValue: imageStr!) as! DDXMLElement
-        
-        body.setValue(imageStr, forKey: "message")
+        body.stringValue = imageStr
+       // body.setValue(imageStr, forKey: "message")
         //body.setStringValue(imageStr)
         let completeMessage = DDXMLElement.elementWithName("message") as! DDXMLElement
         
@@ -228,8 +226,11 @@ extension OneMessage: XMPPStreamDelegate {
 		if !OneChats.knownUserForJid(jidStr: user.jidStr) {
 			OneChats.addUserToChatList(jidStr: user.jidStr)
 		}
+        
+        
 		
-		if message.isChatMessageWithBody() {
+		if message.isChatMessageWithBody()
+        {
 			OneMessage.sharedInstance.delegate?.oneStream(sender, didReceiveMessage: message, from: user)
 		} else {
 			//was composing
